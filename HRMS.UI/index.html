@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="hrBaseApp" ng-controller="hrBaseMainCtrl">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Welcome to InfoMirror| DashBoard</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/content/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" />
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/assets/css/ace-fonts.css" />
+    <link rel="stylesheet" href="/assets/css/chosen.css" />
+
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+
+    <link rel="stylesheet" href="/assets/css/ace-rtl.css" />
+
+    <!-- ace settings handler -->
+    <script src="/assets/js/ace-extra.js"></script>
+
+    <link href="/Content/toastr.min.css" rel="stylesheet" />
+
+    <link href="/Content/site.css" rel="stylesheet" />
+    <link href="/Content/styles.css" rel="stylesheet" />
+</head>
+<body class="no-skin">
+    <!-- == InfoMirror Application === -->
+    <div ui-view></div>
+    <!-- /InfoMirror Application -->
+    <!-- basic scripts -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/assets/js/jquery.js'>" + "<" + "/script>");
+    </script>
+
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='/assets/js/jquery1x.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+    </script>
+    <script src="/assets/js/bootstrap.js"></script>
+
+    <!-- ace scripts -->
+    <script src="/assets/js/ace/elements.scroller.js"></script>
+    <script src="/assets/js/ace/elements.colorpicker.js"></script>
+    <script src="/assets/js/ace/elements.fileinput.js"></script>
+    <script src="/assets/js/ace/elements.typeahead.js"></script>
+    <script src="/assets/js/ace/elements.wysiwyg.js"></script>
+    <script src="/assets/js/ace/elements.spinner.js"></script>
+    <script src="/assets/js/ace/elements.treeview.js"></script>
+    <script src="/assets/js/ace/elements.wizard.js"></script>
+    <script src="/assets/js/ace/elements.aside.js"></script>
+    <script src="/assets/js/ace/ace.js"></script>
+    <script src="/assets/js/ace/ace.ajax-content.js"></script>
+    <script src="/assets/js/ace/ace.touch-drag.js"></script>
+    <script src="/assets/js/ace/ace.sidebar.js"></script>
+    <script src="/assets/js/ace/ace.sidebar-scroll-1.js"></script>
+    <script src="/assets/js/ace/ace.submenu-hover.js"></script>
+    <script src="/assets/js/ace/ace.widget-box.js"></script>
+    <script src="/assets/js/ace/ace.settings.js"></script>
+    <script src="/assets/js/ace/ace.settings-rtl.js"></script>
+    <script src="/assets/js/ace/ace.settings-skin.js"></script>
+    <script src="/assets/js/ace/ace.widget-on-reload.js"></script>
+    <script src="/assets/js/ace/ace.searchbox-autocomplete.js"></script>
+    <script src="/assets/js/chosen.jquery.js"></script>
+
+    <!-- JS -->
+    <script src="/Scripts/toastr.min.js"></script>
+
+    <!-- App -->
+    <script src="/Scripts/moment.min.js"></script>
+
+    <!-- App scripts -->
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/scripts/angular-resource.min.js"></script>
+    <script src="/scripts/angular-route.min.js"></script>
+    <script src="/Scripts/angular-ui-router.min.js"></script>
+    <script src="/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="/Scripts/angular-ui/ui-utils.min.js"></script>
+    <script src="/Scripts/angular-chosen.js"></script>
+    <script src="/Scripts/angular-touch.js"></script>
+    <!--  <script src="/Scripts/ui-grid-unstable.js"></script>-->
+    <script src="/Scripts/angular-ui-switch.js"></script>
+
+    <script src="/scripts/angular-local-storage.min.js"></script>
+    <!--<script src="/scripts/angular-loading-bar.min.js"></script>-->
+
+    <script src="/Scripts/ui-grid.js"></script>
+    <link rel="stylesheet" href="/Scripts/ui-grid.css" type="text/css" />
+
+    <!-- Injection Module -->
+    <script src="app/hrmsBaseApp.js"></script>
+
+</body>
+</html>

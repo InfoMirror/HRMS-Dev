@@ -1,0 +1,89 @@
+﻿<div id="sidebar" class="sidebar responsive">
+
+    <!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+
+          <button class="btn btn-success" ui-sref="home.index">
+            <i class="ace-icon fa fa-dashboard"></i>
+          </button>
+
+        <button class="btn btn-info" ui-sref="home.logging.standard">
+          <i class="ace-icon fa fa-bookmark-o"></i>
+        </button>
+
+          <button class="btn btn-purple">
+            <i class="ace-icon fa fa-question"></i>
+          </button>
+
+          <button class="btn btn-warning">
+            <i class="ace-icon fa fa-question"></i>
+          </button>
+
+
+      </div>-->
+    <!-- <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+          <span class="btn btn-success" ui-sref="home.index"></span>
+
+          <span class="btn btn-info" ui-sref="home.logging.standard"></span>
+
+          <span class="btn btn-purple"></span>
+
+          <span class="btn btn-warning"></span>
+      </div>
+    </div>-->
+
+    <ul class="nav nav-list">
+        <!-- <li ng-class="setMenuActive('home.index')">
+           <a ui-sref="home.index">
+             <i class="menu-icon fa fa-tachometer"></i>
+             <span class="menu-text"> Dashboard </span>
+           </a>
+
+           <b class="arrow"></b>
+         </li>-->
+
+        <li ng-class="setMenuHeaderActive('home.index')">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-bookmark-o"></i>
+                <span class="menu-text">
+                    Scheduler
+                </span>
+
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <ul class="submenu" ng-class="setMenuHeaderInactive('home.index')" ng-style="setMenuHeaderInactiveStyle('dd')">
+
+                <li ng-class="setMenuActive('home.index')">
+                    <a ui-sref="home.scheduler.view">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        View
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+                <!--<li ng-class="setMenuActive('home.scheduler.new')">-->
+                <li ng-class="active">
+                    <a ui-sref="home.account">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        New
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
+
+            </ul>
+
+        </li>
+
+
+    </ul><!-- /.nav-list -->
+    <!-- #section:basics/sidebar.layout.minimize -->
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+</div>

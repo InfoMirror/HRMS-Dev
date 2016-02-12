@@ -1,0 +1,29 @@
+{
+  "name": "hrms.api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "surbhi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "bower": "^1.7.2",
+    "express": "^4.13.4",
+    "git": "^0.1.5",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^2.1.7",
+    "html": "0.0.10",
+    "jade": "^1.11.0",
+    "mssql": "^3.0.0",
+    "node-sqlserver-unofficial": "^1.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-inject": "^3.0.0",
+    "wiredep": "^3.0.0"
+  }
+}

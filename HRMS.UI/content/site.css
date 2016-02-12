@@ -1,0 +1,168 @@
+﻿.rotate90 {
+    writing-mode: tb-rl;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"]::-webkit-input-placeholder {
+    visibility: hidden !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.chosen-container-single .chosen-single {
+    border: 0px;
+}
+
+.chosen-container {
+    border: 1px solid;
+    border-color: #b5b5b5;
+}
+
+.reprocess-group.has-error input,
+.reprocess.has-error select,
+.reprocess.has-error textarea {
+    border-color: #f2a696;
+    color: #d68273;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+    .reprocess.has-error input:focus,
+    .reprocess.has-error select:focus,
+    .reprocess.has-error textarea:focus {
+        -webkit-box-shadow: 0px 0px 0px 2px rgba(219, 137, 120, 0.3);
+        box-shadow: 0px 0px 0px 2px rgba(219, 137, 120, 0.3);
+        color: #ca5f4c;
+        border-color: #d77b68;
+        background-color: #fef9f8;
+    }
+
+
+.has-error .chosen-container {
+    color: #a94442;
+    border-color: #a94442;
+}
+
+.rowBkgColor {
+    background-color: #FF0000;
+    color: #000000;
+}
+
+.ui-grid-row .ui-grid-cell {
+    background-color: inherit !important;
+}
+
+.grid {
+    width: 100%;
+    height: 400px;
+}
+
+.gridActionCell {
+    text-align: center;
+}
+
+/*#myModal4 .modal-content {
+        width: 1100px;
+        margin-left: -250px;
+    }
+
+    #myModal4 .modal-dialog {
+        width: 1100px;
+    }*/
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-25 {
+    margin-top: 25px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.margin-top-35 {
+    margin-top: 30px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+tr.text-center {
+    display: none;
+}
+
+.timepicker .btn {
+    border-width: 1px;
+}
+
+.btn-ui-grid {
+    margin: 3px 3px 0 0;
+    padding: 3px 7px;
+}
+
+.word-break {
+    word-break: break-all;
+}
+
+.errorRedText {
+    color: red;
+}
+
+.errorMessage {
+    position: absolute;
+    padding: 5px;
+    background-color: #E03930;
+    color: white;
+    top: 0px;
+    left: 270px;
+}
+
+.large-Modal .modal-dialog {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.watermark {
+    position: absolute;
+    top: 80px;
+    opacity: 0.25;
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+.chzn-container .chzn-results {
+    height: 150px;
+}

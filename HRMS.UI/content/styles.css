@@ -1,0 +1,46 @@
+﻿.form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+    text-align: left;
+}
+.notification{ color:#f00; }
+.width-85-per {
+    width:85%;
+ }
+.float-left {
+    float:left;
+}
+.float-right {
+    float:right;
+}
+.ownset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove (internal value);
+}
+
+.modal {
+}
+.vertical-alignment-helper {
+    display:table;
+   
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+  
+}
