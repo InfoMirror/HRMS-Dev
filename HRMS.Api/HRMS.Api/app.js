@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var sql = require('msnodesqlv8');
@@ -7,6 +7,7 @@ var path = require('path');
 
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
+var leave = require('./routes/leave.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/account', authenticate);
+app.use('/leave', leave);
 
 app.set('port', process.env.PORT || 9095);
 

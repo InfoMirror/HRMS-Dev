@@ -1,11 +1,11 @@
-﻿hrBaseApp.controller('hrmsMainCtrl', [
-  '$scope', function ($scope, $rootScope, $window) {
+hrBaseApp.controller('hrmsMainCtrl', [
+  '$scope','$rootScope', function ($scope, $rootScope) {
       'use strict';
       //  $rootScope.mywindow = $window;
-      alert('Hello, I am in HRMS Main Controller');
+      /*alert('Hello, I am in HRMS Main Controller');*/
       //#region === Initialize ===
-
       //#endregion
+      
 
   }
 ]);

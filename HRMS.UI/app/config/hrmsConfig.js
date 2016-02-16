@@ -19,5 +19,6 @@
         $stateProvider
         .state('home', { url: '/', templateUrl: '/app/home/hrmsFrameCtrl.html', controller: 'hrmsFrameCtrl', abstract: true })
         .state('home.account', { url: '', templateUrl: '/app/authenticate/authCtrl.html', controller: 'authCtrl' })
+        .state('home.dashboard', { url: '/dashboard', templateUrl: '/app/home/hrmsMainCtrl.html', controller: 'hrmsMainCtrl' })
     }
 ]);

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="hrBaseApp" ng-controller="hrBaseMainCtrl">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -30,6 +30,19 @@
 
     <link href="/Content/site.css" rel="stylesheet" />
     <link href="/Content/styles.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+    (function () {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+
+    function onLoadCallback() {
+        gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
+        gapi.client.load('plus', 'v1', function () { });
+    }
+    </script>
 </head>
 <body class="no-skin">
     <!-- == InfoMirror Application === -->
@@ -101,7 +114,37 @@
     <link rel="stylesheet" href="/Scripts/ui-grid.css" type="text/css" />
 
     <!-- Injection Module -->
-    <script src="app/hrmsBaseApp.js"></script>
+    <!--<script src="app/hrmsBaseApp.js"></script>-->
+    
+      <!-- inject:angular:js-->
+    
+     <script src="/app/app.js"></script>
+    
+     <script src="/app/authenticate/authCtrl.js"></script>
+    
+     <script src="/app/config/hrmsConfig.js"></script>
+    
+     <script src="/app/config/routing-config.js"></script>
+    
+     <script src="/app/Employee/employee.js"></script>
+    
+     <script src="/app/factory/authFctry.js"></script>
+    
+     <script src="/app/home/hrmsFrameCtrl.js"></script>
+    
+     <script src="/app/home/hrmsMainCtrl.js"></script>
+    
+     <script src="/app/values/hrmsSettingsVal.js"></script>
+    
+     <script src="/app/run/hrRun.js"></script>
+    
+     <script src="/app/shared/hr-footer-drctv.js"></script>
+    
+     <script src="/app/shared/hr-header-drctv.js"></script>
+    
+     <script src="/app/shared/hr-sidemenu-drctv.js"></script>
+    
+     <!--endinject-->
 
 </body>
 </html>
