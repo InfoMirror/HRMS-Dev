@@ -13,13 +13,16 @@
     "body-parser": "^1.14.2",
     "bower": "^1.7.2",
     "express": "^4.13.4",
+    "fs": "0.0.2",
     "git": "^0.1.5",
     "google-auth-library": "^0.9.7",
     "googleapis": "^2.1.7",
     "html": "0.0.10",
     "jade": "^1.11.0",
     "mssql": "^3.0.0",
-    "node-sqlserver-unofficial": "^1.4.0"
+    "multer": "^1.1.0",
+    "node-sqlserver-unofficial": "^1.4.0",
+    "node-xlsx": "^0.6.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

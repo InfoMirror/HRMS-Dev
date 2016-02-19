@@ -4,3 +4,9 @@ E:\Projects\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\bin\HRMS.UI.pdb
 E:\Projects\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.csprojResolveAssemblyReference.cache
 E:\Projects\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.dll
 E:\Projects\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.pdb
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\bin\HRMS.UI.dll.config
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\bin\HRMS.UI.dll
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\bin\HRMS.UI.pdb
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.csprojResolveAssemblyReference.cache
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.dll
+E:\GitHub\InfoMirror\HRMS-Dev\HRMS.UI\obj\Debug\HRMS.UI.pdb

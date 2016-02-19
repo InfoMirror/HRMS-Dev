@@ -1,4 +1,4 @@
-﻿hrBaseApp.config([
+hrBaseApp.config([
     '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
         localStorageServiceProvider
@@ -19,6 +19,7 @@
         $stateProvider
         .state('home', { url: '/', templateUrl: '/app/home/hrmsFrameCtrl.html', controller: 'hrmsFrameCtrl', abstract: true })
         .state('home.account', { url: '', templateUrl: '/app/authenticate/authCtrl.html', controller: 'authCtrl' })
-        .state('home.dashboard', { url: '/dashboard', templateUrl: '/app/home/hrmsMainCtrl.html', controller: 'hrmsMainCtrl' })
+        .state('home.dashboard', { url: 'dashboard', templateUrl: '/app/home/hrmsMainCtrl.html', controller: 'hrmsMainCtrl' })
+         .state('home.admin', { url: 'admin', templateUrl: '/app/admin/attendanceCtrl.html', controller: 'attendanceCtrl' })
     }
 ]);

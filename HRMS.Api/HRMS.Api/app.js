@@ -4,10 +4,14 @@ var app = express();
 var sql = require('msnodesqlv8');
 var http = require('http');
 var path = require('path');
+var multer = require('multer');
+var fs = require("fs");
+var xlsx = require('node-xlsx');
 
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
 var leave = require('./routes/leave.js');
+var adminattendance = require('./routes/adminattendance.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,6 +25,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/account', authenticate);
 app.use('/leave', leave);
+app.use('/admin', adminattendance);
 
 app.set('port', process.env.PORT || 9095);
 

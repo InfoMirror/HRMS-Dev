@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 var sql = require('msnodesqlv8');
 var sqlConfig = require('../config/sqlConfig.js');
@@ -10,11 +10,12 @@ router.post('/login', function (req, res) {
         var tableObjectValue = new Array("SelectByUserName", req.body.email, "");
         var pm = conn.procedureMgr();
         pm.callproc('sp_SelectDeleteLogin', tableObjectValue, function (err, results, output) {
-            console.log(results);
+            
             if (err) {
                 console.log(err);
             } else {
                 if (results.length > 0) {
+                    console.log(results);
                     sql.open(sqlConfig, function (err, conn) {
                         var tableObjectValue = new Array("SelectByEmail", results[0].Email);
                         var pm = conn.procedureMgr();
@@ -32,6 +33,41 @@ router.post('/login', function (req, res) {
                             console.log('Connection Error: ' + err);
                         }
                     });
+                }else{
+                     sql.open(sqlConfig, function (err, conn) {
+          var tableObjectValue  = new Array('',req.body.email);
+            var pm = conn.procedureMgr();
+            pm.callproc('sp_InsertUpdateLogin',tableObjectValue , function(err, results, output) {
+                console.log('insert');
+                
+                if(err){
+                    console.log(err);
+                }else{
+                     sql.open(sqlConfig, function (err, conn) {
+                        var tableObjectValue = new Array("SelectByEmail", req.body.email);
+                        var pm = conn.procedureMgr();
+                        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                res.json({
+                                    type: true,
+                                    data: result1
+                                });
+                            }
+                        });
+                        if (err) {
+                            console.log('Connection Error: ' + err);
+                        }
+                    });
+                }
+        });
+        if(err){
+            console.log('Connection Error: '+err);
+        }
+       
+});
+                     
                 }
             }
         });
@@ -41,4 +77,47 @@ router.post('/login', function (req, res) {
     });
 });
 
+
+
+function insertupdateuser(userid,email){
+     sql.open(config, function (err, conn) {
+          var tableObjectValue  = new Array(userid,email);
+            var pm = conn.procedureMgr();
+            pm.callproc('sp_InsertUpdateLogin',tableObjectValue , function(err, results, output) {
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(output[0]);
+                    console.log(results);
+                }
+        });
+        if(err){
+            console.log('Connection Error: '+err);
+        }
+       
+});
+}
+var empData=[];
+function selectEmployeeDetails(email){
+    sql.open(config, function (err, conn) {
+     //  console.log(res.body.email);
+          var tableObjectValue  = new Array("SelectByEmail",email);
+            var pm = conn.procedureMgr();
+            pm.callproc('sp_SelectDeleteEmployeeDetails',tableObjectValue , function(err, results, output) {
+                if(err){
+                    console.log(err);
+                }else{
+                  //  console.log(results);
+                    empData = results;
+                  return results;
+                }
+        });
+        if(err){
+            console.log('Connection Error: '+err);
+        }
+   
+       
+    
+    });
+}
 module.exports = router;

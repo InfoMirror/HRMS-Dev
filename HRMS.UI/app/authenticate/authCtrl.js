@@ -57,7 +57,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope','$state',
                         }*/
                         $rootScope.userDetails=response.data[0];
                         //alert(response.data[0].UserEmail);
-                        $state.go('home.dashboard');
+                        $state.go('home.admin');
                         
                     },
        function (error) {
