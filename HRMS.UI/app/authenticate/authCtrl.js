@@ -14,8 +14,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
         gapi.auth.signIn(myParams);
     };
 
-
-
     $scope.loginCallback = function (result) {
         // alert(0);
         if (result['status']['signed_in']) {
