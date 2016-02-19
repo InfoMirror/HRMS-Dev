@@ -8,9 +8,7 @@ var path = require('path');
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
 var leave = require('./routes/leave.js');
-var holidays = require('./routes/Holidays.js');
-var birthdays = require('./routes/birthdays.js');
-var anniversaries = require('./routes/anniversary.js');
+var dashboard = require('./routes/dashboard.js');
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -26,9 +24,8 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/account', authenticate);
 app.use('/leave', leave);
-app.use('/dashboard', holidays);
-app.use('/dashboard', birthdays);
-app.use('/dashboard', anniversaries);
+app.use('/dashboard', dashboard);
+
 
 app.set('port', process.env.PORT || 9095);
 
