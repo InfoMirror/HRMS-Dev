@@ -1,0 +1,31 @@
+<div>
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <script type="text/javascript">
+            try {
+                ace.settings.check('breadcrumbs', 'fixed')
+            } catch (e) {}
+        </script>
+
+        <!--<ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a ui-sref="home.index">Home</a>
+        <li class="active">Dashboard</li>
+
+    </ul-->
+        <!-- /.breadcrumb -->
+        <ul class="nav nav-tabs" role="tablist" id="centerTabs">
+            <li role="presentation" ng-repeat="state in states" ng-class="setMenuActive(state.name,state.abstract)"><a ui-sref="{{state.redirectState}}">{{state.friendlyName}}</a></li>
+        </ul>
+    </div>
+    <div class="page-header">
+        <h1>
+            {{stateName}}
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Introduction
+            </small>
+        </h1>
+    </div>
+</div>

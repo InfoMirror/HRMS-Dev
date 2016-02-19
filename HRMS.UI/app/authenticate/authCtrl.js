@@ -1,9 +1,9 @@
-var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope','$state','$rootScope', function (authFctry, $scope,$state,$rootScope) {
+var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', function (authFctry, $scope, $state, $rootScope) {
 
     // #region Initialize
-    
+
     $scope.signin = function () {
-     
+
         var myParams = {
             'clientid': '142159620286-m8khm27vosmf3ovj9lbgrtj1vqd52jtj.apps.googleusercontent.com',
             'cookiepolicy': 'single_host_origin',
@@ -13,8 +13,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope','$state',
         };
         gapi.auth.signIn(myParams);
     };
-
-
 
     $scope.loginCallback = function (result) {
         // alert(0);
@@ -41,34 +39,28 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope','$state',
                 //alert(str);
                 $scope.profile = str;
                 if (resp["domain"] == 'infoobjects.com') {
-                    //alert('right user');
-
                     var formdata = {
                         email: email
                     }
-               //     alert(email);
                     authFctry.login(formdata).then(function (response) {
-                        console.log(response);
-                        /*$scope.userDetails = {
-                            email: response.data[0].UserEmail,
-                            team: response.data[0].Team,
-                            skypeId: response.data[0].SkypeID,
-                            name: response.data[0].FirstName + response.data[0].LastName
-                        }*/
-                        $rootScope.userDetails=response.data[0];
-                        //alert(response.data[0].UserEmail);
-                        $state.go('home.admin');
-                        
-                    },
-       function (error) {
-           console.log(error);
-       });
-                } else {
 
+                            $rootScope.userDetails = response.data[0];
+                            $scope.$broadcast('userName', {
+                                message: $rootScope.userDetails.FirstName
+                            });
+                            $rootScope.isLoggedIn = true;
+                            $state.go('home.dashboard');
+
+                        },
+                        function (error) {
+                            console.log(error);
+                        });
+                } else {
+                    $rootScope.isLoggedIn = false;
                     gapi.auth.signOut();
                     location.reload();
                 }
-              
+
             });
 
         }
@@ -81,8 +73,9 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope','$state',
         gapi.auth.signOut();
         location.reload();
     }
+
     function onLoadCallback() {
         gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
-        gapi.client.load('plus', 'v1', function () { });
+        gapi.client.load('plus', 'v1', function () {});
     }
 }]);

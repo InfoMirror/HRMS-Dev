@@ -11,9 +11,15 @@ var xlsx = require('node-xlsx');
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
 var leave = require('./routes/leave.js');
+
 var adminattendance = require('./routes/adminattendance.js');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+var dashboard = require('./routes/dashboard.js');
+
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,14 +31,19 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/account', authenticate);
 app.use('/leave', leave);
+
 app.use('/admin', adminattendance);
+
+app.use('/dashboard', dashboard);
+
+
 
 app.set('port', process.env.PORT || 9095);
 
 //app.set('views', path.join(__dirname, 'views'));
-    //app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
 
-app.get("/index.html", function ( req,res) {
+app.get("/index.html", function (req, res) {
     res.sendfile("views/index.html");
 });
 
