@@ -8,8 +8,13 @@ var path = require('path');
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
 var leave = require('./routes/leave.js');
+var holidays = require('./routes/Holidays.js');
+var birthdays = require('./routes/birthdays.js');
+var anniversaries = require('./routes/anniversary.js');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,13 +26,16 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/account', authenticate);
 app.use('/leave', leave);
+app.use('/dashboard', holidays);
+app.use('/dashboard', birthdays);
+app.use('/dashboard', anniversaries);
 
 app.set('port', process.env.PORT || 9095);
 
 //app.set('views', path.join(__dirname, 'views'));
-    //app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
 
-app.get("/index.html", function ( req,res) {
+app.get("/index.html", function (req, res) {
     res.sendfile("views/index.html");
 });
 
