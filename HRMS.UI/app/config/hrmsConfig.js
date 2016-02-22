@@ -20,14 +20,14 @@ hrBaseApp.config([
         .state('home', { url: '/', templateUrl: '/app/home/hrmsFrameCtrl.html', controller: 'hrmsFrameCtrl', abstract: true })
 
         
-         .state('home.admin', { url: 'admin', templateUrl: '/app/admin/attendanceCtrl.html', controller: 'attendanceCtrl' })
+         .state('home.admin', { url: 'admin', templateUrl: '/app/admin/attendanceCtrl.html', controller: 'attendanceCtrl', friendlyName:'Attendance Upload'})
 
-        .state('home.account', { url: '', templateUrl: '/app/authenticate/authCtrl.html', controller: 'authCtrl', friendlyName:'Sign In' })
+        .state('home.account', { url: '', templateUrl: '/app/authenticate/authCtrl.html', controller: 'authCtrl', friendlyName:'Sign In', hideInMenu:true })
         .state('home.dashboard', { url: 'dashboard', templateUrl: '/app/home/hrmsMainCtrl.html', controller: 'hrmsMainCtrl', friendlyName: 'Dashboard'  })
         .state('home.leaves', { url: 'leaves', templateUrl: '/app/leaves/hrmsLeavesCtrl.html', controller: 'hrmsLeavesCtrl', friendlyName: 'Leaves'  })
-        .state('home.birthdays', { url: 'birthdays', templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html', controller: 'hrmsBirthdaysCtrl', friendlyName: 'Upcoming Birthdays'  })
+        .state('home.birthdays', { url: 'birthdays', templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html', controller: 'hrmsBirthdaysCtrl', friendlyName: 'Upcoming Birthdays' })
         .state('home.holidays', { url: 'holidays', templateUrl: '/app/dashboard/hrmsHolidaysCtrl.html', controller: 'hrmsHolidaysCtrl', friendlyName: 'Upcoming Holidays'  })
-        .state('home.anniversaries', { url: 'anniversaries', templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html', controller: 'hrmsAnniversaryCtrl', friendlyName: 'Upcoming Anniversaries'  })
+        .state('home.anniversaries', { url: 'anniversaries', templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html', controller: 'hrmsAnniversaryCtrl', friendlyName: 'Upcoming Anniversaries' })
 
     }
 ]);

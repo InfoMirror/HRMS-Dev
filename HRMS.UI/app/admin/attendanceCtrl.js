@@ -15,6 +15,8 @@ var attendanceCtrl=hrBaseApp.controller('attendanceCtrl',['Upload','$window','au
         
         
         $scope.upload = function (file) {
+            
+            
             Upload.upload({
                 url: 'http://localhost:9095/admin/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
