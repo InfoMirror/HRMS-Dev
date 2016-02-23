@@ -16,9 +16,17 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
                 action: 'fileOD'
             },
             isArray: false
+        },
+        'getCompOffs': {
+            method: 'GET',
+            params: {
+                action: 'getCompOffs'
+            },
+            isArray: false
         }
+
     });
-    
+
     var _getAbsents = function (parms) {
         var deferred = $q.defer();
         resource.getAbsents(parms, function (response) {
@@ -30,6 +38,7 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
             });
         return deferred.promise;
     }
+
     var _fileOD = function (parms) {
         var deferred = $q.defer();
         resource.fileOD(parms, function (response) {
@@ -42,7 +51,22 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
         return deferred.promise;
     }
 
+    var _getCompOffs = function (parms) {
+        var deferred = $q.defer();
+        resource.getCompOffs(parms, function (response) {
+                console.log(response);
+                deferred.resolve(response);
+            },
+            function (response) {
+                deferred.reject(response);
+
+            });
+        return deferred.promise;
+    }
+    
     leaveFctryData.getAbsents = _getAbsents;
     leaveFctryData.fileOD = _fileOD;
+    leaveFctryData.getCompOffs = _getCompOffs;
+
     return leaveFctryData;
 }]);
