@@ -5,20 +5,41 @@ var sqlConfig = require('../config/sqlConfig.js');
 
 router.post('/getAbsents', function (req, res) {
     sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(req.body.EmpId,"");
+        var tableObjectValue = new Array(req.body.EmpId, "");
+        console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_GetAbsentByEmployeeId', tableObjectValue, function (err, results, output) {
             if (err) {
-                console.log('Error: ');
+                console.log('Error in Getting Absents: ');
                 console.log(err);
-            }else{
-                if(results.length>0){
+            } else {
+                if (results.length > 0) {
                     console.log(results);
                     res.json({
-                        type:true,
-                        data:results
+                        type: true,
+                        data: results
                     });
                 }
+            }
+        });
+    });
+});
+
+router.post('/fileOD', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        console.log(req.body);
+        var tableObjectValue = new Array(req.body.Id, req.body.ODReason);
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_FileOD', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log('Error in File OD: ');
+                console.log(err);
+            } else {
+                res.json({
+                    type: true,
+                    data: 'OD Updated'
+                });
             }
         });
     });
