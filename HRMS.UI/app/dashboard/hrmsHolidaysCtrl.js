@@ -7,7 +7,7 @@ hrBaseApp.controller('hrmsHolidaysCtrl', ['$scope', 'dashboardFctry', function (
         $scope.getData();
     }
 
-    $scope.HolidaysGridOptions = {
+    $scope.holidaysGridOptions = {
         columnDefs: [
             {
                 field: 'FestivalName',
@@ -24,7 +24,7 @@ hrBaseApp.controller('hrmsHolidaysCtrl', ['$scope', 'dashboardFctry', function (
     $scope.getData = function () {
         dashboardFctry.getHolidays().then(function (response) {
             console.log(response.data);
-            $scope.HolidaysGridOptions.data = response.data;
+            $scope.holidaysGridOptions.data = response.data;
         });
     }
 
