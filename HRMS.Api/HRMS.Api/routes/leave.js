@@ -30,7 +30,7 @@ router.get('/getCompOffs', function (req, res) {
         var tableObjectValue = new Array(req.query.EmpId,"");
         console.log(tableObjectValue);
         var pm = conn.procedureMgr();
-        pm.callproc('Sp_GetCompOffByEmployeeId', tableObjectValue, function (err, results, output) {
+        pm.callproc('sp_GetCompOffByEmployeeId', tableObjectValue, function (err, results, output) {
             if (err) {
                 console.log('Error: ');
                 console.log(err);

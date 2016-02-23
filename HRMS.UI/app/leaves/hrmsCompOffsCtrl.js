@@ -21,19 +21,25 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
                 displayName: 'Name',
                 enableColumnMenu: false
             },
-           
+
             {
                 field: 'IsManual',
                 displayName: 'Is Manual',
                 enableColumnMenu: false,
-               cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'
+                cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'
+            },
+            {
+                field:'CompOffStatus',
+                displayName:'CompOff Status',
+                enableColumnMenu: false
+                
             }
         ]
     };
 
     $scope.getCompOffsData = function (empData) {
         leaveFctry.getCompOffs(empData).then(function (response) {
-             console.log(response.data);
+            console.log(response.data);
             $scope.CompOffsGridOptions.data = response.data;
         });
     }
