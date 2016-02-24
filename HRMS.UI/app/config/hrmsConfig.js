@@ -57,7 +57,7 @@ hrBaseApp.config([
                 controller: 'hrmsCompOffsCtrl',
                 friendlyName: 'Comp Off'
             })
-            .state('home.birthdays', {
+            /*.state('home.birthdays', {
                 url: 'birthdays',
                 templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html',
                 controller: 'hrmsBirthdaysCtrl',
@@ -74,6 +74,6 @@ hrBaseApp.config([
                 templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html',
                 controller: 'hrmsAnniversaryCtrl',
                 friendlyName: 'Upcoming Anniversaries'
-            })
+            })*/
     }
 ]);

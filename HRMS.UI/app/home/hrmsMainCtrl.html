@@ -16,9 +16,87 @@
 <!-- /section:basics/content.breadcrumbs -->
 <div class="page-content">
 
-    
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Profile Data</h4> <hr/>
+            <div class="container">
+                <div>
+                    <label for="name">Name: </label>
+                    {{profileData.Name}}
+                </div>
+                <div>
+                    <label for="name">Gender: </label>
+                    {{profileData.Gender}}
+                </div>
+                <div>
+                    <label for="name"> Designation: </label>
+                    {{profileData.Designation}}
+                </div>
+                <div>
+                    <label for="name">Reporting Head: </label>
+                    {{profileData.ReportingHead}}
+                </div>
+                <div>
+                    <label for="name">Team: </label>
+                    {{profileData.Team}}
+                </div>
+                <div>
+                    <label for="name">Blood Group: </label>
+                    {{profileData.BloodGroup}}
+                </div>
+                <div>
+                    <label for="name">Email: </label>
+                    {{profileData.Email}}
+                </div>
+                <div>
+                    <label for="name">Emp Id: </label>
+                    {{profileData.EmpId}}
+                </div>
+                <div>
+                    <label for="name">Current Address: </label>
+                    {{profileData.CurrentAddress}}
+                </div>
+                <div>
+                    <label for="name">Contact No: </label>
+                    {{profileData.ContactNo}}
+                </div>
+                <div>
+                    <label for="name">Blood Group: </label>
+                    {{profileData.SkypeID}}
+                </div>
+                <div>
+                    <label for="name">Date of Joining: </label>
+                    {{profileData.DOJ | date:'dd-MMM-yyyy'}}
+                </div>
+                <div>
+                    <label for="name">Birthday: </label>
+                    {{profileData.DOB | date:'dd-MMM-yyyy'}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Upcoming Holidays</h4><hr/>
+            <div ui-grid="holidaysGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Upcoming Birthdays</h4><hr/>
+            <div ui-grid="birthdaysGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        </div>
+        <div class="col-md-6">
+            <h4>Upcoming Anniversarries</h4><hr/>
+            <div ui-grid="AnniversaryGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        </div>
+    </div>
+
+    <!--<div ui-grid="birthdaysGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+
+    <div ui-grid="AnniversaryGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>-->
+
     <!-- /.page-header -->
-    <div>
+    <!--<div>
         Name: {{userDetails.FirstName}} {{userDetails.LastName}}
         <br /> Email: {{userDetails.UserEmail}}
         <br /> Team: {{userDetails.Team}}
@@ -48,6 +126,6 @@
         <br /> RelationWithNominee: {{userDetails.RelationWithNominee}}
         <br /> ReportingHead: {{userDetails.ReportingHead}}
         <br />
-    </div>
+    </div>-->
 </div>
 <!-- /.page-content -->
