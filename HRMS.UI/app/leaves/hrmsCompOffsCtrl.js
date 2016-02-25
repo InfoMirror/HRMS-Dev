@@ -21,7 +21,6 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
                 displayName: 'Name',
                 enableColumnMenu: false
             },
-
             {
                 field: 'IsManual',
                 displayName: 'Is Manual',
@@ -32,14 +31,12 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
                 field: 'CompOffStatus',
                 displayName: 'CompOff Status',
                 enableColumnMenu: false
-
             }
-
         ]
     };
-    $scope.insertCompOff = function () {
+   /* $scope.insertCompOff = function () {
 
-    }
+    }*/
     $scope.getCompOffsData = function (empData) {
         leaveFctry.getCompOffs(empData).then(function (response) {
             console.log(response.data);
@@ -65,13 +62,14 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
             size: 'md',
             resolve: {
                 aValue: function () {
+                    return $rootScope.userDetails.EmpId
                 }
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
             debugger;
             $scope.paramFromDialog = paramFromDialog;
-            $scope.getCompOffsData($rootScope.userDetails);
+           // $scope.getCompOffsData($rootScope.userDetails);
         });
     }
 

@@ -170,7 +170,7 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
     });
 }
 
-function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry) {
+function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry,CompOffReason) {
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry,CompOffReason);
         var pm = conn.procedureMgr();

@@ -1,19 +1,28 @@
 hrBaseApp.controller('applyCompOffMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry',
-    function ($scope, $modalInstance, aValue, leaveFctry) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope) {
         'use strict';
 
         $scope.init = function () {
+
             $scope.CompOffData = {
-                Id: aValue,
-                CompOffReason: ''
+                EmpId: aValue,
+                CompOffDate: new Date(),
+                startTime: null,
+                endTime: null,
+                compOffStatus: 16,
+                isManual: 1,
+                compOffReason: ''
             }
         }
 
         $scope.submit = function () {
-            $scope.CompOffData.CompOffReason = $scope.CompOffReason;
+            $scope.CompOffData.compOffReason = $scope.CompOffReason;
 
-            if ($scope.CompOffData.CompOffReason != '' && $scope.CompOffData.CompOffReason != undefined) {
+            if ($scope.CompOffData.compOffReason != '' && $scope.CompOffData.compOffReason != undefined) {
+                $scope.CompOffData.CompOffDate = $scope.CompOffDate();
+                $scope.CompOffData.compOffReason = $scope.CompOffReason;
+                console.log($scope.CompOffData);
                 $scope.insertCompOff($scope.CompOffData);
             }
 
@@ -22,7 +31,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
 
         $scope.insertCompOff = function (CompOffData) {
             leaveFctry.insertCompOff(CompOffData).then(function (response) {
-              
+
                 if (response.data == "CompOff Applied") {
                     $scope.insertCompOff($rootScope.userDetails);
                 }
