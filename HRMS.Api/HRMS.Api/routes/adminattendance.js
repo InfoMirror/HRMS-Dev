@@ -172,7 +172,7 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
 
 function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry) {
     sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry);
+        var tableObjectValue = new Array(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry,CompOffReason);
         var pm = conn.procedureMgr();
         pm.callproc('Sp_InsertCompOff', tableObjectValue, function (err, result1, output) {
             if (err) {

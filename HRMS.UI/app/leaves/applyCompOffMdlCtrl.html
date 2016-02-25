@@ -1,0 +1,17 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()">&times;</button>
+        <h4 class="modal-title">Apply CompOff</h4>
+    </div>
+    <div class="modal-body">
+        CompOff Date:
+      <!--  <label for="popup" class="btn btn-default" ng-model="CompOffDate"><i class="glyphicon glyphicon-calendar"></i></label>-->
+        <input type="date" ng-model="CompOffDate"> 
+        CompOff Reason:
+        <input type="textarea" ng-model="CompOffReason">
+        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="submit()">Save</button>
+    </div>
+</div>

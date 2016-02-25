@@ -70,4 +70,45 @@ router.get('/getCompOffs', function (req, res) {
     });
 });
 
+router.post('/insertCompOff', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        console.log(req.body);
+        var tableObjectValue = new Array();
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('Sp_InsertCompOff', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log('Error in Applying CompOff: ');
+                console.log(err);
+            } else {
+                res.json({
+                    type: true,
+                    data: 'CompOff Applied'
+                });
+            }
+        });
+    });
+});
+
+router.post('/MarkCompOff', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        console.log(req.body);
+        var tableObjectValue = new Array(req.body.Id, req.body.CompOffReason);
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_MarkComOff', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log('Error in Marking CompOff: ');
+                console.log(err);
+            } else {
+                res.json({
+                    type: true,
+                    data: 'CompOff Marked'
+                });
+            }
+        });
+    });
+});
+
+
 module.exports = router;
