@@ -18,12 +18,30 @@
         </button>
 
         <!-- /section:basics/sidebar.mobile.toggle -->
-        <div class="navbar-header pull-left">
+        <div class="navbar-header pull-left" ng-show="isLoggedIn">
             <!-- #section:basics/navbar.layout.brand -->
+            
+            <a ui-sref="home.dashboard" class="navbar-brand">
+                <small>
+                    <i class="fa fa-pied-piper-alt"></i>
+                    Info Mirror Dashboard
+                 
+                </small>
+            </a>
+
+            <!-- /section:basics/navbar.layout.brand -->
+            <!-- #section:basics/navbar.toggle -->
+            <!-- /section:basics/navbar.toggle -->
+        </div>
+        
+        <div class="navbar-header pull-left" ng-show="!isLoggedIn">
+            <!-- #section:basics/navbar.layout.brand -->
+            
             <a ui-sref="home.account" class="navbar-brand">
                 <small>
                     <i class="fa fa-pied-piper-alt"></i>
                     Info Mirror Dashboard
+                 
                 </small>
             </a>
 
@@ -61,7 +79,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a ui-sref="home.logout" ng-click="logout()">
+                            <a href="#" ng-click="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
