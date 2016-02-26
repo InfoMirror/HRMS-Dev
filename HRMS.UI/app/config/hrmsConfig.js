@@ -25,13 +25,6 @@ hrBaseApp.config([
             })
 
 
-        .state('home.admin', {
-            url: 'admin',
-            templateUrl: '/app/admin/attendanceCtrl.html',
-            controller: 'attendanceCtrl',
-            friendlyName: 'Attendance Upload'
-        })
-
         .state('home.account', {
                 url: '',
                 templateUrl: '/app/authenticate/authCtrl.html',
@@ -45,35 +38,49 @@ hrBaseApp.config([
                 controller: 'hrmsMainCtrl',
                 friendlyName: 'Dashboard'
             })
-            .state('home.leaves', {
+            .state('home.attendance', {
+                url: 'attendance',
+                templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',
+                controller: 'hrmsAttendanceCtrl',
+                friendlyName: 'Attendance Tracker',
+                abstract: true
+            })
+            .state('home.attendance.leaves', {
                 url: 'leaves',
                 templateUrl: '/app/leaves/hrmsLeavesCtrl.html',
                 controller: 'hrmsLeavesCtrl',
                 friendlyName: 'Leaves'
             })
-            .state('home.compoffs', {
+            .state('home.attendance.compoffs', {
                 url: 'compoffs',
                 templateUrl: '/app/leaves/hrmsCompOffsCtrl.html',
                 controller: 'hrmsCompOffsCtrl',
                 friendlyName: 'Comp Off'
             })
-            /*.state('home.birthdays', {
-                url: 'birthdays',
-                templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html',
-                controller: 'hrmsBirthdaysCtrl',
-                friendlyName: 'Upcoming Birthdays'
+            .state('home.admin', {
+                url: 'admin',
+                templateUrl: '/app/admin/attendanceCtrl.html',
+                controller: 'attendanceCtrl',
+                friendlyName: 'Attendance Upload'
             })
-            .state('home.holidays', {
-                url: 'holidays',
-                templateUrl: '/app/dashboard/hrmsHolidaysCtrl.html',
-                controller: 'hrmsHolidaysCtrl',
-                friendlyName: 'Upcoming Holidays'
-            })
-            .state('home.anniversaries', {
-                url: 'anniversaries',
-                templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html',
-                controller: 'hrmsAnniversaryCtrl',
-                friendlyName: 'Upcoming Anniversaries'
-            })*/
+
+        /*.state('home.birthdays', {
+            url: 'birthdays',
+            templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html',
+            controller: 'hrmsBirthdaysCtrl',
+            friendlyName: 'Upcoming Birthdays'
+        })
+        .state('home.holidays', {
+            url: 'holidays',
+            templateUrl: '/app/dashboard/hrmsHolidaysCtrl.html',
+            controller: 'hrmsHolidaysCtrl',
+            friendlyName: 'Upcoming Holidays'
+        })
+        .state('home.anniversaries', {
+            url: 'anniversaries',
+            templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html',
+            controller: 'hrmsAnniversaryCtrl',
+            friendlyName: 'Upcoming Anniversaries'
+        })*/
     }
 ]);

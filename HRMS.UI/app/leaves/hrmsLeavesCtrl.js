@@ -3,12 +3,7 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
     /* Initialize */
     $scope.init = function () {
         $scope.message = 'Hello, Welcome to Leave Page';
-        //$scope.getAbsentData($rootScope.userDetails);
-        var odData = {
-            Id: 1,
-            ODReason: 'Work From Home'
-        }
-        $scope.fileOD(odData);
+        $scope.getAbsentData($rootScope.userDetails);
     }
 
     $scope.absentGridOptions = {

@@ -20,7 +20,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
             $scope.CompOffData.compOffReason = $scope.CompOffReason;
 
             if ($scope.CompOffData.compOffReason != '' && $scope.CompOffData.compOffReason != undefined) {
-                $scope.CompOffData.CompOffDate = $scope.CompOffDate();
+                $scope.CompOffData.CompOffDate = $scope.CompOffDate;
                 $scope.CompOffData.compOffReason = $scope.CompOffReason;
                 console.log($scope.CompOffData);
                 $scope.insertCompOff($scope.CompOffData);

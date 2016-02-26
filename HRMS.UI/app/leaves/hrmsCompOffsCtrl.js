@@ -69,7 +69,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
         modalInstance.result.then(function (paramFromDialog) {
             debugger;
             $scope.paramFromDialog = paramFromDialog;
-           // $scope.getCompOffsData($rootScope.userDetails);
+            $scope.getCompOffsData($rootScope.userDetails);
         });
     }
 
