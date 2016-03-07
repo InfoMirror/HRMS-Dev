@@ -12,7 +12,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
         }
     });
     */
-    var resource = $resource("http://mayank-pc:9095" + "/dashboard/:action", {
+    var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
         action: '@action',
     }, {
         'getBirthdays': {
@@ -31,13 +31,6 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
             method: 'GET',
             params: {
                 action: 'getHolidays'
-            }
-        },
-
-        'getAllRelations' {
-            method: 'GET',
-            params: {
-                action: 'getAllRelations'
             }
         }
 
@@ -74,9 +67,10 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
             deferred.reject(response);
 
         });
+        return deferred.promise;
     };
 
-    var _getAllRelations = function () {
+    /*var _getAllRelations = function () {
         var deferred = $q.defer();
         resource.getAllRelations(function (response) {
             deferred.resolve(response)
@@ -84,9 +78,9 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
             deferred.reject(response);
 
         });
-    };
-
     return deferred.promise;
+    };*/
+
 
 
 
@@ -97,10 +91,9 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
 
 
     dashboardFctryData.getHolidays = _getHolidays;
-   
-    dashboardFctryData.getAllRelations = _getAllRelations;
-    
+
+    //  dashboardFctryData.getAllRelations = _getAllRelations;
+
     return dashboardFctryData;
 
-
-            }]);
+}]);

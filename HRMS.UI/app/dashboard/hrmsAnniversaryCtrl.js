@@ -7,7 +7,7 @@ hrBaseApp.controller('hrmsAnniversaryCtrl', ['$scope', 'dashboardFctry', functio
         $scope.getData();
     }
 
-    $scope.AnniversaryGridOptions = {
+    $scope.anniversaryGridOptions = {
         columnDefs: [
             {
                 field: 'Name',

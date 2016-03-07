@@ -5,7 +5,7 @@ var sqlConfig = require('../config/sqlConfig.js');
 
 router.post('/login', function (req, res) {
     console.log('In NodeJS Service');
-    console.log(req.body);
+   // console.log(req.body);
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array("SelectByUserName", req.body.email, "");
         var pm = conn.procedureMgr();
@@ -18,11 +18,14 @@ router.post('/login', function (req, res) {
                     console.log(results);
                     sql.open(sqlConfig, function (err, conn) {
                         var tableObjectValue = new Array("SelectByEmail", results[0].Email);
+                        console.log('Getting Employee Details');
+                        console.log(tableObjectValue);
                         var pm = conn.procedureMgr();
                         pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
                             if (err) {
                                 console.log(err);
                             } else {
+                                console.log(result1);
                                 res.json({
                                     type: true,
                                     data: result1

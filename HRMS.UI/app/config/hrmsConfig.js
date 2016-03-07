@@ -38,6 +38,12 @@ hrBaseApp.config([
                 controller: 'hrmsMainCtrl',
                 friendlyName: 'Dashboard'
             })
+            .state('home.editProfile', {
+                url: 'editProfile',
+                templateUrl: '/app/home/hrmsEditProfileCtrl.html',
+                controller: 'hrmsEditProfileCtrl',
+                friendlyName: 'Edit Profile'
+            })
             .state('home.attendance', {
                 url: 'attendance',
                 templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',

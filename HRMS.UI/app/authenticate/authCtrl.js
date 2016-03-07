@@ -44,13 +44,14 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                     }
                     authFctry.login(formdata).then(function (response) {
 
-                            $rootScope.userDetails = response.data[0];
-                            $scope.$broadcast('userName', {
-                                message: $rootScope.userDetails.FirstName
-                            });
+                            if (response.data.length > 0) {
+                                $rootScope.userDetails = response.data[0];
+                                $scope.$broadcast('userName', {
+                                    message: $rootScope.userDetails.FirstName
+                                });
+                            }
                             $rootScope.isLoggedIn = true;
                             $state.go('home.dashboard');
-
                         },
                         function (error) {
                             console.log(error);
