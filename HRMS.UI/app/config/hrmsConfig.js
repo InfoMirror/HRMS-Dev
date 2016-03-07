@@ -44,6 +44,12 @@ hrBaseApp.config([
                 controller: 'hrmsEditProfileCtrl',
                 friendlyName: 'Edit Profile'
             })
+            .state('home.approveProfile', {
+                url: 'ApproveProfile',
+                templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
+                controller: 'hrmsApproveProfileCtrl',
+                friendlyName: 'Approve Profile'
+            })
             .state('home.attendance', {
                 url: 'attendance',
                 templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',

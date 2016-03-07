@@ -9,6 +9,12 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
             params: {
                 action: 'getAllRelations'
             }
+        },
+        'getAllEmployees': {
+            method: 'GET',
+            params: {
+                action: 'getAllEmployees'
+            }
         }
     });
 
@@ -22,7 +28,19 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
         return deffered.promise;
     };
 
+    var _getAllEmployees = function () {
+        var deffered = $q.defer();
+        resource.getAllEmployees(function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
     profileFctryData.getAllRelations = _getAllRelations;
+    
+    profileFctryData.getAllEmployees = _getAllEmployees;
 
     return profileFctryData;
 }]);
