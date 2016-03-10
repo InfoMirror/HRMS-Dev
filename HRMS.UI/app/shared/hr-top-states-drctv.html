@@ -16,7 +16,7 @@
     </ul-->
         <!-- /.breadcrumb -->
         <ul class="nav nav-tabs" role="tablist" id="centerTabs">
-            <li role="presentation" ng-repeat="state in states" ng-class="setMenuActive(state.name,state.abstract)" ng-hide="checkRole()"><a ui-sref="{{state.redirectState}}" >{{state.friendlyName}}</a></li>
+            <li role="presentation" ng-repeat="state in states" ng-class="setMenuActive(state.name,state.abstract)"><a ui-sref="{{state.redirectState}}" >{{state.friendlyName}}</a></li>
         </ul>
     </div>
     <div class="page-header">

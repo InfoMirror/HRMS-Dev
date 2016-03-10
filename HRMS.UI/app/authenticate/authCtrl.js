@@ -46,7 +46,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
                             if (response.data.length > 0) {
                                 $rootScope.userDetails = response.data[0];
-                                if ($rootScope.userDetails.UserEmail == 'hr@infoobjects.com') {
+                                if ($rootScope.userDetails.UserEmail == 'surbhi@infoobjects.com') {
                                     $rootScope.Role = 'HR';
                                 } else {
                                     $rootScope.Role = 'Employee';
