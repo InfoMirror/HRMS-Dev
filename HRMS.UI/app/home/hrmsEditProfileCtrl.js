@@ -1,10 +1,16 @@
-hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', function ($scope, $rootScope, profileFctry) {
+hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', function ($scope, $rootScope, profileFctry, $state) {
     'use strict';
 
     $scope.init = function () {
-        $scope.formData = {
-            Id: $rootScope.userDetails.Id
-        };
+        $scope.formData = {};
+        if ($rootScope.userDetails != undefined) {
+            $scope.formData = $rootScope.userDetails;
+            console.log($scope.formData);
+        }
+        /*$scope.formData = {
+            Id: $rootScope.userDetails.Id,
+            userEmail: $rootScope.userDetails.UserEmail
+        };*/
 
         $scope.getReportingHeads();
 
@@ -23,9 +29,15 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.submit = function () {
-        alert(JSON.stringify($scope.formData));
+        //alert(JSON.stringify($scope.formData));
+        if ($rootScope.Role = 'HR') {
+            $scope.formData.ProfileStatus = 24
+        } else if ($rootScope.Role = 'Employee') {
+            $scope.formData.ProfileStatus = 23
+        }
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
             console.log(response.data);
+            $state.go('home.dashboard');
         });
     }
 

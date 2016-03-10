@@ -2,132 +2,132 @@
     <form role="form">
         <div class="control-group" ng-class="{true: 'error'}[submitted && form.$invalid]">
             <div class="form-group">
-                <label for="userEmail">User Email:</label>
-                <input type="email" class="form-control" id="userEmail" required ng-model="formData.userEmail">
+                <label for="UserEmail">User Email:</label>
+                <input type="email" class="form-control" id="UserEmail" required ng-model="formData.UserEmail">
             </div>
             <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" class="form-control" id="firstName" required ng-model="formData.firstName">
+                <label for="FirstName">First Name:</label>
+                <input type="text" class="form-control" id="FirstName" required ng-model="formData.FirstName">
             </div>
             <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" class="form-control" id="lastName" required ng-model="formData.lastName">
+                <label for="LastName">Last Name:</label>
+                <input type="text" class="form-control" id="LastName" required ng-model="formData.LastName">
             </div>
             <div class="form-group">
-                <label for="team">Team:</label>
-                <input type="text" class="form-control" id="team" required ng-model="formData.team">
+                <label for="Team">Team:</label>
+                <input type="text" class="form-control" id="Team" required ng-model="formData.Team">
             </div>
             <div class="form-group">
-                <label for="designation">Designation: </label>
-                <select ng-model="formData.designation" ng-options="designation.Id as designation.Value for designation in designations"></select>
+                <label for="Designation">Designation: </label>
+                <select ng-model="formData.Designation" ng-options="designation.Id as designation.Value for designation in designations"></select>
             </div>
             <div class="form-group">
-                <label for="gender">Gender:</label>
+                <label for="Gender">Gender:</label>
                <label class="radio-inline" ng-repeat="gender in genders">
-                    <input type="radio" ng-model="formData.gender" value="{{gender.Id}}" >{{gender.Value}}
+                    <input type="radio" ng-model="formData.Gender" value="{{gender.Id}}" >{{gender.Value}}
                 </label>
             </div>
             <div class="form-group">
-                <label for="currentAddress">Current Address:</label>
-                <input type="textarea" class="form-control" id="currentAddress" required ng-model="formData.currentAddress">
+                <label for="CurrentAddress">Current Address:</label>
+                <input type="textarea" class="form-control" id="CurrentAddress" required ng-model="formData.CurrentAddress">
             </div>
             <div class="form-group">
-                <label for="permanentAddress">Permanent Address:</label>
-                <input type="textarea" class="form-control" id="permanentAddress" required ng-model="formData.permanentAddress">
+                <label for="PermanentAddress">Permanent Address:</label>
+                <input type="textarea" class="form-control" id="PermanentAddress" required ng-model="formData.PermanentAddress">
             </div>
             <div class="form-group">
-                <label for="personalEmail">Personal Email:</label>
-                <input type="email" class="form-control" id="personalEmail" required ng-model="formData.personalEmail">
+                <label for="PersonalEmail">Personal Email:</label>
+                <input type="email" class="form-control" id="PersonalEmail" required ng-model="formData.PersonalEmail">
             </div>
             <div class="form-group">
-                <label for="contactNo">Contact No:</label>
-                <input type="text" class="form-control" id="contactNo" required ng-model="formData.contactNo">
+                <label for="ContactNo">Contact No:</label>
+                <input type="text" class="form-control" id="ContactNo" required ng-model="formData.ContactNo">
             </div>
             <div class="form-group">
-                <label for="emergenyCntctNo">Emergency Contact No:</label>
-                <input type="text" class="form-control" id="emergenyCntctNo" required ng-model="formData.emergenyCntctNo">
+                <label for="EmergencyContactNo">Emergency Contact No:</label>
+                <input type="text" class="form-control" id="EmergencyContactNo" required ng-model="formData.EmergencyContactNo">
             </div>
             <div class="form-group">
-                <label for="emergencyCntctName">Name of Emergency Contact:</label>
-                <input type="text" class="form-control" id="emergencyCntctName" required ng-model="formData.emergencyCntctName">
+                <label for="NameOfEC">Name of Emergency Contact:</label>
+                <input type="text" class="form-control" id="NameOfEC" required ng-model="formData.NameOfEC">
             </div>
             <div class="form-group">
-                <label for="relationWithEmrgncyCntct">Relation with Emergency Contact:</label>
-                <select ng-model="formData.relationWithEmrgncyCntct" ng-options="relation.Id as relation.Value for relation in relations"></select>
+                <label for="RelationWithEC">Relation with Emergency Contact:</label>
+                <select ng-model="formData.RelationWithEC" ng-options="relation.Id as relation.Value for relation in relations"></select>
             </div>
             <div class="form-group">
-                <label for="bloodGrp">Blood Group:</label>
-                <input type="text" class="form-control" id="bloodGrp" required ng-model="formData.bloodGrp">
+                <label for="BloodGroup">Blood Group:</label>
+                <input type="text" class="form-control" id="BloodGroup" required ng-model="formData.BloodGroup">
             </div>
             <div class="form-group">
-                <label for="dob">Date of Birth:</label>
-                <input type="date" class="form-control" id="dob" required ng-model="formData.dob">
+                <label for="DOB">Date of Birth:</label>
+                <input type="date" class="form-control" id="DOB" required ng-model="formData.DOB">
             </div>
             <div class="form-group">
-                <label for="nominee">Nominee:</label>
-                <input type="text" class="form-control" id="nominee" required ng-model="formData.nominee">
+                <label for="Nominee">Nominee:</label>
+                <input type="text" class="form-control" id="Nominee" required ng-model="formData.Nominee">
             </div>
             <div class="form-group">
-                <label for="relationWithNominee">Relation with Nominee:</label>
-                <select ng-model="formData.relationWithNominee" ng-options="relation.Id as relation.Value for relation in relations"></select>
+                <label for="RelationWithNominee">Relation with Nominee:</label>
+                <select ng-model="formData.RelationWithNominee" ng-options="relation.Id as relation.Value for relation in relations"></select>
             </div>
             <div class="form-group">
-                <label for="skypeId">Skype ID:</label>
-                <input type="text" class="form-control" id="skypeId" required ng-model="formData.skypeId">
+                <label for="SkypeID">Skype ID:</label>
+                <input type="text" class="form-control" id="SkypeID" required ng-model="formData.SkypeID">
             </div>
             <div class="form-group">
-                <label for="passportNo">Passport No:</label>
-                <input type="text" class="form-control" id="passportNo" required ng-model="formData.passportNo">
+                <label for="PassportNumber">Passport No:</label>
+                <input type="text" class="form-control" id="PassportNumber" required ng-model="formData.PassportNumber">
             </div>
             <div class="form-group">
-                <label for="passportIssueDate">Passport Issue Date:</label>
-                <input type="date" class="form-control" id="passportIssueDate" required ng-model="formData.passportIssueDate">
+                <label for="PassportIssueDate">Passport Issue Date:</label>
+                <input type="date" class="form-control" id="PassportIssueDate" required ng-model="formData.PassportIssueDate">
             </div>
             <div class="form-group">
-                <label for="passportExpiryDate">Passport Expiry Date:</label>
-                <input type="date" class="form-control" id="passportExpiryDate" required ng-model="formData.passportExpiryDate">
+                <label for="PassportExpiryDate">Passport Expiry Date:</label>
+                <input type="date" class="form-control" id="PassportExpiryDate" required ng-model="formData.PassportExpiryDate">
             </div>
             <div class="form-group">
-                <label for="passportIssuePlace">Passport Issue Place:</label>
-                <input type="text" class="form-control" id="passportIssuePlace" required ng-model="formData.passportIssuePlace">
+                <label for="PassportIssuePlace">Passport Issue Place:</label>
+                <input type="text" class="form-control" id="PassportIssuePlace" required ng-model="formData.PassportIssuePlace">
             </div>
             <div class="form-group">
-                <label for="panNo">PAN No:</label>
-                <input type="text" class="form-control" id="panNo" required ng-model="formData.panNo">
+                <label for="PanCard">PAN No:</label>
+                <input type="text" class="form-control" id="PanCard" required ng-model="formData.PanCard">
             </div>
             <div class="form-group">
-                <label for="maritalStatus">Marital Status:</label>
+                <label for="MaritalStatus">Marital Status:</label>
                 <label class="radio-inline" ng-repeat="status in maritalStatus">
-                    <input type="radio" value="{{status.Id}}" ng-model="formData.maritalStatus">{{status.Value}}
+                    <input type="radio" value="{{status.Id}}" ng-model="formData.MaritalStatus">{{status.Value}}
                 </label>
             </div>
             <div class="form-group">
-                <label for="children1">Children1:</label>
-                <input type="text" class="form-control" id="children1" ng-model="formData.children1">
+                <label for="Children1">Children1:</label>
+                <input type="text" class="form-control" id="Children1" ng-model="formData.Children1">
             </div>
             <div class="form-group">
-                <label for="children2">Children 2:</label>
-                <input type="text" class="form-control" id="children1" ng-model="formData.children2">
+                <label for="Children2">Children 2:</label>
+                <input type="text" class="form-control" id="Children2" ng-model="formData.Children2">
             </div>
             <div class="form-group" ng-show="checkRole()">
-                <label for="dateOfJoining">Date of joining: </label>
-                <input type="date" class="form-control" id="dateOfJoining" ng-model="formData.dateOfJoining">
+                <label for="DOJ">Date of joining: </label>
+                <input type="date" class="form-control" id="DOJ" ng-model="formData.DOJ">
             </div>
             <div class="form-group" ng-show="checkRole()">
-                <label for="bankAccountNo">Bank Account Number: </label>
-                <input type="text" class="form-control" id="bankAccountNo" ng-model="formData.bankAccountNo">
+                <label for="BankAccountNumber">Bank Account Number: </label>
+                <input type="text" class="form-control" id="BankAccountNumber" ng-model="formData.BankAccountNumber">
             </div>
             <div class="form-group" ng-show="checkRole()">
-                <label for="repotingHead">Reporting Head:</label>
-                <select ng-model="formData.repotingHead" ng-options="head.Id as head.Name for head in reportingHeads"></select>
+                <label for="ReportingHead">Reporting Head:</label>
+                <select ng-model="formData.ReportingHead" ng-options="head.Id as head.Name for head in reportingHeads"></select>
             </div>
             <div class="form-group" ng-show="checkRole()">
-                <label for="pfNo">PF Number: </label>
-                <input type="text" class="form-control" id="pfNo" ng-model="formData.pfNo">
+                <label for="PFNo">PF Number: </label>
+                <input type="text" class="form-control" id="PFNo" ng-model="formData.PFNo">
             </div>
             <div class="form-group" ng-show="checkRole()">
-                <label for="uan">UAN: </label>
-                <input type="text" class="form-control" id="uan" ng-model="formData.uan">
+                <label for="UAN">UAN: </label>
+                <input type="text" class="form-control" id="UAN" ng-model="formData.UAN">
             </div>
             
         </div>
