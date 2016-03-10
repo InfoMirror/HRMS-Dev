@@ -1,5 +1,5 @@
 hrBaseApp.config([
-    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider',
+    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider', 
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
         localStorageServiceProvider
             .setPrefix('hrmsApp')
@@ -8,14 +8,14 @@ hrBaseApp.config([
 
         //$httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
         //$httpProvider.defaults.headers.common.Pragma = "no-cache";
-
+        debugger;
+        //alert($rootScope.Role);
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         $urlRouterProvider.otherwise("/404");
 
         $urlRouterProvider.when('', '');
         $urlRouterProvider.when('/', '');
-
         $stateProvider
             .state('home', {
                 url: '/',

@@ -15,6 +15,18 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
             params: {
                 action: 'getAllEmployees'
             }
+        },
+        'getMasterValues': {
+            method: 'POST',
+            params: {
+                action: 'getMasterValues'
+            }
+        },
+        'updateEmployeeDetails': {
+            method: 'POST',
+            params: {
+                action: 'updateEmployeeDetails'
+            }
         }
     });
 
@@ -38,9 +50,33 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
         return deffered.promise;
     };
 
+    var _getMasterValues = function (parms) {
+        var deffered = $q.defer();
+        resource.getMasterValues(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _updateEmpDetails = function (parms) {
+        var deffered = $q.defer();
+        resource.updateEmployeeDetails(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
     profileFctryData.getAllRelations = _getAllRelations;
-    
+
     profileFctryData.getAllEmployees = _getAllEmployees;
+
+    profileFctryData.getMasterValue = _getMasterValues;
+
+    profileFctryData.updateEmpDetails = _updateEmpDetails;
 
     return profileFctryData;
 }]);

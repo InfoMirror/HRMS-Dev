@@ -5,7 +5,7 @@ var sqlConfig = require('../config/sqlConfig.js');
 
 router.post('/login', function (req, res) {
     console.log('In NodeJS Service');
-   // console.log(req.body);
+    // console.log(req.body);
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array("SelectByUserName", req.body.email, "");
         var pm = conn.procedureMgr();

@@ -12,7 +12,7 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
         p.scope = {
             parentState: '@parentState'
         };
-        p.controller = function ($scope, $state) {
+        p.controller = function ($scope, $state, $rootScope) {
 
             $scope.filterStates = function () {
 
@@ -54,6 +54,13 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
 
             $scope.show = function () {
                 return false;
+            }
+
+            $scope.checkRole = function () {
+                if ($rootScope.Role == 'HR')
+                    return true;
+                else
+                    return false;
             }
 
         }
