@@ -92,4 +92,25 @@ router.post('/updateEmployeeDetails', function (req, res) {
     });
 });
 
+
+router.post('/getEmpDetails', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array('SelectByEmail', req.body.UserEmail,'');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (results.length > 0) {
+                    res.json({
+                        type: true,
+                        data: results
+                    });
+                }
+            }
+        });
+    });
+});
+
 module.exports = router;

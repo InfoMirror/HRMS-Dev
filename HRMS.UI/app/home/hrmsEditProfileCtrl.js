@@ -1,16 +1,13 @@
-hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', function ($scope, $rootScope, profileFctry, $state) {
+hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', function ($scope, $rootScope, profileFctry, $state, $timeout) {
     'use strict';
 
     $scope.init = function () {
-        $scope.formData = {};
-        if ($rootScope.userDetails != undefined) {
-            $scope.formData = $rootScope.userDetails;
-            console.log($scope.formData);
+
+        if ($rootScope.passedUserEmail == undefined) {
+            $scope.getEmpData($rootScope.userDetails.UserEmail);
+        } else {
+            $scope.getEmpData($rootScope.passedUserEmail);
         }
-        /*$scope.formData = {
-            Id: $rootScope.userDetails.Id,
-            userEmail: $rootScope.userDetails.UserEmail
-        };*/
 
         $scope.getReportingHeads();
 
@@ -28,15 +25,42 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         });
     }
 
+    $scope.getEmpData = function (userEmail) {
+        profileFctry.getEmpDetails({
+            UserEmail: userEmail
+        }).then(function (response) {
+            $scope.formData = response.data[0];
+            console.log($scope.formData);
+        });
+    }
+
     $scope.submit = function () {
-        //alert(JSON.stringify($scope.formData));
-        if ($rootScope.Role = 'HR') {
+
+        if ($scope.formData.Children1 == '' || $scope.formData.Children1 == undefined)
+            $scope.formData.Children1 = null;
+        if ($scope.formData.Children2 == '' || $scope.formData.Children1 == undefined)
+            $scope.formData.Children1 = null;
+        if ($scope.formData.DOJ == '' || $scope.formData.DOJ == undefined)
+            $scope.formData.DOJ == null;
+        if ($scope.formData.BankAccountNumber == '' || $scope.formData.BankAccountNumber == undefined)
+            $scope.formData.BankAccountNumber == null;
+        if ($scope.formData.ReportingHead == '' || $scope.formData.ReportingHead == undefined)
+            $scope.formData.ReportingHead == null;
+        if ($scope.formData.PFNo == '' || $scope.formData.PFNo == undefined)
+            $scope.formData.PFNo == null;
+        if ($scope.formData.UAN == '' || $scope.formData.UAN == undefined)
+            $scope.formData.UAN == null;
+
+        //Profile Status as per to the Role
+        if ($rootScope.Role == 'HR') {
             $scope.formData.ProfileStatus = 24
-        } else if ($rootScope.Role = 'Employee') {
+        } else if ($rootScope.Role == 'Employee') {
             $scope.formData.ProfileStatus = 23
         }
+
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
-            console.log(response.data);
+          //  console.log(response.data);
+            $rootScope.passedUserEmail = undefined;
             $state.go('home.dashboard');
         });
     }
@@ -68,6 +92,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getReportingHeads = function () {
         profileFctry.getAllEmployees().then(function (response) {
             $scope.reportingHeads = response.data;
+            console.log($scope.reportingHeads);
         });
     }
 

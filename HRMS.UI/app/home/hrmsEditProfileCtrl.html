@@ -19,12 +19,15 @@
             </div>
             <div class="form-group">
                 <label for="Designation">Designation: </label>
-                <select ng-model="formData.Designation" ng-options="designation.Id as designation.Value for designation in designations"></select>
+                <select ng-model="formData.Designation">
+                    <option value="0">Select One</option>
+                    <option ng-repeat="designation in designations" value="{{designation.Id}}" ng-selected="{{formData.Designation==designation.Id}}">{{designation.Value}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="Gender">Gender:</label>
-               <label class="radio-inline" ng-repeat="gender in genders">
-                    <input type="radio" ng-model="formData.Gender" value="{{gender.Id}}" >{{gender.Value}}
+                <label class="radio-inline" ng-repeat="gender in genders">
+                    <input type="radio" ng-model="formData.Gender" value="{{gender.Id}}">{{gender.Value}}
                 </label>
             </div>
             <div class="form-group">
@@ -53,7 +56,11 @@
             </div>
             <div class="form-group">
                 <label for="RelationWithEC">Relation with Emergency Contact:</label>
-                <select ng-model="formData.RelationWithEC" ng-options="relation.Id as relation.Value for relation in relations"></select>
+                <!--<select ng-model="formData.RelationWithEC" ng-options="relation.Id as relation.Value for relation in relations"></select>-->
+                <select ng-model="formData.RelationWithEC">
+                    <option value="0">Select One</option>
+                    <option ng-repeat="relation in relations" value="{{relation.Id}}" ng-selected="{{formData.RelationWithEC==relation.Id}}">{{relation.Value}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="BloodGroup">Blood Group:</label>
@@ -61,7 +68,7 @@
             </div>
             <div class="form-group">
                 <label for="DOB">Date of Birth:</label>
-                <input type="date" class="form-control" id="DOB" required ng-model="formData.DOB">
+                <input type="text" class="form-control" id="DOB" required ng-model="formData.DOB">
             </div>
             <div class="form-group">
                 <label for="Nominee">Nominee:</label>
@@ -69,7 +76,11 @@
             </div>
             <div class="form-group">
                 <label for="RelationWithNominee">Relation with Nominee:</label>
-                <select ng-model="formData.RelationWithNominee" ng-options="relation.Id as relation.Value for relation in relations"></select>
+                <!--<select ng-model="formData.RelationWithNominee" ng-options="relation.Id as relation.Value for relation in relations"></select>-->
+                <select ng-model="formData.RelationWithNominee">
+                    <option value="0">Select One</option>
+                    <option ng-repeat="relation in relations" value="{{relation.Id}}" ng-selected="{{formData.RelationWithNominee==relation.Id}}">{{relation.Value}}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="SkypeID">Skype ID:</label>
@@ -81,11 +92,11 @@
             </div>
             <div class="form-group">
                 <label for="PassportIssueDate">Passport Issue Date:</label>
-                <input type="date" class="form-control" id="PassportIssueDate" required ng-model="formData.PassportIssueDate">
+                <input type="text" class="form-control" id="PassportIssueDate" required ng-model="formData.PassportIssueDate">
             </div>
             <div class="form-group">
                 <label for="PassportExpiryDate">Passport Expiry Date:</label>
-                <input type="date" class="form-control" id="PassportExpiryDate" required ng-model="formData.PassportExpiryDate">
+                <input type="text" class="form-control" id="PassportExpiryDate" required ng-model="formData.PassportExpiryDate">
             </div>
             <div class="form-group">
                 <label for="PassportIssuePlace">Passport Issue Place:</label>
@@ -111,7 +122,7 @@
             </div>
             <div class="form-group" ng-show="checkRole()">
                 <label for="DOJ">Date of joining: </label>
-                <input type="date" class="form-control" id="DOJ" ng-model="formData.DOJ">
+                <input type="text" class="form-control" id="DOJ" ng-model="formData.DOJ">
             </div>
             <div class="form-group" ng-show="checkRole()">
                 <label for="BankAccountNumber">Bank Account Number: </label>
@@ -119,7 +130,11 @@
             </div>
             <div class="form-group" ng-show="checkRole()">
                 <label for="ReportingHead">Reporting Head:</label>
-                <select ng-model="formData.ReportingHead" ng-options="head.Id as head.Name for head in reportingHeads"></select>
+                <!--<select ng-model="formData.ReportingHead" ng-options="head.Id as head.Name for head in reportingHeads"></select>-->
+                <select ng-model="formData.ReportingHead">
+                    <option value="0">Select One</option>
+                    <option ng-repeat="head in reportingHeads" value="{{head.Id}}" ng-selected="{{formData.ReportingHead==head.Id}}">{{head.Name}}</option>
+                </select>
             </div>
             <div class="form-group" ng-show="checkRole()">
                 <label for="PFNo">PF Number: </label>
@@ -129,7 +144,7 @@
                 <label for="UAN">UAN: </label>
                 <input type="text" class="form-control" id="UAN" ng-model="formData.UAN">
             </div>
-            
+
         </div>
 
         <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>

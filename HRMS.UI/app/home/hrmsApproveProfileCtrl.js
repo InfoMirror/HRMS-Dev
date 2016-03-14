@@ -29,7 +29,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
                 field: 'Action',
                 displayName: 'Show Details',
                 enableColumnMenu: true,
-                cellTemplate: '<div>{{row.entity.Action}}<button type="button"  ng-click="grid.appScope.getEmployeeDetails(row.entity.Id)">Show Details</button></div>'
+                cellTemplate: '<div>{{row.entity.Action}}<button type="button"  ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail)">Show Details</button></div>'
             }
 
         ]
@@ -43,7 +43,10 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
 
         });
         $scope.getEmployeeDetails = function (rowId) {
-            alert(rowId);
+            /*alert(rowId);
+            $scope.$parent.$broadcast('passingRowId', { message: rowId });
+            alert('Going to Profile State');*/
+            $rootScope.passedUserEmail = rowId;
             $state.go('home.editProfile');
         }
 
