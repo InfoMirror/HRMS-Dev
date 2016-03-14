@@ -33,6 +33,12 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
             params: {
                 action: 'getEmpDetails'
             }
+        },
+        'getApprovalReqEmp': {
+            method: 'POST',
+            params: {
+                action: 'getApprovalReqEmp'
+            }
         }
     });
 
@@ -86,6 +92,16 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
         return deffered.promise;
     };
 
+    var _getApprovalReqEmp = function (parms) {
+        var deffered = $q.defer();
+        resource.getApprovalReqEmp(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
     profileFctryData.getAllRelations = _getAllRelations;
 
     profileFctryData.getAllEmployees = _getAllEmployees;
@@ -95,6 +111,8 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
     profileFctryData.updateEmpDetails = _updateEmpDetails;
 
     profileFctryData.getEmpDetails = _getEmpDetails;
+
+    profileFctryData.getApprovalReqEmp = _getApprovalReqEmp;
 
     return profileFctryData;
 }]);

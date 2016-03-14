@@ -36,7 +36,9 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
     };
 
     $scope.getEmployees = function () {
-        profileFctry.getAllEmployees().then(function (response) {
+        profileFctry.getApprovalReqEmp({
+            Id: $rootScope.userDetails.Id
+        }).then(function (response) {
             /* $scope.employeeDetails = response.data;
              alert(JSON.stringify($scope.employeeDetails));*/
             $scope.ApproveProfileGridOptions.data = response.data;
