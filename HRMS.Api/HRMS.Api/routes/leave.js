@@ -110,5 +110,57 @@ router.post('/MarkCompOff', function (req, res) {
     });
 });
 
+router.post('/getAppliedLeaves', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array(req.body.EmpId, '');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_GetappliedLeavesByEmployeeId', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (result.length > 0) {
+                    res.json({
+                        type: true,
+                        data: result
+                    });
+                } else {
+                    res.json({
+                        type: true,
+                        data: 'No Records Found'
+                    });
+                }
+            }
+        });
+    });
+});
+
+router.post('/insertLeave', function (req, res) {
+    console.log('Hitting Insert Leaves Api');
+    console.log(req.body);
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array(req.body.EmpId, req.body.FromDate, req.body.ToDate, req.body.Reason, req.body.Status, '');
+        console.log('Leave Data:');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('Sp_InsertLeave', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (result.length > 0) {
+                    res.json({
+                        type: true,
+                        data: result
+                    });
+                } else {
+                    res.json({
+                        type: true,
+                        data: 'Leave Applied'
+                    });
+                }
+            }
+        });
+    });
+});
 
 module.exports = router;

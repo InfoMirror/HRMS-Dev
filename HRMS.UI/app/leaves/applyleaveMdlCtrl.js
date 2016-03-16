@@ -9,31 +9,30 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
                 EmpId: aValue,
                 FromDate: new Date(),
                 ToDate: new Date(),
-                Status:26,
+                Status: 26,
                 Reason: ''
             }
         }
 
         $scope.submit = function () {
-            alert($scope.LReason);
-           // $scope.Reason.Reason = $scope.Reason;
-
+            $scope.ApplyLeave.Reason = $scope.LReason;
+            alert($scope.ApplyLeave.Reason);
+            debugger;
+            // $scope.Reason.Reason = $scope.Reason;
             if ($scope.ApplyLeave.Reason != '' && $scope.ApplyLeave.Reason != undefined) {
                 $scope.ApplyLeave.FromDate = $scope.FromDate;
-                 $scope.ApplyLeave.ToDate = $scope.ToDate;
+                $scope.ApplyLeave.ToDate = $scope.ToDate;
                 $scope.ApplyLeave.Reason = $scope.LReason;
                 console.log($scope.ApplyLeave);
                 $scope.insertLeave($scope.ApplyLeave);
             }
-
-            $scope.close();
         }
 
         $scope.insertLeave = function (ApplyLeaveDate) {
+            alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
-
                 if (response.data == "Leave Applied") {
-                    $scope.insertLeave($rootScope.userDetails);
+                    $scope.close();
                 }
             });
         }
@@ -43,5 +42,5 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         }
 
         $scope.init();
-    }
-]);
+                }
+                ]);

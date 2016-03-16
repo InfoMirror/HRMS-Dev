@@ -38,9 +38,19 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
                 action: 'markCompOff'
             },
             isArray: false
+        },
+        'getAppliedLeaves': {
+            method: 'POST',
+            params: {
+                action: 'getAppliedLeaves'
+            }
+        },
+        'insertLeave': {
+            method: 'POST',
+            params: {
+                action: 'insertLeave'
+            }
         }
-
-
 
     });
 
@@ -108,10 +118,37 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
         return deferred.promise;
     }
 
+    var _getAppliedLeaves = function (parms) {
+        var deferred = $q.defer();
+        resource.getAppliedLeaves(parms, function (response) {
+                deferred.resolve(response);
+            },
+            function (response) {
+                deferred.reject(response);
+
+            });
+        return deferred.promise;
+    }
+
+    var _insertLeave = function (parms) {
+        var deferred = $q.defer();
+        resource.insertLeave(parms, function (response) {
+                deferred.resolve(response);
+            },
+            function (response) {
+                deferred.reject(response);
+
+            });
+        return deferred.promise;
+    }
+
     leaveFctryData.getAbsents = _getAbsents;
     leaveFctryData.fileOD = _fileOD;
     leaveFctryData.getCompOffs = _getCompOffs;
     leaveFctryData.insertCompOff = _insertCompOff;
     leaveFctryData.markCompOff = _markCompOff;
+    leaveFctryData.getAppliedLeaves = _getAppliedLeaves;
+    leaveFctryData.insertLeave = _insertLeave;
+
     return leaveFctryData;
 }]);
