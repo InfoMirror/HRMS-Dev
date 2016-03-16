@@ -81,6 +81,14 @@ hrBaseApp.config([
                 controller: 'attendanceCtrl',
                 friendlyName: 'Attendance Upload'
             })
+        
+            
+            .state('home.approval', {
+                url: 'approval',
+                templateUrl: '/app/approval/hrmsApproveCompOffODCtrl.html',
+                controller: 'hrmsApproveCompOffODCtrl',
+                friendlyName: 'Admin Approval'
+            })
 
         /*.state('home.birthdays', {
             url: 'birthdays',
