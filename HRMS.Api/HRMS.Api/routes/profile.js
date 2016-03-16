@@ -81,12 +81,10 @@ router.post('/updateEmployeeDetails', function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                if (results.length > 0) {
-                    res.json({
-                        type: true,
-                        data: results
-                    });
-                }
+                res.json({
+                    type: true,
+                    data: 'Profile Updated'
+                });
             }
         });
     });

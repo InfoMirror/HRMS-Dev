@@ -4,7 +4,6 @@ var sql = require('msnodesqlv8');
 var sqlConfig = require('../config/sqlConfig.js');
 
 router.get('/getBirthdays', function (req, res) {
-    console.log(req.param);
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
         console.log('Table Object Value: ');
@@ -28,7 +27,6 @@ router.get('/getBirthdays', function (req, res) {
 });
 
 router.get('/getAnniversary', function (req, res) {
-    console.log(req.param);
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
         console.log('Table Object Value: ');
@@ -52,7 +50,6 @@ router.get('/getAnniversary', function (req, res) {
 });
 
 router.get('/getHolidays', function (req, res) {
-    console.log(req.param);
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
         console.log('Table Object Value: ');
@@ -75,7 +72,27 @@ router.get('/getHolidays', function (req, res) {
     });
 });
 
-
+router.post('/getLeaveSummary', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array(req.body.EmpId,'');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_GetLeaveSummaryByEmpId', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log('Error: ');
+                console.log(err);
+            }else{
+                if(results.length>0){
+                    console.log(results);
+                    res.json({
+                        type:true,
+                        data:results
+                    });
+                }
+            }
+        });
+    });
+});
 
 
 module.exports = router;

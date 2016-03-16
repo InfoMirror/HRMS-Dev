@@ -57,6 +57,12 @@ hrBaseApp.config([
                 friendlyName: 'Attendance Tracker',
                 abstract: true
             })
+            /*.state('home.attendance.leavesummary', {
+                url: 'leaveSummary',
+                templateUrl: '/app/leaves/hrmsLeaveSummaryCtrl.html',
+                controller: 'hrmsLeaveSummaryCtrl',
+                friendlyName: 'Leave Summary'
+            })*/
             .state('home.attendance.leaves', {
                 url: 'leaves',
                 templateUrl: '/app/leaves/hrmsLeavesCtrl.html',

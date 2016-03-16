@@ -1,17 +1,7 @@
 hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
 
     var dashboardFctryData = {};
-    //alert('In Dashboard Factory');
-    /*var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
-        action: '@action'
-    }, {
-        'getBirthdays': {
-            method: 'GET',
-            params: 'getBirthdays',
-            isArray: true
-        }
-    });
-    */
+
     var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
         action: '@action',
     }, {
@@ -32,6 +22,13 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
             params: {
                 action: 'getHolidays'
             }
+        },
+        'getLeaveSummary': {
+            method: 'POST',
+            params: {
+                action: 'getLeaveSummary'
+            },
+            isArray: false
         }
 
     });
@@ -70,29 +67,23 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
         return deferred.promise;
     };
 
-    /*var _getAllRelations = function () {
-        var deferred = $q.defer();
-        resource.getAllRelations(function (response) {
-            deferred.resolve(response)
+    var _getLeaveSummary = function (parms) {
+        var deffered = $q.defer();
+        resource.getLeaveSummary(parms, function (response) {
+            deffered.resolve(response)
         }, function (response) {
-            deferred.reject(response);
-
+            deffered.reject(response);
         });
-    return deferred.promise;
-    };*/
-
-
-
+        return deffered.promise;
+    };
 
     dashboardFctryData.getBirthdays = _getBirthdays;
 
-
     dashboardFctryData.getAnniversary = _getAnniversary;
-
 
     dashboardFctryData.getHolidays = _getHolidays;
 
-    //  dashboardFctryData.getAllRelations = _getAllRelations;
+    dashboardFctryData.getLeaveSummary = _getLeaveSummary;
 
     return dashboardFctryData;
 

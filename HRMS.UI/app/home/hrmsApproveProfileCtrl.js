@@ -39,15 +39,10 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
         profileFctry.getApprovalReqEmp({
             Id: $rootScope.userDetails.Id
         }).then(function (response) {
-            /* $scope.employeeDetails = response.data;
-             alert(JSON.stringify($scope.employeeDetails));*/
             $scope.ApproveProfileGridOptions.data = response.data;
 
         });
         $scope.getEmployeeDetails = function (rowId) {
-            /*alert(rowId);
-            $scope.$parent.$broadcast('passingRowId', { message: rowId });
-            alert('Going to Profile State');*/
             $rootScope.passedUserEmail = rowId;
             $state.go('home.editProfile');
         }
