@@ -8,7 +8,7 @@ hrBaseApp.config([
 
         //$httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
         //$httpProvider.defaults.headers.common.Pragma = "no-cache";
-        debugger;
+
         //alert($rootScope.Role);
         $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -23,9 +23,7 @@ hrBaseApp.config([
                 controller: 'hrmsFrameCtrl',
                 abstract: true
             })
-
-
-        .state('home.account', {
+            .state('home.account', {
                 url: '',
                 templateUrl: '/app/authenticate/authCtrl.html',
                 controller: 'authCtrl',
@@ -38,19 +36,22 @@ hrBaseApp.config([
                 controller: 'hrmsMainCtrl',
                 friendlyName: 'Dashboard'
             })
-            .state('home.editProfile', {
-                url: 'editProfile',
-                templateUrl: '/app/home/hrmsEditProfileCtrl.html',
-                controller: 'hrmsEditProfileCtrl',
-                friendlyName: 'Edit Profile'
-            })
-            .state('home.approveProfile', {
-                url: 'ApproveProfile',
-                templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
-                controller: 'hrmsApproveProfileCtrl',
-                friendlyName: 'Approve Profile'
-            })
-            .state('home.attendance', {
+
+        .state('home.editProfile', {
+            url: 'editProfile',
+            templateUrl: '/app/home/hrmsEditProfileCtrl.html',
+            controller: 'hrmsEditProfileCtrl',
+            friendlyName: 'Edit Profile'
+        })
+
+        .state('home.approveProfile', {
+            url: 'ApproveProfile',
+            templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
+            controller: 'hrmsApproveProfileCtrl',
+            friendlyName: 'Approve Profile'
+        })
+
+        .state('home.attendance', {
                 url: 'attendance',
                 templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',
                 controller: 'hrmsAttendanceCtrl',
@@ -63,58 +64,42 @@ hrBaseApp.config([
                 controller: 'hrmsLeaveSummaryCtrl',
                 friendlyName: 'Leave Summary'
             })*/
-            .state('home.attendance.leaves', {
-                url: 'leaves',
-                templateUrl: '/app/leaves/hrmsLeavesCtrl.html',
-                controller: 'hrmsLeavesCtrl',
-                friendlyName: 'Leaves'
-            })
-            .state('home.attendance.compoffs', {
-                url: 'compoffs',
-                templateUrl: '/app/leaves/hrmsCompOffsCtrl.html',
-                controller: 'hrmsCompOffsCtrl',
-                friendlyName: 'Comp Off'
-            })
-            .state('home.admin', {
-                url: 'admin',
-                templateUrl: '/app/admin/attendanceCtrl.html',
-                controller: 'attendanceCtrl',
-                friendlyName: 'Attendance Upload'
-            })
-<<<<<<< HEAD
-        
-            
-            .state('home.approval', {
-                url: 'approval',
-                templateUrl: '/app/approval/hrmsApproveCompOffODCtrl.html',
-                controller: 'hrmsApproveCompOffODCtrl',
-                friendlyName: 'Admin Approval'
-=======
-.state('home.attendance.applyleave', {
-                url: 'ApplyLeave',
-                templateUrl: '/app/admin/applyleaveCtrl.html',
-                controller: 'applyleaveCtrl',
-                friendlyName: 'Apply Leave'
->>>>>>> origin/master
-            })
 
-        /*.state('home.birthdays', {
-            url: 'birthdays',
-            templateUrl: '/app/dashboard/hrmsBirthdaysCtrl.html',
-            controller: 'hrmsBirthdaysCtrl',
-            friendlyName: 'Upcoming Birthdays'
+        .state('home.attendance.leaves', {
+            url: 'leaves',
+            templateUrl: '/app/leaves/hrmsLeavesCtrl.html',
+            controller: 'hrmsLeavesCtrl',
+            friendlyName: 'Leaves'
         })
-        .state('home.holidays', {
-            url: 'holidays',
-            templateUrl: '/app/dashboard/hrmsHolidaysCtrl.html',
-            controller: 'hrmsHolidaysCtrl',
-            friendlyName: 'Upcoming Holidays'
+
+        .state('home.attendance.compoffs', {
+            url: 'compoffs',
+            templateUrl: '/app/leaves/hrmsCompOffsCtrl.html',
+            controller: 'hrmsCompOffsCtrl',
+            friendlyName: 'Comp Off'
         })
-        .state('home.anniversaries', {
-            url: 'anniversaries',
-            templateUrl: '/app/dashboard/hrmsAnniversaryCtrl.html',
-            controller: 'hrmsAnniversaryCtrl',
-            friendlyName: 'Upcoming Anniversaries'
-        })*/
-    }
+
+        .state('home.admin', {
+            url: 'admin',
+            templateUrl: '/app/admin/attendanceCtrl.html',
+            controller: 'attendanceCtrl',
+            friendlyName: 'Attendance Upload'
+        })
+
+        .state('home.approval', {
+            url: 'approval',
+            templateUrl: '/app/approval/hrmsApproveCompOffODCtrl.html',
+            controller: 'hrmsApproveCompOffODCtrl',
+            friendlyName: 'Admin Approval'
+        })
+
+        .state('home.attendance.applyleave', {
+            url: 'ApplyLeave',
+            templateUrl: '/app/admin/applyleaveCtrl.html',
+            controller: 'applyleaveCtrl',
+            friendlyName: 'Apply Leave'
+
+        })
+
+      }
 ]);
