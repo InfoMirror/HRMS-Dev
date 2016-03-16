@@ -81,6 +81,12 @@ hrBaseApp.config([
                 controller: 'attendanceCtrl',
                 friendlyName: 'Attendance Upload'
             })
+.state('home.attendance.applyleave', {
+                url: 'ApplyLeave',
+                templateUrl: '/app/admin/applyleaveCtrl.html',
+                controller: 'applyleaveCtrl',
+                friendlyName: 'Apply Leave'
+            })
 
         /*.state('home.birthdays', {
             url: 'birthdays',
