@@ -10,11 +10,11 @@ hrBaseApp.config([
         //$httpProvider.defaults.headers.common.Pragma = "no-cache";
 
         //alert($rootScope.Role);
-        $locationProvider.html5Mode(true).hashPrefix('!');
+        //$locationProvider.html5Mode(true).hashPrefix('!');
 
-        $urlRouterProvider.otherwise("/404");
+        // $urlRouterProvider.otherwise("/404");
 
-        $urlRouterProvider.when('', '');
+        $urlRouterProvider.when('', '/');
         $urlRouterProvider.when('/', '');
         $stateProvider
             .state('home', {
@@ -42,7 +42,14 @@ hrBaseApp.config([
                 controller: 'hrmsEditProfileCtrl',
                 friendlyName: 'Edit Profile'
             })
-            .state('home.approveProfile', {
+            .state('home.hr', {
+                url: 'hr',
+                templateUrl: '/app/home/hrRoleCtrl.html',
+                controller: 'hrRoleCtrl',
+                friendlyName: 'HR Roles',
+                abstract: true
+            })
+            .state('home.hr.approveProfile', {
                 url: 'ApproveProfile',
                 templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
                 controller: 'hrmsApproveProfileCtrl',
@@ -56,7 +63,7 @@ hrBaseApp.config([
                 abstract: true
             })
             .state('home.attendance.leaves', {
-                url: 'leaves',
+                url: '/leaves',
                 templateUrl: '/app/leaves/hrmsLeavesCtrl.html',
                 controller: 'hrmsLeavesCtrl',
                 friendlyName: 'Leaves'
@@ -67,7 +74,7 @@ hrBaseApp.config([
                 controller: 'hrmsCompOffsCtrl',
                 friendlyName: 'Comp Off'
             })
-            .state('home.admin', {
+            .state('home.hr.admin', {
                 url: 'admin',
                 templateUrl: '/app/admin/attendanceCtrl.html',
                 controller: 'attendanceCtrl',
@@ -103,6 +110,12 @@ hrBaseApp.config([
                 templateUrl: '/app/approval/hrmsApproveLeaveCtrl.html',
                 controller: 'hrmsApproveLeaveCtrl',
                 friendlyName: 'Leave Approval'
+            })
+            .state('home.norights', {
+                url: 'NoRights',
+                templateUrl: '/app/home/hrmsNoRights.html',
+                controller: 'hrmsNoRights',
+                hideInMenu: true
             })
 
       }
