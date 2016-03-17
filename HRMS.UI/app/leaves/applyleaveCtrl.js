@@ -45,9 +45,7 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
 
 
     $scope.getAppliedLeaves = function (empData) {
-        alert(JSON.stringify(empData));
         leaveFctry.getAppliedLeaves(empData).then(function (response) {
-            console.log(response.data);
             if (response.data != 'No Records Found')
                 $scope.AppliedLeaveGridOptions.data = response.data;
         });
@@ -65,7 +63,6 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            debugger;
             $scope.paramFromDialog = paramFromDialog;
             $scope.getAppliedLeaves({
                 EmpId: $rootScope.userDetails.EmpId

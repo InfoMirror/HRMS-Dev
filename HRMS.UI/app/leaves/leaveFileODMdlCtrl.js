@@ -12,7 +12,6 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
         }
 
         $scope.submit = function () {
-            debugger;
             $scope.odData.ODReason = $scope.odReason;
 
             if ($scope.odData.ODReason != '' && $scope.odData.ODReason != undefined) {

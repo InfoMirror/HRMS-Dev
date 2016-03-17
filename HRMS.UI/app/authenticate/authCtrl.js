@@ -1,6 +1,14 @@
-var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', function (authFctry, $scope, $state, $rootScope) {
+var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', 'localStorageService', function (authFctry, $scope, $state, $rootScope, localStorageService) {
 
     // #region Initialize
+
+    $scope.init = function () {
+        $rootScope.userDetails = localStorageService.get('userDetails');
+        if ($rootScope.userDetails != undefined) {
+            localStorageService.set('userDetails', undefined);
+            location.reload();
+        }
+    }
 
     $scope.signin = function () {
 
@@ -53,6 +61,9 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                                 }
                             }
                             $rootScope.isLoggedIn = true;
+                            $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
+                            $rootScope.userDetails.Role = $rootScope.Role;
+                            localStorageService.set('userDetails', $rootScope.userDetails);
                             $state.go('home.dashboard');
                         },
                         function (error) {
@@ -81,4 +92,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
         gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
         gapi.client.load('plus', 'v1', function () {});
     }
+
+    $scope.init();
 }]);

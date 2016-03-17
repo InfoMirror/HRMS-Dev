@@ -17,7 +17,6 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         $scope.submit = function () {
             $scope.ApplyLeave.Reason = $scope.LReason;
             alert($scope.ApplyLeave.Reason);
-            debugger;
             // $scope.Reason.Reason = $scope.Reason;
             if ($scope.ApplyLeave.Reason != '' && $scope.ApplyLeave.Reason != undefined) {
                 $scope.ApplyLeave.FromDate = $scope.FromDate;

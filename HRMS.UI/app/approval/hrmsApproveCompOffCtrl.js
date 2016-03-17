@@ -50,7 +50,6 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                alert(status + ' ' + rowId);
                 $scope.approveCompOffGridOptions.data = response.data;
             }
         });

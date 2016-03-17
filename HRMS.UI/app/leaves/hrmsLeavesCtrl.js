@@ -89,7 +89,6 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            debugger;
             $scope.paramFromDialog = paramFromDialog;
             $scope.getAbsentData($rootScope.userDetails);
         });

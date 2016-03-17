@@ -49,7 +49,6 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             ODStatus: ODStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                alert(status + ' ' + rowId);
                 $scope.approveODGridOptions.data = response.data;
             }
         });

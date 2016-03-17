@@ -66,7 +66,7 @@ hrBaseApp.config([
                 url: '/leaves',
                 templateUrl: '/app/leaves/hrmsLeavesCtrl.html',
                 controller: 'hrmsLeavesCtrl',
-                friendlyName: 'Leaves'
+                friendlyName: 'Absents'
             })
             .state('home.attendance.compoffs', {
                 url: 'compoffs',

@@ -22,7 +22,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
                 displayName: 'Team'
           },
             {
-                field: 'Value',
+                field: 'Designation',
                 displayName: 'Designation'
           },
             {
