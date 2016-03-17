@@ -1,7 +1,7 @@
-hrBaseApp.controller('hrmsApproveCompOffODCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApprovalCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
     'use strict';
 
-    /*Initialize*/
+    /*Initialize
     $scope.init = function () {
         $scope.getFiledCompOff($rootScope.userDetails);
         $scope.getFiledOD($rootScope.userDetails);
@@ -111,5 +111,5 @@ hrBaseApp.controller('hrmsApproveCompOffODCtrl', ['$scope', '$rootScope', 'appro
         });
     }
 
-    $scope.init();
+    $scope.init();*/
 }]);

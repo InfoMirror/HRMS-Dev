@@ -51,6 +51,28 @@ router.post('/getFiledOD', function (req, res) {
     });
 });
 
+router.post('/getAppliedLeaves', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        console.log(req.body);
+        var tableObjectValue = new Array(req.body.Id,'');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_GetAppliedLeavesByReportingHead', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (results.length > 0) {
+                    console.log(results);
+                    res.json({
+                        type: true,
+                        data: results
+                    });
+                }
+            }
+        });
+    });
+});
+
 
 router.post('/approveCompOff', function (req, res) {
     sql.open(sqlConfig, function (err, conn) {
@@ -81,6 +103,25 @@ router.post('/approveOD', function (req, res) {
         pm.callproc('sp_ApprovRejectFileODByReportingHead', tableObjectValue, function (err, result, output) {
             if (err) {
                 console.log('Error in approving OD: ');
+                console.log(err);
+            } else {
+                res.json({
+                    type: true,
+                    data: 'Status Updated'
+                });
+            }
+        });
+    });
+});
+
+router.post('/approveLeave', function (req, res) {
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array(req.body.Id, req.body.Status,'');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_UpdateLeaveStatus', tableObjectValue, function (err, result, output) {
+            if (err) {
+                console.log('Error in approving Leave: ');
                 console.log(err);
             } else {
                 res.json({

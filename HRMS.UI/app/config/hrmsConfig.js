@@ -81,9 +81,28 @@ hrBaseApp.config([
             })
             .state('home.approval', {
                 url: 'approval',
-                templateUrl: '/app/approval/hrmsApproveCompOffODCtrl.html',
-                controller: 'hrmsApproveCompOffODCtrl',
-                friendlyName: 'Admin Approval'
+                templateUrl: '/app/approval/hrmsApprovalCtrl.html',
+                controller: 'hrmsApprovalCtrl',
+                friendlyName: 'Give Approval',
+                abstract: true
+            })
+            .state('home.approval.compOff', {
+                url: '/CompOffsApproval',
+                templateUrl: '/app/approval/hrmsApproveCompOffCtrl.html',
+                controller: 'hrmsApproveCompOffCtrl',
+                friendlyName: 'CompOff Approval'
+            })
+            .state('home.approval.od', {
+                url: '/ODApproval',
+                templateUrl: '/app/approval/hrmsApproveODCtrl.html',
+                controller: 'hrmsApproveODCtrl',
+                friendlyName: 'OD Approval'
+            })
+            .state('home.approval.leave', {
+                url: '/LeaveApproval',
+                templateUrl: '/app/approval/hrmsApproveLeaveCtrl.html',
+                controller: 'hrmsApproveLeaveCtrl',
+                friendlyName: 'Leave Approval'
             })
 
       }

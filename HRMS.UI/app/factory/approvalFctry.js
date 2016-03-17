@@ -16,6 +16,12 @@ hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http,
                 action: 'getFiledOD'
             }
         },
+        'getAppliedLeaves': {
+            method: 'POST',
+            params: {
+                action: 'getAppliedLeaves'
+            }
+        },
         'approveCompOff': {
             method: 'POST',
             params: {
@@ -27,13 +33,19 @@ hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http,
             params: {
                 action: 'approveOD'
             }
+        },
+        'approveLeave': {
+            method: 'POST',
+            params: {
+                action: 'approveLeave'
+            }
         }
-        
+
     });
 
     var _getFiledCompOff = function (parms) {
         var deffered = $q.defer();
-        resource.getFiledCompOff(parms,function (response) {
+        resource.getFiledCompOff(parms, function (response) {
             deffered.resolve(response)
         }, function (response) {
             deffered.reject(response);
@@ -43,7 +55,7 @@ hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http,
 
     var _getFiledOD = function (parms) {
         var deffered = $q.defer();
-        resource.getFiledOD(parms,function (response) {
+        resource.getFiledOD(parms, function (response) {
             deffered.resolve(response)
         }, function (response) {
             deffered.reject(response);
@@ -51,7 +63,17 @@ hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http,
         return deffered.promise;
     };
 
-    var _approveCompOff= function (parms) {
+    var _getAppliedLeaves = function (parms) {
+        var deffered = $q.defer();
+        resource.getAppliedLeaves(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _approveCompOff = function (parms) {
         var deffered = $q.defer();
         resource.approveCompOff(parms, function (response) {
             deffered.resolve(response)
@@ -71,11 +93,23 @@ hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http,
         return deffered.promise;
     };
 
-   
+    var _approveLeave = function (parms) {
+        var deffered = $q.defer();
+        resource.approveLeave(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+
     approvalFctryData.getFiledCompOff = _getFiledCompOff;
     approvalFctryData.getFiledOD = _getFiledOD;
+    approvalFctryData.getAppliedLeaves = _getAppliedLeaves;
     approvalFctryData.approveCompOff = _approveCompOff;
-    approvalFctryData.approveOD = _approveOD
+    approvalFctryData.approveOD = _approveOD;
+    approvalFctryData.approveLeave = _approveLeave;
 
     return approvalFctryData;
 }]);
