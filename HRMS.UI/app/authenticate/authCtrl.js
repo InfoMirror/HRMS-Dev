@@ -61,10 +61,20 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                                 }
                             }
                             $rootScope.isLoggedIn = true;
+
                             $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
                             $rootScope.userDetails.Role = $rootScope.Role;
                             localStorageService.set('userDetails', $rootScope.userDetails);
+
+                        
+                        if(response.data[0].ProfileStatus==22 || response.data[0].ProfileStatus==23){
+                        $rootScope.ShowAllStates=false;
+                            $state.go('home.editProfile');
+                        }else{
+                            $rootScope.ShowAllStates=true;
                             $state.go('home.dashboard');
+                        }
+                            
                         },
                         function (error) {
                             console.log(error);

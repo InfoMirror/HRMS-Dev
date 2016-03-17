@@ -1,8 +1,8 @@
 hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
 
     var dashboardFctryData = {};
-
-    var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
+var resource = $resource("http://mayank-pc:9095" + "/dashboard/:action", {
+    //var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
         action: '@action',
     }, {
         'getBirthdays': {

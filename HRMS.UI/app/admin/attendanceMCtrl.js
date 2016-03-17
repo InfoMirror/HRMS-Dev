@@ -1,4 +1,4 @@
-var attendanceCtrl=hrBaseApp.controller('attendanceCtrl',['Upload','$window','attendanceFctry','$scope','$state','$rootScope',function(Upload,$window,attendanceFctry, $scope,$state,$rootScope){
+var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','attendanceFctry','$scope','$state','$rootScope',function(Upload,$window,attendanceFctry, $scope,$state,$rootScope){
         var vm = this;
         
         $scope.init = function(){
@@ -9,18 +9,18 @@ var attendanceCtrl=hrBaseApp.controller('attendanceCtrl',['Upload','$window','at
           /*  alert($scope.file.url);//function to call on form submit
         condole.log($('#myfile'));*/
             if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
+                $scope.file.fileName=$scope.SelMonth + $scope.SelYear +'.xlsx';
                 $scope.upload($scope.file); //call upload function
             }
         }
-        
         
         $scope.upload = function (file) {
             
           
           
             Upload.upload({
-                url: 'http://localhost:9095/admin/upload', //webAPI exposed to upload the file
-                data:{file:file} //pass file as data, should be user ng-model
+                url: 'http://localhost:9095/admin/uploadMonthly', //webAPI exposed to upload the file
+                data:{file:file,month:$scope.SelMonth,year:$scope.SelYear} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
                     $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');

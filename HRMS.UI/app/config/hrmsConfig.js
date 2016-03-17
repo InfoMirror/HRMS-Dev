@@ -78,7 +78,13 @@ hrBaseApp.config([
                 url: 'admin',
                 templateUrl: '/app/admin/attendanceCtrl.html',
                 controller: 'attendanceCtrl',
-                friendlyName: 'Attendance Upload'
+                friendlyName: 'Daily Attendance Upload'
+            })
+          .state('home.hr.adminMonthly', {
+                url: 'adminMontlyUpload',
+                templateUrl: '/app/admin/attendanceMCtrl.html',
+                controller: 'attendanceMCtrl',
+                friendlyName: 'Monthly Attendance Upload'
             })
             .state('home.attendance.applyleave', {
                 url: 'ApplyLeave',

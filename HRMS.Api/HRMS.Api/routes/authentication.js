@@ -46,38 +46,57 @@ router.post('/login', function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                sql.open(sqlConfig, function (err, conn) {
-                                    var tableObjectValue = new Array("SelectByEmail", req.body.email);
+                                sql.open(config, function (err, conn) {
+                                    //  console.log(res.body.email);
+                                    var tableObjectValue = new Array("0", req.body.email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 22);
                                     var pm = conn.procedureMgr();
-                                    pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
+                                    pm.callproc('sp_InsertUpdateEmployeeDetails', tableObjectValue, function (err, results, output) {
                                         if (err) {
                                             console.log(err);
                                         } else {
-                                            res.json({
-                                                type: true,
-                                                data: result1
-                                            });
-                                            sql.open(sqlConfig, function (err, conn) {
-                                                var parms = new Array(result1[0].EmpId, "");
-                                                var pm = conn.procedureMgr();
-                                                pm.callproc('sp_AllotLeaves', parms, function (err, result, output) {
-                                                    if (err) {
-                                                        console.log(err);
-                                                    } else {
-                                                        res.json({
-                                                            type: true,
-                                                            data: 'Leaves Alloted'
-                                                        });
-                                                        console.log(res);
-                                                    }
-                                                });
-                                            });
+                                            //  console.log(results);
+
                                         }
                                     });
                                     if (err) {
                                         console.log('Connection Error: ' + err);
                                     }
+
+
+
                                 });
+                                /* sql.open(sqlConfig, function (err, conn) {
+                                     var tableObjectValue = new Array("SelectByEmail", req.body.email);
+                                     var pm = conn.procedureMgr();
+                                     pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
+                                         if (err) {
+                                             console.log(err);
+                                         } else {
+                                             res.json({
+                                                 type: true,
+                                                 data: result1
+                                             });
+                                             sql.open(sqlConfig, function (err, conn) {
+                                                 var parms = new Array(result1[0].EmpId, "");
+                                                 var pm = conn.procedureMgr();
+                                                 pm.callproc('sp_AllotLeaves', parms, function (err, result, output) {
+                                                     if (err) {
+                                                         console.log(err);
+                                                     } else {
+                                                         res.json({
+                                                             type: true,
+                                                             data: 'Leaves Alloted'
+                                                         });
+                                                         console.log(res);
+                                                     }
+                                                 });
+                                             });
+                                         }
+                                     });
+                                     if (err) {
+                                         console.log('Connection Error: ' + err);
+                                     }
+                                 });*/
                             }
                         });
                         if (err) {
@@ -129,6 +148,28 @@ function selectEmployeeDetails(email) {
                 //  console.log(results);
                 empData = results;
                 return results;
+            }
+        });
+        if (err) {
+            console.log('Connection Error: ' + err);
+        }
+
+
+
+    });
+}
+
+function InsertEmployeeDetails(email) {
+    sql.open(config, function (err, conn) {
+        //  console.log(res.body.email);
+        var tableObjectValue = new Array("0", email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 22);
+        var pm = conn.procedureMgr();
+        pm.callproc('[sp_InsertUpdateEmployeeDetails]', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                //  console.log(results);
+
             }
         });
         if (err) {

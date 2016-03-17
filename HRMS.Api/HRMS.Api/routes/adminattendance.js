@@ -12,6 +12,7 @@ var HalfabsentCount = 0;
 
 var storage = multer.diskStorage({
 
+    
     //multers disk storage settings
     destination: function (req, file, cb) {
         cb(null, 'C:/upload')
@@ -21,6 +22,7 @@ var storage = multer.diskStorage({
 
         var datetimestamp = Date.now();
         fnameorginal = file.originalname.split('.')[0];
+        
         filename = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1];
         cb(null, filename)
     }
@@ -32,10 +34,12 @@ var upload = multer({ //multer settings
 }).single('file');
 
 /** API path that will upload the files */
-router.post('/upload', function (req, res) {
-    // console.log("upload");
+router.post('/uploadMonthly', function (req, res) {
+   // console.log("upload");
     //  console.log(file);
+//console.log(req.data);
     upload(req, res, function (err) {
+         // console.log("uploadss");
         if (err) {
             console.log(err);
             res.json({
@@ -44,8 +48,8 @@ router.post('/upload', function (req, res) {
             });
             return;
         }
-        // console.log(filename);
-        excuteexcel(filename);
+        //console.log(filename);
+      excuteexcelmonthly(filename);
 
         res.json({
             error_code: absentCount,
@@ -55,7 +59,32 @@ router.post('/upload', function (req, res) {
 
 });
 
-function excuteexcel(filname) {
+
+router.post('/upload', function (req, res) {
+   // console.log("upload");
+    //  console.log(file);
+    upload(req, res, function (err) {
+       //   console.log("uploadss");
+        if (err) {
+            console.log(err);
+            res.json({
+                error_code: 1,
+                err_desc: err
+            });
+            return;
+        }
+        //console.log(filename);
+      excuteexcel(filename);
+
+        res.json({
+            error_code: 0,
+            err_desc: ''
+        });
+        console.log(res)
+    })
+
+});
+function excuteexcel(filename) {
     var xlsFile = 'C:/upload/' + filename;
 
     var date = fnameorginal.substring(0, 2);
@@ -63,6 +92,7 @@ function excuteexcel(filname) {
     var year = fnameorginal.substring(6, 10);
     var fulldate = year + '-' + month + '-' + date;
     var day = new Date(year, month, date).getDay();
+    console.log(day);
     isHoliDay(fulldate, function (IsHoliday) {
        
         fs.exists(xlsFile, function (exists) {
@@ -230,5 +260,82 @@ function getmonth(m) {
     } else if (m == 'Feb') {
         return '02';
     }
+    else if (m == 'March') {
+        return '03';
+    }
+    else if (m == 'Apirl') {
+        return '04';
+    }
+    else if (m == 'May') {
+        return '05';
+    }
+    else if (m == 'June') {
+        return '06';
+    }
+    else if (m == 'July') {
+        return '07';
+    }
 }
+
+
+function excuteexcelmonthly(filename){
+    console.log('excute');
+    var xlsFile = 'C:/upload/' + filename;
+    var empId=0;
+    console.log(fnameorginal);
+    var month= getmonth(fnameorginal.substring(0,3));
+   
+    var year=fnameorginal.substring(3,7);
+      fs.exists(xlsFile, function (exists) {
+            if (exists) {
+                console.log('tygui');
+                var obj = xlsx.parse(xlsFile);
+                var len = obj[0].data.length;
+               console.log(len);
+                    for (var i = 8; i <= len - 2; i = i+1) {
+                       // console.log(i);
+                       if(obj[0].data[i-1][0]=="CATEGORY: INFOOBJECTS"){
+                           empId=obj[0].data[i][0];
+                           i=i+2;
+                           continue;
+                       } if(obj[0].data[i][0].indexOf("Presen")>-1){
+                           i=i+5;
+                           continue;
+                       }
+                        if(obj[0].data[i][2]=='' || obj[0].data[i][3]==''){
+                           // day=obj[0].data[i][0];
+                            console.log('FL');
+                          var fulldate = year + '-' + month + '-' + obj[0].data[i][0];
+                             insertAbsent(empId, fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
+                        }else{
+                             var fulldate = year + '-' + month + '-' + obj[0].data[i][0];
+                        console.log(fulldate);
+                             var starttm = new Date(year, month, obj[0].data[i][0], obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
+                                var endtm = new Date(year, month, obj[0].data[i][0], obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
+                                var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
+
+
+                                if (hh < 2) {
+                                    console.log('HL');
+                                    insertAbsent(empId, fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
+
+
+                                } else if (hh > 2 && hh < 9) {
+                                    console.log('FL');
+                                    insertAbsent(empId, fulldate, obj[0].data[i][2], obj[0].data[i][3], 21, 17, false);
+
+
+                                }
+                        }
+                    }
+
+               
+            } else {
+                console.log('File does not exist');
+            }
+
+
+        });
+}
+
 module.exports = router;

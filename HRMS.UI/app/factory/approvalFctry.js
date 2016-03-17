@@ -1,7 +1,7 @@
 hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var approvalFctryData = {};
-
-    var resource = $resource('http://localhost:9095' + '/approval/:action', {
+var resource = $resource('http://mayank-pc:9095' + '/approval/:action', {
+    //var resource = $resource('http://localhost:9095' + '/approval/:action', {
         action: '@action',
     }, {
         'getFiledCompOff': {

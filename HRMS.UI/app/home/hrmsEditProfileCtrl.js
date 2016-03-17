@@ -2,7 +2,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     'use strict';
 
     $scope.init = function () {
-
+//$scope.Warningmsg=false;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail);
         } else {
@@ -60,8 +60,16 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
           //  console.log(response.data);
+           // alert($scope.formData.ProfileStatus);
             $rootScope.passedUserEmail = undefined;
-            $state.go('home.dashboard');
+            if($scope.formData.ProfileStatus==23 ||$scope.formData.ProfileStatus==22 ){
+                alert("Your Profile is subbmited and awaited for approval");
+                $scope.Warningmsg=true;
+                $state.go('home.editProfile');
+            }
+            else{
+                $state.go('home.dashboard');
+            }
         });
     }
 

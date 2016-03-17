@@ -6,12 +6,24 @@ hrBaseApp.controller('hrmsFrameCtrl', [
         //$rootScope.User = $stateParams.User;
         //$rootScope.OEM = $stateParams.oemName;
         //console.log($rootScope.User);
+
         $rootScope.userDetails = localStorageService.get('userDetails');
         if ($rootScope.userDetails == null) {
             $state.go('home.account');
         } else {
             $rootScope.isLoggedIn = $rootScope.userDetails.isLoggedIn;
         }
+
+
+$scope.CanShowAllStates=function(){
+    if($rootScope.isLoggedIn && $rootScope.ShowAllStates){
+        return true;
+    }else {
+        return false;
+    }
+}
+        
+        
 
   }
 ]);
