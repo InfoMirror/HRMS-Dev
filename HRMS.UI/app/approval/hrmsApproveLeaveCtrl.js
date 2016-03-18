@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
 
     $scope.init = function () {
         $scope.getAppliedLeaves({
@@ -55,9 +55,11 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            $scope.getAppliedLeaves({
+             alert("Leave Is Approved");
+                $state.go('home.approval');
+          /*  $scope.getAppliedLeaves({
                 Id: $rootScope.userDetails.Id
-            });
+            });*/
         });
     }
 

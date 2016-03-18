@@ -68,6 +68,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 $state.go('home.editProfile');
             }
             else{
+                alert(0);
                 $state.go('home.dashboard');
             }
         });

@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
 
     $scope.init = function () {
         $scope.getFiledOD($rootScope.userDetails);
@@ -49,7 +49,9 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             ODStatus: ODStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                $scope.approveODGridOptions.data = response.data;
+                alert("OD Is Approved");
+                $state.go('home.approval');
+              //  $scope.approveODGridOptions.data = response.data;
             }
         });
     }

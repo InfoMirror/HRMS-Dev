@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
 
     $scope.init = function(){
         $scope.getFiledCompOff($rootScope.userDetails);
@@ -50,7 +50,9 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                $scope.approveCompOffGridOptions.data = response.data;
+                alert("ComOff Is Approved");
+                $state.go('home.approval');
+                // $scope.approveCompOffGridOptions.data = response.data;
             }
         });
     }
