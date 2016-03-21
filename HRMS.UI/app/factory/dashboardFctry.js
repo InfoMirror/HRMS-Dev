@@ -30,6 +30,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
             },
             isArray: false
         },
+
         'getEmpProfileData': {
             method: 'POST',
             params: {
@@ -82,6 +83,15 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
         });
         return deffered.promise;
     };
+     var _getEmpProfileData = function (parms) {
+        var deffered = $q.defer();
+        resource.getEmpProfileData(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
 
     var _getEmpProfileData = function (parms) {
         var deffered = $q.defer();
@@ -100,6 +110,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
     dashboardFctryData.getHolidays = _getHolidays;
 
     dashboardFctryData.getLeaveSummary = _getLeaveSummary;
+     
 
     dashboardFctryData.getEmpProfileData = _getEmpProfileData;
 
