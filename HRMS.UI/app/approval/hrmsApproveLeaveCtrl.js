@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
 
     $scope.init = function () {
         $scope.getAppliedLeaves({
@@ -8,10 +8,6 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
 
     $scope.approveLeaveGridOptions = {
         columnDefs: [
-            {
-                field: 'Name',
-                displayName: 'Name'
-            },
             {
                 field: 'FromDate',
                 displayName: 'From',
@@ -32,7 +28,7 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             },
             {
                 field: 'Action',
-                displayName: 'Action',
+                displayName: 'Approval Status',
                 cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
             }
         ]
@@ -55,9 +51,11 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            $scope.getAppliedLeaves({
+             alert("Leave Is Approved");
+                $state.go('home.approval');
+          /*  $scope.getAppliedLeaves({
                 Id: $rootScope.userDetails.Id
-            });
+            });*/
         });
     }
 

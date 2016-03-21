@@ -24,11 +24,11 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
-            {
+          /*  {
                 field: 'EmployeeName',
                 displayName: 'Name',
                 enableColumnMenu: false
-            },
+            },*/
             {
                 field: 'Reason',
                 displayName: 'Reason',

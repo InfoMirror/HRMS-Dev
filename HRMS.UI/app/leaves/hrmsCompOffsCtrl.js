@@ -8,29 +8,37 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
 
     $scope.CompOffsGridOptions = {
         enableSorting: true,
+         enableCellEditOnFocus: true,
+        filter:true,
         data: null,
         columnDefs: [
             {
                 field: 'CompOffDate',
-                displayName: 'CompOff Date',
+                displayName: 'Date',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
-            {
+           /* {
                 field: 'EmployeeName',
                 displayName: 'Name',
                 enableColumnMenu: false
-            },
+            },*/
             {
                 field: 'IsManual',
-                displayName: 'Is Manual',
+                displayName: 'System Identified',
                 enableColumnMenu: false,
                 cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'
             },
-            {
+        /*    {
                 field: 'CompOffStatus',
-                displayName: 'CompOff Status',
+                displayName: 'Approval Status',
                 enableColumnMenu: false
+            }*/
+             ,{
+                field: 'CompOffStatus',
+                displayName: 'Approval Status',
+                enableColumnMenu: false,
+                cellTemplate: '<div>{{row.entity.CompOffStatus}}<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.CompOffStatus)" style="margin-right: 8%;float: right;" href="">File CompOff</a></div>'
             }
         ]
     };
@@ -79,5 +87,14 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
             IsManual = 1
     }
 
+    
+    $scope.enableDisableLink = function (compOffStatus) {
+        if (compOffStatus == "Not Filed")
+            return true
+        else
+            return false;
+    }
+
+    
     $scope.init();
 }]);

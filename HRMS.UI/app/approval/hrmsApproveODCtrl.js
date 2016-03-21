@@ -6,18 +6,19 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
 
     $scope.approveODGridOptions = {
         columnDefs: [
-            {
+            /*{
                 field: 'Name',
                 displayName: 'Name'
-            },
+                
+            },*/
             {
                 field: 'AbsentDate',
-                displayName: 'Absent Date',
+                displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
                 field: 'ODReason',
-                displayName: 'OD Reason'
+                displayName: 'Reason'
             },
             {
                 field: 'ODStatus',
@@ -25,7 +26,7 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             },
             {
                 field: 'MarkStatus',
-                displayName: 'Mark Status',
+                displayName: 'Approval Status',
                 cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
             }
         ]
@@ -49,6 +50,7 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             ODStatus: ODStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
+                
                 $scope.approveODGridOptions.data = response.data;
             }
         });

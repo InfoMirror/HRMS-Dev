@@ -1,8 +1,8 @@
 hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
 
     var dashboardFctryData = {};
- //   var resource = $resource("http://mayank-pc:9095" + "/dashboard/:action", {
-        var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
+    //var resource = $resource("http://mayank-pc:9095" + "/dashboard/:action", {
+    var resource = $resource("http://localhost:9095" + "/dashboard/:action", {
         action: '@action',
     }, {
         'getBirthdays': {
@@ -38,17 +38,6 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
         }
 
     });
-
-
-    var _getEmpProfileData = function (parms) {
-        var deffered = $q.defer();
-        resource.getEmpProfileData(parms, function (response) {
-            deffered.resolve(response)
-        }, function (response) {
-            deffered.reject(response);
-        });
-        return deffered.promise;
-    };
 
     var _getBirthdays = function () {
         var deffered = $q.defer();
@@ -87,6 +76,16 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
     var _getLeaveSummary = function (parms) {
         var deffered = $q.defer();
         resource.getLeaveSummary(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _getEmpProfileData = function (parms) {
+        var deffered = $q.defer();
+        resource.getEmpProfileData(parms, function (response) {
             deffered.resolve(response)
         }, function (response) {
             deffered.reject(response);

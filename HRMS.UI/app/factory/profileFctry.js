@@ -1,7 +1,7 @@
 hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var profileFctryData = {};
-var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
-   // var resource = $resource('http://localhost:9095' + '/profile/:action', {
+//var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
+    var resource = $resource('http://localhost:9095' + '/profile/:action', {
         action: '@action',
     }, {
         'getAllRelations': {

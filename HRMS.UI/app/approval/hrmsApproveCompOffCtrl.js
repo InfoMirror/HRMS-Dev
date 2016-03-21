@@ -7,12 +7,8 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
     $scope.approveCompOffGridOptions = {
         columnDefs: [
             {
-                field: 'Name',
-                displayName: 'Name'
-            },
-            {
                 field: 'CompOffDate',
-                displayName: 'CompOff Date',
+                displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
@@ -21,7 +17,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             },
             {
                 field: 'CompOffStatus',
-                displayName: 'CompOff Status'
+                displayName: 'Approval Status'
             },
             {
                 field: 'MarkStatus',
@@ -50,7 +46,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                $scope.approveCompOffGridOptions.data = response.data;
+              $scope.approveCompOffGridOptions.data = response.data;
             }
         });
     }
