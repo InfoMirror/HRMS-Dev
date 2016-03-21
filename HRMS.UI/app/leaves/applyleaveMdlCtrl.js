@@ -16,7 +16,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
 
         $scope.submit = function () {
             $scope.ApplyLeave.Reason = $scope.LReason;
-            alert($scope.ApplyLeave.Reason);
+            //alert($scope.ApplyLeave.Reason);
             // $scope.Reason.Reason = $scope.Reason;
             if ($scope.ApplyLeave.Reason != '' && $scope.ApplyLeave.Reason != undefined) {
                 $scope.ApplyLeave.FromDate = $scope.FromDate;
@@ -28,7 +28,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         }
 
         $scope.insertLeave = function (ApplyLeaveDate) {
-            alert(JSON.stringify(ApplyLeaveDate));
+           // alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
                     $scope.close();

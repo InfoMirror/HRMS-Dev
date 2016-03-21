@@ -98,10 +98,23 @@ hrBaseApp.controller('hrmsMainCtrl', [
         }
 
         $scope.getProfileData = function () {
-            if ($rootScope.userDetails != undefined) {
+
+            dashboardFctry.getEmpProfileData({
+                UserEmail: $rootScope.userDetails.UserEmail
+            }).then(function (response) {
+                $scope.profileData = response.data[0];
+                console.log($scope.profileData);
+            });
+            /*if ($rootScope.userDetails != undefined) {
+                var _gender;
+                if ($rootScope.userDetails.Gender == 4) {
+                    _gender: 'Female'
+                } else if ($rootScope.userDetails.Gender == 3) {
+                    _gender: 'Male'
+                }
                 $scope.profileData = {
                     Name: $rootScope.userDetails.FirstName + ' ' + $rootScope.userDetails.LastName,
-                    Gender: $rootScope.userDetails.Gender,
+                    Gender: _gender,
                     ReportingHead: $rootScope.userDetails.ReportingHead,
                     Designation: $rootScope.userDetails.Designation,
                     Team: $rootScope.userDetails.Team,
@@ -114,10 +127,9 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     DOJ: $rootScope.userDetails.DOJ,
                     DOB: $rootScope.userDetails.DOB
                 }
-            }
+            }*/
 
         }
 
         $scope.init();
-  }
-]);
+}]);
