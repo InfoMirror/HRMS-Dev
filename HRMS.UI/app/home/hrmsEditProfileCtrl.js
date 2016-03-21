@@ -18,6 +18,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             MasterTypeId: 1
         });
         $scope.getMaritalStatus({
+            
             MasterTypeId: 3
         });
         $scope.getRelations({

@@ -77,6 +77,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                             
                         },
                         function (error) {
+                        
                             console.log(error);
                         });
                 } else {
