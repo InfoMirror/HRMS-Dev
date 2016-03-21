@@ -10,7 +10,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 CompOffDate: new Date(),
                 startTime: null,
                 endTime: null,
-                compOffStatus: 16,
+                CompOffStatus: 16,
                 isManual: 1,
                 compOffReason: ''
             }

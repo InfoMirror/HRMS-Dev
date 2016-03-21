@@ -12,7 +12,7 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
         columnDefs: [
             {
                 field: 'AbsentDate',
-                displayName: 'Absent Date',
+                displayName: 'Date',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             }
@@ -21,11 +21,11 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 displayName: 'Absent Type',
                 enableColumnMenu: false
             }
-            ,{
+         /*   ,{
                 field: 'EmployeeName',
                 displayName: 'Name',
                 enableColumnMenu: false
-            }
+            }*/
             ,{
                 field: 'StartTime',
                 displayName: 'Start Time',
@@ -38,16 +38,17 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             }
             ,{
                 field: 'ODStatus',
-                displayName: 'OD Status',
+                displayName: 'Approval Status',
                 enableColumnMenu: false,
                 cellTemplate: '<div>{{row.entity.ODStatus}}<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
             }
-            ,{
+            /*,{
                 field: 'IsAdminEntry',
                 displayName: 'Admin Entry',
                 enableColumnMenu: false,
                 cellTemplate: '<input type="checkbox" disabled ng-click="alert(row.entity.IsAdminEntry)" ng-model="row.entity.IsAdminEntry">'
-            }
+                
+            }*/
             /*,{
                 field: 'fileOD',
                 displayName: 'Action',

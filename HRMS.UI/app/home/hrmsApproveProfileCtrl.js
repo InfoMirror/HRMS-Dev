@@ -9,10 +9,10 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
 
     $scope.ApproveProfileGridOptions = {
         columnDefs: [
-            {
+          /*  {
                 field: 'Name',
                 displayName: 'Name'
-            },
+            },*/
             {
                 field: 'UserEmail',
                 displayName: 'Email Id'

@@ -73,7 +73,7 @@ router.get('/getCompOffs', function (req, res) {
 router.post('/insertCompOff', function (req, res) {
     sql.open(sqlConfig, function (err, conn) {
         console.log(req.body);
-        var tableObjectValue = new Array(req.body.EmpId, req.body.CompOffDate, req.body.startTime, req.body.endTime, req.body.compOffStatus, req.body.isManual, req.body.compOffReason);
+        var tableObjectValue = new Array(req.body.EmpId, req.body.CompOffDate, req.body.startTime, req.body.endTime, req.body.CompOffStatus, req.body.isManual, req.body.compOffReason);
         console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('Sp_InsertCompOff', tableObjectValue, function (err, result, output) {
