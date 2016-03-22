@@ -14,7 +14,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
             $scope.getHolidayData();
         }
 
-        $scope.profileGridOptions = {
+      /*  $scope.profileGridOptions = {
             columnDefs: [
                 {
                     field: 'Name',
@@ -33,7 +33,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     displayName: 'Reporting Head'
                 }
             ]
-        }
+        }*/
 
         $scope.holidaysGridOptions = {
             columnDefs: [
@@ -98,23 +98,10 @@ hrBaseApp.controller('hrmsMainCtrl', [
         }
 
         $scope.getProfileData = function () {
-
-            dashboardFctry.getEmpProfileData({
-                UserEmail: $rootScope.userDetails.UserEmail
-            }).then(function (response) {
-                $scope.profileData = response.data[0];
-                console.log($scope.profileData);
-            });
-            /*if ($rootScope.userDetails != undefined) {
-                var _gender;
-                if ($rootScope.userDetails.Gender == 4) {
-                    _gender: 'Female'
-                } else if ($rootScope.userDetails.Gender == 3) {
-                    _gender: 'Male'
-                }
+            if ($rootScope.userDetails != undefined) {
                 $scope.profileData = {
                     Name: $rootScope.userDetails.FirstName + ' ' + $rootScope.userDetails.LastName,
-                    Gender: _gender,
+                    Gender: $rootScope.userDetails.Gender,
                     ReportingHead: $rootScope.userDetails.ReportingHead,
                     Designation: $rootScope.userDetails.Designation,
                     Team: $rootScope.userDetails.Team,
@@ -127,9 +114,10 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     DOJ: $rootScope.userDetails.DOJ,
                     DOB: $rootScope.userDetails.DOB
                 }
-            }*/
+            }
 
         }
 
         $scope.init();
-}]);
+  }
+]);

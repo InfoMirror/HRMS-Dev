@@ -37,8 +37,7 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
             method: 'POST',
             params: {
                 action: 'markCompOff'
-            },
-            isArray: false
+            }
         },
         'getAppliedLeaves': {
             method: 'POST',

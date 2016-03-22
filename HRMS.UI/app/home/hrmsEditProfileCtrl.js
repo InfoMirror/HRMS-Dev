@@ -58,6 +58,12 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.formData.ProfileStatus = 23
         }
 
+        if($scope.formData.ownVisa==false)
+            {
+               // $scope.formData.visaCountry.visibility="false";
+            }
+        
+        
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
           //  console.log(response.data);
            // alert($scope.formData.ProfileStatus);

@@ -90,10 +90,10 @@ router.post('/insertCompOff', function (req, res) {
     });
 });
 
-router.post('/MarkCompOff', function (req, res) {
+router.post('/markCompOff', function (req, res) {
     sql.open(sqlConfig, function (err, conn) {
         console.log(req.body);
-        var tableObjectValue = new Array(req.body.EmpId);
+        var tableObjectValue = new Array(req.body.Id,'');
         console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_MarkComOff', tableObjectValue, function (err, result, output) {

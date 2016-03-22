@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', function ($scope, leaveFctry, $rootScope, $modal) {
+hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal','uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal,uiGridConstants) {
     'use strict';
     /* Initialize */
     $scope.init = function () {
@@ -8,17 +8,21 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
 
     $scope.absentGridOptions = {
         enableSorting: true,
+        enableFiltering:true,
+        filter:true,
         data: null,
         columnDefs: [
             {
                 field: 'AbsentDate',
                 displayName: 'Date',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\''
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                filter: { condition: uiGridConstants.filter.CONTAINS}
             }
             ,{
                 field: 'AbsentType',
                 displayName: 'Absent Type',
+                enableFiltering:false,
                 enableColumnMenu: false
             }
          /*   ,{
@@ -29,17 +33,20 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             ,{
                 field: 'StartTime',
                 displayName: 'Start Time',
+                enableFiltering:false,
                 enableColumnMenu: false
             }
             ,{
                 field: 'EndTime',
                 displayName: 'End Time',
+                enableFiltering:false,
                 enableColumnMenu: false
             }
             ,{
                 field: 'ODStatus',
                 displayName: 'Approval Status',
                 enableColumnMenu: false,
+                filter: { condition: uiGridConstants.filter.CONTAINS},
                 cellTemplate: '<div>{{row.entity.ODStatus}}<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
             }
             /*,{
