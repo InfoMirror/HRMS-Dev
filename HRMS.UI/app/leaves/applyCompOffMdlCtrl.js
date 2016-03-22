@@ -1,6 +1,6 @@
 hrBaseApp.controller('applyCompOffMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope',
-    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', '$state',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, $state) {
         'use strict';
 
         $scope.init = function () {
@@ -31,9 +31,14 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
 
         $scope.insertCompOff = function (CompOffData) {
             leaveFctry.insertCompOff(CompOffData).then(function (response) {
-
+                //alert(response.data);
                 if (response.data == "CompOff Applied") {
-                    $scope.insertCompOff($rootScope.userDetails);
+                    alert('CompOff Is Applied');
+                    //$state.go('home.attendance.compoffs');              
+                    $scope.getCompOffsData($rootScope.userDetails);
+                } else {
+                    alert('CompOff Is Allready Exist');
+                    $modalInstance.close();
                 }
             });
         }

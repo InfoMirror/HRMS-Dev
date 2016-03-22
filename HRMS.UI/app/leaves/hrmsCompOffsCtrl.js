@@ -1,5 +1,6 @@
 hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','$modal','uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal,uiGridConstants) {
     'use strict';
+   // alert(0);
     /* Initialize */
     $scope.init = function () {
         $scope.message = 'Hello, Welcome to CompOff Page';
