@@ -1,4 +1,7 @@
 <div class="container">
+    <div class="row bg-info" ng-show="showMessage()">
+        <p style="margin: 5px 30px;">{{message}}</p>
+    </div>
     <form role="form">
         <div class="control-group" ng-class="{true: 'error'}[submitted && form.$invalid]">
             <div class="form-group">

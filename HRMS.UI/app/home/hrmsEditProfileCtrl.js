@@ -2,7 +2,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     'use strict';
 
     $scope.init = function () {
-//$scope.Warningmsg=false;
+        //$scope.Warningmsg=false;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail);
         } else {
@@ -18,6 +18,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             MasterTypeId: 1
         });
         $scope.getMaritalStatus({
+            
             MasterTypeId: 3
         });
         $scope.getRelations({
@@ -25,12 +26,25 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         });
     }
 
+    $scope.showMessage = function () {
+        debugger;
+        if ($rootScope.userDetails != null) {
+            if ($rootScope.userDetails.ProfileStatus == 22) {
+                $rootScope.message = 'Please enter your profile data and submit. After approval from HR you will be able to enter the portal.';
+                return true;
+            } else if ($rootScope.userDetails.ProfileStatus == 23) {
+                $rootScope.message = 'Your profile data have been submitted. Please wait for the HR approval.';
+                return true;
+            }
+        }
+    }
+
     $scope.getEmpData = function (userEmail) {
         profileFctry.getEmpDetails({
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
-            console.log($scope.formData);
+            $rootScope.userDetails = $scope.formData;
         });
     }
 
@@ -65,16 +79,17 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         
         
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
-          //  console.log(response.data);
-           // alert($scope.formData.ProfileStatus);
-            $rootScope.passedUserEmail = undefined;
-            if($scope.formData.ProfileStatus==23 ||$scope.formData.ProfileStatus==22 ){
-                alert("Your Profile is subbmited and awaited for approval");
-                $scope.Warningmsg=true;
-                $state.go('home.editProfile');
+            debugger;
+            if (response.data == 'Profile Updated') {
+                $scope.getEmpData($rootScope.userDetails.UserEmail);
+                $rootScope.message = 'Your profile data have been submitted. Please wait for the HR approval.';
             }
-            else{
-                alert(0);
+            $rootScope.passedUserEmail = undefined;
+            if ($scope.formData.ProfileStatus == 23 || $scope.formData.ProfileStatus == 22) {
+                alert("Your Profile has been subbmited. Please wait for the approval.");
+                //$scope.Warningmsg=true;
+                $state.go('home.editProfile');
+            } else {
                 $state.go('home.dashboard');
             }
         });
