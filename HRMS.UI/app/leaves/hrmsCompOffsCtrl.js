@@ -29,7 +29,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
             },*/
             {
                 field: 'IsManual',
-                displayName: 'Is Manual',
+                displayName: 'Sytem Identified',
                 enableColumnMenu: false,
                 enableFiltering:false,
                 cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'

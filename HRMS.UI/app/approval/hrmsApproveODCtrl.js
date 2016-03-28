@@ -22,11 +22,11 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             },
             {
                 field: 'ODStatus',
-                displayName: 'OD Status'
+                displayName: 'Approval Status'
             },
             {
-                field: 'MarkStatus',
-                displayName: 'Approval Status',
+                field: 'Action',
+                displayName: 'Action',
                 cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
             }
         ]
