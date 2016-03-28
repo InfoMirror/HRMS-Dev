@@ -19,8 +19,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             },
             {
                 field: 'CompOffReason',
-                displayName: 'CompOff Reason',
-                enableFiltering: false
+                displayName: 'CompOff Reason'
             },
             {
                 field: 'CompOffStatus',
@@ -30,18 +29,11 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
                 }
             },
             {
-<<<<<<< HEAD
-                field: 'MarkStatus',
-                displayName: 'Mark Status',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
-=======
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
->>>>>>> origin/master
+                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                enableFiltering: false
+
             }
         ]
     };

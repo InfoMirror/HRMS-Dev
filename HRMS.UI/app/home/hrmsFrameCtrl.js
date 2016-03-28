@@ -8,6 +8,7 @@ hrBaseApp.controller('hrmsFrameCtrl', [
         //console.log($rootScope.User);
 
         $rootScope.userDetails = localStorageService.get('userDetails');
+        $rootScope.Role = localStorageService.get('role');
         if ($rootScope.userDetails == null) {
             $state.go('home.account');
         } else {
