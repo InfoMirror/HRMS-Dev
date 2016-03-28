@@ -50,7 +50,7 @@ hrBaseApp.config([
                 abstract: true
             })
             .state('home.hr.approveProfile', {
-                url: 'ApproveProfile',
+                url: '/ApproveProfile',
                 templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
                 controller: 'hrmsApproveProfileCtrl',
                 friendlyName: 'Approve Profile'
@@ -69,25 +69,25 @@ hrBaseApp.config([
                 friendlyName: 'Absents'
             })
             .state('home.attendance.compoffs', {
-                url: 'compoffs',
+                url: '/compoffs',
                 templateUrl: '/app/leaves/hrmsCompOffsCtrl.html',
                 controller: 'hrmsCompOffsCtrl',
                 friendlyName: 'Comp Off'
             })
             .state('home.hr.admin', {
-                url: 'admin',
+                url: '/admin',
                 templateUrl: '/app/admin/attendanceCtrl.html',
                 controller: 'attendanceCtrl',
                 friendlyName: 'Daily Attendance Upload'
             })
           .state('home.hr.adminMonthly', {
-                url: 'adminMontlyUpload',
+                url: '/adminMontlyUpload',
                 templateUrl: '/app/admin/attendanceMCtrl.html',
                 controller: 'attendanceMCtrl',
                 friendlyName: 'Monthly Attendance Upload'
             })
             .state('home.attendance.applyleave', {
-                url: 'ApplyLeave',
+                url: '/ApplyLeave',
                 templateUrl: '/app/leaves/applyleaveCtrl.html',
                 controller: 'applyleaveCtrl',
                 friendlyName: 'Apply Leave'
