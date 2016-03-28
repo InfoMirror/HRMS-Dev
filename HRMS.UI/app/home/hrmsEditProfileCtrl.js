@@ -9,6 +9,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getEmpData($rootScope.passedUserEmail);
         }
 
+        $scope.IsVisible=$rootScope.userDetails.ownVisa;
+        
         $scope.getReportingHeads();
 
         $scope.getGenders({
@@ -18,7 +20,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             MasterTypeId: 1
         });
         $scope.getMaritalStatus({
-            
+
             MasterTypeId: 3
         });
         $scope.getRelations({
@@ -48,6 +50,19 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         });
     }
 
+    $scope.ShowHide = function () {
+        //If DIV is visible it will be hidden and vice versa.
+        if ($scope.formData.ownVisa == 1) {
+            debugger;
+            $scope.IsVisible =true;
+        }
+        else{
+        $scope.IsVisible = $scope.formData.ownVisa;
+        $scope.formData.visaCountry = null;
+        $scope.formData.visaExpiryDate = null;
+        }
+    }
+
     $scope.submit = function () {
 
         if ($scope.formData.Children1 == '' || $scope.formData.Children1 == undefined)
@@ -69,17 +84,16 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         if ($rootScope.Role == 'HR') {
             $scope.formData.ProfileStatus = 24
         } else if ($rootScope.Role == 'Employee') {
-            $scope.formData.ProfileStatus = 23
+            if ($scope.formData.ProfileStatus == 24) {
+                debugger;
+                $scope.formData.ProfileStatus == 24
+                $rootScope.message = 'Your profile data changes have been submitted. Please wait for the HR approval.';
+            } else {
+                $scope.formData.ProfileStatus = 23
+            }
         }
 
-        if($scope.formData.ownVisa==false)
-            {
-               // $scope.formData.visaCountry.visibility="false";
-            }
-        
-        
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
-            debugger;
             if (response.data == 'Profile Updated') {
                 $scope.getEmpData($rootScope.userDetails.UserEmail);
                 $rootScope.message = 'Your profile data have been submitted. Please wait for the HR approval.';

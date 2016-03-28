@@ -1,0 +1,14 @@
+{
+  "name": "date-picker",
+  "homepage": "https://github.com/pulavska/date-picker",
+  "_release": "cea7ea64a4",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "cea7ea64a471221b668e292307b929bfa12d8824"
+  },
+  "_source": "git://github.com/pulavska/date-picker.git",
+  "_target": "*",
+  "_originalSource": "date-picker",
+  "_direct": true
+}

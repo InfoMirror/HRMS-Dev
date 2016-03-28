@@ -28,13 +28,18 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         }
 
         $scope.insertLeave = function (ApplyLeaveDate) {
-           // alert(JSON.stringify(ApplyLeaveDate));
+            // alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
-                    $scope.close();
+                    alert("Leave is Applied");
+                   // $scope.getAppliedLeaves($rootScope.userDetails);
+                } else {
+                    alert("Applied Leave on same Date already exist");
+                    $modalInstance.close();
                 }
             });
         }
+
 
         $scope.close = function () {
             $modalInstance.close();

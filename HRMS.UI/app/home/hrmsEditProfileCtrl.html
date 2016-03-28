@@ -2,11 +2,15 @@
     <div class="row bg-info" ng-show="showMessage()">
         <p style="margin: 5px 30px;">{{message}}</p>
     </div>
-    <form role="form">
+    <form role="form" novalidate>
         <div class="control-group" ng-class="{true: 'error'}[submitted && form.$invalid]">
+            <div class="form-group" ng-show="Warningmsg">
+                Your Profile is awaited for aprroval!.
+
+            </div>
             <div class="form-group">
                 <label for="UserEmail">User Email:</label>
-                <input type="email" class="form-control" id="UserEmail" required ng-model="formData.UserEmail">
+                <input type="email" class="form-control" id="UserEmail" ng-readonly="true" required ng-model="formData.UserEmail">
             </div>
             <div class="form-group">
                 <label for="FirstName">First Name:</label>
@@ -18,11 +22,11 @@
             </div>
             <div class="form-group">
                 <label for="Team">Team:</label>
-                <input type="text" class="form-control" id="Team" required ng-model="formData.Team">
+                <input type="text" class="form-control" id="Team" required ng-readonly="true" ng-model="formData.Team">
             </div>
             <div class="form-group">
                 <label for="Designation">Designation: </label>
-                <select ng-model="formData.Designation">
+                <select ng-model="formData.Designation" ng-disabled="true">
                     <option value="0">Select One</option>
                     <option ng-repeat="designation in designations" value="{{designation.Id}}" ng-selected="{{formData.Designation==designation.Id}}">{{designation.Value}}</option>
                 </select>
@@ -115,19 +119,19 @@
                     <input type="radio" value="{{status.Id}}" ng-model="formData.MaritalStatus">{{status.Value}}
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" display:none>
                 <label for="Children1">Children1:</label>
                 <input type="text" class="form-control" id="Children1" ng-model="formData.Children1">
             </div>
-            <div class="form-group">
+            <div class="form-group" visibility="hidden">
                 <label for="Children2">Children 2:</label>
                 <input type="text" class="form-control" id="Children2" ng-model="formData.Children2">
             </div>
-            <div class="form-group" ng-show="checkRole()">
+            <div class="form-group" ng-readonly="true">
                 <label for="DOJ">Date of joining: </label>
                 <input type="text" class="form-control" id="DOJ" ng-model="formData.DOJ">
             </div>
-            <div class="form-group" ng-show="checkRole()">
+            <div class="form-group" ng-readonly="true">
                 <label for="BankAccountNumber">Bank Account Number: </label>
                 <input type="text" class="form-control" id="BankAccountNumber" ng-model="formData.BankAccountNumber">
             </div>
@@ -139,36 +143,34 @@
                     <option ng-repeat="head in reportingHeads" value="{{head.Id}}" ng-selected="{{formData.ReportingHead==head.Id}}">{{head.Name}}</option>
                 </select>
             </div>
-            <div class="form-group" ng-show="checkRole()">
+            <div class="form-group" ng-readonly="true">
                 <label for="PFNo">PF Number: </label>
                 <input type="text" class="form-control" id="PFNo" ng-model="formData.PFNo">
             </div>
-            <div class="form-group" ng-show="checkRole()">
+            <div class="form-group" ng-readonly="true">
                 <label for="UAN">UAN: </label>
                 <input type="text" class="form-control" id="UAN" ng-model="formData.UAN">
             </div>
-            
             <div class="form-group">
-             <label for="ownVisa">Do You Own Visa: 
-             <input type="checkbox" class="form-control" id="ownVisa" ng-model="formData.ownVisa">   
-             </label>
+                <label for="ownVisa">Do you own Visa Status:</label>
+                <label class="radio-inline">
+                    <input type="checkbox" ng-model="formData.ownVisa" ng-change="ShowHide()">
+                </label>{{formData.ownVisa}}
             </div>
-            
-            <div class="form-group" id="select" visible="false">
-                <label for="visaCountry"> Select Visa Country: </label>
-                <br>
-                <select ng-model="formData.visaCountry">
-                    <option value="option-1">USA</option>
-                    <option value="option-2">France</option>
+            <div class="form-group" ng-show="IsVisible">
+                <label for="visaCountry">Visa Country:</label>
+                <select ng-model="formData.visaCountry" visibility="false" text="Select One">
+                    <option value="USA">USA</option>
+                    <option value="France">France</option>
                 </select>
-                <br>
             </div>
-              <div class="form-group">
-                <label for="VisaExpiryDate">Date of Visa Expiring: </label>
-                <input type="text" class="form-control" id="VisaExpiryDate" ng-model="formData.VisaExpiryDate">
-            </div>
+            <div class="form-group" ng-show="IsVisible">
+                <label for="visaExpiryDate">Visa Expiry Date:</label>
+                <input type="text" class="form-control" id="visaExpiryDate" required ng-model="formData.visaExpiryDate|date : 'dd/MM/yyyy'">
             </div>
 
-            <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
+        </div>
+
+        <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
     </form>
-    </div>
+</div>

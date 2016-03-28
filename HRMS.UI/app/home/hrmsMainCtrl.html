@@ -76,6 +76,11 @@
         <div class="col-md-6">
             <h4>Upcoming Holidays</h4><hr/>
             <div ui-grid="holidaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+       
+        </div>
+         <div class="col-md-6">
+            <h4>Holiday Calendar for this year</h4><hr/>
+            <div ui-grid="holidayCalendarGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable" ng-show="ShowCalendar"></div>
         </div>
     </div>
 
