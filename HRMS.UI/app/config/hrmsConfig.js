@@ -74,23 +74,29 @@ hrBaseApp.config([
                 controller: 'hrmsCompOffsCtrl',
                 friendlyName: 'Comp Off'
             })
+            .state('home.attendance.applyleave', {
+                url: '/ApplyLeave',
+                templateUrl: '/app/leaves/applyleaveCtrl.html',
+                controller: 'applyleaveCtrl',
+                friendlyName: 'Apply Leave'
+            })
+            .state('home.attendance.leaveSummary', {
+                url: '/leaveSummary',
+                templateUrl: '/app/leaves/hrmsLeaveSummaryCtrl.html',
+                controller: 'hrmsLeaveSummaryCtrl',
+                friendlyName: 'Leave Summary'
+            })
             .state('home.hr.admin', {
                 url: '/admin',
                 templateUrl: '/app/admin/attendanceCtrl.html',
                 controller: 'attendanceCtrl',
                 friendlyName: 'Daily Attendance Upload'
             })
-          .state('home.hr.adminMonthly', {
+            .state('home.hr.adminMonthly', {
                 url: '/adminMontlyUpload',
                 templateUrl: '/app/admin/attendanceMCtrl.html',
                 controller: 'attendanceMCtrl',
                 friendlyName: 'Monthly Attendance Upload'
-            })
-            .state('home.attendance.applyleave', {
-                url: '/ApplyLeave',
-                templateUrl: '/app/leaves/applyleaveCtrl.html',
-                controller: 'applyleaveCtrl',
-                friendlyName: 'Apply Leave'
             })
             .state('home.approval', {
                 url: 'approval',

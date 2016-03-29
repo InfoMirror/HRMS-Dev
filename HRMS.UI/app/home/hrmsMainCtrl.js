@@ -52,7 +52,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     displayName: 'Show Calendar',
                     cellEditableCondition: false,
                     /*cellTemplate: '<div><a ng-show="ShowCalendar" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>' */
-                    cellTemplate:'<div><a href="" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>'
+                    cellTemplate: '<div><a href="" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>'
                 }
             ]
         }
@@ -96,7 +96,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 {
                     field: 'FestivalDate',
                     displayName: 'Festival Date',
-                     cellFilter: 'date:\'dd-MMM-yyyy\''
+                    cellFilter: 'date:\'dd-MMM-yyyy\''
                 }
             ]
         }
@@ -117,14 +117,14 @@ hrBaseApp.controller('hrmsMainCtrl', [
 
         $scope.getHolidayData = function () {
             dashboardFctry.getHolidays().then(function (response) {
-               // console.log(response.data);
+                // console.log(response.data);
                 $scope.holidaysGridOptions.data = response.data;
             });
         }
 
         $scope.getHolidayCalendar = function () {
             dashboardFctry.getHolidayCalendar().then(function (response) {
-               // console.log(response.data);
+                // console.log(response.data);
                 $scope.holidayCalendarGridOptions.data = response.data;
             });
         }
