@@ -28,6 +28,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         });
     }
 
+    $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+    
     $scope.showMessage = function () {
         if ($rootScope.userDetails != null) {
             if ($rootScope.userDetails.ProfileStatus == 22) {

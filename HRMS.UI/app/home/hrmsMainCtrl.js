@@ -11,7 +11,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
             $scope.getProfileData();
             $scope.getBirthdayData();
             $scope.getAnniversaryData();
-            $scope.getHolidayData();
+          //  $scope.getHolidayData();
             $scope.getHolidayCalendar();
         }
 

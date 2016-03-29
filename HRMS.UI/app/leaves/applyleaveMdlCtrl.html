@@ -4,16 +4,38 @@
         <h4 class="modal-title">Apply LEave</h4>
     </div>
     <div class="modal-body">
-        From Date:
-      <!--  <label for="popup" class="btn btn-default" ng-model="CompOffDate"><i class="glyphicon glyphicon-calendar"></i></label>-->
-        <input type="date" ng-model="FromDate"> 
-        To  Date:
-        <input type="date" ng-model="ToDate">
-        
-          Reason:
-        <input type="textarea" ng-model="LReason">
+        <div class="container">
+            <form class="form form-horizontal" name="applyLeaveForm">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">From Date:<span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="date" ng-model="FromDate" name="fromDate" required>
+                        <span ng-show="applyLeaveForm.fromDate.$error.required && applyLeaveForm.fromDate.$dirty" class="text-danger">Required*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">To Date:<span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="date" ng-model="ToDate" name="toDate" required>
+                        <span ng-show="applyLeaveForm.toDate.$error.required && applyLeaveForm.toDate.$dirty" class="text-danger">Required*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Reason:<span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <!--<input type="textarea" ng-model="LReason" name="reason" height="10" required>-->
+                        <textarea style="width: 25%;" rows="3" ng-model="LReason" name="reason" required></textarea>
+                        <span ng-show="applyLeaveForm.reason.$error.required && applyLeaveForm.reason.$dirty" class="text-danger">Required*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default btn-sm" ng-click="submit()" ng-disabled="!applyLeaveForm.$valid">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="submit()">Save</button>
     </div>
 </div>
