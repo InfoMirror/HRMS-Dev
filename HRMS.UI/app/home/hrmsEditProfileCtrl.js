@@ -26,6 +26,10 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.getRelations({
             MasterTypeId: 4
         });
+          $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;

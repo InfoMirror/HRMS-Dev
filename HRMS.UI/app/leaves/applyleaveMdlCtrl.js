@@ -12,6 +12,11 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
                 Status: 26,
                 Reason: ''
             }
+            
+               $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
         }
 
         $scope.submit = function () {
@@ -39,7 +44,11 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
                 }
             });
         }
+$scope.open1 = function ($event) {
+   //   alert($scope.startDateDisplay);
+$scope.ToMin = $scope.FromDate;
 
+      }
 
         $scope.close = function () {
             $modalInstance.close();

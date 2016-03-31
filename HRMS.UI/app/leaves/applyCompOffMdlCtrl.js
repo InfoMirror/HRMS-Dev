@@ -15,7 +15,12 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 compOffReason: ''
             }
         }
-
+  $scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');
+      //  alert($scope.startDateDisplay);
+         $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
         $scope.submit = function () {
             $scope.CompOffData.compOffReason = $scope.CompOffReason;
 
@@ -42,7 +47,16 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 }
             });
         }
+ /*$scope.open = function ($event) {
+alert(0);
 
+      }*/
+ 
+  /*$scope.open1 = function ($event) {
+   //   alert($scope.startDateDisplay);
+$scope.startMin2 = $scope.startDateDisplay;
+
+      }*/
         $scope.close = function () {
             $modalInstance.close();
         }
