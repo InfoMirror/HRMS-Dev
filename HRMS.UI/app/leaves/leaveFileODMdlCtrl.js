@@ -1,6 +1,6 @@
 hrBaseApp.controller('leaveFileODMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry',
-    function ($scope, $modalInstance, aValue, leaveFctry) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope) {
         'use strict';
 
         $scope.init = function () {
@@ -23,11 +23,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
 
         $scope.fileOD = function (OdData) {
             leaveFctry.fileOD(OdData).then(function (response) {
-                //console.log('OD Data: ');
-                //console.log(response.data);
-                if (response.data == "OD Updated") {
-                    $scope.getAbsentData($rootScope.userDetails);
-                }
+                $modalInstance.close();
             });
         }
 

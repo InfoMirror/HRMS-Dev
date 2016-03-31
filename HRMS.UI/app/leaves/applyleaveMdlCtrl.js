@@ -12,17 +12,18 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
                 Status: 26,
                 Reason: ''
             }
-            
-               $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
+
+            $scope.startMin = new Date();
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
         }
 
         $scope.submit = function () {
             $scope.ApplyLeave.Reason = $scope.LReason;
             //alert($scope.ApplyLeave.Reason);
-            // $scope.Reason.Reason = $scope.Reason;
+            //$scope.Reason.Reason = $scope.Reason;
             if ($scope.ApplyLeave.Reason != '' && $scope.ApplyLeave.Reason != undefined) {
                 $scope.ApplyLeave.FromDate = $scope.FromDate;
                 $scope.ApplyLeave.ToDate = $scope.ToDate;
@@ -36,19 +37,19 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             // alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
-                    alert("Leave is Applied");
-                   // $scope.getAppliedLeaves($rootScope.userDetails);
+                    alert("Leave has been Applied Successfully");
+                    // $scope.getAppliedLeaves($rootScope.userDetails);
                 } else {
                     alert("Applied Leave on same Date already exist");
-                    $modalInstance.close();
                 }
+                $modalInstance.close();
             });
         }
-$scope.open1 = function ($event) {
-   //   alert($scope.startDateDisplay);
-$scope.ToMin = $scope.FromDate;
+        $scope.open1 = function ($event) {
+            //   alert($scope.startDateDisplay);
+            $scope.ToMin = $scope.FromDate;
 
-      }
+        }
 
         $scope.close = function () {
             $modalInstance.close();
