@@ -57,7 +57,8 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                $scope.approveCompOffGridOptions.data = response.data;
+                $scope.getFiledCompOff($rootScope.userDetails);
+                //$scope.approveCompOffGridOptions.data = response.data;
             }
         });
     }

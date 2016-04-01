@@ -1,7 +1,7 @@
 hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var leaveFctryData = {};
-   var resource = $resource("http://localhost:9095" + "/leave/:action", {
-   // var resource = $resource("http://mayank-pc:9095" + "/leave/:action", { 
+   //var resource = $resource("http://localhost:9095" + "/leave/:action", {
+    var resource = $resource("http://mayank-pc:9095" + "/leave/:action", { 
     action: '@action',
     }, {
         'getAbsents': {

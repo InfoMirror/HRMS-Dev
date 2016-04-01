@@ -61,11 +61,11 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            alert("Leave Is Approved");
-            $state.go('home.approval');
-            /*  $scope.getAppliedLeaves({
+            //alert("Leave Is Approved");
+            //$state.go('home.approval');
+              $scope.getAppliedLeaves({
                   Id: $rootScope.userDetails.Id
-              });*/
+              });
         });
     }
 
