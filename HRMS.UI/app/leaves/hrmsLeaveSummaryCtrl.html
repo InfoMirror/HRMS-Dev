@@ -1,0 +1,35 @@
+<div class="container" width="100%">
+    <div class="row">
+        <label>Carried Forward Leaves: </label>
+        {{leaveData.CarriedFrwdLeaves}}
+    </div>
+    <div class="row">
+        <label>Leaves Accumulated this year: </label>
+        <label>{{leaveData.LeavesAccumulated}}</label>
+        <a href="#">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="CL: {{leaveData.CL}} PL: {{leaveData.PL}}"></span></a>
+        <!--<i class="icon-info-sign" data-toggle="tooltip" title="first tooltip" id='example'></i>-->
+    </div>
+    <div class="row">
+        <label>Comp Offs Accumulated this year: </label>
+        {{leaveData.CompOffsAccumulated}}
+    </div>
+    <div class="row">
+        <label>Leaves Taken: </label>
+        {{leaveData.LeavesTaken}}
+    </div>
+    <div class="row">
+        <label>PayOffs: </label>
+        {{leaveData.PayOffs}}
+    </div>
+    <div class="row">
+        <label>Leave Balance: </label>
+        {{leaveData.LeaveBalance}}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

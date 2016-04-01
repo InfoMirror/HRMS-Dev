@@ -8,22 +8,25 @@ hrBaseApp.controller('hrmsFrameCtrl', [
         //console.log($rootScope.User);
 
         $rootScope.userDetails = localStorageService.get('userDetails');
+        $rootScope.Role = localStorageService.get('role');
         if ($rootScope.userDetails == null) {
             $state.go('home.account');
         } else {
             $rootScope.isLoggedIn = $rootScope.userDetails.isLoggedIn;
+            if ($rootScope.userDetails.ProfileStatus == 22 || $rootScope.userDetails.ProfileStatus == 23) {
+                $rootScope.ShowAllStates = false;
+            } else if ($rootScope.userDetails.ProfileStatus == 24) {
+                $rootScope.ShowAllStates = true;
+            }
         }
 
 
-$scope.CanShowAllStates=function(){
-    if($rootScope.isLoggedIn && $rootScope.ShowAllStates){
-        return true;
-    }else {
-        return false;
-    }
-}
-        
-        
-
+        $scope.CanShowAllStates = function () {
+            if ($rootScope.isLoggedIn && $rootScope.ShowAllStates) {
+                return true;
+            } else {
+                return false;
+            }
+        }
   }
 ]);

@@ -54,7 +54,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
                             if (response.data.length > 0) {
                                 $rootScope.userDetails = response.data[0];
-                                if ($rootScope.userDetails.UserEmail == 'mayank.chaturvedi@infoobjects.com') {
+                                if ($rootScope.userDetails.UserEmail == 'surbhi@infoobjects.com') {
                                     $rootScope.Role = 'HR';
                                 } else {
                                     $rootScope.Role = 'Employee';
@@ -65,6 +65,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                             $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
                             $rootScope.userDetails.Role = $rootScope.Role;
                             localStorageService.set('userDetails', $rootScope.userDetails);
+                            localStorageService.set('role',$rootScope.Role);
 
                         
                         if(response.data[0].ProfileStatus==22 || response.data[0].ProfileStatus==23){
@@ -77,9 +78,11 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                             
                         },
                         function (error) {
+                        
                             console.log(error);
                         });
                 } else {
+                    alert('You are not authorized to login to this portal. Please try to login with your infoobjects.com account.');
                     $rootScope.isLoggedIn = false;
                     gapi.auth.signOut();
                     location.reload();

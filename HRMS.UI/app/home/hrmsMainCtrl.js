@@ -11,29 +11,30 @@ hrBaseApp.controller('hrmsMainCtrl', [
             $scope.getProfileData();
             $scope.getBirthdayData();
             $scope.getAnniversaryData();
-            $scope.getHolidayData();
+          //  $scope.getHolidayData();
+            $scope.getHolidayCalendar();
         }
 
-        $scope.profileGridOptions = {
-            columnDefs: [
-                {
-                    field: 'Name',
-                    displayName: 'Name'
-                }
-                , {
-                    field: 'Gender',
-                    displayName: 'Gender'
-                }
-                , {
-                    field: 'Designation',
-                    displayName: 'Designation'
-                }
-                , {
-                    field: 'ReportingHead',
-                    displayName: 'Reporting Head'
-                }
-            ]
-        }
+        /*  $scope.profileGridOptions = {
+              columnDefs: [
+                  {
+                      field: 'Name',
+                      displayName: 'Name'
+                  }
+                  , {
+                      field: 'Gender',
+                      displayName: 'Gender'
+                  }
+                  , {
+                      field: 'Designation',
+                      displayName: 'Designation'
+                  }
+                  , {
+                      field: 'ReportingHead',
+                      displayName: 'Reporting Head'
+                  }
+              ]
+          }*/
 
         $scope.holidaysGridOptions = {
             columnDefs: [
@@ -45,6 +46,13 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     field: 'FestivalDate',
                     displayName: 'Festival',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
+                },
+                {
+                    field: 'Action',
+                    displayName: 'Show Calendar',
+                    cellEditableCondition: false,
+                    /*cellTemplate: '<div><a ng-show="ShowCalendar" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>' */
+                    cellTemplate: '<div><a href="" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>'
                 }
             ]
         }
@@ -78,6 +86,23 @@ hrBaseApp.controller('hrmsMainCtrl', [
             ]
         }
 
+
+        $scope.holidayCalendarGridOptions = {
+            columnDefs: [
+                {
+                    field: 'FestivalName',
+                    displayName: 'Festival Name'
+                },
+                {
+                    field: 'FestivalDate',
+                    displayName: 'Festival Date',
+                    cellFilter: 'date:\'dd-MMM-yyyy\''
+                }
+            ]
+        }
+
+
+
         $scope.getBirthdayData = function () {
             dashboardFctry.getBirthdays().then(function (response) {
                 $scope.birthdaysGridOptions.data = response.data;
@@ -92,29 +117,27 @@ hrBaseApp.controller('hrmsMainCtrl', [
 
         $scope.getHolidayData = function () {
             dashboardFctry.getHolidays().then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 $scope.holidaysGridOptions.data = response.data;
             });
         }
 
-        $scope.getProfileData = function () {
-
-            dashboardFctry.getEmpProfileData({
-                UserEmail: $rootScope.userDetails.UserEmail
-            }).then(function (response) {
-                $scope.profileData = response.data[0];
-                console.log($scope.profileData);
+        $scope.getHolidayCalendar = function () {
+            dashboardFctry.getHolidayCalendar().then(function (response) {
+                // console.log(response.data);
+                $scope.holidayCalendarGridOptions.data = response.data;
             });
-            /*if ($rootScope.userDetails != undefined) {
-                var _gender;
-                if ($rootScope.userDetails.Gender == 4) {
-                    _gender: 'Female'
-                } else if ($rootScope.userDetails.Gender == 3) {
-                    _gender: 'Male'
-                }
+        }
+
+        $scope.showCalendarData = function () {
+            $scope.ShowCalendar = true;
+        }
+
+        $scope.getProfileData = function () {
+            if ($rootScope.userDetails != undefined) {
                 $scope.profileData = {
                     Name: $rootScope.userDetails.FirstName + ' ' + $rootScope.userDetails.LastName,
-                    Gender: _gender,
+                    Gender: $rootScope.userDetails.Gender,
                     ReportingHead: $rootScope.userDetails.ReportingHead,
                     Designation: $rootScope.userDetails.Designation,
                     Team: $rootScope.userDetails.Team,
@@ -127,9 +150,10 @@ hrBaseApp.controller('hrmsMainCtrl', [
                     DOJ: $rootScope.userDetails.DOJ,
                     DOB: $rootScope.userDetails.DOB
                 }
-            }*/
+            }
 
         }
 
         $scope.init();
-}]);
+  }
+]);

@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
+hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
 
     $scope.init = function () {
         $scope.getFiledOD($rootScope.userDetails);
@@ -6,26 +6,27 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
 
     $scope.approveODGridOptions = {
         columnDefs: [
-            {
+            /*{
                 field: 'Name',
                 displayName: 'Name'
-            },
+                
+            },*/
             {
                 field: 'AbsentDate',
-                displayName: 'Absent Date',
+                displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
                 field: 'ODReason',
-                displayName: 'OD Reason'
+                displayName: 'Reason'
             },
             {
                 field: 'ODStatus',
-                displayName: 'OD Status'
+                displayName: 'Approval Status'
             },
             {
-                field: 'MarkStatus',
-                displayName: 'Mark Status',
+                field: 'Action',
+                displayName: 'Action',
                 cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
             }
         ]
@@ -49,9 +50,8 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             ODStatus: ODStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                alert("OD Is Approved");
-                $state.go('home.approval');
-              //  $scope.approveODGridOptions.data = response.data;
+                $scope.getFiledOD($rootScope.userDetails);
+                /*$scope.approveODGridOptions.data = response.data;*/
             }
         });
     }

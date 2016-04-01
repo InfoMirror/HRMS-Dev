@@ -1,13 +1,27 @@
-<div class="modal-content" >
+<div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" ng-click="close()">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Please Give Reason For This OD</h4>
     </div>
     <div class="modal-body">
-        OD Reason: 
-        <input type="textarea" ng-model="odReason">
+        <div class="container">
+            <form class="form form-horizontal" name="fileODForm">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">OD Reason:<span class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="textarea" ng-model="odReason" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default btn-sm" ng-click="submit()" ng-disabled="!fileODForm.$valid">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--OD Reason:
+        <input type="textarea" ng-model="odReason">-->
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="submit()">Save</button>
     </div>
 </div>

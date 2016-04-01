@@ -1,19 +1,21 @@
-hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry','$state', function ($scope, $rootScope, approvalFctry,$state) {
+hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', 'uiGridConstants', function ($scope, $rootScope, approvalFctry, uiGridConstants) {
 
-    $scope.init = function(){
+    $scope.init = function () {
         $scope.getFiledCompOff($rootScope.userDetails);
     }
-    
+
     $scope.approveCompOffGridOptions = {
+        enableSorting: true,
+        enableFiltering: true,
+        filter: true,
         columnDefs: [
             {
-                field: 'Name',
-                displayName: 'Name'
-            },
-            {
                 field: 'CompOffDate',
-                displayName: 'CompOff Date',
-                cellFilter: 'date:\'dd-MMM-yyyy\''
+                displayName: 'Date',
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
             },
             {
                 field: 'CompOffReason',
@@ -21,23 +23,28 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             },
             {
                 field: 'CompOffStatus',
-                displayName: 'CompOff Status'
+                displayName: 'Approval Status',
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
             },
             {
-                field: 'MarkStatus',
-                displayName: 'Mark Status',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
+                field: 'Action',
+                displayName: 'Action',
+                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                enableFiltering: false
+
             }
         ]
     };
-    
+
     $scope.getFiledCompOff = function (rowId) {
 
         approvalFctry.getFiledCompOff(rowId).then(function (response) {
             $scope.approveCompOffGridOptions.data = response.data;
         });
     }
-    
+
     $scope.updateStatus = function (status, rowId) {
         var compOffStatus;
         if (status == "approved") {
@@ -50,12 +57,11 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                alert("ComOff Is Approved");
-                $state.go('home.approval');
-                // $scope.approveCompOffGridOptions.data = response.data;
+                $scope.getFiledCompOff($rootScope.userDetails);
+                //$scope.approveCompOffGridOptions.data = response.data;
             }
         });
     }
-    
+
     $scope.init();
 }])

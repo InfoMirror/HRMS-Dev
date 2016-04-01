@@ -1,4 +1,4 @@
-hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', function ($scope, leaveFctry, $rootScope, $modal) {
+hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', 'uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants) {
     'use strict';
 
     $scope.init = function () {
@@ -10,35 +10,47 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
 
     $scope.AppliedLeaveGridOptions = {
         enableSorting: true,
+        enableFiltering: true,
+        filter: true,
         data: null,
         columnDefs: [
             {
                 field: 'FromDate',
                 displayName: 'From Date',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\''
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
             },
             {
                 field: 'ToDate',
                 displayName: 'To Date',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\''
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
             },
-            {
+          /*  {
                 field: 'EmployeeName',
                 displayName: 'Name',
                 enableColumnMenu: false
-            },
+            },*/
             {
                 field: 'Reason',
                 displayName: 'Reason',
+                enableFiltering: false,
                 enableColumnMenu: false
 
             },
             {
                 field: 'Status',
                 displayName: 'Current Status',
-                enableColumnMenu: false
+                enableColumnMenu: false,
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
             }
         ]
     };

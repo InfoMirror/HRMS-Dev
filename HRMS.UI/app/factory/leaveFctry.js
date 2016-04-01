@@ -1,6 +1,6 @@
 hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var leaveFctryData = {};
-   // var resource = $resource("http://localhost:9095" + "/leave/:action", {
+   //var resource = $resource("http://localhost:9095" + "/leave/:action", {
     var resource = $resource("http://mayank-pc:9095" + "/leave/:action", { 
     action: '@action',
     }, {
@@ -37,8 +37,7 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
             method: 'POST',
             params: {
                 action: 'markCompOff'
-            },
-            isArray: false
+            }
         },
         'getAppliedLeaves': {
             method: 'POST',
