@@ -131,7 +131,6 @@ function insertupdateuser(userid, email) {
         if (err) {
             console.log('Connection Error: ' + err);
         }
-
     });
 }
 var empData = [];
