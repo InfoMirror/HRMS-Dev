@@ -34,16 +34,19 @@ router.post('/login', function (req, res) {
 
                                     sql.open(sqlConfig, function (err, conn) {
                                         var parms = new Array(result1[0].EmpId, "");
+                                     
                                         var pm = conn.procedureMgr();
                                         pm.callproc('sp_AllotLeaves', parms, function (err, result, output) {
+                                               
                                             if (err) {
                                                 console.log(err);
                                             } else {
-                                                res.json({
+                                                console.log('sp_AllotLeaves');
+                                              /*  res.json({
                                                     type: true,
                                                     data: 'Leaves Alloted'
-                                                });
-                                                console.log(res);
+                                                });*/
+                                               // console.log(res);
                                             }
                                         });
                                     });

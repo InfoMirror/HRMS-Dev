@@ -28,7 +28,7 @@ router.get('/getAllRelations', function (req, res) {
 });
 
 router.get('/getAllEmployees', function (req, res) {
-    //console.log(req.param);
+    console.log("req.param");
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
         console.log('Table Object Value: ');
@@ -74,7 +74,7 @@ router.post('/getMasterValues', function (req, res) {
 
 router.post('/updateEmployeeDetails', function (req, res) {
     sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(req.body.Id, req.body.UserEmail, req.body.FirstName, req.body.LastName, req.body.Team, req.body.Designation, req.body.Gender, req.body.MaritalStatus, req.body.Children1, req.body.Children2, req.body.CurrentAddress, req.body.PermanentAddress, req.body.PersonalEmail, req.body.ContactNo, req.body.EmergencyContactNo, req.body.NameOfEC, req.body.RelationWithEC, req.body.BloodGroup, req.body.DOJ, req.body.DOB, req.body.Nominee, req.body.RelationWithNominee, req.body.SkypeID, req.body.PassportNumber, req.body.PassportIssueDate, req.body.PassportExpiryDate, req.body.PassportIssuePlace, req.body.PanCard, req.body.BankAccountNumber, req.body.ReportingHead, req.body.PFNo, req.body.UAN, req.body.ProfileStatus,req.body.ownVisa,req.body.visaCountry,req.body.visaExpiryDate);
+        var tableObjectValue = new Array(req.body.Id, req.body.UserEmail,req.body.EmpId, req.body.FirstName, req.body.LastName, req.body.Team, req.body.Designation, req.body.Gender, req.body.MaritalStatus, req.body.Children1, req.body.Children2, req.body.CurrentAddress, req.body.PermanentAddress, req.body.PersonalEmail, req.body.ContactNo, req.body.EmergencyContactNo, req.body.NameOfEC, req.body.RelationWithEC, req.body.BloodGroup, req.body.DOJ, req.body.DOB, req.body.Nominee, req.body.RelationWithNominee, req.body.SkypeID, req.body.PassportNumber, req.body.PassportIssueDate, req.body.PassportExpiryDate, req.body.PassportIssuePlace, req.body.PanCard, req.body.BankAccountNumber, req.body.ReportingHead, req.body.PFNo, req.body.UAN, req.body.ProfileStatus,req.body.ownVisa,req.body.visaCountry,req.body.visaExpiryDate);
         console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_InsertUpdateEmployeeDetails', tableObjectValue, function (err, results, output) {
@@ -112,10 +112,13 @@ router.post('/getEmpDetails', function (req, res) {
 });
 
 router.post('/getApprovalReqEmp', function (req, res) {
+   
+    
     sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(req.body.Id, '');
+        var tableObjectValue = new Array();
         var pm = conn.procedureMgr();
         pm.callproc('sp_GetApprovalReqEmp', tableObjectValue, function (err, results, output) {
+             console.log(results);
             if (err) {
                 console.log(err);
             } else {

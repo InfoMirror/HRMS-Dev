@@ -160,7 +160,9 @@ function excuteexcel(filename) {
 
                                     //console.log(hh);
                                     //console.log(starttm - endtm);
-                                    if (obj[0].data[i][2] == '' || obj[0].data[i][3] == '') {
+                                    if (obj[0].data[i][2] == ':' || obj[0].data[i][3] == ':') {
+                                        console.log(obj[0].data[i][2]);
+                                        console.log(obj[0].data[i][3]);
                                         insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
 
                                     } else {

@@ -4,9 +4,7 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
     $scope.init = function () {
         $scope.message = 'Hello, Welcome to Leave Page';
         $scope.getAbsentData($rootScope.userDetails);
-    }
-
-    $scope.absentGridOptions = {
+          $scope.absentGridOptions = {
         enableSorting: true,
         enableFiltering:true,
         filter:true,
@@ -64,14 +62,20 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             }*/
         ]
     };
+    }
+
+  
 
     /*<button class="btn btn-primary" ng-click="grid.appScope.openModal(row.entity.Id)" ng-disabled="!grid.appScope.enableDisableLink(row.entity.ODStatus)">File OD</button>*/
     /*<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus)" href="">File OD</a>*/
 
     $scope.getAbsentData = function (empData) {
+       // alert(empData.EmpId);
         leaveFctry.getAbsents(empData).then(function (response) {
-            //console.log(response.data);
+            console.log(response.data);
+            if(response.data!=null){
             $scope.absentGridOptions.data = response.data;
+            }
         });
     }
 

@@ -72,6 +72,7 @@ router.get('/getAnniversary', function (req, res) {
 });
 
 router.get('/getHolidays', function (req, res) {
+     console.log('Table Object Value: ');
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
         console.log('Table Object Value: ');
