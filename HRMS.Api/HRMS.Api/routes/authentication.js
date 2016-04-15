@@ -1,110 +1,207 @@
-var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', 'localStorageService', function (authFctry, $scope, $state, $rootScope, localStorageService) {
+var express = require('express');
+var router = express.Router();
+var sql = require('msnodesqlv8');
+var sqlConfig = require('../config/sqlConfig.js');
 
-    // #region Initialize
+router.post('/login', function (req, res) {
+    console.log('In NodeJS Service');
+    // console.log(req.body);
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array("SelectByUserName", req.body.email, "");
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_SelectDeleteLogin', tableObjectValue, function (err, results, output) {
 
-    $scope.init = function () {
-        $rootScope.userDetails = localStorageService.get('userDetails');
-        if ($rootScope.userDetails != undefined) {
-            localStorageService.set('userDetails', undefined);
-            location.reload();
-        }
-    }
+            if (err) {
+                console.log(err);
+            } else {
+                if (results.length > 0) {
+                    console.log(results);
+                    sql.open(sqlConfig, function (err, conn) {
+                        var tableObjectValue = new Array("SelectByEmail", results[0].Email);
+                        console.log('Getting Employee Details');
+                        console.log(tableObjectValue);
+                        var pm = conn.procedureMgr();
+                        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(result1);
+                                res.json({
+                                    type: true,
+                                    data: result1
+                                });
+                                if (result1[0].EmpId != null) {
 
-    $scope.signin = function () {
-
-        var myParams = {
-            'clientid': '142159620286-m8khm27vosmf3ovj9lbgrtj1vqd52jtj.apps.googleusercontent.com',
-            'cookiepolicy': 'single_host_origin',
-            'callback': $scope.loginCallback,
-            'approvalprompt': 'force',
-            'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
-        };
-        gapi.auth.signIn(myParams);
-    };
-
-    $scope.loginCallback = function (result) {
-        // alert(0);
-        if (result['status']['signed_in']) {
-            var request = gapi.client.plus.people.get({
-                'userId': 'me'
-            });
-            request.execute(function (resp) {
-                var email = '';
-                if (resp['emails']) {
-                    for (var i = 0; i < resp['emails'].length; i++) {
-                        if (resp['emails'][i]['type'] == 'account') {
-                            email = resp['emails'][i]['value'];
-                        }
-                    }
-                }
-
-                var str = "Name:" + resp['displayName'] + "<br>";
-                /* str += "Image:" + resp['image']['url'] + "<br>";
-                 str += "<img src='" + resp['image']['url'] + "' /><br>";
-
-                 str += "URL:" + resp['url'] + "<br>";*/
-                str += "Email:" + email + "<br>";
-                //alert(str);
-                $scope.profile = str;
-                if (resp["domain"] == 'infoobjects.com') {
-                    var formdata = {
-                        email: email
-                    }
-                    authFctry.login(formdata).then(function (response) {
-
-                            if (response.data.length > 0) {
-                                $rootScope.userDetails = response.data[0];
-                                if ($rootScope.userDetails.UserEmail == 'surbhi@infoobjects.com') {
-                                    $rootScope.Role = 'HR';
-                                } else {
-                                    $rootScope.Role = 'Employee';
+                                    sql.open(sqlConfig, function (err, conn) {
+                                        var parms = new Array(result1[0].EmpId, "");
+                                        var pm = conn.procedureMgr();
+                                        pm.callproc('sp_AllotLeaves', parms, function (err, result, output) {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                res.json({
+                                                    type: true,
+                                                    data: 'Leaves Alloted'
+                                                });
+                                                console.log(res);
+                                            }
+                                        });
+                                    });
                                 }
                             }
-                            $rootScope.isLoggedIn = true;
-
-                            $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
-                            $rootScope.userDetails.Role = $rootScope.Role;
-                            localStorageService.set('userDetails', $rootScope.userDetails);
-                            localStorageService.set('role',$rootScope.Role);
-
-                        
-                        if(response.data[0].ProfileStatus==22 || response.data[0].ProfileStatus==23){
-                        $rootScope.ShowAllStates=false;
-                            $state.go('home.editProfile');
-                        }else{
-                            $rootScope.ShowAllStates=true;
-                            $state.go('home.dashboard');
-                        }
-                            
-                        },
-                        function (error) {
-                        
-                            console.log(error);
                         });
+                        if (err) {
+                            console.log('Connection Error: ' + err);
+                        }
+                    });
                 } else {
-                    alert('You are not authorized to login to this portal. Please try to login with your infoobjects.com account.');
-                    $rootScope.isLoggedIn = false;
-                    gapi.auth.signOut();
-                    location.reload();
+                    sql.open(sqlConfig, function (err, conn) {
+                        var tableObjectValue = new Array(req.body.email);
+                        var pm = conn.procedureMgr();
+                        pm.callproc('Sp_InsertLogin', tableObjectValue, function (err, results, output) {
+                            console.log('insert');
+
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                sql.open(sqlConfig, function (err, conn) {
+                                    //  console.log(res.body.email);
+                                    var tableObjectValue = new Array("0", req.body.email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "22", null, null, null);
+                                    var pm = conn.procedureMgr();
+                                    pm.callproc('sp_InsertUpdateEmployeeDetails', tableObjectValue, function (err, results, output) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                              sql.open(sqlConfig, function (err, conn) {
+                        var tableObjectValue = new Array("SelectByEmail", req.body.email);
+                        console.log('Getting Employee Details');
+                        console.log(tableObjectValue);
+                        var pm = conn.procedureMgr();
+                        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, result1, output) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(result1);
+                                res.json({
+                                    type: true,
+                                    data: result1
+                                });
+                              /*  if (result1[0].EmpId != null) {
+
+                                    sql.open(sqlConfig, function (err, conn) {
+                                        var parms = new Array(result1[0].EmpId, "");
+                                        var pm = conn.procedureMgr();
+                                        pm.callproc('sp_AllotLeaves', parms, function (err, result, output) {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                res.json({
+                                                    type: true,
+                                                    data: 'Leaves Alloted'
+                                                });
+                                                console.log(res);
+                                            }
+                                        });
+                                    });
+                                }*/
+                            }
+                        });
+                        if (err) {
+                            console.log('Connection Error: ' + err);
+                        }
+                    });
+
+                                        }
+                                    });
+                                    if (err) {
+                                        console.log('Connection Error: ' + err);
+                                    }
+
+
+
+                                });
+                            
+                            }
+                        });
+                        if (err) {
+                            console.log('Connection Error: ' + err);
+                        }
+
+                    });
+
                 }
+            }
+        });
+        if (err) {
+            console.log('Connection Error: ' + err);
+        }
+    });
+});
 
-            });
 
+
+function insertupdateuser(userid, email) {
+    sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array(userid, email);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_InsertUpdateLogin', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(output[0]);
+                console.log(results);
+            }
+        });
+        if (err) {
+            console.log('Connection Error: ' + err);
         }
 
-    }
+    });
+}
+var empData = [];
+
+function selectEmployeeDetails(email) {
+    sql.open(sqlConfig, function (err, conn) {
+        //  console.log(res.body.email);
+        var tableObjectValue = new Array("SelectByEmail", email);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                //  console.log(results);
+                empData = results;
+                return results;
+            }
+        });
+        if (err) {
+            console.log('Connection Error: ' + err);
+        }
 
 
 
-    $scope.logout = function () {
-        gapi.auth.signOut();
-        location.reload();
-    }
+    });
+}
 
-    function onLoadCallback() {
-        gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
-        gapi.client.load('plus', 'v1', function () {});
-    }
+function InsertEmployeeDetails(email) {
+    sql.open(sqlConfig, function (err, conn) {
+        //  console.log(res.body.email);
+        var tableObjectValue = new Array("0", email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 22);
+        var pm = conn.procedureMgr();
+        pm.callproc('[sp_InsertUpdateEmployeeDetails]', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log(err);
+            } else {
+                //  console.log(results);
 
-    $scope.init();
-}]);
+            }
+        });
+        if (err) {
+            console.log('Connection Error: ' + err);
+        }
+
+
+
+    });
+}
+module.exports = router;
