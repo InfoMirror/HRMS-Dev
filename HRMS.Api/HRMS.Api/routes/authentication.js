@@ -30,7 +30,7 @@ router.post('/login', function (req, res) {
                                     type: true,
                                     data: result1
                                 });
-                                if (result1[0].EmpId != null) {
+                               /* if (result1[0].EmpId != null) {
 
                                     sql.open(sqlConfig, function (err, conn) {
                                         var parms = new Array(result1[0].EmpId, "");
@@ -42,15 +42,15 @@ router.post('/login', function (req, res) {
                                                 console.log(err);
                                             } else {
                                                 console.log('sp_AllotLeaves');
-                                              /*  res.json({
-                                                    type: true,
-                                                    data: 'Leaves Alloted'
-                                                });*/
+                                               // res.json({
+                                             //       type: true,
+                                                   // data: 'Leaves Alloted'
+                                              //  });
                                                // console.log(res);
                                             }
                                         });
                                     });
-                                }
+                                }*/
                             }
                         });
                         if (err) {
@@ -69,7 +69,8 @@ router.post('/login', function (req, res) {
                             } else {
                                 sql.open(sqlConfig, function (err, conn) {
                                     //  console.log(res.body.email);
-                                    var tableObjectValue = new Array("0", req.body.email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "22", null, null, null);
+                                    var tableObjectValue = new Array("0", req.body.email,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "22", null, null, null);
+                                    console.log(tableObjectValue);
                                     var pm = conn.procedureMgr();
                                     pm.callproc('sp_InsertUpdateEmployeeDetails', tableObjectValue, function (err, results, output) {
                                         if (err) {
