@@ -130,7 +130,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
     function executeStatement() {
 
-        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate", function (err, rowCount, rows) {
+        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -197,6 +197,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
         request.addParameter('ownVisa', TYPES.Bit, req.body.ownVisa);
         request.addParameter('visaCountry', TYPES.NVarChar, req.body.visaCountry);
         request.addParameter('visaExpiryDate', TYPES.Date, req.body.visaExpiryDate);
+        request.addParameter('Role', TYPES.VarChar, "Employee");
 
 
 

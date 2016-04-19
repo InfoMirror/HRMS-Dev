@@ -4,7 +4,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.init = function () {
         //$scope.Warningmsg=false;
         if ($rootScope.passedUserEmail == undefined) {
-            $scope.getEmpData($rootScope.userDetails.UserEmail);
+            $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         } else {
             $scope.getEmpData($rootScope.passedUserEmail);
         }
@@ -26,14 +26,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.getRelations({
             MasterTypeId: 4
         });
-          $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
-    
+
     $scope.showMessage = function () {
         if ($rootScope.userDetails != null) {
             if ($rootScope.userDetails.ProfileStatus == 22) {
