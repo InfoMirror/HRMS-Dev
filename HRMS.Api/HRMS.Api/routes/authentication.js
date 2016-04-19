@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 var sql = require('msnodesqlv8');
 var sqlConfig = require('../config/sqlConfig.js');
+var connectionConfig=require('../config/sqlConfig.json');
 var sqlConnection = require('tedious').Connection;
 
 var config = {
-    server: 'MAYANK-PC',
-    database: 'dbHRMS',
-    userName: 'mayankdbhrms',
-    password: 'mayankdbhrms',
+    server: connectionConfig.server,
+    database: connectionConfig.database,
+    userName: connectionConfig.userName,
+    password: connectionConfig.password,
     options: {
-        database: 'dbHRMS',
+        database: connectionConfig.database,
         rowCollectionOnRequestCompletion: true,
         useColumnNames: true,
         port: '49172'
@@ -55,8 +56,8 @@ router.post('/login', function (req, res) {
                         }
                     });
 
-                    request1.addParameter('Action', TYPES.NVarChar, "SelectByEmail");
-                    request1.addParameter('UserEmail', TYPES.NVarChar, req.body.email);
+                    request1.addParameter('Action', TYPES.VarChar, "SelectByEmail");
+                    request1.addParameter('UserEmail', TYPES.VarChar, req.body.email);
 
                     connection.execSql(request1);
 

@@ -59,8 +59,12 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="../../assets/avatars/avatar2.png" alt="Jason's Photo" />
-                        <span class="user-info">
-                            <small>Welcome, {{userDetails.FirstName}} {{userDetails.LastName}}</small>
+                        <span class="user-info" ng-if="userDetails.FirstName.value!=null">
+                            <small>Welcome, {{userDetails.FirstName.value}} {{userDetails.LastName.value}}</small>
+
+                        </span>
+                         <span class="user-info" ng-if="userDetails.FirstName.value==null">
+                            <small>Welcome, {{userDetails.UserEmail.value}} </small>
 
                         </span>
 

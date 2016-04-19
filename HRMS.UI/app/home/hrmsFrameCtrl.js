@@ -13,9 +13,9 @@ hrBaseApp.controller('hrmsFrameCtrl', [
             $state.go('home.account');
         } else {
             $rootScope.isLoggedIn = $rootScope.userDetails.isLoggedIn;
-            if ($rootScope.userDetails.ProfileStatus == 22 || $rootScope.userDetails.ProfileStatus == 23) {
+            if ($rootScope.userDetails.Role.value=='Employee' &&($rootScope.userDetails.ProfileStatus.value  == 22 || $rootScope.userDetails.ProfileStatus.value == 23) ){
                 $rootScope.ShowAllStates = false;
-            } else if ($rootScope.userDetails.ProfileStatus == 24) {
+            } else if ($rootScope.userDetails.ProfileStatus.value == 24 ||$rootScope.userDetails.Role.value=='HR') {
                 $rootScope.ShowAllStates = true;
             }
         }

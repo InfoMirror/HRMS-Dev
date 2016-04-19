@@ -54,6 +54,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
                             if (response.data.length > 0) {
                                 $rootScope.userDetails = response.data[0];
+                                $rootScope.Role=response.data[0].Role.value;
                                 /* if ($rootScope.userDetails.Role == 'HR') {
                                      $rootScope.Role = $rootScope.userDetails.Role;
                                  } else {
@@ -66,7 +67,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                                 if (response.data[0].Role.value == "Employee" && (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23)) {
                                     $rootScope.ShowAllStates = false;
                                     $state.go('home.editProfile');
-                                } else if (response.data[0].Role == "HR") {
+                                } else if (response.data[0].Role.value == "HR") {
                                     $rootScope.ShowAllStates = true;
                                     $state.go('home.dashboard');
                                 }
