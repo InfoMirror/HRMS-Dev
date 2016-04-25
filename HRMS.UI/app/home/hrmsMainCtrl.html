@@ -16,6 +16,19 @@
 <!-- /section:basics/content.breadcrumbs -->
 <div class="page-content">
     <div class="row">
+        <div class="col-md-6">
+            <h4>Upcoming Birthdays</h4>
+            <!--<hr/>-->
+            <div ui-grid="birthdaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        </div>
+        <div class="col-md-6">
+            <h4>Upcoming Anniversaries</h4>
+            <!--<hr/>-->
+            <div ui-grid="AnniversaryGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
         <!--   <div class="col-md-6">
             <h4>Profile Data</h4> <hr/>
             <div class="container" width="100%">
@@ -73,7 +86,7 @@
                 </div>
             </div>
         </div>-->
-       <!-- <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <h4>Upcoming Holidays</h4>
             <hr/>
             <div ui-grid="holidaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
@@ -81,23 +94,11 @@
         </div>-->
         <div class="col-md-6">
             <h4>Holiday Calendar for this year</h4>
-            <hr/>
+            <!--<hr/>-->
             <div ui-grid="holidayCalendarGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h4>Upcoming Birthdays</h4>
-            <hr/>
-            <div ui-grid="birthdaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-        </div>
-        <div class="col-md-6">
-            <h4>Upcoming Anniversaries</h4>
-            <hr/>
-            <div ui-grid="AnniversaryGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-        </div>
-    </div>
 
     <!--<div ui-grid="birthdaysGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
 

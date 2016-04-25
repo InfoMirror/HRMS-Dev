@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state', 'uiGridConstants', function ($scope, $rootScope, approvalFctry, $state, uiGridConstants) {
+hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state', function ($scope, $rootScope, approvalFctry, $state) {
 
     $scope.init = function () {
         $scope.getAppliedLeaves({
@@ -12,27 +12,24 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
         filter: true,
         columnDefs: [
             {
-                field: 'FromDate',
+                field: 'FromDate.value',
                 displayName: 'From',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+              
             },
             {
-                field: 'ToDate',
+                field: 'ToDate.value',
                 displayName: 'To',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+               
             },
             {
-                field: 'Reason',
-                displayName: 'Reason'
+                field: 'Reason.value',
+                displayName: 'Reason',
+                enableFiltering: false
             },
             {
-                field: 'Status',
+                field: 'Status.value',
                 displayName: 'Approval Status'
             },
             {

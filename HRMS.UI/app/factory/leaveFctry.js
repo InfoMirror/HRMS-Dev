@@ -19,7 +19,7 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
             isArray: false
         },
         'getCompOffs': {
-            method: 'GET',
+            method: 'POST',
             params: {
                 action: 'getCompOffs'
             },

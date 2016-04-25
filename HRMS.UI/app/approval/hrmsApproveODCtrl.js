@@ -5,23 +5,22 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
     }
 
     $scope.approveODGridOptions = {
+        enableSorting: true,
+        enableFiltering: true,
+        filter: true,
         columnDefs: [
-            /*{
-                field: 'Name',
-                displayName: 'Name'
-                
-            },*/
             {
-                field: 'AbsentDate',
+                field: 'AbsentDate.value',
                 displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
-                field: 'ODReason',
-                displayName: 'Reason'
+                field: 'ODReason.value',
+                displayName: 'Reason',
+                enableFiltering: false
             },
             {
-                field: 'ODStatus',
+                field: 'ODStatus.value',
                 displayName: 'Approval Status'
             },
             {
@@ -51,7 +50,7 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
         }).then(function (response) {
             if (response.data == "Status Updated") {
                 
-                $scope.approveODGridOptions.data = response.data;
+                $scope.getFiledOD(rowId);
             }
         });
     }

@@ -15,7 +15,7 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
         data: null,
         columnDefs: [
             {
-                field: 'FromDate',
+                field: 'FromDate.value',
                 displayName: 'From Date',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
@@ -24,7 +24,7 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 }
             },
             {
-                field: 'ToDate',
+                field: 'ToDate.value',
                 displayName: 'To Date',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
@@ -38,14 +38,14 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 enableColumnMenu: false
             },*/
             {
-                field: 'Reason',
+                field: 'Reason.value',
                 displayName: 'Reason',
                 enableFiltering: false,
                 enableColumnMenu: false
 
             },
             {
-                field: 'Status',
+                field: 'Status.value',
                 displayName: 'Current Status',
                 enableColumnMenu: false,
                 filter: {

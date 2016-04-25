@@ -23,8 +23,8 @@ hrBaseApp.config([
                 controller: 'hrmsFrameCtrl',
                 abstract: true
             })
-            .state('home.account', {
-                url: '',
+            .state('account', {
+                url: '/',
                 templateUrl: '/app/authenticate/authCtrl.html',
                 controller: 'authCtrl',
                 friendlyName: 'Sign In',

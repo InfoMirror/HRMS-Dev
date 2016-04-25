@@ -60,11 +60,11 @@ hrBaseApp.controller('hrmsMainCtrl', [
         $scope.birthdaysGridOptions = {
             columnDefs: [
                 {
-                    field: 'Name',
+                    field: 'Name.value',
                     displayName: 'Name'
                 },
                 {
-                    field: 'DOB',
+                    field: 'DOB.value',
                     displayName: 'Birthday',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
                 }
@@ -75,11 +75,11 @@ hrBaseApp.controller('hrmsMainCtrl', [
         $scope.AnniversaryGridOptions = {
             columnDefs: [
                 {
-                    field: 'Name',
+                    field: 'Name.value',
                     displayName: 'Name'
                 },
                 {
-                    field: 'DOJ',
+                    field: 'DOJ.value',
                     displayName: 'Anniversary',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
                 }
@@ -90,11 +90,11 @@ hrBaseApp.controller('hrmsMainCtrl', [
         $scope.holidayCalendarGridOptions = {
             columnDefs: [
                 {
-                    field: 'FestivalName',
+                    field: 'FestivalName.value',
                     displayName: 'Festival Name'
                 },
                 {
-                    field: 'FestivalDate',
+                    field: 'FestivalDate.value',
                     displayName: 'Festival Date',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
                 }
@@ -115,12 +115,12 @@ hrBaseApp.controller('hrmsMainCtrl', [
             });
         }
 
-        $scope.getHolidayData = function () {
+        /*$scope.getHolidayData = function () {
             dashboardFctry.getHolidays().then(function (response) {
                 // console.log(response.data);
                 $scope.holidaysGridOptions.data = response.data;
             });
-        }
+        }*/
 
         $scope.getHolidayCalendar = function () {
             dashboardFctry.getHolidayCalendar().then(function (response) {
@@ -129,9 +129,9 @@ hrBaseApp.controller('hrmsMainCtrl', [
             });
         }
 
-        $scope.showCalendarData = function () {
+       /* $scope.showCalendarData = function () {
             $scope.ShowCalendar = true;
-        }
+        }*/
 
         $scope.getProfileData = function () {
             if ($rootScope.userDetails != undefined) {

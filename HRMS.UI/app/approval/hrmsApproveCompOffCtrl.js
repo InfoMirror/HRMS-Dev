@@ -10,7 +10,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
         filter: true,
         columnDefs: [
             {
-                field: 'CompOffDate',
+                field: 'CompOffDate.value',
                 displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
                 filter: {
@@ -18,11 +18,11 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
                 }
             },
             {
-                field: 'CompOffReason',
+                field: 'CompOffReason.value',
                 displayName: 'CompOff Reason'
             },
             {
-                field: 'CompOffStatus',
+                field: 'CompOffStatus.value',
                 displayName: 'Approval Status',
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS
@@ -57,7 +57,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             compOffStatus: compOffStatus
         }).then(function (response) {
             if (response.data == "Status Updated") {
-                $scope.approveCompOffGridOptions.data = response.data;
+                 $scope.getFiledCompOff(rowId);
             }
         });
     }

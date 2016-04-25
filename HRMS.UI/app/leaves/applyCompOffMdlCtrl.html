@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Date:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
-                           <olca-date min-date="startMin" date-options="dateOptions" input-value="CompOffDate" input-name="startDate" date-required="true" date-changed="resetResults()" date-click="open($event)"></olca-date>
+                           <olca-date min-date="startMin" date-options="dateOptions" input-value="CompOffDate.value" input-name="startDate" date-required="true" date-changed="resetResults()" date-click="open($event)"></olca-date>
                        <!-- <olca-date min-date="startMin2" date-options="dateOptions" input-value="startDateDisplay1" input-name="startDate" date-required="true" date-changed="resetResults1()" date-click="open1($event)"></olca-date>-->
                        <!-- <input type="date" ng-model="CompOffDate" name="date" required>-->
                         <span ng-show="applyCompOffForm.date.$error.required && applyCompOffForm.date.$dirty" class="text-danger">Required*</span>
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">CompOff Reason:<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <textarea style="width: 25%;" rows="3" ng-model="CompOffReason" name="compOffReason" required></textarea>
+                        <textarea style="width: 25%;" rows="3" ng-model="CompOffReason.value" name="compOffReason" required></textarea>
                         <span ng-show="applyCompOffForm.compOffReason.$error.required && applyCompOffForm.compOffReason.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>

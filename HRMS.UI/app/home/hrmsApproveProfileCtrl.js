@@ -6,19 +6,19 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
         $scope.getEmployees();
     }
     $scope.getBkgColorTable = function (row) {
-        
-//return 'may';
+
+        //return 'may';
         switch (row.entity.ProfileStatus) {
         case 22:
-                alert(22);
+            alert(22);
             return 'rowRed';
             break;
         case 23:
-               alert(23);
+            alert(23);
             return 'rowawq';
             break;
         default: // anything but 0 and -1, alerts
-              //  alert(24);
+            //  alert(24);
             return 'rowlime';
         }
     };
@@ -27,7 +27,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
     var rowtpl = '<div><div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'rowlime\':row.entity.ProfileStatus==24,\'rowawq\':row.entity.ProfileStatus==23,\'rowRed\':row.entity.ProfileStatus==22 }" ui-grid-cell></div></div>';
 
     // var rowTemplate = '<div style="height: 100%" ng-class="{rowRed: row.getProperty(\'ProfileStatus\') == 22, rowawq: row.getProperty(\'ProfileStatus\') == 24}"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' + '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
-                   
+
     //var rowtpl='<div><div style="{\'background-color\': grid.appScope.getBkgColorTable(row}" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" ui-grid-cell></div></div>';
 
     $scope.ApproveProfileGridOptions = {
@@ -38,20 +38,20 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
                 displayName: 'Name'
             },*/
             {
-                field: 'UserEmail',
+                field: 'UserEmail.value',
                 displayName: 'Email Id'
           },
             {
-                field: 'Team',
+                field: 'Team.value',
                 displayName: 'Team'
           },
-            
+
             {
-                field: 'Action',
+                field: 'Action.value',
                 displayName: 'Show Details',
                 enableColumnMenu: true,
-                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail)" style="margin-left: 15%;" href="">Show Details</a></div>'
-                
+                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
+
             }
 
         ]
@@ -61,7 +61,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
         profileFctry.getApprovalReqEmp({
             Id: $rootScope.userDetails.Id
         }).then(function (response) {
-           // alert(JSON.stringify(response.data));
+            // alert(JSON.stringify(response.data));
             $scope.ApproveProfileGridOptions.data = response.data;
             //$scope.ApproveProfileGridOptions.sortBy('name');
 

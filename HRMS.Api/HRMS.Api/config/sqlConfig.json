@@ -1,6 +1,6 @@
 {
-    "server":"MAYANK-PC",
+    "server":"INFOOBJECTS_PC",
     "database":"dbHRMS",
-    "userName":"mayankdbhrms",
-    "password":"mayankdbhrms"
+    "userName":"sa",
+    "password":"1234"
 }

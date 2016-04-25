@@ -1,5 +1,5 @@
-hrBaseApp.directive('hrTopStatesDrctv', ['$state',
-    function ($state) {
+hrBaseApp.directive('hrTopStatesDrctv', ['$state', '$rootScope',
+    function ($state, $rootScope) {
         'use strict';
 
         var p = {};
@@ -14,8 +14,15 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
         };
         p.controller = function ($scope, $state, $rootScope) {
 
+            /*$scope.showHideMenus = function () {
+                debugger;
+                if ($rootScope.Role == 'HR' && $rootScope.userDetails.ProfileStatus.value != 24) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }*/
             $scope.filterStates = function () {
-
                 $scope.states = $state.get().filter(function (x) {
 
                     if ((x.name.indexOf($scope.parentState) == 0) && x.name.split('.').length == $scope.parentState.split('.').length + 1 && !x.hideInMenu) {
@@ -23,6 +30,7 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
                             x.redirectState = $scope.findFirstChildState(x);
                         } else {
                             x.redirectState = x.name;
+
                         }
                         return true;
                     } else
@@ -77,6 +85,7 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
                     $state.get().filter(function (x) {
                         if (x.name == pageLocation) {
                             $scope.stateName = x.friendlyName;
+                            $scope.userEmail = $rootScope.userDetails.UserEmail.value;
                         }
                     });
                     return 'active';
@@ -84,11 +93,7 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
                     return '';
                 }
             }
-
-
-
         }
 
         return p;
-    }
-]);
+}]);

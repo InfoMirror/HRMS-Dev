@@ -1,6 +1,6 @@
 hrBaseApp.directive('hrHeaderDrctv', [
-    '$state', '$log',
-    function ($state, $log) {
+    '$state', '$log', 'localStorageService',
+    function ($state, $log, localStorageService) {
         'use strict';
 
         var p = {};
@@ -10,25 +10,30 @@ hrBaseApp.directive('hrHeaderDrctv', [
         p.restrict = 'E';
         p.templateUrl = '/app/shared/hr-header-drctv.html';
 
-        p.link = function ($scope, element, attributes, controller, $state,$rootScope) {
-            
-            
+        p.link = function ($scope, element, attributes, controller, $state, $rootScope) {
+
+
             $scope.logout = function () {
                 $scope.logout1();
             }
-        }
-        
-        p.controller=function($scope,$rootScope,$state){
-         $scope.logout1 = function () {
-             
-           //   alert('1');
-                gapi.auth.signOut();
-                  $rootScope.isLoggedIn = false;
-             $rootScope.userDetails=[];
-                 $state.go('home.account');
+            debugger;
+            if (localStorageService.get('userDetails') != null) {
+                $scope.activeUserName = localStorageService.get('userDetails').FirstName.value + ' ' + localStorageService.get('userDetails').LastName.value;
+                alert($scope.activeUserName);
             }
-           
-            
+        }
+
+        p.controller = function ($scope, $rootScope, $state) {
+            $scope.logout1 = function () {
+
+                //   alert('1');
+                gapi.auth.signOut();
+                $rootScope.isLoggedIn = false;
+                $rootScope.userDetails = [];
+                $state.go('account');
+            }
+
+
         }
 
         return p;

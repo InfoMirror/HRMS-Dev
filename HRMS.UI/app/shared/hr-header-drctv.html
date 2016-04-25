@@ -1,7 +1,8 @@
-
 <div id="navbar" class="navbar navbar-default">
     <script type="text/javascript">
-	    try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {}
     </script>
 
     <div class="navbar-container" id="navbar-container">
@@ -20,7 +21,7 @@
         <!-- /section:basics/sidebar.mobile.toggle -->
         <div class="navbar-header pull-left" ng-show="isLoggedIn">
             <!-- #section:basics/navbar.layout.brand -->
-            
+
             <a ui-sref="home.dashboard" class="navbar-brand">
                 <small>
                     <i class="fa fa-pied-piper-alt"></i>
@@ -33,11 +34,11 @@
             <!-- #section:basics/navbar.toggle -->
             <!-- /section:basics/navbar.toggle -->
         </div>
-        
+
         <div class="navbar-header pull-left" ng-show="!isLoggedIn">
             <!-- #section:basics/navbar.layout.brand -->
-            
-            <a ui-sref="home.account" class="navbar-brand">
+
+            <a ui-sref="account" class="navbar-brand">
                 <small>
                     <i class="fa fa-pied-piper-alt"></i>
                     Info Mirror Dashboard
@@ -59,11 +60,11 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="../../assets/avatars/avatar2.png" alt="Jason's Photo" />
-                        <span class="user-info" ng-if="userDetails.FirstName.value!=null">
-                            <small>Welcome, {{userDetails.FirstName.value}} {{userDetails.LastName.value}}</small>
+                        <span class="user-info" ng-if="activeUserName!=null">
+                            <small>Welcome, {{activeUserName}}</small>
 
                         </span>
-                         <span class="user-info" ng-if="userDetails.FirstName.value==null">
+                        <span class="user-info" ng-if="activeUserName==null">
                             <small>Welcome, {{userDetails.UserEmail.value}} </small>
 
                         </span>
@@ -84,8 +85,7 @@
 
                         <li>
                             <a href="#" ng-click="logout()">
-                                <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                <i class="ace-icon fa fa-power-off"></i> Logout
                             </a>
                         </li>
                     </ul>
@@ -96,5 +96,6 @@
         </div>
 
         <!-- /section:basics/navbar.dropdown -->
-    </div><!-- /.navbar-container -->
+    </div>
+    <!-- /.navbar-container -->
 </div>

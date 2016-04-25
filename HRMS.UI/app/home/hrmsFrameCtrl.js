@@ -10,12 +10,17 @@ hrBaseApp.controller('hrmsFrameCtrl', [
         $rootScope.userDetails = localStorageService.get('userDetails');
         $rootScope.Role = localStorageService.get('role');
         if ($rootScope.userDetails == null) {
-            $state.go('home.account');
+            $state.go('account');
         } else {
             $rootScope.isLoggedIn = $rootScope.userDetails.isLoggedIn;
-            if ($rootScope.userDetails.Role.value=='Employee' &&($rootScope.userDetails.ProfileStatus.value  == 22 || $rootScope.userDetails.ProfileStatus.value == 23) ){
+            /*if ($rootScope.userDetails.Role.value == 'Employee' && ($rootScope.userDetails.ProfileStatus.value == 22 || $rootScope.userDetails.ProfileStatus.value == 23)) {
                 $rootScope.ShowAllStates = false;
-            } else if ($rootScope.userDetails.ProfileStatus.value == 24 ||$rootScope.userDetails.Role.value=='HR') {
+            } else if ($rootScope.userDetails.ProfileStatus.value == 24 || $rootScope.userDetails.Role.value == 'HR') {
+                $rootScope.ShowAllStates = true;
+            }*/
+            if ($rootScope.userDetails.ProfileStatus.value == 22 || $rootScope.userDetails.ProfileStatus.value == 23) {
+                $rootScope.ShowAllStates = false;
+            } else if ($rootScope.userDetails.ProfileStatus.value == 24) {
                 $rootScope.ShowAllStates = true;
             }
         }
