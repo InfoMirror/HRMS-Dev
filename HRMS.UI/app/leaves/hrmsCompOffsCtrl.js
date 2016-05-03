@@ -54,20 +54,21 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
         leaveFctry.getCompOffs({
             EmpId: empData
         }).then(function (response) {
+            debugger;
             console.log(response.data);
             $scope.CompOffsGridOptions.data = response.data;
         });
     }
 
 
-    $scope.insertCompOff = function (CompOffData) {
+    /*$scope.insertCompOff = function (CompOffData) {
         leaveFctry.insertCompOff(CompOffData).then(function (response) {
             if (response.data == "CompOff Applied") {
                 //  console.log(response.data);
                 $scope.getCompOffsData($rootScope.userDetails.EmpId.value);
             }
         });
-    }
+    }*/
 
 
     $scope.openModal = function () {
@@ -83,8 +84,9 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            $scope.paramFromDialog = paramFromDialog;
-            $scope.getCompOffsData($rootScope.userDetails);
+            debugger;
+           // $scope.paramFromDialog = paramFromDialog;
+            $scope.getCompOffsData($rootScope.userDetails.EmpId);
         });
     }
 

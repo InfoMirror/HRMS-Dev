@@ -6,15 +6,19 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
         $scope.init = function () {
             // $scope.valuePassed = aValue;
             $scope.odData = {
-                Id: aValue,
-                ODReason: ''
+                Id: {
+                    value: aValue
+                },
+                ODReason: {
+                    value: ''
+                }
             }
         }
 
         $scope.submit = function () {
-            $scope.odData.ODReason = $scope.odReason;
+            $scope.odData.ODReason.value = $scope.odReason;
 
-            if ($scope.odData.ODReason != '' && $scope.odData.ODReason != undefined) {
+            if ($scope.odData.ODReason.value != '' && $scope.odData.ODReason.value != undefined) {
                 $scope.fileOD($scope.odData);
             }
 
@@ -26,7 +30,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
                 //console.log('OD Data: ');
                 //console.log(response.data);
                 if (response.data == "OD Updated") {
-                    $scope.getAbsentData($rootScope.userDetails);
+                    // $scope.getAbsentData($rootScope.userDetails);
                 }
             });
         }

@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="row bg-info" ng-show="showMessage()">
         <p style="margin: 5px 30px;">{{message}}</p>
@@ -13,7 +14,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="EmpId">Employee Unique Id:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="EmpId">Employee Unique Id:<span class="text-danger" ng-show="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="EmpId" name="empId" ng-readonly="!checkRole()" ng-required="checkRole()" ng-model="formData.EmpId.value">
 
@@ -36,14 +37,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="Team">Team:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="Team">Team:<span class="text-danger" ng-show="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="Team" name="team" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.Team.value">
                 <span ng-show="editForm.team.$error.required && editForm.team.$dirty" class="text-danger">Required*</span>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="Designation">Designation:<span class="text-danger">*</span> </label>
+            <label class="control-label col-sm-2" for="Designation">Designation:<span class="text-danger" ng-show="checkRole()">*</span> </label>
             <div class="col-sm-10">
                 <select ng-model="formData.Designation.value" ng-disabled="!checkRole()">
                     <option value="0">Select One</option>
@@ -222,14 +223,14 @@
             </div>
         </div>
         <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="BankAccountNumber">Bank Account Number:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="BankAccountNumber">Bank Account Number:<span class="text-danger" ng-show="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-readonly="!checkRole()" ng-required="checkRole()" ng-model="formData.BankAccountNumber.value">
                 <span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="text-danger">Required*</span>
             </div>
         </div>
         <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="ReportingHead">Reporting Head:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="ReportingHead">Reporting Head:<span class="text-danger" ng-show="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <select ng-model="formData.ReportingHead.value">
                     <option value="0">Select One</option>
@@ -271,18 +272,28 @@
         <div class="form-group" ng-show="IsVisible">
             <label class="control-label col-sm-2" for="visaExpiryDate">Visa Expiry Date:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate.value">
+                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value" date-required="false"></olca-date>
+                <!--<input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate.value">-->
                 <!-- <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>
         <div class="form-group" ng-show="checkRole()">
+            <label class="control-label col-sm-2" for="Role">HR Access:</label>
+            <div class="col-sm-10">
+                <select ng-model="formData.Role.value" visibility="false" text="Select One">
+                    <option value="HR">HR</option>
+                    <option value="Employee">Employee</option>
+                </select>
+            </div>
+        </div>
+        <!--<div class="form-group" ng-show="checkRole()">
             <label class="control-label col-sm-2" for="hrAccess">HR Access:</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
                     <input type="checkbox" ng-model="formData.hrAccess.value">
                 </label>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">

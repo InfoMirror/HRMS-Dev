@@ -16,23 +16,32 @@ hrBaseApp.directive('hrHeaderDrctv', [
             $scope.logout = function () {
                 $scope.logout1();
             }
-            debugger;
+            $scope.changeState1 = function () {
+                $scope.changeState();
+            }
             if (localStorageService.get('userDetails') != null) {
                 $scope.activeUserName = localStorageService.get('userDetails').FirstName.value + ' ' + localStorageService.get('userDetails').LastName.value;
-                alert($scope.activeUserName);
             }
         }
 
         p.controller = function ($scope, $rootScope, $state) {
             $scope.logout1 = function () {
-
                 //   alert('1');
                 gapi.auth.signOut();
                 $rootScope.isLoggedIn = false;
                 $rootScope.userDetails = [];
+                localStorageService.set('userDetails', '');
                 $state.go('account');
             }
 
+            $scope.changeState = function () {
+                debugger;
+                if (localStorageService.get('userDetails').ProfileStatus.value == 24) {
+                    $state.go('home.dashboard');
+                } /*else {
+                    $state.go('home.editprofile');
+                }*/
+            }
 
         }
 

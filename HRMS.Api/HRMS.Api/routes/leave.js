@@ -93,7 +93,6 @@ router.post('/fileOD', function (req, res) {
                 });
             }
         });
-
         request.addParameter('AbsentId', TYPES.Int, req.body.Id.value);
         request.addParameter('ODReason', TYPES.VarChar, req.body.ODReason.value);
         connection.execSql(request);
