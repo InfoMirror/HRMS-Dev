@@ -33,6 +33,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+    $scope.EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     $scope.showMessage = function () {
         if ($rootScope.userDetails != null) {

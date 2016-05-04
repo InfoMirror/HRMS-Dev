@@ -15,13 +15,13 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
                 field: 'FromDate.value',
                 displayName: 'From',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-              
+
             },
             {
                 field: 'ToDate.value',
                 displayName: 'To',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-               
+
             },
             {
                 field: 'Reason.value',
@@ -58,13 +58,32 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            alert("Leave Is Approved");
+            if (_status == 18)
+                alert("Leave Is Approved");
+            else if (_status == 19)
+                alert("Leave Is Rejected");
             $state.go('home.approval');
-            /*  $scope.getAppliedLeaves({
-                  Id: $rootScope.userDetails.Id
-              });*/
+
         });
     }
+
+    /*$scope.updateStatusRejection = function (status) {
+
+        var _status;
+        if (status == 'approved')
+            _status = 18;
+        else if (status == 'rejected')
+            _status = 19;
+
+        approvalFctry.approveLeave({
+            Id: rowId,
+            Status: _status
+        }).then(function (response) {
+            alert("Leave Is Rejected");
+            $state.go('home.approval');
+
+        });
+    }*/
 
     $scope.init();
 }])
