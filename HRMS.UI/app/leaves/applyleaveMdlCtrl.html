@@ -1,7 +1,7 @@
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" ng-click="close()">&times;</button>
-        <h4 class="modal-title">Apply LEave</h4>
+        <h4 class="modal-title">Apply Leave</h4>
     </div>
     <div class="modal-body">
         <div class="container">
@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">From Date:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
-                           <olca-date min-date="startMin" date-options="dateOptions" input-value="FromDate" input-name="FromDate" date-required="true" date-changed="resetResults1()" date-click="open($event)"></olca-date>
+                           <olca-date min-date="startMin" max-date="startMax" date-options="dateOptions" input-value="FromDate" input-name="FromDate" date-required="true" date-changed="resetResults1()" date-click="open($event)"></olca-date>
                       <!--  <input type="date" ng-model="FromDate" name="fromDate" required>-->
                         <span ng-show="applyLeaveForm.fromDate.$error.required && applyLeaveForm.fromDate.$dirty" class="text-danger">Required*</span>
                     </div>

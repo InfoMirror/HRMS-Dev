@@ -35,7 +35,7 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
                 enableFiltering: false
             }
         ]
@@ -49,21 +49,19 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
 
     $scope.updateStatus = function (status, rowId) {
         var _status;
-        if (status == 'approved')
+        if (status == 'Approved')
             _status = 18;
-        else if (status == 'rejected')
+        else if (status == 'Rejected')
             _status = 19;
 
         approvalFctry.approveLeave({
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            if (_status == 18)
-                alert("Leave Is Approved");
-            else if (_status == 19)
-                alert("Leave Is Rejected");
-            $state.go('home.approval');
-
+            alert("Leave " + status);
+            $scope.getAppliedLeaves({
+                Id: $rootScope.userDetails.Id
+            });
         });
     }
 

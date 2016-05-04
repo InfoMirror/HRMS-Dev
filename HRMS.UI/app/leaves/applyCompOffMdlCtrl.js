@@ -15,7 +15,8 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 compOffReason: ''
             }
         }
-        $scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');
+        /*$scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');*/
+        $scope.startMin = moment().subtract(0, 'days').format('MM/DD/YYYY');
         //  alert($scope.startDateDisplay);
         $scope.dateOptions = {
             formatYear: 'yy',
