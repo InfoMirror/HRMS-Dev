@@ -94,7 +94,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.submit = function () {
-        alert("data is submitting");
+    
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)

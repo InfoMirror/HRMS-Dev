@@ -308,7 +308,8 @@
         <div class="form-group" ng-show="IsVisible">
             <label class="control-label col-sm-2" for="visaCountry">Visa Country:</label>
             <div class="col-sm-10">
-                <select ng-model="formData.visaCountry.value" visibility="false" text="Select One">
+                <select ng-model="formData.visaCountry.value" visibility="false">
+                    <option value=" " style="display:none">Select One</option>
                     <option value="USA">USA</option>
                     <option value="France">France</option>
                 </select>
