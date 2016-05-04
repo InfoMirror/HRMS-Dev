@@ -35,9 +35,9 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
-    $scope.EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
+    
     $scope.showMessage = function () {
+       
         if ($scope.userDetails != null) {
             if ($rootScope.Role=='HR' && $rootScope.userDetails.ProfileStatus.value!=24) {
               //  alert($scope.userDetails.Role.value);
@@ -64,7 +64,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         }).then(function (response) {
             $scope.formData = response.data[0];
             $scope.userDetails = $scope.formData;
-            alert($scope.userDetails.ProfileStatus.value);
+        
             $scope.checkVal = 1;
         });
     }
@@ -79,9 +79,22 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.formData.visaExpiryDate = null;
         }
     }
+    
+     $scope.HidePassportDetails = function () {
+        //If DIV is visible it will be hidden and vice versa.
+        if ($scope.formData.ownPassport == 1) {
+            $scope.IsVisible = true;
+        } else {
+            $scope.IsVisible = $scope.formData.ownPassport.value;
+            $scope.formData.PassportNumber = null;
+            $scope.formData.PassportIssueDate = null;
+            $scope.formData.PassportExpiryDate = null;
+            $scope.formData.PassportIssuePlace = null;
+        }
+    }
 
     $scope.submit = function () {
-        alert($scope.formData.Role.value);
+        alert("data is submitting");
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)

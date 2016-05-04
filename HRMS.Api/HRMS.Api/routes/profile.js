@@ -232,7 +232,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
     function executeStatement() {
 
-        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
+        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -285,6 +285,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
         request.addParameter('Nominee', TYPES.NVarChar, req.body.Nominee.value);
         request.addParameter('RelationWithNominee', TYPES.NVarChar, req.body.RelationWithNominee.value);
         request.addParameter('SkypeID', TYPES.NVarChar, req.body.SkypeID.value);
+        request.addParameter('ownPassport', TYPES.Bit, req.body.ownPassport.value);
         request.addParameter('PassportNumber', TYPES.NVarChar, req.body.PassportNumber.value);
         request.addParameter('PassportIssueDate', TYPES.Date, req.body.PassportIssueDate.value);
         request.addParameter('PassportExpiryDate', TYPES.Date, req.body.PassportExpiryDate.value);
