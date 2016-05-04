@@ -22,7 +22,7 @@
         <div class="navbar-header pull-left" ng-show="isLoggedIn">
             <!-- #section:basics/navbar.layout.brand -->
 
-            <a ui-sref="home.dashboard" class="navbar-brand">
+            <a ng-click="changeState1()" class="navbar-brand">
                 <small>
                     <i class="fa fa-pied-piper-alt"></i>
                     Info Mirror Dashboard
@@ -60,11 +60,11 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="../../assets/avatars/avatar2.png" alt="Jason's Photo" />
-                        <span class="user-info" ng-if="activeUserName!=null">
+                        <span class="user-info" ng-if="activeUserName!='null null'">
                             <small>Welcome, {{activeUserName}}</small>
 
                         </span>
-                        <span class="user-info" ng-if="activeUserName==null">
+                        <span class="user-info" ng-if="activeUserName=='null null'">
                             <small>Welcome, {{userDetails.UserEmail.value}} </small>
 
                         </span>

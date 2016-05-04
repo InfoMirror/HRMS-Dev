@@ -7,6 +7,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         } else {
             $scope.getEmpData($rootScope.passedUserEmail);
+            $rootScope.passedUserEmail=null;
         }
 
         $scope.IsVisible = $rootScope.userDetails.ownVisa.value;
@@ -30,26 +31,31 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             formatYear: 'yy',
             startingDay: 1
         };
+        $scope.checkVal = 0;
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
     $scope.EmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     $scope.showMessage = function () {
-        if ($rootScope.userDetails != null) {
-            if ($rootScope.Role == 'HR' && $rootScope.userDetails.ProfileStatus.value != 24) {
-                $rootScope.message = 'Please enter your profile data to see the Employee content.';
-                return true;
-            } else {
-                if ($rootScope.userDetails.ProfileStatus.value == 22) {
-                    $rootScope.message = 'Please enter your profile data and submit. After approval from HR you will be able to enter the portal.';
+        if ($scope.userDetails != null) {
+            if ($rootScope.Role=='HR' && $rootScope.userDetails.ProfileStatus.value!=24) {
+              //  alert($scope.userDetails.Role.value);
+                if ($scope.userDetails.Role.value == 'HR' && $scope.userDetails.ProfileStatus.value != 24) {
+                    $rootScope.message = 'Please enter your profile data to see the Employee content.';
                     return true;
-                } else if ($rootScope.userDetails.ProfileStatus.value == 23) {
-                    $rootScope.message = 'Your profile data have been submitted. Please wait for the HR approval.';
-                    return true;
+                } else {
+                    if ($scope.userDetails.ProfileStatus.value == 22) {
+                        $rootScope.message = 'Please enter your profile data and submit. After approval from HR you will be able to enter the portal.';
+                        return true;
+                    } else if ($scope.userDetails.ProfileStatus.value == 23) {
+                        $rootScope.message = 'Your profile data have been submitted. Please wait for the HR approval.';
+                        return true;
+                    }
                 }
-            }
+            } /**/
         }
+        // alert($rootScope.message);
     }
 
     $scope.getEmpData = function (userEmail) {
@@ -57,7 +63,9 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
-            $rootScope.userDetails = $scope.formData;
+            $scope.userDetails = $scope.formData;
+            alert($scope.userDetails.ProfileStatus.value);
+            $scope.checkVal = 1;
         });
     }
 
@@ -73,28 +81,43 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.submit = function () {
-
+        alert($scope.formData.Role.value);
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.DOJ.value == '' || $scope.formData.DOJ.value == undefined)
-            $scope.formData.DOJ.value == null;
+            $scope.formData.DOJ.value = null;
         if ($scope.formData.BankAccountNumber.value == '' || $scope.formData.BankAccountNumber.value == undefined)
-            $scope.formData.BankAccountNumber.value == null;
+            $scope.formData.BankAccountNumber.value = null;
         if ($scope.formData.ReportingHead.value == '' || $scope.formData.ReportingHead.value == undefined)
-            $scope.formData.ReportingHead.value == null;
+            $scope.formData.ReportingHead.value = null;
         if ($scope.formData.PFNo.value == '' || $scope.formData.PFNo.value == undefined)
-            $scope.formData.PFNo.value == null;
+            $scope.formData.PFNo.value = null;
         if ($scope.formData.UAN.value == '' || $scope.formData.UAN.value == undefined)
-            $scope.formData.UAN.value == null;
-        if ($scope.formData.visaExpiryDate.value == '' || $scope.formData.visaExpiryDate.value == undefined)
-            $scope.formData.visaExpiryDate.value == null;
+            $scope.formData.UAN.value = null;
+        if ($scope.formData.visaCountry != null) {
+            if ($scope.formData.visaCountry.value == '' || $scope.formData.visaCountry.value == undefined)
+                $scope.formData.visaCountry.value = null;
+        } else {
+            $scope.formData.visaCountry = {
+                value: null
+            };
+        }
+        if ($scope.formData.visaExpiryDate != null) {
+            if ($scope.formData.visaExpiryDate.value == '' || $scope.formData.visaExpiryDate.value == undefined)
+                $scope.formData.visaExpiryDate.value = null;
+        } else {
+            $scope.formData.visaExpiryDate = {
+                value: null
+            };
+        }
+
 
         //Profile Status as per to the Role
         if ($rootScope.Role == 'HR') {
             $scope.formData.ProfileStatus.value = 24;
-            $scope.formData.Role.value = "HR";
+            //$scope.formData.Role.value = "HR";
         } else if ($rootScope.Role == 'Employee') {
             $scope.formData.Role.value = "Employee";
             if ($scope.formData.ProfileStatus.value == 24 || $rootScope.Role == 'HR') {

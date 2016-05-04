@@ -15,12 +15,12 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 compOffReason: ''
             }
         }
-  $scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');
-      //  alert($scope.startDateDisplay);
-         $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
+        $scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');
+        //  alert($scope.startDateDisplay);
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
         $scope.submit = function () {
             $scope.CompOffData.compOffReason = $scope.CompOffReason;
 
@@ -30,29 +30,28 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 console.log($scope.CompOffData);
                 $scope.insertCompOff($scope.CompOffData);
             }
-
-            $scope.close();
         }
 
         $scope.insertCompOff = function (CompOffData) {
-            leaveFctry.insertCompOff(CompOffData).then(function (response) {
-                //alert(response.data);
-                if (response.data == "CompOff Applied") {
-                    alert('CompOff Is Applied');
-                    //$state.go('home.attendance.compoffs');              
-                    $scope.getCompOffsData($rootScope.userDetails);
-                } else {
-                    alert('CompOff Is Allready Exist');
-                    $modalInstance.close();
-                }
-            });
-        }
- /*$scope.open = function ($event) {
+                leaveFctry.insertCompOff(CompOffData).then(function (response) {
+                    //alert(response.data);
+                    if (response.data == "CompOff Applied") {
+                        alert('CompOff Is Applied');
+                        //$state.go('home.attendance.compoffs');              
+                        // $scope.getCompOffsData($rootScope.userDetails);
+                        $modalInstance.close();
+                    } else {
+                        alert('CompOff Is Allready Exist');
+                        $modalInstance.close();
+                    }
+                });
+            }
+            /*$scope.open = function ($event) {
 alert(0);
 
       }*/
- 
-  /*$scope.open1 = function ($event) {
+
+        /*$scope.open1 = function ($event) {
    //   alert($scope.startDateDisplay);
 $scope.startMin2 = $scope.startDateDisplay;
 

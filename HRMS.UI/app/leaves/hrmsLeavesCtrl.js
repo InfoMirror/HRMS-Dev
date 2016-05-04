@@ -1,51 +1,49 @@
-hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal','uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal,uiGridConstants) {
+hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', function ($scope, leaveFctry, $rootScope, $modal) {
     'use strict';
     /* Initialize */
     $scope.init = function () {
         $scope.message = 'Hello, Welcome to Leave Page';
         $scope.getAbsentData($rootScope.userDetails);
-          $scope.absentGridOptions = {
-        enableSorting: true,
-        enableFiltering:true,
-        filter:true,
-        data: null,
-        columnDefs: [
-            {
-                field: 'AbsentDate',
-                displayName: 'Date',
-                enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: { condition: uiGridConstants.filter.CONTAINS}
+        $scope.absentGridOptions = {
+            enableSorting: true,
+            enableFiltering: true,
+            filter: true,
+            data: null,
+            columnDefs: [
+                {
+                    field: 'AbsentDate.value',
+                    displayName: 'Date',
+                    enableColumnMenu: false,
+                    cellFilter: 'date:\'dd-MMM-yyyy\''
             }
-            ,{
-                field: 'AbsentType',
-                displayName: 'Absent Type',
-                enableFiltering:false,
-                enableColumnMenu: false
+            , {
+                    field: 'AbsentType.value',
+                    displayName: 'Absent Type',
+                    enableFiltering: false,
+                    enableColumnMenu: false
             }
          /*   ,{
                 field: 'EmployeeName',
                 displayName: 'Name',
                 enableColumnMenu: false
             }*/
-            ,{
-                field: 'StartTime',
-                displayName: 'Start Time',
-                enableFiltering:false,
-                enableColumnMenu: false
+            , {
+                    field: 'StartTime.value',
+                    displayName: 'Start Time',
+                    enableFiltering: false,
+                    enableColumnMenu: false
             }
-            ,{
-                field: 'EndTime',
-                displayName: 'End Time',
-                enableFiltering:false,
-                enableColumnMenu: false
+            , {
+                    field: 'EndTime.value',
+                    displayName: 'End Time',
+                    enableFiltering: false,
+                    enableColumnMenu: false
             }
-            ,{
-                field: 'ODStatus',
-                displayName: 'Approval Status',
-                enableColumnMenu: false,
-                filter: { condition: uiGridConstants.filter.CONTAINS},
-                cellTemplate: '<div>{{row.entity.ODStatus}}<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
+            , {
+                    field: 'ODStatus.value',
+                    displayName: 'Approval Status',
+                    enableColumnMenu: false,
+                    cellTemplate: '<div>{{row.entity.ODStatus.value}}<a ng-click="grid.appScope.openModal(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus.value)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
             }
             /*,{
                 field: 'IsAdminEntry',
@@ -61,20 +59,20 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 cellTemplate: '<button class="btn btn-primary" style="width: 96%;height: 96%;margin: 1%;" ng-click="grid.appScope.openModal(row.entity.Id)" ng-disabled="!grid.appScope.enableDisableLink(row.entity.ODStatus)">File OD</button>'
             }*/
         ]
-    };
+        };
     }
 
-  
+
 
     /*<button class="btn btn-primary" ng-click="grid.appScope.openModal(row.entity.Id)" ng-disabled="!grid.appScope.enableDisableLink(row.entity.ODStatus)">File OD</button>*/
     /*<a ng-click="grid.appScope.openModal(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus)" href="">File OD</a>*/
 
     $scope.getAbsentData = function (empData) {
-       // alert(empData.EmpId);
+        // alert(empData.EmpId);
         leaveFctry.getAbsents(empData).then(function (response) {
             console.log(response.data);
-            if(response.data!=null){
-            $scope.absentGridOptions.data = response.data;
+            if (response.data != null) {
+                $scope.absentGridOptions.data = response.data;
             }
         });
     }
