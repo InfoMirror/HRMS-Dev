@@ -10,7 +10,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $rootScope.passedUserEmail=null;
         }
 
-        $scope.IsVisible = $rootScope.userDetails.ownVisa.value;
+        $scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
+         $scope.IsPassportChecked = $rootScope.userDetails.ownVisa.value;
 
         $scope.getReportingHeads();
 
@@ -71,25 +72,25 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
     $scope.ShowHide = function () {
         //If DIV is visible it will be hidden and vice versa.
-        if ($scope.formData.ownVisa == 1) {
-            $scope.IsVisible = true;
+        if ($scope.formData.ownVisa.value == 1) {
+            $scope.IsVisaChecked = true;
         } else {
-            $scope.IsVisible = $scope.formData.ownVisa.value;
-            $scope.formData.visaCountry = null;
-            $scope.formData.visaExpiryDate = null;
+            $scope.IsVisaChecked = $scope.formData.ownVisa.value;
+            $scope.formData.visaCountry.value = null;
+            $scope.formData.visaExpiryDate.value = null;
         }
     }
     
      $scope.HidePassportDetails = function () {
         //If DIV is visible it will be hidden and vice versa.
-        if ($scope.formData.ownPassport == 1) {
-            $scope.IsVisible = true;
+        if ($scope.formData.ownPassport.value == 1) {
+            $scope.IsPassportChecked = true;
         } else {
-            $scope.IsVisible = $scope.formData.ownPassport.value;
-            $scope.formData.PassportNumber = null;
-            $scope.formData.PassportIssueDate = null;
-            $scope.formData.PassportExpiryDate = null;
-            $scope.formData.PassportIssuePlace = null;
+            $scope.IsPassportChecked = $scope.formData.ownPassport.value;
+            $scope.formData.PassportNumber.value = null;
+            $scope.formData.PassportIssueDate.value = null;
+            $scope.formData.PassportExpiryDate.value = null;
+            $scope.formData.PassportIssuePlace.value = null;
         }
     }
 
