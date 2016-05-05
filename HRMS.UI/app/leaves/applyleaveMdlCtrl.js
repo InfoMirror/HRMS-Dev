@@ -20,7 +20,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         }
         $scope.startMin = moment().subtract(0, 'days').format('MM/DD/YYYY');
         $scope.startMax = moment().add(30, 'days').format('MM/DD/YYYY');
-        
+
         $scope.submit = function () {
             $scope.ApplyLeave.Reason = $scope.LReason;
             //alert($scope.ApplyLeave.Reason);
@@ -48,12 +48,15 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             });
         }
 
-        $scope.open1 = function ($event) {
+        $scope.endDateCalOpen = function ($event) {
             $scope.ToMin = $scope.FromDate;
         }
 
-        $scope.open = function ($event) {
-            $scope.startMax = $scope.ToDate;
+        $scope.startDateCalOpen = function ($event) {
+            if ($scope.FromDate > $scope.ToDate) {
+                alert("From Date can not be greater than To Date");
+                $scope.ToDate = $scope.FromDate;
+            }
         }
         $scope.close = function () {
             $modalInstance.close();

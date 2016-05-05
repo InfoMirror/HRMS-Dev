@@ -7,11 +7,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         } else {
             $scope.getEmpData($rootScope.passedUserEmail);
-            $rootScope.passedUserEmail=null;
+            $rootScope.passedUserEmail = null;
         }
 
-        $scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
-         $scope.IsPassportChecked = $rootScope.userDetails.ownVisa.value;
+        //$scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
+        //   $scope.IsPassportChecked = $rootScope.userDetails.ownPassport.value;
 
         $scope.getReportingHeads();
 
@@ -32,16 +32,16 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.checkVal = 0;
+        // $scope.checkVal = 0;
     }
 
     $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
-    
+    $scope.startMin = new Date();
     $scope.showMessage = function () {
-       
+
         if ($scope.userDetails != null) {
-            if ($rootScope.Role=='HR' && $rootScope.userDetails.ProfileStatus.value!=24) {
-              //  alert($scope.userDetails.Role.value);
+            if ($rootScope.Role == 'HR' && $rootScope.userDetails.ProfileStatus.value != 24) {
+                //  alert($scope.userDetails.Role.value);
                 if ($scope.userDetails.Role.value == 'HR' && $scope.userDetails.ProfileStatus.value != 24) {
                     $rootScope.message = 'Please enter your profile data to see the Employee content.';
                     return true;
@@ -59,43 +59,58 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         // alert($rootScope.message);
     }
 
+    $scope.endDateCalOpen = function ($event) {
+        $scope.ToMin = $scope.formData.PassportIssueDate.value;
+    }
+
+    $scope.startDateCalOpen = function ($event) {
+        if ($scope.formData.PassportIssueDate.value > $scope.formData.PassportExpiryDate.value) {
+            alert("Issue Date can not be greater than Expiry Date");
+            $scope.formData.PassportExpiryDate.value = $scope.formData.PassportIssueDate.value;
+        }
+    }
+
     $scope.getEmpData = function (userEmail) {
         profileFctry.getEmpDetails({
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
             $scope.userDetails = $scope.formData;
-        
-            $scope.checkVal = 1;
+
+            //$scope.checkVal = 1;
         });
     }
 
     $scope.ShowHide = function () {
         //If DIV is visible it will be hidden and vice versa.
         if ($scope.formData.ownVisa.value == 1) {
-            $scope.IsVisaChecked = true;
+            //$scope.IsVisaChecked = true;
+            return true;
         } else {
-            $scope.IsVisaChecked = $scope.formData.ownVisa.value;
+            //$scope.IsVisaChecked = false;
             $scope.formData.visaCountry.value = null;
             $scope.formData.visaExpiryDate.value = null;
+            return false;
         }
     }
-    
-     $scope.HidePassportDetails = function () {
+
+    $scope.HidePassportDetails = function () {
         //If DIV is visible it will be hidden and vice versa.
         if ($scope.formData.ownPassport.value == 1) {
-            $scope.IsPassportChecked = true;
+            // $scope.IsPassportChecked = true;
+            return true;
         } else {
-            $scope.IsPassportChecked = $scope.formData.ownPassport.value;
+            // $scope.IsPassportChecked = false;
             $scope.formData.PassportNumber.value = null;
             $scope.formData.PassportIssueDate.value = null;
             $scope.formData.PassportExpiryDate.value = null;
             $scope.formData.PassportIssuePlace.value = null;
+            return false;
         }
     }
 
     $scope.submit = function () {
-    
+
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -159,6 +174,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 alert("Profile has been updated successfully");
                 $rootScope.ShowAllStates = true;
                 $state.go('home.dashboard');
+            } else if ($scope.formData.ProfileStatus.value == 24) {
+                alert("Profile has been updated successfully");
             }
         });
     }

@@ -55,7 +55,7 @@
                     <option value=" " style="display:none">Select One</option>
                     <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation==designation.Id.value}}">{{designation.Value.value}}</option>
                 </select>
-                 <span ng-show="editForm.Designation.$error.required && editForm.Designation.$dirty" class="text-danger">Required*</span>
+                <span ng-show="editForm.Designation.$error.required && editForm.Designation.$dirty" class="text-danger">Required*</span>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                 <label class="radio-inline" ng-repeat="gender in genders" ng-required="checkRole()">
                     <input type="radio" ng-model="formData.Gender.value" name="gender" value="{{gender.Id.value}}" required>{{gender.Value.value}}
                 </label>
-                 <span ng-show="editForm.Designation.$error.required && editForm.Designation.$dirty" class="text-danger">Required*</span>
+                <span ng-show="editForm.Designation.$error.required && editForm.Designation.$dirty" class="text-danger">Required*</span>
             </div>
         </div>
 
@@ -143,7 +143,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="DOB">Date of Birth:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true" date-changed="resetResults1()" date-click="open($event)"></olca-date>
+                <olca-date date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true"></olca-date>
                 <!--  <input type="text" class="form-control" id="DOB" required ng-model="formData.DOB">-->
             </div>
             <!--<div class="input-group date" id="dtpDOB">
@@ -183,13 +183,13 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="ownPassport">Do you own Passport:</label>
             <div class="col-sm-10">
-                <label class="radio-inline">
+                <label class="">
                     <input type="checkbox" ng-model="formData.ownPassport.value" ng-change="HidePassportDetails()">
                 </label>
             </div>
         </div>
-        
-        <div class="form-group" ng-show="IsPassportChecked">
+
+        <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportNumber">Passport No:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value">
@@ -197,25 +197,25 @@
             </div>
         </div>
 
-        <div class="form-group" ng-show="IsPassportChecked">
+        <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportIssueDate">Passport Issue Date:</label>
             <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value" date-required="false"></olca-date>
+                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value" date-required="false" ng-click="startDateCalOpen($event)"></olca-date>
                 <!--    <input type="text" class="form-control" id="PassportIssueDate" name="passportIssueDate" ng-model="formData.PassportIssueDate">-->
                 <!--<span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>
 
-        <div class="form-group" ng-show="IsPassportChecked">
+        <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportExpiryDate">Passport Expiry Date:</label>
             <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportExpiryDate.value" input-name="formData.PassportExpiryDate.value" date-required="false"></olca-date>
+                <olca-date min-date="ToMin" date-options="dateOptions" input-value="formData.PassportExpiryDate.value" input-name="formData.PassportExpiryDate.value" date-required="false" ng-click="endDateCalOpen($event)"></olca-date>
                 <!-- <input type="text" class="form-control" id="PassportExpiryDate" name="passportExpiryDate" ng-model="formData.PassportExpiryDate">-->
                 <!--<span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>
 
-        <div class="form-group" ng-show="IsPassportChecked">
+        <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportIssuePlace">Passport Issue Place:</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value">
@@ -263,7 +263,7 @@
             </div>
         </div>
 
-        <div class="form-group" >
+        <div class="form-group">
             <label class="control-label col-sm-2" for="BankAccountNumber">Bank Account Number:
                 <!--<span class="text-danger">*</span></label>--></label>
             <div class="col-sm-10">
@@ -278,7 +278,7 @@
                 <select ng-model="formData.ReportingHead.value" ng-disabled="!checkRole()">
                     <option value=" " style="display:none">Select One</option>
                     <option ng-repeat="head in reportingHeads" value="{{head.Id.value}}" ng-selected="{{formData.ReportingHead.value==head.Id.value}}">{{head.Name.value}}</option>
-                   </select>
+                </select>
             </div>
         </div>
 
@@ -307,7 +307,7 @@
             </div>
         </div>
 
-        <div class="form-group" ng-show="IsVisaChecked">
+        <div class="form-group" ng-show="ShowHide()">
             <label class="control-label col-sm-2" for="visaCountry">Visa Country:</label>
             <div class="col-sm-10">
                 <select ng-model="formData.visaCountry.value" visibility="false">
@@ -318,10 +318,11 @@
             </div>
         </div>
 
-        <div class="form-group" ng-show="IsVisaChecked">
+        <div class="form-group" ng-show="ShowHide()">
             <label class="control-label col-sm-2" for="visaExpiryDate">Visa Expiry Date:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate.value">
+                <!--<input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate.value">-->
+                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value" date-required="true"></olca-date>
                 <!-- <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>

@@ -35,7 +35,6 @@ hrBaseApp.directive('hrHeaderDrctv', [
             }
 
             $scope.changeState = function () {
-                debugger;
                 if (localStorageService.get('userDetails').ProfileStatus.value == 24) {
                     $state.go('home.dashboard');
                 } /*else {

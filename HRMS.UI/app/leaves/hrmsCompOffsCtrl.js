@@ -54,7 +54,6 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
         leaveFctry.getCompOffs({
             EmpId: empData
         }).then(function (response) {
-            debugger;
             console.log(response.data);
             $scope.CompOffsGridOptions.data = response.data;
         });
