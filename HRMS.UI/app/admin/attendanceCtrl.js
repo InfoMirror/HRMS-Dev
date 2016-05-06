@@ -8,8 +8,10 @@ var attendanceCtrl=hrBaseApp.controller('attendanceCtrl',['Upload','$window','at
         $scope.submit = function(){ 
           /*  alert($scope.file.url);//function to call on form submit
         condole.log($('#myfile'));*/
-            if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
+            if ($scope.upload_form.file.$valid && $scope.file && /[0-9]{2,2}[A-Z][a-z]{2,2} [0-9]{4,4}(.xlsx)/g.test($scope.file.name)) { //check if from is valid
                 $scope.upload($scope.file); //call upload function
+            }else{
+                alert('file name is not correct it should be like this :- 02Feb 2016.xlsx');
             }
         }
         
