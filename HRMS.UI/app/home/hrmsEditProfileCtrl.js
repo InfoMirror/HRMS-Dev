@@ -64,7 +64,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.startDateCalOpen = function ($event) {
-        if ($scope.formData.PassportIssueDate.value > $scope.formData.PassportExpiryDate.value) {
+        if (($scope.formData.PassportExpiryDate.value != null && $scope.formData.PassportExpiryDate.value != undefined) && ($scope.formData.PassportIssueDate.value > $scope.formData.PassportExpiryDate.value)) {
             alert("Issue Date can not be greater than Expiry Date");
             $scope.formData.PassportExpiryDate.value = $scope.formData.PassportIssueDate.value;
         }
@@ -76,36 +76,51 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         }).then(function (response) {
             $scope.formData = response.data[0];
             $scope.userDetails = $scope.formData;
-
             //$scope.checkVal = 1;
         });
     }
 
     $scope.ShowHide = function () {
         //If DIV is visible it will be hidden and vice versa.
-        if ($scope.formData.ownVisa.value == 1) {
-            //$scope.IsVisaChecked = true;
-            return true;
+        if ($scope.formData != null && $scope.formData != undefined) {
+            if ($scope.formData.ownVisa.value == 1) {
+                //$scope.IsVisaChecked = true;
+                return true;
+            } else {
+                //$scope.IsVisaChecked = false;
+                $scope.formData.visaCountry.value = null;
+                $scope.formData.visaExpiryDate.value = null;
+                return false;
+            }
         } else {
-            //$scope.IsVisaChecked = false;
-            $scope.formData.visaCountry.value = null;
-            $scope.formData.visaExpiryDate.value = null;
-            return false;
+            if ($scope.userDetails.ownVisa.value == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
     $scope.HidePassportDetails = function () {
         //If DIV is visible it will be hidden and vice versa.
-        if ($scope.formData.ownPassport.value == 1) {
-            // $scope.IsPassportChecked = true;
-            return true;
+        if ($scope.formData != null && $scope.formData != undefined) {
+            if ($scope.formData.ownPassport.value == 1) {
+                // $scope.IsPassportChecked = true;
+                return true;
+            } else {
+                // $scope.IsPassportChecked = false;
+                $scope.formData.PassportNumber.value = null;
+                $scope.formData.PassportIssueDate.value = null;
+                $scope.formData.PassportExpiryDate.value = null;
+                $scope.formData.PassportIssuePlace.value = null;
+                return false;
+            }
         } else {
-            // $scope.IsPassportChecked = false;
-            $scope.formData.PassportNumber.value = null;
-            $scope.formData.PassportIssueDate.value = null;
-            $scope.formData.PassportExpiryDate.value = null;
-            $scope.formData.PassportIssuePlace.value = null;
-            return false;
+            if ($scope.userDetails.ownPassport.value == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
