@@ -68,7 +68,7 @@ router.post('/login', function (req, res) {
                             console.log('Sp_InsertLogin');
                             console.log(rowCount);
                             console.log(rows);
-                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
+                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
                                 if (err) {
                                     console.log(err);
                                 } else {
@@ -119,6 +119,7 @@ router.post('/login', function (req, res) {
                             reqEmpDetailsInsert.addParameter('Nominee', TYPES.NVarChar, null);
                             reqEmpDetailsInsert.addParameter('RelationWithNominee', TYPES.NVarChar, null);
                             reqEmpDetailsInsert.addParameter('SkypeID', TYPES.NVarChar, null);
+                            reqEmpDetailsInsert.addParameter('ownPassport', TYPES.Bit, null);
                             reqEmpDetailsInsert.addParameter('PassportNumber', TYPES.NVarChar, null);
                             reqEmpDetailsInsert.addParameter('PassportIssueDate', TYPES.Date, null);
                             reqEmpDetailsInsert.addParameter('PassportExpiryDate', TYPES.Date, null);
@@ -264,7 +265,7 @@ function InsertEmployeeDetails(email) {
     var TYPES = require('tedious').TYPES;
 
     function executeStatement() {
-        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id, @UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate, @Role", function (err, rowCount, rows) {
+        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id, @UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID,@ownPassport, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate, @Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -298,6 +299,7 @@ function InsertEmployeeDetails(email) {
         reqEmpDetailsInsert.addParameter('Nominee', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('RelationWithNominee', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('SkypeID', TYPES.NVarChar, null);
+        reqEmpDetailsInsert.addParameter('ownPassport', TYPES.Bit, null);
         reqEmpDetailsInsert.addParameter('PassportNumber', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('PassportIssueDate', TYPES.Date, null);
         reqEmpDetailsInsert.addParameter('PassportExpiryDate', TYPES.Date, null);
