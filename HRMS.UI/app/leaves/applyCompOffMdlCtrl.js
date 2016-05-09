@@ -5,18 +5,18 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
 
         $scope.init = function () {
 
-            $scope.CompOffData = {
-                EmpId: aValue,
-                CompOffDate: new Date(),
-                startTime: null,
-                endTime: null,
-                CompOffStatus: 16,
-                isManual: 1,
-                compOffReason: ''
+                $scope.CompOffData = {
+                    EmpId: aValue,
+                    CompOffDate: new Date(),
+                    startTime: null,
+                    endTime: null,
+                    CompOffStatus: 16,
+                    isManual: 1,
+                    compOffReason: ''
+                }
             }
-        }
-        /*$scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');*/
-        $scope.startMin = moment().subtract(0, 'days').format('MM/DD/YYYY');
+            /*$scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');*/
+        $scope.startMin = moment().subtract(30, 'days').format('MM/DD/YYYY');
         //  alert($scope.startDateDisplay);
         $scope.dateOptions = {
             formatYear: 'yy',
@@ -30,6 +30,16 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 $scope.CompOffData.compOffReason = $scope.CompOffReason;
                 console.log($scope.CompOffData);
                 $scope.insertCompOff($scope.CompOffData);
+            }
+        }
+
+        $scope.resetResults = function () {
+            var currDate = new Date();
+            $scope.CompOffData.CompOffDate = document.getElementById("CompOffDate").children[0].value;
+            var compOffDate = new Date($scope.CompOffData.CompOffDate);
+            if (compOffDate > currDate) {
+                alert("Comp Off can not be applied to the future dates.");
+                $scope.CompOffData.CompOffDate = currDate;
             }
         }
 

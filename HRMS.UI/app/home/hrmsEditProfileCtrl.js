@@ -59,6 +59,26 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         // alert($rootScope.message);
     }
 
+    $scope.checkDOJ = function () {
+        var currDate = new Date();
+        $scope.formData.DOJ.value = document.getElementById("DOJ").children[0].value;
+        $scope.formData.DOB.value = document.getElementById("DOB").children[0].value;
+        var dateOfJoining = new Date($scope.formData.DOJ.value);
+        var dateOfBirth = new Date($scope.formData.DOB.value);
+        //Check for DOB<DOJ
+        if ($scope.formData.DOB.value != null && $scope.formData.DOB.value != undefined) {
+            if (dateOfJoining < dateOfBirth) {
+                alert("Date of Joining can not be less than Date of Birth");
+                $scope.formData.DOJ.value = new Date();
+            }
+        }
+        //Check for DOJ<Current Date
+        if (dateOfJoining > currDate) {
+            alert("Date of Joining can not be a future date");
+            $scope.formData.DOJ.value = new Date();
+        }
+    }
+
     $scope.endDateCalOpen = function ($event) {
         $scope.ToMin = $scope.formData.PassportIssueDate.value;
     }

@@ -143,7 +143,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="DOB">Date of Birth:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <olca-date date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true"></olca-date>
+                <olca-date id="DOB" date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true"></olca-date>
                 <!--  <input type="text" class="form-control" id="DOB" required ng-model="formData.DOB">-->
             </div>
             <!--<div class="input-group date" id="dtpDOB">
@@ -200,7 +200,7 @@
         <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportIssueDate">Passport Issue Date:</label>
             <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value" date-required="false" ng-click="startDateCalOpen($event)"></olca-date>
+                <olca-date date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value" date-required="false" ng-click="startDateCalOpen($event)"></olca-date>
                 <!--    <input type="text" class="form-control" id="PassportIssueDate" name="passportIssueDate" ng-model="formData.PassportIssueDate">-->
                 <!--<span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>-->
             </div>
@@ -257,7 +257,7 @@
         <div class="form-group" ng-readonly="true">
             <label class="control-label col-sm-2" for="DOJ">Date of joining:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" ng-readonly="!checkRole()"></olca-date>
+                <olca-date id="DOJ" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" ng-readonly="!checkRole()" date-changed="checkDOJ()"></olca-date>
                 <!--<input type="text" class="form-control" id="DOJ" name="doj" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.DOJ">-->
                 <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
             </div>
