@@ -65,23 +65,5 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
         });
     }
 
-    /*$scope.updateStatusRejection = function (status) {
-
-        var _status;
-        if (status == 'approved')
-            _status = 18;
-        else if (status == 'rejected')
-            _status = 19;
-
-        approvalFctry.approveLeave({
-            Id: rowId,
-            Status: _status
-        }).then(function (response) {
-            alert("Leave Is Rejected");
-            $state.go('home.approval');
-
-        });
-    }*/
-
     $scope.init();
 }])
