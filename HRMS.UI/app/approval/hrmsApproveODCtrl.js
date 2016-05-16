@@ -48,12 +48,12 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             Id: rowId,
             ODStatus: ODStatus
         }).then(function (response) {
-            alert("OD is " + status)
+            alert("OD is " + status);
             $scope.getFiledOD({
-                rowId Id: $rootScope.userDetails.Id
+               Id: $rootScope.userDetails.Id
             });
         });
     }
-
+  
     $scope.init();
 }])
