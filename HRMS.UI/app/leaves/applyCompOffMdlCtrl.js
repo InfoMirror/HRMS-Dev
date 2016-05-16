@@ -1,6 +1,6 @@
 hrBaseApp.controller('applyCompOffMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', '$state',
-    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, $state) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', '$state', 'dashboardFctry', '$filter',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, $state, dashboardFctry, $filter) {
         'use strict';
 
         $scope.init = function () {
@@ -22,14 +22,44 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.submit = function () {
-            $scope.CompOffData.compOffReason = $scope.CompOffReason;
+        $scope.holiday = null;
+        $scope.getHolidays = function () {
+            debugger;
+            $scope.comparingDate = {
+                value: $scope.CompOffData.CompOffDate
+            };
+            dashboardFctry.getHolidayCalendar().then(function (response) {
+                $scope.holidays = response.data;
+                $scope.holiday = $filter("filter")($scope.holidays, {
+                    FestivalDate: $scope.comparingDate
+                });
+            });
+        }
 
+        $scope.submit = function () {
             if ($scope.CompOffData.compOffReason != '' && $scope.CompOffData.compOffReason != undefined) {
-                $scope.CompOffData.CompOffDate = $scope.CompOffDate;
-                $scope.CompOffData.compOffReason = $scope.CompOffReason;
-                console.log($scope.CompOffData);
-                $scope.insertCompOff($scope.CompOffData);
+                debugger;
+                if (new Date($scope.CompOffData.CompOffDate).getDay() == 6 || new Date($scope.CompOffData.CompOffDate).getDay() == 0) {
+                    $scope.insertCompOff($scope.CompOffData);
+                } else {
+                    debugger;
+                    $scope.comparingDate = {
+                        value: $scope.CompOffData.CompOffDate
+                    };
+                    dashboardFctry.getHolidayCalendar().then(function (response) {
+                        $scope.holidays = response.data;
+                        $scope.holiday = $filter("filter")($scope.holidays, {
+                            FestivalDate: $scope.comparingDate
+                        });
+                        if ($scope.holiday == null || $scope.holiday == undefined || $scope.holiday.length == 0) {
+                            alert('This was a working day, so you can not apply comp off for this. May be you should file OD for this.');
+                            $modalInstance.close();
+                        } else {
+                            $scope.insertCompOff($scope.CompOffData);
+                        }
+                    });
+                }
+                //console.log($scope.CompOffData);
             }
         }
 
@@ -47,12 +77,12 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 leaveFctry.insertCompOff(CompOffData).then(function (response) {
                     //alert(response.data);
                     if (response.data == "CompOff Applied") {
-                        alert('CompOff Is Applied');
+                        alert('CompOff Applied Successfully');
                         //$state.go('home.attendance.compoffs');              
                         // $scope.getCompOffsData($rootScope.userDetails);
                         $modalInstance.close();
                     } else {
-                        alert('CompOff Is Allready Exist');
+                        alert('You have already applied for this comp off');
                         $modalInstance.close();
                     }
                 });

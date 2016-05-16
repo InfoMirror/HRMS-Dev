@@ -34,7 +34,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
                 displayName: 'Sytem Identified',
                 enableColumnMenu: false,
                 enableFiltering: false,
-                cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'
+                cellTemplate: '<input type="checkbox" disabled ng-model="!row.entity.IsManual.value">'
             },
             {
                 field: 'CompOffStatus.value',
