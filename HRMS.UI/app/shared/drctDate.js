@@ -19,7 +19,8 @@ hrBaseApp.directive('olcaDate', [function () {
         inputName: '@',
         dateChanged: '&',
         dateClick:"&",
-        dateRequired: '='
+        dateRequired: '=',
+        dateDisabled: '&'
     };
 
     p.link = function ($scope, element, attr) {       

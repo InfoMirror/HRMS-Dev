@@ -257,7 +257,7 @@
         <div class="form-group" ng-readonly="true">
             <label class="control-label col-sm-2" for="DOJ">Date of joining:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <olca-date id="DOJ" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" ng-readonly="!checkRole()" date-changed="checkDOJ()"></olca-date>
+                <olca-date id="DOJ" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" date-disabled="!checkRole()" date-changed="checkDOJ()"></olca-date>
                 <!--<input type="text" class="form-control" id="DOJ" name="doj" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.DOJ">-->
                 <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
             </div>

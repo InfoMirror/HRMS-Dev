@@ -210,7 +210,7 @@ router.post('/insertCompOff', function (req, res) {
                     }
                 });
                 request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-                request.addParameter('CompOffDate', TYPES.Date, req.body.CompOffDate.value);
+                request.addParameter('CompOffDate', TYPES.Date, req.body.CompOffDate);
                 request.addParameter('StartTime', TYPES.NVarChar, '');
                 request.addParameter('EndTime', TYPES.NVarChar, '');
                 request.addParameter('CompOffStatus', TYPES.Int, req.body.CompOffStatus);

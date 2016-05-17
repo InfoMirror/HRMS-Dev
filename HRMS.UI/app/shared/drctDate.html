@@ -5,7 +5,7 @@
            datepicker-options="dateOptions"
            date-disabled="disabled(date, mode)"
            close-text="Close"
-           ng-change="dateChanged()" ng-click="dateClick()" date-only ng-required="dateRequired" placeholder="mm/dd/yyyy" /><span class="input-group-addon">
+           ng-change="dateChanged()" ng-click="dateClick()" ng-disabled="dateDisabled()" date-only ng-required="dateRequired" placeholder="mm/dd/yyyy" /><span class="input-group-addon">
         <i class="glyphicon glyphicon-calendar" ng-click="open($event)"></i>
     </span>
 </p>
