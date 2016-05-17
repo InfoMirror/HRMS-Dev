@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', 'uiGridConstants', function ($scope, $rootScope, approvalFctry, uiGridConstants) {
+hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
 
     $scope.init = function () {
         $scope.getFiledCompOff($rootScope.userDetails);
@@ -12,10 +12,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             {
                 field: 'CompOffDate.value',
                 displayName: 'Date',
-                cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+                cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
                 field: 'CompOffReason.value',
@@ -23,10 +20,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             },
             {
                 field: 'CompOffStatus.value',
-                displayName: 'Approval Status',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+                displayName: 'Approval Status'
             },
             {
                 field: 'Action',
@@ -56,9 +50,11 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
             Id: rowId,
             compOffStatus: compOffStatus
         }).then(function (response) {
-            if (response.data == "Status Updated") {
-                 $scope.getFiledCompOff(rowId);
-            }
+            alert("CompOff " + status);
+            $scope.getFiledCompOff({
+                Id: $rootScope.userDetails.Id
+            });
+
         });
     }
 
