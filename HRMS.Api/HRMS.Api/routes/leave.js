@@ -173,7 +173,7 @@ router.post('/getCompOffs', function (req, res) {
 router.post('/insertCompOff', function (req, res) {
     //   console.log('insertCompOff');
     console.log(req.body);
-    IsCompOffExist(req.body.CompOffDate.value, req.body.EmpId.value, function (IsExist) {
+    IsCompOffExist(req.body.CompOffDate, req.body.EmpId.value, function (IsExist) {
 
         if (IsExist) {
             //  console.log('in true');
@@ -428,6 +428,8 @@ function IsCompOffExist(CompOffDate, EmpId, CallBack) {
     var TYPES = require('tedious').TYPES;
 
     function executeStatement() {
+        console.log(CompOffDate);
+        console.log(EmpId);
         request = new Request("exec Sp_IsDuplicateCompoff @CompOffDate, @empId", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);

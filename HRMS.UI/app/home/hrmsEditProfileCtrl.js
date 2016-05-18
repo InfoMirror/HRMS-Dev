@@ -84,6 +84,10 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.startDateCalOpen = function ($event) {
+        if ($scope.formData.PassportIssueDate.value > new Date()) {
+            alert("Issue Date can not be greater than today.");
+            $scope.formData.PassportIssueDate.value = new Date();
+        }
         if (($scope.formData.PassportExpiryDate.value != null && $scope.formData.PassportExpiryDate.value != undefined) && ($scope.formData.PassportIssueDate.value > $scope.formData.PassportExpiryDate.value)) {
             alert("Issue Date can not be greater than Expiry Date");
             $scope.formData.PassportExpiryDate.value = $scope.formData.PassportIssueDate.value;
