@@ -1,5 +1,6 @@
 var express = require('express');
 var sql = require('msnodesqlv8');
+var moment = require('moment');
 var sqlConfig = require('../config/sqlConfig.js');
 var connectionConfig = require('../config/sqlConfig.json');
 var sqlConnection = require('tedious').Connection;
@@ -115,9 +116,12 @@ function excuteexcel(filename) {
     var date = fnameorginal.substring(0, 2);
     var month = getmonth(fnameorginal.substring(2, 5));
     var year = fnameorginal.substring(6, 10);
-    var fulldate = getfulldateDailySheet(fnameorginal);
+    var fulldate = moment(getfulldateDailySheet(fnameorginal),'YYYY-MM-DD');
  // var fulldate=new Date(year,month,date);
-    var day = new Date(year,month,date).getDay();
+
+
+ //console.log(dt.format('ddd'));
+    var day = fulldate.format('ddd');
    console.log(day);
    // console.log('day');
   //  console.log( new Date(year, 00, 06));
@@ -130,7 +134,7 @@ function excuteexcel(filename) {
                     if (exists) {
                         var obj = xlsx.parse(xlsFile);
                         var len = obj[0].data.length;
-                        if (day == 0 || day == 6 || IsHoliday) {
+                        if (day == 'Sat' || day == 'Sun' || IsHoliday) {
                             console.log('holiday');
                             for (var i = 7; i <= len - 2; i = i + 3) {
                                 if (obj[0].data[i + 2] == 'DEPARTMENT: INFOOBJECTS') {
@@ -225,25 +229,6 @@ function getfulldateDailySheet(filename){
     return fulldate;
 }
 function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatus, isAdminEntry) {
-    // sql.open(sqlConfig, function (err, conn) {
-        // var tableObjectValue = new Array(empId, absentDate, startTime, endTime, absentType, odStatus, isAdminEntry);
-        // var pm = conn.procedureMgr();
-        // pm.callproc('InsertAbsent', tableObjectValue, function (err, result1, output) {
-            // if (err) {
-                // console.log(err);
-            // } else {
-                // if (absentType == 20) {
-                    // absentCount++;
-                // } else if (absentType == 21) {
-                    // HalfabsentCount++;
-                // }
-            // }
-        // });
-        // if (err) {
-            // console.log('Connection Error: ' + err);
-        // }
-    // });
-	
 	var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -260,12 +245,7 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
             if (err) {
                 console.log(err);
             } else {
-			//  console.log('absent');
-               // if (absentType == 20) {
-                    // absentCount++;
-                // } else if (absentType == 21) {
-                    // HalfabsentCount++;
-                // }
+			
             }
         });
 request.addParameter('EmpId', TYPES.VarChar, empId);
@@ -281,20 +261,7 @@ request.addParameter('IsAdminEntry', TYPES.Bit, isAdminEntry);
 }
 
 function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry, CompOffReason) {
-    // sql.open(sqlConfig, function (err, conn) {
-        // var tableObjectValue = new Array(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry, CompOffReason);
-        // var pm = conn.procedureMgr();
-        // pm.callproc('Sp_InsertCompOff', tableObjectValue, function (err, result1, output) {
-            // if (err) {
-                // console.log(err);
-            // } else {
-
-            // }
-        // });
-        // if (err) {
-            // console.log('Connection Error: ' + err);
-        // }
-    // });
+    
 var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -311,12 +278,7 @@ var connection = new sqlConnection(config);
             if (err) {
                 console.log(err);
             } else {
-			 // console.log('absent');
-               // if (absentType == 20) {
-                    // absentCount++;
-                // } else if (absentType == 21) {
-                    // HalfabsentCount++;
-                // }
+			
             }
         });
 request.addParameter('EmpId', TYPES.VarChar, empId);
@@ -333,28 +295,7 @@ request.addParameter('CompOffReason', TYPES.NVarChar, CompOffReason);
 	}
 
 function isHoliDay(AttdenceDate, callback) {
-    // sql.open(sqlConfig, function (err, conn) {
-        // var tableObjectValue = new Array(AttdenceDate);
-        // var pm = conn.procedureMgr();
-        // pm.callproc('Sp_CheckIsHoliday', tableObjectValue, function (err, result1, output) {
-            // if (err) {
-                // console.log(err);
-            // } else {
-                // console.log(result1[0].IsHoliDay)
-                // if (result1[0].IsHoliDay > 0) {
-
-                    // callback(true);
-                // } else {
-
-                    // callback(false);
-                // }
-            // }
-        // });
-        // if (err) {
-            // console.log('Connection Error: ' + err);
-        // }
-    // });
-	
+   
 	var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -390,29 +331,7 @@ request.addParameter('Date', TYPES.Date, AttdenceDate);
 
 
 function isDuplicateDate(AttdenceDate, callback) {
-    // sql.open(sqlConfig, function (err, conn) {
-        // var tableObjectValue = new Array(AttdenceDate);
-        // var pm = conn.procedureMgr();
-        // pm.callproc('Sp_IsDuplicateDate', tableObjectValue, function (err, result1, output) {
-            // if (err) {
-                // console.log(err);
-            // } else {
-                // //console.log(result1[0].IsHoliDay)
-                // if (result1[0].RCount > 0) {
-
-                    // callback(true);
-                // } else {
-
-                    // callback(false);
-                // }
-            // }
-        // });
-        // if (err) {
-            // console.log('Connection Error: ' + err);
-        // }
-    // });
-
-	var connection = new sqlConnection(config);
+   	var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
             return console.error(err);
@@ -485,17 +404,17 @@ request.addParameter('Date', TYPES.Date, AttdenceDate);
 
 
 
-function toDate(dStr, format) {
-    var now = new Date(dStr);
-    console.log(now);
-    /*if (format == "h:m") {
- 		now.setHours(dStr.substr(0,dStr.indexOf(":")));
- 		now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
- 		now.setSeconds(0);
- 		return now;
-	}else 
-		return "Invalid Format";*/
-}
+// function toDate(dStr, format) {
+//     var now = new Date(dStr);
+//     console.log(now);
+//     /*if (format == "h:m") {
+//  		now.setHours(dStr.substr(0,dStr.indexOf(":")));
+//  		now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
+//  		now.setSeconds(0);
+//  		return now;
+// 	}else 
+// 		return "Invalid Format";*/
+// }
 
 function getmonth(m) {
 
@@ -556,14 +475,15 @@ function excuteexcelmonthly(filename) {
                     i = i + 5;
                     continue;
                 }
-                if (obj[0].data[i][2] == '' || obj[0].data[i][3] == '' || obj[0].data[i][2]==':' ||obj[0].data[i][3]==':') {
+                if (obj[0].data[i][2] == '' || obj[0].data[i][3] == '' || obj[0].data[i][2]==':' ||obj[0].data[i][3]==':'||obj[0].data[i][2]==null||obj[0].data[i][3]==null) {
                     // if (obj[0].data[i][1] != 'Sat' || obj[0].data[i][1] != 'Sun') {
 //                    console.log(i);
 
-                    var fulldate = year + '-' + month + '-' + obj[0].data[i][0];
+                    var fulldate = moment(year + '-' + month + '-' + obj[0].data[i][0],'YYYY-MM-DD');
+                    console.log(fulldate);
                      isDuplicateDate_New(fulldate,obj[0].data[i],empId,function(IsDuplicate,Eid,robj){
                         if(!IsDuplicate){
-                          var Adate = year + '-' + month + '-' + robj[0];   
+                          var Adate = moment(year + '-' + month + '-' + robj[0],'YYYY-MM-DD');   
                     if (robj[1] != 'Sat' && robj[1] != 'Sun') {
                     insertAbsent(Eid, Adate, robj[2], robj[3], 20, 17, false);
                        
@@ -572,29 +492,8 @@ function excuteexcelmonthly(filename) {
                         });
                     // }
                 } else {
-                      var fulldate = year + '-' + month + '-' + obj[0].data[i][0];
-                     isDuplicateDate_New(fulldate,obj[0].data[i],empId,function(IsDuplicate,Eid,robj){
-                        if(!IsDuplicate){
-                            var Adate = year + '-' + month + '-' + robj[0];
-                         if (robj[1] != 'Sat' && robj[1] != 'Sun') {
-                         var starttm = new Date(year, month, robj[0], robj[2].substring(0, 2), robj[2].substring(3, 5))
-                        var endtm = new Date(year, month, robj[0], robj[3].substring(0, 2), robj[3].substring(3, 5))
-                        var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-                        if (hh < 2) {
-                            console.log('HL');
-                            insertAbsent(Eid, Adate, robj[2], robj[3], 20, 17, false);
-                        } else if (hh >= 2 && hh < 6) {
-                            console.log('FL');
-                            insertAbsent(Eid, Adate, robj[2], robj[3], 21, 17, false);
-                        }
-                    } 
-                    else {
-                       console.log(fulldate);
-                        insertCompOff(Eid, Adate, robj[2], robj[3], 17, false, 'System Entry');
-                       
-                    }
-                        }
-                    });
+                      var fulldate = moment(year + '-' + month + '-' + obj[0].data[i][0],'YYYY-MM-DD');
+                   InsertMonthlyData(fulldate,obj[0].data[i],empId,year,month); 
                    
                 }
             }
@@ -608,4 +507,36 @@ function excuteexcelmonthly(filename) {
     });
 }
 
+function InsertMonthlyData(fulldate,robj,empId,year,month) {
+    
+    isDuplicateDate(fulldate,function(IsDuplicate){
+         if(!IsDuplicate){
+                           // var Adate = year + '-' + month + '-' + robj[0];
+                         if (robj[1] != 'Sat' && robj[1] != 'Sun') {
+                         var stem=moment(year + '-' + month + '-' + robj[0]+' '+robj[2].substring(0, 2)+':'+robj[2].substring(3, 5));
+                           var Etem=moment(year + '-' + month + '-' +robj[0]+' '+robj[3].substring(0, 2)+':'+robj[3].substring(3, 5));
+                           console.log(stem);
+                           var hr=Etem.diff(stem,'hours');
+                           console.log(hr);
+                         var starttm = new Date(year, month, robj[0], robj[2].substring(0, 2), robj[2].substring(3, 5))
+                        var endtm = new Date(year, month, robj[0], robj[3].substring(0, 2), robj[3].substring(3, 5))
+                        var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
+                        if (hh < 2) {
+                            console.log('HL');
+                            insertAbsent(empId, fulldate, robj[2], robj[3], 20, 17, false);
+                        } else if (hh >= 2 && hh < 6) {
+                            console.log('FL');
+                            insertAbsent(empId, fulldate, robj[2], robj[3], 21, 17, false);
+                        }
+                    } 
+                    else {
+                       console.log(fulldate);
+                        insertCompOff(empId, fulldate, robj[2], robj[3], 17, false, 'System Entry');
+                       
+                    }
+                        }
+        
+    });
+    
+}
 module.exports = router;
