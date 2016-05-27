@@ -129,6 +129,11 @@ hrBaseApp.config([
                 controller: 'hrmsNoRights',
                 hideInMenu: true
             })
-
-      }
+            .state('home.anonymousFeedback', {
+                url: 'AnonymousFeedback',
+                templateUrl: '/app/anonymousFeedback/hrmsFeedback.html',
+                controller: 'hrmshrmsFeedback',
+                friendlyName: 'Anonymous Feedback'
+            })
+    }
 ]);
