@@ -1,5 +1,5 @@
 var express = require('express');
-var sql = require('msnodesqlv8');
+//var sql = require('msnodesqlv8');
 var moment = require('moment');
 var sqlConfig = require('../config/sqlConfig.js');
 var connectionConfig = require('../config/sqlConfig.json');
