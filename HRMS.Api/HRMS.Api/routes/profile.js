@@ -239,18 +239,18 @@ router.post('/updateEmployeeDetails', function (req, res) {
                 console.log('sp_InsertUpdateEmployeeDetails');
                 if (req.body.EmpId.value != null) {
                     console.log('EmpId: ' + req.body.EmpId.value);
-                    request1 = new Request("exec sp_AllotLeaves @EmpId", function (err1, rowC, rws) {
-                        console.log('sp_AllotLeaves');
-                        if (err1) {
-                            console.log(err1);
-                        } else {
-                            console.log(rowC);
-                            console.log(rws);
-                        }
-                    });
-                    console.log('sp_AllotLeaves');
-                    request1.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-                    connection.execSql(request1);
+                    // request1 = new Request("exec sp_AllotLeaves @EmpId", function (err1, rowC, rws) {
+                    //     console.log('sp_AllotLeaves');
+                    //     if (err1) {
+                    //         console.log(err1);
+                    //     } else {
+                    //         console.log(rowC);
+                    //         console.log(rws);
+                    //     }
+                    // });
+                    // console.log('sp_AllotLeaves');
+                    // request1.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
+                    // connection.execSql(request1);
                     // });
                 }
             }
