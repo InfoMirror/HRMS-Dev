@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var sql = require('msnodesqlv8');
+//var sql = require('msnodesqlv8');
 var sqlConfig = require('../config/sqlConfig.js');
 var connectionConfig = require('../config/sqlConfig.json');
 var sqlConnection = require('tedious').Connection;
