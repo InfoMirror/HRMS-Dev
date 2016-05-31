@@ -10,6 +10,7 @@ var xlsx = require('node-xlsx');
 
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
+var feedback = require('./routes/feedback.js');
 var leave = require('./routes/leave.js');
 var profile = require('./routes/profile.js');
 
@@ -33,6 +34,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/account', authenticate);
+app.use('/feedback', feedback);
 app.use('/leave', leave);
 
 app.use('/admin', adminattendance);

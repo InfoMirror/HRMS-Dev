@@ -132,7 +132,7 @@ hrBaseApp.config([
             .state('home.anonymousFeedback', {
                 url: 'AnonymousFeedback',
                 templateUrl: '/app/anonymousFeedback/hrmsFeedback.html',
-                controller: 'hrmshrmsFeedback',
+                controller: 'hrmsFeedbackCtrl',
                 friendlyName: 'Anonymous Feedback'
             })
     }
