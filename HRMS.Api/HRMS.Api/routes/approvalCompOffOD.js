@@ -100,7 +100,7 @@ router.post('/getFiledOD', function (req, res) {
             }
         });
 
-        request.addParameter('EmployeeID', TYPES.Int, req.body.EmpId.value);
+        request.addParameter('EmployeeID', TYPES.Int, req.body.Id.value);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {
@@ -189,6 +189,7 @@ router.post('/approveCompOff', function (req, res) {
     });
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
+    console.log(req.body);
 
     function executeStatement() {
         request = new Request("exec sp_ApproveCompOffByReportingHead @CompOff, @CompOfStatus", function (err, rowCount, rows) {
@@ -240,6 +241,7 @@ router.post('/approveOD', function (req, res) {
     });
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
+    console.log(req.body);
 
     function executeStatement() {
         request = new Request("exec sp_ApprovRejectFileODByReportingHead @AbsentId, @ODStatus", function (err, rowCount, rows) {
@@ -257,7 +259,7 @@ router.post('/approveOD', function (req, res) {
             }
         });
         request.addParameter('AbsentId', TYPES.Int, req.body.Id.value);
-        request.addParameter('AbsentId', TYPES.Int, req.body.ODStatus.value);
+        request.addParameter('ODStatus', TYPES.Int, req.body.ODStatus.value);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {
@@ -290,6 +292,7 @@ router.post('/approveLeave', function (req, res) {
     });
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
+    console.log(req.body);
 
     function executeStatement() {
         request = new Request("exec sp_UpdateLeaveStatus @Id, @Status", function (err, rowCount, rows) {
