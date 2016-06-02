@@ -18,26 +18,27 @@ hrBaseApp.directive('olcaDate', [function () {
         maxAttr: '@maxDate',
         inputName: '@',
         dateChanged: '&',
-        dateClick:"&",
+        dateClick: "&",
         dateRequired: '=',
-        dateDisabled: '&'
+        dateDisabled: '&',
+        showCal:'&'
     };
 
-    p.link = function ($scope, element, attr) {       
-      $scope.opened = false;
+    p.link = function ($scope, element, attr) {
+        $scope.opened = false;
 
-      $scope.open = function ($event) {
-$scope.dateClick();
-        //we have called the javascript setTimeOut as it does not call the $apply() automatically
-        //thus we do not have to worry about stopPropagation which is needed to avoid calendar from hiding automatically.
-        //i. e. first the click event propagates to make sure all the open calendars hide automatically, and only after that 
-        //our changes to show the calendar are applied
-        setTimeout(function () {
-          $scope.opened = true;
-          $scope.$apply();
-        }, 2);
+        $scope.open = function ($event) {
+            $scope.dateClick();
+            //we have called the javascript setTimeOut as it does not call the $apply() automatically
+            //thus we do not have to worry about stopPropagation which is needed to avoid calendar from hiding automatically.
+            //i. e. first the click event propagates to make sure all the open calendars hide automatically, and only after that 
+            //our changes to show the calendar are applied
+            setTimeout(function () {
+                $scope.opened = true;
+                $scope.$apply();
+            }, 2);
 
-      }
+        }
     }
 
     return p;
@@ -56,7 +57,7 @@ $scope.dateClick();
 //on a single control. For min/max validations, we needed scope to get the current min/max values as they can change. Since that could not be done, we used minAttr/maxAttr and
 //we put a watch over that to check for value changes
 hrBaseApp.directive('dateOnly', ['$window', function ($window) {
-    
+
     return {
         require: 'ngModel',
         restrict: 'A',
@@ -71,8 +72,8 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 if (!$window.getSelection().toString()) {
                     // Required for mobile Safari
                     var caret = this.selectionStart;
-                    
-                    var startSlash = modelCtrl.$viewValue.substring(0,caret).lastIndexOf('/');
+
+                    var startSlash = modelCtrl.$viewValue.substring(0, caret).lastIndexOf('/');
                     if (startSlash >= caret || startSlash == -1)
                         startSlash = 0;
                     else
@@ -80,8 +81,7 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
 
                     var endSlash = modelCtrl.$viewValue.indexOf('/', caret);
 
-                    if (endSlash == -1)
-                    {
+                    if (endSlash == -1) {
                         endSlash = this.value.length;
                     }
 
@@ -98,9 +98,8 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 var year = "";
                 if (dateParts.length > 0) {
                     month = dateParts[0];
-                    
-                    if (month.length == 1)
-                    {
+
+                    if (month.length == 1) {
                         month = "0" + month;
                     }
 
@@ -110,14 +109,14 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 if (dateParts.length > 1) {
 
                     day = dateParts[1];
-                   
+
                     if (day.length == 1) {
                         day = "0" + day;
                     }
 
                     transformedInput += "/" + day;
 
-                   
+
                 }
 
                 if (dateParts.length > 2) {
@@ -125,7 +124,7 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                     transformedInput += "/" + year;
                 }
 
-                if (transformedInput !=modelCtrl.$viewValue) {
+                if (transformedInput != modelCtrl.$viewValue) {
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                 }
@@ -144,15 +143,15 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 });
 
                 modelCtrl.$validators.min =
-                function (modelValue, viewValue) {
+                    function (modelValue, viewValue) {
 
 
-                    if (angular.isUndefined(modelCtrl.minDate) || viewValue == '' || viewValue == undefined)
-                        return true;
+                        if (angular.isUndefined(modelCtrl.minDate) || viewValue == '' || viewValue == undefined)
+                            return true;
 
-                    var minDate = angular.isDate(modelCtrl.minDate) ? modelCtrl.minDate : new Date(modelCtrl.minDate);
-                    return new Date(modelValue) >= minDate;
-                }
+                        var minDate = angular.isDate(modelCtrl.minDate) ? modelCtrl.minDate : new Date(modelCtrl.minDate);
+                        return new Date(modelValue) >= minDate;
+                    }
 
             }
 
@@ -165,14 +164,14 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 });
 
                 modelCtrl.$validators.max =
-              function (modelValue, viewValue) {
+                    function (modelValue, viewValue) {
 
-                  if (angular.isUndefined(modelCtrl.maxDate) || viewValue == '' || viewValue == undefined)
-                      return true;
+                        if (angular.isUndefined(modelCtrl.maxDate) || viewValue == '' || viewValue == undefined)
+                            return true;
 
-                  var maxDate = angular.isDate(modelCtrl.maxDate) ? modelCtrl.maxDate : new Date(modelCtrl.maxDate);
-                  return new Date(modelValue) <= maxDate;
-              }
+                        var maxDate = angular.isDate(modelCtrl.maxDate) ? modelCtrl.maxDate : new Date(modelCtrl.maxDate);
+                        return new Date(modelValue) <= maxDate;
+                    }
             }
 
             //remove the parser added by the bootstrap-ui date directive
@@ -238,8 +237,7 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
                 if (moment(transformedInput, 'MM/DD/YYYY').isValid() && year.length == 4 && month.length > 0 && day.length > 0) {
                     modelCtrl.$modelValue = new Date(Date.UTC(year, parseInt(month) - 1, day));
                     return new Date(Date.UTC(year, parseInt(month) - 1, day));
-                }
-                else {
+                } else {
                     return undefined;
                 }
             });
@@ -247,6 +245,3 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
         }
     };
 }]);
-
-
-
