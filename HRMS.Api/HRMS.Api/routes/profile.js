@@ -412,4 +412,44 @@ router.post('/getApprovalReqEmp', function (req, res) {
     });*/
 });
 
+router.post('/IsEmpIdExist', function (req, res) {
+    console.log('sp_IsEmpIdExist');
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        executeStatement();
+    });
+
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_IsEmpIdExist @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_IsEmpIdExist');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows 
+                    });
+                }else{
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        
+        request.addParameter('EmpId', TYPES.NVarChar, req.body.EmpId.value);
+
+        connection.execSql(request);
+    }
+});
+
 module.exports = router;

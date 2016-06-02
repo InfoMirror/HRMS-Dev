@@ -149,7 +149,24 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.submit = function () {
+        if ($rootScope.Role == 'HR') {
+            debugger;
+            profileFctry.isEmpIdExist($scope.formData).then(function (response) {
+                //alert(JSON.stringify(response));
+                if (response.data.length > 0) {
+                    if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
+                        alert('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+                    } else {
+                        $scope.updateEmpDetails();
+                    }
+                }
+            });
+        } else {
+            $scope.updateEmpDetails();
+        }
+    }
 
+    $scope.updateEmpDetails = function () {
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
