@@ -1,71 +1,69 @@
 <div class="col-sm-12">
-    
+
     <div class="clearfix"></div>
     <div class="cell-marginT-2x">
-      
-<div class="row">
-             <div class="col-sm-6">
+
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
-                   
-                       <div class="panel-heading">
-                            <div class="panel-title">
-                               
-                                <h4>New Discussion</h4>
-                            </div>
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>New Feedback</h4>
                         </div>
-                        <div class="panel-body">
-                            <form class="form form-vertical">
+                    </div>
+                    <div class="panel-body">
+                        <form class="form form-vertical" name="feedbackForm">
+                            <div class="control-group">
+                                <label>Subject<span class="text-danger">*</span></label>
+                                <div class="controls">
+                                    <input type="text" name="subject" class="form-control" placeholder="Enter Subject" ng-model="feedback.subject" required>
+                                    <span ng-show="feedbackForm.subject.$error.required && feedbackForm.subject.$dirty" class="text-danger">Required*</span>
+                                </div>
                                 <div class="control-group">
-                                    <label>Subject</label>
+                                    <label>Description<span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" placeholder="Enter Name">
+                                        <textarea class="form-control" name="description" placeholder="Enter Description" ng-model="feedback.description" required></textarea>
+                                        <span ng-show="feedbackForm.description.$error.required && feedbackForm.description.$dirty" class="text-danger">Required*</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label>Discription</label>
+                                    <label>Email id<span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <textarea class="form-control"></textarea>
+                                        <input type="email" name="email" class="form-control" placeholder="Enter Email" ng-model="feedback.email" required>
+                                        <span ng-show="feedbackForm.email.$error.required && feedbackForm.email.$dirty" class="text-danger">Required*</span>
+                                        <span ng-show="!feedbackForm.email.$error.required && feedbackForm.email.$error.email && feedbackForm.email.$dirty" class="text-danger">Invalid Email</span>
                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <label>Email id</label>
-                                    <div class="controls">                                
-                                            <input type="text" class="form-control" placeholder="Enter Email">
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label></label>
-                                    <div class="controls">
-                                        <button type="submit" ng-click="sendEmail()" class="btn btn-primary">
+                                    <div class="control-group">
+                                        <label></label>
+                                        <div class="controls">
+                                            <button type="submit" ng-click="submitFeedback()" class="btn btn-primary">
                                             Submit
                                         </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                        </form>
                         </div>
-                        <!--/panel content-->
-                    
-                    <!--/panel-->
+                        </div>
+                    </div>
                 </div>
-                </div>
-           <div class="col-sm-6">
-                <div class="panel panel-default">
-                   
-                       <div class="panel-heading">
+                
+            </div>
+                <div class="col-sm-offset-1 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <div class="panel-title">
-                                
-                                <h4>Track old Discussion</h4>
+                                <h4>Track Existing Feedback</h4>
                             </div>
                         </div>
                         <div class="panel-body">
                             <form class="form form-vertical">
                                 <div class="control-group">
-                                    <label>Track Id</label>
+                                    <label>Feedback Id</label>
                                     <div class="controls">
                                         <input type="text" class="form-control" placeholder="Enter Id">
                                     </div>
                                 </div>
-                              
+
                                 <div class="control-group">
                                     <label></label>
                                     <div class="controls">
@@ -76,23 +74,7 @@
                                 </div>
                             </form>
                         </div>
-                        <!--/panel content-->
-                    
-                    <!--/panel-->
-       
-           </div>
-           </div>
-    </div>
-   
-</div>
-</div>
+                    </div>
+                </div>
 
-
-<!--<div ui-view=""></div>
-<div style="margin:0 5%">
-    <div ui-grid="approveCompOffGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-</div>
-
-<div style="margin:0 5%">
-    <div ui-grid="approveODGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-</div>-->
+        </div>

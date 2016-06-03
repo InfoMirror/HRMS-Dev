@@ -18,7 +18,40 @@ var config = {
     }
 };
 
-router.post('/sendMail', function (req, res) {
+router.post('/submitFeedback', function (req, res) {
+   var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_InsertAnonymousFeedback @FeedbackId, @Subject, @Description, @Resolve, @FeedbackDateTime ", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_InsertAnonymousFeedback');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        request.addParameter('FeedbackId', TYPES.VarChar, req.body.FeedbackId);
+        request.addParameter('Subject', TYPES.VarChar, req.body.Feedback.Subject);
+        request.addParameter('Description', TYPES.VarChar, req.body.Description);
+        request.addParameter('Resolve', TYPES.VarChar, 0);
+        request.addParameter('FeedbackDateTime', TYPES.VarChar, NOW());
+        connection.execSql(request);
+    }
    
     // Not the movie transporter!
     var transporter = nodemailer.createTransport({
@@ -30,14 +63,14 @@ router.post('/sendMail', function (req, res) {
     });
     var mailOptions={
         from:'example@gmail.com',
-             to:req.body.to,
-                  subject:req.body.subject,
-                   text:req.body.text
+             to:req.body.Feedback.Email,
+                  subject:req.body.Feedback.Subject,
+                   text:req.body.Feedback.Description
     }
 sendEmail(mailOptions);
 });
 
- function sendEmail() {
+ function sendEmail(mailOptions) {
      transporter.sendMail(mailOptions, function(error, info){
     if(error){
         console.log(error);
