@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', function ($scope, $rootScope, profileFctry, $state, $timeout) {
+hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', '$modal', function ($scope, $rootScope, profileFctry, $state, $timeout, $modal) {
     'use strict';
 
     $scope.init = function () {
@@ -150,7 +150,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
     $scope.submit = function () {
         if ($rootScope.Role == 'HR') {
-            debugger;
             profileFctry.isEmpIdExist($scope.formData).then(function (response) {
                 //alert(JSON.stringify(response));
                 if (response.data.length > 0) {
@@ -159,6 +158,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                     } else {
                         $scope.updateEmpDetails();
                     }
+                } else {
+                    $scope.updateEmpDetails();
                 }
             });
         } else {
@@ -272,6 +273,24 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             return true;
         else
             return false;
+    }
+
+    $scope.openModal = function () {
+        var modalInstance = $modal.open({
+            templateUrl: '/app/home/addEditEmpId.html',
+            controller: 'addEditEmpId',
+            size: 'md',
+            resolve: {
+                aValue: function () {
+                    return $rootScope.userDetails.UserEmail
+                }
+            }
+        });
+        modalInstance.result.then(function (paramFromDialog) {
+            debugger;
+            $scope.paramFromDialog = paramFromDialog;
+            $scope.getEmpData($rootScope.userDetails.UserEmail.value);  
+        });
     }
 
     $scope.init();

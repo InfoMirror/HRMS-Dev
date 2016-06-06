@@ -452,4 +452,45 @@ router.post('/IsEmpIdExist', function (req, res) {
     }
 });
 
+router.post('/updateEmpId', function (req, res) {
+    console.log('sp_UpdateEmpId');
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        executeStatement();
+    });
+
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_UpdateEmpId @UserEmail, @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_UpdateEmpId');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows 
+                    });
+                }else{
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        
+        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);
+        request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
+
+        connection.execSql(request);
+    }
+});
+
 module.exports = router;

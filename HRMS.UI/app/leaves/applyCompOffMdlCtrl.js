@@ -24,7 +24,6 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
         };
         $scope.holiday = null;
         $scope.getHolidays = function () {
-            debugger;
             $scope.comparingDate = {
                 value: $scope.CompOffData.CompOffDate
             };
