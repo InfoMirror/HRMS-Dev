@@ -264,7 +264,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getReportingHeads = function () {
         profileFctry.getAllEmployees().then(function (response) {
             $scope.reportingHeads = response.data;
-            console.log($scope.reportingHeads);
         });
     }
 
