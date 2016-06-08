@@ -15,11 +15,14 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="EmpId">Employee Unique Id:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="EmpId" name="empId" ng-readonly="!checkRole()" ng-required="checkRole()" ng-model="formData.EmpId.value">
+            <label class="control-label col-sm-2" for="EmpId">Employee Unique Id:<span class="text-danger" ng-if="checkRole()">*</span></label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="EmpId" name="empId" ng-readonly="true" ng-required="checkRole()" ng-model="formData.EmpId.value">
 
                 <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="text-danger">Required*</span>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="openModal()">Update Employee Unique Id</button>
             </div>
         </div>
 
@@ -41,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="Team">Team:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="Team">Team:<span class="text-danger" ng-if="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="Team" name="team" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.Team.value">
                 <span ng-show="editForm.team.$error.required && editForm.team.$dirty" class="text-danger">Required*</span>
@@ -49,9 +52,9 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="Designation">Designation:<span class="text-danger">*</span> </label>
+            <label class="control-label col-sm-2" for="Designation">Designation:<span class="text-danger" ng-if="checkRole()">*</span> </label>
             <div class="col-sm-10">
-                <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole">
+                <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
                     <option value=" " style="display:none">Select One</option>
                     <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation==designation.Id.value}}">{{designation.Value.value}}</option>
                 </select>
@@ -62,7 +65,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="Gender">Gender:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <label class="radio-inline" ng-repeat="gender in genders" ng-required="checkRole()">
+                <label class="radio-inline" ng-repeat="gender in genders" >
                     <input type="radio" ng-model="formData.Gender.value" name="gender" value="{{gender.Id.value}}" required>{{gender.Value.value}}
                 </label>
                 <span ng-show="editForm.Designation.$error.required && editForm.Designation.$dirty" class="text-danger">Required*</span>
@@ -209,7 +212,7 @@
         <div class="form-group" ng-show="HidePassportDetails()">
             <label class="control-label col-sm-2" for="PassportExpiryDate">Passport Expiry Date:</label>
             <div class="col-sm-10">
-                <olca-date min-date="ToMin" date-options="dateOptions" input-value="formData.PassportExpiryDate.value" input-name="formData.PassportExpiryDate.value" date-required="false" ng-click="endDateCalOpen($event)"></olca-date>
+                <olca-date min-date="ToMin" date-options="dateOptions" input-value="formData.PassportExpiryDate.value" input-name="formData.PassportExpiryDate.value" date-required="false" ng-click="endDateCalOpen($event)" show-cal="true"></olca-date>
                 <!-- <input type="text" class="form-control" id="PassportExpiryDate" name="passportExpiryDate" ng-model="formData.PassportExpiryDate">-->
                 <!--<span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>-->
             </div>
@@ -255,10 +258,10 @@
         </div>
 
         <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="DOJ">Date of joining:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="DOJ">Date of joining:<span class="text-danger" ng-if="checkRole()">*</span></label>
             <div class="col-sm-10">
 
-                <olca-date id="DOJ" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" date-disabled="!checkRole()" date-changed="checkDOJ()"></olca-date>
+                <olca-date id="DOJ" class="col-sm-12" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value" date-required="checkRole()" date-disabled="!checkRole()" show-cal="checkRole()" date-changed="checkDOJ()"></olca-date>
                 
                 <!--<input type="text" class="form-control" id="DOJ" name="doj" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.DOJ">-->
                 <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
@@ -275,7 +278,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="ReportingHead">Reporting Head:<span class="text-danger">*</span></label>
+            <label class="control-label col-sm-2" for="ReportingHead">Reporting Head:<span class="text-danger" ng-if="checkRole()">*</span></label>
             <div class="col-sm-10">
                 <select ng-model="formData.ReportingHead.value" ng-disabled="!checkRole()">
                     <option value=" " style="display:none">Select One</option>

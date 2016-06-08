@@ -1,11 +1,6 @@
 <p class="input-group">
 
-    <input type="text" class="form-control date-picker" datepicker-popup="MM/dd/yyyy" name="{{inputName}}"
-           ng-model="inputValue" is-open="opened" min-date="min" max-date="max"
-           datepicker-options="dateOptions"
-           date-disabled="disabled(date, mode)"
-           close-text="Close"
-           ng-change="dateChanged()" ng-click="dateClick()" ng-disabled="dateDisabled()" date-only ng-required="dateRequired" placeholder="mm/dd/yyyy" /><span class="input-group-addon">
+    <input type="text" class="form-control date-picker" datepicker-popup="MM/dd/yyyy" name="{{inputName}}" ng-model="inputValue" is-open="opened" min-date="min" max-date="max" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" ng-change="dateChanged()" ng-click="dateClick()" ng-disabled="dateDisabled()" date-only ng-required="dateRequired" placeholder="mm/dd/yyyy" /><span class="input-group-addon" ng-show="showCal()">
         <i class="glyphicon glyphicon-calendar" ng-click="open($event)"></i>
     </span>
 </p>

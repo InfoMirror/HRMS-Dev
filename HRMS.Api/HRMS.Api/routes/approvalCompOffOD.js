@@ -100,7 +100,7 @@ router.post('/getFiledOD', function (req, res) {
             }
         });
 
-        request.addParameter('EmployeeID', TYPES.Int, req.body.EmpId.value);
+        request.addParameter('EmployeeID', TYPES.Int, req.body.Id.value);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {
@@ -189,6 +189,7 @@ router.post('/approveCompOff', function (req, res) {
     });
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
+    console.log(req.body);
 
     function executeStatement() {
         request = new Request("exec sp_ApproveCompOffByReportingHead @CompOff, @CompOfStatus", function (err, rowCount, rows) {
@@ -241,11 +242,13 @@ router.post('/approveOD', function (req, res) {
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
 
+
     function executeStatement() {
         request = new Request("exec sp_ApprovRejectFileODByReportingHead @AbsentId, @ODStatus", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
+                    console.log(req.body);
                 console.log('sp_ApprovRejectFileODByReportingHead');
                 console.log(rows);
                 if (rowCount > 0) {
@@ -256,27 +259,11 @@ router.post('/approveOD', function (req, res) {
                 }
             }
         });
+        console.log(req.body);
         request.addParameter('AbsentId', TYPES.Int, req.body.Id.value);
-        request.addParameter('AbsentId', TYPES.Int, req.body.ODStatus.value);
+        request.addParameter('ODStatus', TYPES.Int, req.body.ODStatus);
         connection.execSql(request);
     }
-    /*sql.open(sqlConfig, function (err, conn) {
-        console.log(req.body);
-        var tableObjectValue = new Array(req.body.Id, req.body.ODStatus, '');
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_ApprovRejectFileODByReportingHead', tableObjectValue, function (err, result, output) {
-            if (err) {
-                console.log('Error in approving OD: ');
-                console.log(err);
-            } else {
-                res.json({
-                    type: true,
-                    data: 'Status Updated'
-                });
-            }
-        });
-    });*/
 });
 
 router.post('/approveLeave', function (req, res) {
@@ -290,6 +277,7 @@ router.post('/approveLeave', function (req, res) {
     });
     var Request = require('tedious').Request;
     var TYPES = require('tedious').TYPES;
+    console.log(req.body);
 
     function executeStatement() {
         request = new Request("exec sp_UpdateLeaveStatus @Id, @Status", function (err, rowCount, rows) {

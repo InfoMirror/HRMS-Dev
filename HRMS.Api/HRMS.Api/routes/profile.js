@@ -239,18 +239,18 @@ router.post('/updateEmployeeDetails', function (req, res) {
                 console.log('sp_InsertUpdateEmployeeDetails');
                 if (req.body.EmpId.value != null) {
                     console.log('EmpId: ' + req.body.EmpId.value);
-                    request1 = new Request("exec sp_AllotLeaves @EmpId", function (err1, rowC, rws) {
-                        console.log('sp_AllotLeaves');
-                        if (err1) {
-                            console.log(err1);
-                        } else {
-                            console.log(rowC);
-                            console.log(rws);
-                        }
-                    });
-                    console.log('sp_AllotLeaves');
-                    request1.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-                    connection.execSql(request1);
+                    // request1 = new Request("exec sp_AllotLeaves @EmpId", function (err1, rowC, rws) {
+                    //     console.log('sp_AllotLeaves');
+                    //     if (err1) {
+                    //         console.log(err1);
+                    //     } else {
+                    //         console.log(rowC);
+                    //         console.log(rws);
+                    //     }
+                    // });
+                    // console.log('sp_AllotLeaves');
+                    // request1.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
+                    // connection.execSql(request1);
                     // });
                 }
             }
@@ -410,6 +410,87 @@ router.post('/getApprovalReqEmp', function (req, res) {
             }
         });
     });*/
+});
+
+router.post('/IsEmpIdExist', function (req, res) {
+    console.log('sp_IsEmpIdExist');
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        executeStatement();
+    });
+
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_IsEmpIdExist @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_IsEmpIdExist');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows 
+                    });
+                }else{
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        
+        request.addParameter('EmpId', TYPES.NVarChar, req.body.EmpId.value);
+
+        connection.execSql(request);
+    }
+});
+
+router.post('/updateEmpId', function (req, res) {
+    console.log('sp_UpdateEmpId');
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        executeStatement();
+    });
+
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_UpdateEmpId @UserEmail, @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_UpdateEmpId');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows 
+                    });
+                }else{
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        
+        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);
+        request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
+
+        connection.execSql(request);
+    }
 });
 
 module.exports = router;

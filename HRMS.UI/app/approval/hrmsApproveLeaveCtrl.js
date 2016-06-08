@@ -35,7 +35,7 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                cellTemplate: '<div ng-show="row.entity.Status.value==\'Pending\'"><a ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
                 enableFiltering: false
             }
         ]
