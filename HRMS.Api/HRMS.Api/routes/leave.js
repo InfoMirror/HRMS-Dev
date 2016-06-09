@@ -136,6 +136,7 @@ router.post('/getCompOffs', function (req, res) {
                 console.log(err);
             } else {
                 console.log('sp_GetCompOffByEmployeeId');
+                console.log(req.body);
                 console.log(rows);
                 if (rowCount > 0) {
                     res.json({
@@ -267,7 +268,7 @@ router.post('/markCompOff', function (req, res) {
             }
         });
 
-        request.addParameter('CompOff', TYPES.Int, req.body.Id.value);
+        request.addParameter('CompOff', TYPES.Int, req.body.Id);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {

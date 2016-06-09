@@ -34,7 +34,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
                 displayName: 'Sytem Identified',
                 enableColumnMenu: false,
                 enableFiltering: false,
-                cellTemplate: '<input type="checkbox" disabled ng-model="!row.entity.IsManual.value">'
+                cellTemplate: '<input type="checkbox" disabled ng-checked="grid.appScope.isSystemIdentified(row.entity.IsManual.value)">'
             },
             {
                 field: 'CompOffStatus.value',
@@ -54,11 +54,17 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
         leaveFctry.getCompOffs({
             EmpId: empData
         }).then(function (response) {
-            console.log(response.data);
             $scope.CompOffsGridOptions.data = response.data;
         });
     }
 
+    $scope.isSystemIdentified = function (isManual) {
+        if(isManual){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     /*$scope.insertCompOff = function (CompOffData) {
         leaveFctry.insertCompOff(CompOffData).then(function (response) {
