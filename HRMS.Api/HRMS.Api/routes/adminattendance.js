@@ -21,7 +21,8 @@ var config = {
     options: {
         database: connectionConfig.database,
         rowCollectionOnRequestCompletion: true,
-        useColumnNames: true
+        useColumnNames: true,
+		instanceName: connectionConfig.instanceName
     }
 };
 
