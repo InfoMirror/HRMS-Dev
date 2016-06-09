@@ -1,58 +1,58 @@
 hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var profileFctryData = {};
-//var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
-    var resource = $resource('http://localhost:9095' + '/profile/:action', {
+
+    var resource = $resource(hrmsSettingsVal.jsonUrl + '/profile/:action', {
         action: '@action',
     }, {
-        'getAllRelations': {
-            method: 'GET',
-            params: {
-                action: 'getAllRelations'
+            'getAllRelations': {
+                method: 'GET',
+                params: {
+                    action: 'getAllRelations'
+                }
+            },
+            'getAllEmployees': {
+                method: 'GET',
+                params: {
+                    action: 'getAllEmployees'
+                }
+            },
+            'getMasterValues': {
+                method: 'POST',
+                params: {
+                    action: 'getMasterValues'
+                }
+            },
+            'updateEmployeeDetails': {
+                method: 'POST',
+                params: {
+                    action: 'updateEmployeeDetails'
+                }
+            },
+            'getEmpDetails': {
+                method: 'POST',
+                params: {
+                    action: 'getEmpDetails'
+                }
+            },
+            'getApprovalReqEmp': {
+                method: 'POST',
+                params: {
+                    action: 'getApprovalReqEmp'
+                }
+            },
+            'IsEmpIdExist': {
+                method: 'POST',
+                params: {
+                    action: 'IsEmpIdExist'
+                }
+            },
+            'updateEmpId': {
+                method: 'POST',
+                params: {
+                    action: 'updateEmpId'
+                }
             }
-        },
-        'getAllEmployees': {
-            method: 'GET',
-            params: {
-                action: 'getAllEmployees'
-            }
-        },
-        'getMasterValues': {
-            method: 'POST',
-            params: {
-                action: 'getMasterValues'
-            }
-        },
-        'updateEmployeeDetails': {
-            method: 'POST',
-            params: {
-                action: 'updateEmployeeDetails'
-            }
-        },
-        'getEmpDetails': {
-            method: 'POST',
-            params: {
-                action: 'getEmpDetails'
-            }
-        },
-        'getApprovalReqEmp': {
-            method: 'POST',
-            params: {
-                action: 'getApprovalReqEmp'
-            }
-        },
-        'IsEmpIdExist': {
-            method: 'POST',
-            params: {
-                action: 'IsEmpIdExist'
-            }
-        },
-        'updateEmpId': {
-            method: 'POST',
-            params: {
-                action: 'updateEmpId'
-            }
-        }
-    });
+        });
 
     var _getAllRelations = function () {
         var deffered = $q.defer();
@@ -113,7 +113,7 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
         });
         return deffered.promise;
     };
-    
+
     var _isEmpIdExist = function (parms) {
         var deffered = $q.defer();
         resource.IsEmpIdExist(parms, function (response) {
@@ -123,7 +123,7 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
         });
         return deffered.promise;
     };
-    
+
     var _updateEmpId = function (parms) {
         var deffered = $q.defer();
         resource.updateEmpId(parms, function (response) {
@@ -145,9 +145,9 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
     profileFctryData.getEmpDetails = _getEmpDetails;
 
     profileFctryData.getApprovalReqEmp = _getApprovalReqEmp;
-    
+
     profileFctryData.isEmpIdExist = _isEmpIdExist;
-    
+
     profileFctryData.updateEmpId = _updateEmpId;
 
     return profileFctryData;

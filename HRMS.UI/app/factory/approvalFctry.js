@@ -1,47 +1,47 @@
 hrBaseApp.factory('approvalFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var approvalFctryData = {};
-//var resource = $resource('http://mayank-pc:9095' + '/approval/:action', {
-  var resource = $resource('http://localhost:9095' + '/approval/:action', {
+
+    var resource = $resource(hrmsSettingsVal.jsonUrl + '/approval/:action', {
         action: '@action',
     }, {
-        'getFiledCompOff': {
-            method: 'POST',
-            params: {
-                action: 'getFiledCompOff'
+            'getFiledCompOff': {
+                method: 'POST',
+                params: {
+                    action: 'getFiledCompOff'
+                }
+            },
+            'getFiledOD': {
+                method: 'POST',
+                params: {
+                    action: 'getFiledOD'
+                }
+            },
+            'getAppliedLeaves': {
+                method: 'POST',
+                params: {
+                    action: 'getAppliedLeaves'
+                }
+            },
+            'approveCompOff': {
+                method: 'POST',
+                params: {
+                    action: 'approveCompOff'
+                }
+            },
+            'approveOD': {
+                method: 'POST',
+                params: {
+                    action: 'approveOD'
+                }
+            },
+            'approveLeave': {
+                method: 'POST',
+                params: {
+                    action: 'approveLeave'
+                }
             }
-        },
-        'getFiledOD': {
-            method: 'POST',
-            params: {
-                action: 'getFiledOD'
-            }
-        },
-        'getAppliedLeaves': {
-            method: 'POST',
-            params: {
-                action: 'getAppliedLeaves'
-            }
-        },
-        'approveCompOff': {
-            method: 'POST',
-            params: {
-                action: 'approveCompOff'
-            }
-        },
-        'approveOD': {
-            method: 'POST',
-            params: {
-                action: 'approveOD'
-            }
-        },
-        'approveLeave': {
-            method: 'POST',
-            params: {
-                action: 'approveLeave'
-            }
-        }
 
-    });
+        });
 
     var _getFiledCompOff = function (parms) {
         var deffered = $q.defer();
