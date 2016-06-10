@@ -14,7 +14,7 @@ var config = {
         database: connectionConfig.database,
         rowCollectionOnRequestCompletion: true,
         useColumnNames: true,
-		instanceName: connectionConfig.instanceName
+        instanceName: connectionConfig.instanceName
     }
 };
 /*var config = {
@@ -101,6 +101,64 @@ router.get('/getAllEmployees', function (req, res) {
                 console.log('sp_GetAllEpmloyees');
                 console.log(rows);
                 if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+
+        connection.execSql(request);
+    }
+    /*sql.open(sqlConfig, function (err, conn) {
+        var tableObjectValue = new Array();
+        console.log('Table Object Value: ');
+        console.log(tableObjectValue);
+        var pm = conn.procedureMgr();
+        pm.callproc('sp_GetAllEpmloyees', tableObjectValue, function (err, results, output) {
+            if (err) {
+                console.log('Error: ');
+                console.log(err);
+            } else {
+                if (results.length > 0) {
+                    console.log(results);
+                    res.json({
+                        type: true,
+                        data: results
+                    });
+                }
+            }
+        });
+    });*/
+});
+
+router.get('/getAllEmployeesData', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_GetAllEpmloyees", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                // console.log('sp_GetAllEpmloyees');
+                // console.log(rows);
+                if (rowCount > 0) {
+                    for (var i = 0; i < rowCount; i++) {
+                        rows[i].Id = rows[i].Id.value;
+                        rows[i].Name = rows[i].Name.value;
+                        rows[i].UserEmail = rows[i].UserEmail.value;
+                        rows[i].Team = rows[i].Team.value;
+                    }
                     res.json({
                         type: true,
                         data: rows
@@ -306,7 +364,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
         connection.execSql(request);
     }
-   
+
 });
 
 
@@ -436,9 +494,9 @@ router.post('/IsEmpIdExist', function (req, res) {
                 if (rowCount > 0) {
                     res.json({
                         type: true,
-                        data: rows 
+                        data: rows
                     });
-                }else{
+                } else {
                     res.json({
                         type: true,
                         data: rows
@@ -446,7 +504,7 @@ router.post('/IsEmpIdExist', function (req, res) {
                 }
             }
         });
-        
+
         request.addParameter('EmpId', TYPES.NVarChar, req.body.EmpId.value);
 
         connection.execSql(request);
@@ -476,9 +534,9 @@ router.post('/updateEmpId', function (req, res) {
                 if (rowCount > 0) {
                     res.json({
                         type: true,
-                        data: rows 
+                        data: rows
                     });
-                }else{
+                } else {
                     res.json({
                         type: true,
                         data: rows
@@ -486,7 +544,7 @@ router.post('/updateEmpId', function (req, res) {
                 }
             }
         });
-        
+
         request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
 

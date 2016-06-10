@@ -48,7 +48,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                 $scope.profile = str;
                 if (resp["domain"] == 'infoobjects.com') {
                     var formdata = {
-                        email: email
+                        email: email,
+                        image: resp.image.url,
                     }
                     authFctry.login(formdata).then(function (response) {
 

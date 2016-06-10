@@ -323,7 +323,7 @@ router.post('/getAppliedLeaves', function (req, res) {
             }
         });
 
-        request.addParameter('EmployeeID', TYPES.Int, req.body.EmpId.value);
+        request.addParameter('EmployeeID', TYPES.VarChar, req.body.EmpId.value);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {
