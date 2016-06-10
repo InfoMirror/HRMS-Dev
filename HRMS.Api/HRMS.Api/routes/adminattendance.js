@@ -51,9 +51,6 @@ var upload = multer({ //multer settings
 
 /** API path that will upload the files */
 router.post('/uploadMonthly', function (req, res) {
-    // console.log("upload");
-    //  console.log(file);
-    //console.log(req.data);
     upload(req, res, function (err) {
         // console.log("uploadss");
         if (err) {
@@ -118,14 +115,9 @@ function excuteexcel(filename) {
     var month = getmonth(fnameorginal.substring(2, 5));
     var year = fnameorginal.substring(6, 10);
     var fulldate = moment(getfulldateDailySheet(fnameorginal),'YYYY-MM-DD');
- // var fulldate=new Date(year,month,date);
-
-
- //console.log(dt.format('ddd'));
     var day = fulldate.format('ddd');
+    fulldate=getfulldateDailySheet(fnameorginal);
    console.log(day);
-   // console.log('day');
-  //  console.log( new Date(year, 00, 06));
     isDuplicateDate(fulldate, function (IsDuplicate) {
 
         if (!IsDuplicate) {
@@ -146,21 +138,18 @@ function excuteexcel(filename) {
                                 if (obj[0].data[i] == 'undefined') {
                                     console.log(obj[0].data[i])
                                 } else {
-
-
-                                    //console.log(hh);
-                                    //console.log(starttm - endtm);
                                     if (obj[0].data[i][2] == ':' || obj[0].data[i][3] == ':') {
 
-
                                     } else {
-                                        var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
-                                        var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
-                                        var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-
-
-                                        if (hh > 2) {
-
+                                        // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
+                                        // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
+                                        // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
+                                        var start=moment(date + '/' + month + '/' + year+' '+obj[0].data[i][2].substring(0, 2)+':'+obj[0].data[i][2].substring(3, 5)+':00');
+                                        var end=moment(date + '/' + month + '/' +year+' '+obj[0].data[i][3].substring(0, 2)+':'+obj[0].data[i][3].substring(3, 5)+':00');
+                                        var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+                                        var d = moment.duration(ms);
+  
+                                        if (d.asHours() > 2) {
                                             insertCompOff(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 17, false, 'System Entry');
                                         }
                                     }
@@ -174,38 +163,27 @@ function excuteexcel(filename) {
                                     i = i + 2;
                                     continue;
                                 }
-
                                 if (obj[0].data[i] == 'undefined') {
-                                    //console.log(obj[0].data[i])
+                                   
                                 } else {
 
-
-                                    //console.log(hh);
-                                    //console.log(starttm - endtm);
                                     if (obj[0].data[i][2] == ':' || obj[0].data[i][3] == ':') {
-                                      //  console.log(obj[0].data[i][2]);
-                                       // console.log(obj[0].data[i][3]);
                                         insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
-
                                     } else {
-                                        var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
-                                        var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
-                                        var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-
-
-                                        console.log(hh);
-                                        if (hh < 2) {
+                                        // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
+                                        // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
+                                        // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
+                                         var start=moment(date + '/' + month + '/' + year+' '+obj[0].data[i][2].substring(0, 2)+':'+obj[0].data[i][2].substring(3, 5)+':00');
+                                        var end=moment(date + '/' + month + '/' +year+' '+obj[0].data[i][3].substring(0, 2)+':'+obj[0].data[i][3].substring(3, 5)+':00');
+                                        var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+                                        var d = moment.duration(ms);
+                                        if (d.asHours() < 2) {
                                             console.log(1);
                                             insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
-
-
-                                        } else if (hh >=2 && hh < 6) {
+                                        } else if (d.asHours() >=2 && d.asHours() < 6) {
                                             console.log(0);
                                             insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 21, 17, false);
-
-
                                         }
-
                                     }
                                 }
                             }
@@ -213,8 +191,6 @@ function excuteexcel(filename) {
                     } else {
                         console.log('File does not exist');
                     }
-
-
                 });
             });
         }
@@ -324,8 +300,6 @@ function isHoliDay(AttdenceDate, callback) {
             }
         });
 request.addParameter('Date', TYPES.Date, AttdenceDate);
-
-
         connection.execSql(request);
     }
 }
@@ -348,23 +322,16 @@ function isDuplicateDate(AttdenceDate, callback) {
             if (err) {
                 console.log(err);
             } else {
-			//console.log('Sp_IsDuplicateDate');
-			//  console.log(rows[0].RCount.value);
               if (rows[0].RCount.value > 0) {
-
                     callback(true);
                 } else {
-
                     callback(false);
                 }
             }
         });
 request.addParameter('Date', TYPES.Date, AttdenceDate);
-
-
         connection.execSql(request);
     }
-	
 	}
     function isDuplicateDate_New(AttdenceDate,robj,eId, callback) {
  	var connection = new sqlConnection(config);
@@ -383,42 +350,19 @@ request.addParameter('Date', TYPES.Date, AttdenceDate);
             if (err) {
                 console.log(err);
             } else {
-			//console.log('Sp_IsDuplicateDate');
-			//  console.log(rows[0].RCount.value);
               if (rows[0].RCount.value > 0) {
-//callBackId(eId);
                     callback(true,eId,robj);
                 } else {
-//callBackId(eId);
                      callback(false,eId,robj);
                 }
             }
         });
 request.addParameter('Date', TYPES.Date, AttdenceDate);
-
-
         connection.execSql(request);
     }
-	
 	}
 
-
-
-
-// function toDate(dStr, format) {
-//     var now = new Date(dStr);
-//     console.log(now);
-//     /*if (format == "h:m") {
-//  		now.setHours(dStr.substr(0,dStr.indexOf(":")));
-//  		now.setMinutes(dStr.substr(dStr.indexOf(":")+1));
-//  		now.setSeconds(0);
-//  		return now;
-// 	}else 
-// 		return "Invalid Format";*/
-// }
-
 function getmonth(m) {
-
     if (m == 'Jan') {
         return '01'
     } else if (m == 'Feb') {
@@ -454,52 +398,40 @@ function excuteexcelmonthly(filename) {
     var empId = 0;
     console.log(fnameorginal);
     var month = getmonth(fnameorginal.substring(0, 3));
-//month=month++;
+
     var year = fnameorginal.substring(3, 7);
     fs.exists(xlsFile, function (exists) {
         if (exists) {
             console.log('tygui');
             var obj = xlsx.parse(xlsFile);
             var len = obj[0].data.length;
-  //          console.log(len);
             for (var i = 8; i <= len - 3; i = i + 1) {
-                // console.log(i);
                 if (obj[0].data[i - 1][0] == "CATEGORY: INFOOBJECTS") {
-                  //   console.log(i);
                     empId = obj[0].data[i][0];
                     i = i + 1;
                     continue;
                 }
-               
                 if (obj[0].data[i][0].indexOf("Present") > -1) {
-                    // console.log(obj[0].data[i][0].indexOf("Present"));
                     i = i + 5;
                     continue;
                 }
                 if (obj[0].data[i][2] == '' || obj[0].data[i][3] == '' || obj[0].data[i][2]==':' ||obj[0].data[i][3]==':'||obj[0].data[i][2]==null||obj[0].data[i][3]==null) {
-                    // if (obj[0].data[i][1] != 'Sat' || obj[0].data[i][1] != 'Sun') {
-//                    console.log(i);
-
-                    var fulldate = moment(year + '-' + month + '-' + obj[0].data[i][0],'YYYY-MM-DD');
-                    console.log(fulldate);
+                               var fulldate = year + '-' + month + '-' + obj[0].data[i][0];
                      isDuplicateDate_New(fulldate,obj[0].data[i],empId,function(IsDuplicate,Eid,robj){
                         if(!IsDuplicate){
-                          var Adate = moment(year + '-' + month + '-' + robj[0],'YYYY-MM-DD');   
+                          var Adate =year + '-' + month + '-' + robj[0];   
                     if (robj[1] != 'Sat' && robj[1] != 'Sun') {
                     insertAbsent(Eid, Adate, robj[2], robj[3], 20, 17, false);
                        
                     }
                  }
                         });
-                    // }
+                
                 } else {
-                      var fulldate = moment(year + '-' + month + '-' + obj[0].data[i][0],'YYYY-MM-DD');
+                     var fulldate =year + '-' + month + '-' + obj[0].data[i][0];
                    InsertMonthlyData(fulldate,obj[0].data[i],empId,year,month); 
-                   
                 }
             }
-
-
         } else {
             console.log('File does not exist');
         }
@@ -512,32 +444,25 @@ function InsertMonthlyData(fulldate,robj,empId,year,month) {
     
     isDuplicateDate(fulldate,function(IsDuplicate){
          if(!IsDuplicate){
-                           // var Adate = year + '-' + month + '-' + robj[0];
+                       
                          if (robj[1] != 'Sat' && robj[1] != 'Sun') {
-                         var stem=moment(year + '-' + month + '-' + robj[0]+' '+robj[2].substring(0, 2)+':'+robj[2].substring(3, 5));
-                           var Etem=moment(year + '-' + month + '-' +robj[0]+' '+robj[3].substring(0, 2)+':'+robj[3].substring(3, 5));
-                           console.log(stem);
-                           var hr=Etem.diff(stem,'hours');
-                           console.log(hr);
-                         var starttm = new Date(year, month, robj[0], robj[2].substring(0, 2), robj[2].substring(3, 5))
-                        var endtm = new Date(year, month, robj[0], robj[3].substring(0, 2), robj[3].substring(3, 5))
-                        var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-                        if (hh < 2) {
-                            console.log('HL');
+                         var start=moment(new Date(robj[0] , month, year,robj[2].substring(0, 2),robj[2].substring(3, 5)));
+                           var end=moment(new Date(robj[0] , month, year,robj[3].substring(0, 2),robj[3].substring(3, 5)));
+var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+var d = moment.duration(ms);
+var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
+                        if (d.asHours() < 2) {
+                            console.log(d.asHours());
                             insertAbsent(empId, fulldate, robj[2], robj[3], 20, 17, false);
-                        } else if (hh >= 2 && hh < 6) {
-                            console.log('FL');
+                        } else if (d.asHours() >= 2 && d.asHours() < 6) {
+                            console.log(d.asHours());
                             insertAbsent(empId, fulldate, robj[2], robj[3], 21, 17, false);
                         }
                     } 
                     else {
-                       console.log(fulldate);
                         insertCompOff(empId, fulldate, robj[2], robj[3], 17, false, 'System Entry');
-                       
                     }
                         }
-        
     });
-    
 }
 module.exports = router;
