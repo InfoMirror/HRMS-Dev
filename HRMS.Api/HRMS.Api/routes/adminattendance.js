@@ -87,18 +87,19 @@ router.post('/upload', function (req, res) {
             return;
         }
         //console.log(filename);
-        excuteexcel(filename);
+     
 
-        isDuplicateDate(getfulldateDailySheet(fnameorginal),function(isduplicate){
+        isDuplicateDate(getfulldateDailySheet(fnameorginal),0,function(isduplicate){
            if(isduplicate){
                 res.json({
             error_code: 11,
             err_desc: 'Attandance for this date is allready uploaded'
         }); 
            } else{
+                  excuteexcel(filename);
                  res.json({
             error_code: 0,
-            err_desc: ''
+            err_desc: 'Success'
         });  
            }
         });
@@ -144,10 +145,14 @@ function excuteexcel(filename) {
                                         // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
                                         // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
                                         // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-                                        var start=moment(date + '/' + month + '/' + year+' '+obj[0].data[i][2].substring(0, 2)+':'+obj[0].data[i][2].substring(3, 5)+':00');
-                                        var end=moment(date + '/' + month + '/' +year+' '+obj[0].data[i][3].substring(0, 2)+':'+obj[0].data[i][3].substring(3, 5)+':00');
-                                        var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
-                                        var d = moment.duration(ms);
+                                         if(obj[0].data[i][2].split(":")[0].length==1){
+                          obj[0].data[i][2]="0"+obj[0].data[i][2];
+                      }
+                                        var start=moment(new Date(date , month, year,obj[0].data[i][2].substring(0, 2),obj[0].data[i][2].substring(3, 5)));
+                           var end=moment(new Date(date , month, year,obj[0].data[i][3].substring(0, 2),obj[0].data[i][3].substring(3, 5)));
+var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+var d = moment.duration(ms);
+var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
   
                                         if (d.asHours() > 2) {
                                             insertCompOff(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 17, false, 'System Entry');
@@ -173,10 +178,14 @@ function excuteexcel(filename) {
                                         // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
                                         // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
                                         // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-                                         var start=moment(date + '/' + month + '/' + year+' '+obj[0].data[i][2].substring(0, 2)+':'+obj[0].data[i][2].substring(3, 5)+':00');
-                                        var end=moment(date + '/' + month + '/' +year+' '+obj[0].data[i][3].substring(0, 2)+':'+obj[0].data[i][3].substring(3, 5)+':00');
-                                        var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
-                                        var d = moment.duration(ms);
+                                          if(obj[0].data[i][2].split(":")[0].length==1){
+                          obj[0].data[i][2]="0"+obj[0].data[i][2];
+                      }
+                               var start=moment(new Date(date , month, year,obj[0].data[i][2].substring(0, 2),obj[0].data[i][2].substring(3, 5)));
+                           var end=moment(new Date(date , month, year,obj[0].data[i][3].substring(0, 2),obj[0].data[i][3].substring(3, 5)));
+var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+var d = moment.duration(ms);
+var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
                                         if (d.asHours() < 2) {
                                             console.log(1);
                                             insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
@@ -382,6 +391,9 @@ request.addParameter('empId', TYPES.VarChar, empId);
             if (err) {
                 console.log(err);
             } else {
+                if(AttdenceDate=="2016-05-04"){
+                    var t="ll";
+                }
               if (rows[0].RCount.value > 0) {
                     callback(true,eId,robj);
                 } else {

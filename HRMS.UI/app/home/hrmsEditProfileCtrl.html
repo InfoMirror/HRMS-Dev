@@ -17,13 +17,13 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="EmpId">Employee Unique Id:<span class="text-danger" ng-if="checkRole()">*</span></label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="EmpId" name="empId" ng-readonly="(Role!=HR || formData.ProfileStatus.value==24)"
+                <input type="text" class="form-control" id="EmpId" name="empId" ng-readonly="(!checkRole()|| formData.ProfileStatus.value==24)"
                     ng-required="checkRole()" ng-model="formData.EmpId.value">
 
                 <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="text-danger">Required*</span>
             </div>
             <div class="col-sm-2">
-                <button type="button" class="btn btn-sm btn-primary" ng-disabled="(Role!=HR || !(formData.ProfileStatus.value!=24))" ng-click="openModal()">Update Employee Unique Id</button>
+                <button type="button" class="btn btn-sm btn-primary" ng-disabled="(!checkRole()|| formData.ProfileStatus.value!=24)" ng-click="openModal()">{{Role}}Update Employee Unique Id</button>
             </div>
         </div>
 
@@ -152,7 +152,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="DOB">Date of Birth:<span class="text-danger">*</span></label>
             <div class="col-sm-10">
-                <olca-date id="DOB" date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true"></olca-date>
+                <olca-date id="DOB" date-options="dateOptions" input-value="formData.DOB.value" input-name="formData.DOB.value" date-required="true" show-cal="true"></olca-date>
                 <!--  <input type="text" class="form-control" id="DOB" required ng-model="formData.DOB">-->
             </div>
             <!--<div class="input-group date" id="dtpDOB">
@@ -210,7 +210,7 @@
             <label class="control-label col-sm-2" for="PassportIssueDate">Passport Issue Date:</label>
             <div class="col-sm-10">
                 <olca-date date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value"
-                    date-required="false" ng-click="startDateCalOpen($event)"></olca-date>
+                    date-required="false" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
                 <!--    <input type="text" class="form-control" id="PassportIssueDate" name="passportIssueDate" ng-model="formData.PassportIssueDate">-->
                 <!--<span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>-->
             </div>
@@ -282,7 +282,11 @@
                 <!--<span class="text-danger">*</span></label>--></label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-model="formData.BankAccountNumber.value"
-                    ng-minlength="11" ng-maxlength=15>
+                    ng-minlength="11" ng-maxlength="15">
+                    <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength">
+        Your Bank Account Number Should Contain Atleast 11 Characters</span>
+        <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength">
+        Sorry You are Exceeding the Limit</span>
                 <!--<span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>
@@ -338,7 +342,7 @@
             <label class="control-label col-sm-2" for="visaExpiryDate">Visa Expiry Date:</label>
             <div class="col-sm-10">
                 <!--<input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate.value">-->
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"></olca-date>
+                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value" show-cal="true"></olca-date>
                 <!-- <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>-->
             </div>
         </div>
@@ -347,7 +351,8 @@
             <label class="control-label col-sm-2" for="hrAccess">HR Access:</label>
             <div class="col-sm-10">
                 <label class="radio-inline">
-                    <input type="checkbox" ng-model="formData.hrAccess.value">
+                   
+                    <input type="checkbox" ng-model="formData.hrAccess">
                 </label>
             </div>
         </div>

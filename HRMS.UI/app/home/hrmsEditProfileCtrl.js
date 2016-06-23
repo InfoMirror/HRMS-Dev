@@ -100,6 +100,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         }).then(function (response) {
             $scope.formData = response.data[0];
             $scope.userDetails = $scope.formData;
+            if($scope.formData.Role.value=="HR"){
+                $scope.formData.hrAccess=true;
+            }else{
+               $scope.formData.hrAccess=false;
+            }
             //$scope.checkVal = 1;
         });
     }
@@ -199,7 +204,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             };
         }
 
-
+if($scope.formData.hrAccess){
+    $scope.formData.Role.value="HR";
+}else{
+    $scope.formData.Role.value="Employee";
+}
         //Profile Status as per to the Role
         if ($rootScope.Role == 'HR') {
             $scope.formData.ProfileStatus.value = 24;
