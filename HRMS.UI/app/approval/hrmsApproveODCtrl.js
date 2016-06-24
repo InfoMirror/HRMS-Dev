@@ -10,6 +10,10 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
         filter: true,
         columnDefs: [
             {
+                field:'Name.value',
+                displayName:'Name'
+            },
+            {
                 field: 'AbsentDate.value',
                 displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''

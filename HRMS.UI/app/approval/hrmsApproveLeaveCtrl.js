@@ -12,6 +12,10 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
         filter: true,
         columnDefs: [
             {
+                field:'Name.value',
+                displayName:'Name'
+            },
+            {
                 field: 'FromDate.value',
                 displayName: 'From',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',

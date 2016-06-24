@@ -10,6 +10,10 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
         filter: true,
         columnDefs: [
             {
+                field:'Name.value',
+                displayName:'Name'
+            },
+            {
                 field: 'CompOffDate.value',
                 displayName: 'Date',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
