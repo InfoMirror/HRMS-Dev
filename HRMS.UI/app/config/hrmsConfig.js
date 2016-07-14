@@ -1,6 +1,6 @@
 hrBaseApp.config([
-    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider',
-    function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
+    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider', 
+    function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider, $localStorage, $sessionStorage) {
         localStorageServiceProvider
             .setPrefix('hrmsApp')
             .setStorageType('sessionStorage')
@@ -11,7 +11,7 @@ hrBaseApp.config([
 
         //alert($rootScope.Role);
         //$locationProvider.html5Mode(true).hashPrefix('!');
-
+//console.log($localStorage.role);
         // $urlRouterProvider.otherwise("/404");
 
         $urlRouterProvider.when('', '/');
@@ -134,6 +134,33 @@ hrBaseApp.config([
                 templateUrl: '/app/anonymousFeedback/hrmsFeedback.html',
                 controller: 'hrmsFeedbackCtrl',
                 friendlyName: 'Anonymous Feedback'
+            })
+            .state('home.feedbackConversation', {
+                url: 'FeedbackConversation/:feedbackId',
+                templateUrl: '/app/anonymousFeedback/hrmsFeedbackConversation.html',
+                controller: 'hrmsFeedbackConversationCtrl',
+                friendlyName: 'Feedback Conversation',
+                hideInMenu: true
+            })
+            .state('home.feedbacks', {
+                url: 'feedbacks',
+                templateUrl: '/app/anonymousFeedback/hrmsAllFeedbacks.html',
+                controller: 'hrmsAllFeedbacksCtrl',
+                friendlyName: 'Feedbacks',
+                abstract: true
+                //hideInMenu: (true)?true:false
+            })
+            .state('home.feedbacks.activeFeedbacks', {
+                url: '/activeFeedbacks',
+                templateUrl: '/app/anonymousFeedback/hrmsActiveFeedbacks.html',
+                controller: 'hrmsActiveFeedbacksCtrl',
+                friendlyName: 'Active Feedbacks'
+            })
+            .state('home.feedbacks.archivedFeedbacks', {
+                url: '/archivedFeedbacks',
+                templateUrl: '/app/anonymousFeedback/hrmsArchivedFeedbacks.html',
+                controller: 'hrmsActiveFeedbacksCtrl',
+                friendlyName: 'Archived Feedbacks'
             })
     }
 ]);

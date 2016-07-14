@@ -1,0 +1,87 @@
+<style type="text/css">
+* { 
+	margin: 0; 
+	padding: 0; 
+}
+body { 
+	font: 14px/1.4 Georgia, Serif; 
+}
+#page-wrap {
+	margin: 50px;
+}
+p {
+	margin: 20px 0; 
+}
+
+	/* 
+	Generic Styling, for Desktops/Laptops 
+	*/
+	table { 
+		width: 100%; 
+		border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+	}
+	th { 
+		background: #333; 
+		color: white; 
+		font-weight: bold; 
+	}
+	td, th { 
+		padding: 6px; 
+		border: 1px solid #ccc; 
+		text-align: left; 
+	}
+</style>
+
+ <!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	
+	<title>Feedbacks</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="">
+	<style type="text/css">
+	.rowClick {
+		cursor: pointer;
+	}
+	tr.rowClick:hover {
+		background-color: #a9a9a9;
+	}
+	 </style>
+</head>
+
+<body>
+
+	<div id="page-wrap">
+
+	<h2>Feedbacks</h2>
+		
+	<table>
+		<tr>
+			<th>S.No.</th>
+			<th>Subject</th>
+			<th>Description</th>
+			<th>Posted On</th>
+			<th>Status</th>
+		</tr>
+		<tr class="rowClick" ng-repeat="feedback in archivedFeedbacks" ng-click="getFeedbackById(feedback.FeedbackId.value)">
+			<td>{{$index+1}}</td>
+			<td>{{feedback.Subject.value}}</td>
+			<td>{{feedback.Description.value}}</td>
+			<td>{{feedback.FeedbackDateTime.value|date:'medium'}}</td>
+			<td>{{feedback.Resolve.value==0?'Not resolved':'Resolved'}}</td>
+		</tr>
+	</table>
+	
+	</div>
+		
+</body>
+
+</html>

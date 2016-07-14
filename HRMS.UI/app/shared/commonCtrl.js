@@ -7,7 +7,7 @@
         if (size == undefined || size == '') {
             size = 'md';
         }
-        if (hideCancel == undefined || hideCancel == '') {
+        if (hideCancel == undefined) {
             hideCancel = true;
         }
         if (isWarning == undefined || isWarning == '') {
@@ -27,7 +27,9 @@
         });
 
         modalInstance.result.then(function (response) {
-            callback();
+            if (callback && typeof callback === 'function') {
+                callback();
+            }
         }, function (response) {
 
         });

@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form class="form form-vertical" name="feedbackForm">
+                        <form class="form form-vertical" name="feedbackForm" autocomplete="off">
                             <div class="control-group">
                                 <label>Subject<span class="text-danger">*</span></label>
                                 <div class="controls">
@@ -46,35 +46,38 @@
                         </div>
                     </div>
                 </div>
-                
-            </div>
-                <div class="col-sm-offset-1 col-sm-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>Track Existing Feedback</h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form form-vertical">
-                                <div class="control-group">
-                                    <label>Feedback Id</label>
-                                    <div class="controls">
-                                        <input type="text" class="form-control" placeholder="Enter Id">
-                                    </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <label></label>
-                                    <div class="controls">
-                                        <button type="submit" class="btn btn-primary">
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+            </div>
+            <div class="col-sm-offset-1 col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>Track Existing Feedback</h4>
                         </div>
                     </div>
+                    <div class="panel-body">
+                        <form class="form form-vertical" name="trackFeedbackForm">
+                            <div class="control-group">
+                                <label>Feedback Id<span class="text-danger">*</span></label>
+                                <div class="controls">
+                                    <input type="text" class="form-control" placeholder="Enter Id" ng-model="feedbackId" name="feedbackId" required>
+                                    <span ng-show="trackFeedbackForm.feedbackId.$error.required && trackFeedbackForm.feedbackId.$dirty" class="text-danger">Required*</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label></label>
+                                <div class="controls">
+                                    <button type="submit" ng-click="trackFeedback(feedbackId);" class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                </div>
+                                <br>
+                                <span ng-show="showErrorMsg" class="text-danger">This feedback ID does not exist.</span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+            </div>
 
         </div>

@@ -1,164 +1,98 @@
 <div class="col-sm-12">
-    
-    <div class="clearfix"></div>
-    <div class="cell-marginT-2x">
-      
- <div class="row">
-        	<div class="col-sm-8">
-										<div class="widget-box">
-											<div class="widget-header">
-												<h4 class="widget-title lighter smaller">
-													<i class="ace-icon fa fa-comment blue"></i>
-													Conversation
-												</h4>
-											</div>
 
-											<div class="widget-body">
-												<div class="widget-main no-padding">
-													<!-- #section:pages/dashboard.conversations -->
-													<div class="dialogs">
-														<div class="itemdiv dialogdiv">
-															<div class="user">
-																<img alt="Alexa's Avatar" src="../assets/avatars/avatar1.png" />
-															</div>
+	<div class="clearfix"></div>
+	<div class="cell-marginT-2x">
 
-															<div class="body">
-																<div class="time">
-																	<i class="ace-icon fa fa-clock-o"></i>
-																	<span class="green">4 sec</span>
-																</div>
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h4 class="widget-title lighter smaller">
+							<div style="text-align:left;"><i class="ace-icon fa fa-comment blue"></i>
+							{{feedbackDetails.Subject.value}}
+							  </div>
+							  <div  style="text-align:right;"> {{feedbackDetails.FeedbackDateTime.value|date:'medium'}}</div>
+							
+						</h4>
+					</div>
 
-																<div class="name">
-																	<a href="#">Alexa</a>
-																</div>
-																<div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.</div>
+					<div class="widget-body">
+						<div class="widget-main no-padding">
+							<!-- #section:pages/dashboard.conversations -->
+							<div class="dialogs">
+								<div class="itemdiv dialogdiv">
+									<div class="user">
+										<img alt="" src="../assets/avatars/avatar.png" />
+									</div>
 
-																<div class="tools">
-																	<a href="#" class="btn btn-minier btn-info">
-																		<i class="icon-only ace-icon fa fa-share"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
+									<div class="body">
+										<div class="time">
+											<!--<i class="ace-icon fa fa-clock-o"></i>-->
+											<span class="green">{{feedbackDetails.FeedbackDateTime.value|date:'medium'}}</span>
+										</div>
 
-														<div class="itemdiv dialogdiv">
-															<div class="user">
-																<img alt="John's Avatar" src="../assets/avatars/avatar.png" />
-															</div>
+										<div class="name">
+											<a href="#">Anonymous User</a>
+										</div>
+										<div class="text">{{feedbackDetails.Description.value}}</div>
+									</div>
+								</div>
+								<div class="itemdiv dialogdiv" ng-repeat="conversation in conversationDetails">
+									<div class="user">
+										<img alt="" src="../assets/avatars/avatar.png" />
+									</div>
 
-															<div class="body">
-																<div class="time">
-																	<i class="ace-icon fa fa-clock-o"></i>
-																	<span class="blue">38 sec</span>
-																</div>
+									<div class="body">
+										<div class="time">
+											<!--<i class="ace-icon fa fa-clock-o"></i>-->
+											<span class="green">{{conversation.CommentDateTime.value  | date:'MM/dd/yyyy @ h:mma'}}</span>
+										</div>
 
-																<div class="name">
-																	<a href="#">John</a>
-																</div>
-																<div class="text">Raw denim you probably haven&#39;t heard of them jean shorts Austin.</div>
+										<div class="name">
+											<a href="#">{{conversation.Username.value}}</a>
+										</div>
+										<div class="text">{{conversation.Comment.value}}</div>
+									</div>
+								</div>
+							</div>
 
-																<div class="tools">
-																	<a href="#" class="btn btn-minier btn-info">
-																		<i class="icon-only ace-icon fa fa-share"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
-
-														<div class="itemdiv dialogdiv">
-															<div class="user">
-																<img alt="Bob's Avatar" src="../assets/avatars/user.jpg" />
-															</div>
-
-															<div class="body">
-																<div class="time">
-																	<i class="ace-icon fa fa-clock-o"></i>
-																	<span class="orange">2 min</span>
-																</div>
-
-																<div class="name">
-																	<a href="#">Bob</a>
-																	<span class="label label-info arrowed arrowed-in-right">admin</span>
-																</div>
-																<div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.</div>
-
-																<div class="tools">
-																	<a href="#" class="btn btn-minier btn-info">
-																		<i class="icon-only ace-icon fa fa-share"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
-
-														<div class="itemdiv dialogdiv">
-															<div class="user">
-																<img alt="Jim's Avatar" src="../assets/avatars/avatar4.png" />
-															</div>
-
-															<div class="body">
-																<div class="time">
-																	<i class="ace-icon fa fa-clock-o"></i>
-																	<span class="grey">3 min</span>
-																</div>
-
-																<div class="name">
-																	<a href="#">Jim</a>
-																</div>
-																<div class="text">Raw denim you probably haven&#39;t heard of them jean shorts Austin.</div>
-
-																<div class="tools">
-																	<a href="#" class="btn btn-minier btn-info">
-																		<i class="icon-only ace-icon fa fa-share"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
-
-														<div class="itemdiv dialogdiv">
-															<div class="user">
-																<img alt="Alexa's Avatar" src="../assets/avatars/avatar1.png" />
-															</div>
-
-															<div class="body">
-																<div class="time">
-																	<i class="ace-icon fa fa-clock-o"></i>
-																	<span class="green">4 min</span>
-																</div>
-
-																<div class="name">
-																	<a href="#">Alexa</a>
-																</div>
-																<div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-
-																<div class="tools">
-																	<a href="#" class="btn btn-minier btn-info">
-																		<i class="icon-only ace-icon fa fa-share"></i>
-																	</a>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<!-- /section:pages/dashboard.conversations -->
-													<form>
-														<div class="form-actions">
-															<div class="input-group">
-																<input placeholder="Type your message here ..." type="text" class="form-control" name="message" />
-																<span class="input-group-btn">
-																	<button class="btn btn-sm btn-info no-radius" type="button">
+							<!-- /section:pages/dashboard.conversations -->
+							<form name="conversationForm">
+								<div class="form-actions">
+									<div class="input-group">
+										<input placeholder="Type your message here ..." type="text" class="form-control" name="replyMsg" ng-model="replyMsg" required
+										/>
+										<span ng-show="(conversationForm.replyMsg.$error.required && conversationForm.replyMsg.$dirty) || showError" class="text-danger">Required*</span>
+										<span class="input-group-btn" style="padding:0 5px;">
+																	<button class="btn btn-sm btn-info no-radius" type="button" ng-click="submitReply()">
 																		<i class="ace-icon fa fa-share"></i>
-																		Send
+																		Reply
 																	</button>
 																</span>
-															</div>
-														</div>
-													</form>
-												</div><!-- /.widget-main -->
-											</div><!-- /.widget-body -->
-										</div><!-- /.widget-box -->
-									</div><!-- /.col -->
-        </div>
-</div>
+
+										<span class="input-group-btn">
+																	<button class="btn btn-sm btn-info no-radius" ng-if="feedbackDetails.Resolve.value==0" type="button" ng-click="confirmResolve()">
+																		<i class="ace-icon fa fa-share"></i>
+																		Reply & Resolve
+																	</button>
+																	<button class="btn btn-sm btn-info no-radius" ng-if="feedbackDetails.Resolve.value==1" type="button" ng-click="confirmReopen()">
+																		<i class="ace-icon fa fa-share"></i>
+																		Reply & Reopen
+																	</button>
+																	</span>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.widget-main -->
+					</div>
+					<!-- /.widget-body -->
+				</div>
+				<!-- /.widget-box -->
+			</div>
+			<!-- /.col -->
+		</div>
+	</div>
 </div>
 
 
