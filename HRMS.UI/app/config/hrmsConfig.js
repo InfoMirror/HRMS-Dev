@@ -3,7 +3,7 @@ hrBaseApp.config([
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider, $localStorage, $sessionStorage) {
         localStorageServiceProvider
             .setPrefix('hrmsApp')
-            .setStorageType('sessionStorage')
+            .setStorageType('localStorage')
             .setNotify(true, true)
 
         //$httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
@@ -147,8 +147,8 @@ hrBaseApp.config([
                 templateUrl: '/app/anonymousFeedback/hrmsAllFeedbacks.html',
                 controller: 'hrmsAllFeedbacksCtrl',
                 friendlyName: 'Feedbacks',
-                abstract: true
-                //hideInMenu: (true)?true:false
+                abstract: true,
+                roles: ['SuperAdmin']
             })
             .state('home.feedbacks.activeFeedbacks', {
                 url: '/activeFeedbacks',

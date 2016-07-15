@@ -120,6 +120,11 @@ router.post('/getFeedbacks', function (req, res) {
                 console.log('sp_GetAllAnonymousFeedback');
                 console.log(rowCount);
                 if (rows.length > 0) {
+                    for(i=0;i<rows.length;i++)
+                    {
+                        rows[i].Subject.value = decrypt(rows[i].Subject.value);
+                        rows[i].Description.value = decrypt(rows[i].Description.value); 
+                    }
                     //rows[0].Subject.value = decrypt(rows[0].Subject.value);
                     //rows[0].Description.value = decrypt(rows[0].Description.value);
                     res.json({
@@ -161,6 +166,10 @@ router.post('/getConversationData', function (req, res) {
                 console.log('sp_GetConversationData');
                 console.log(rowCount);
                 if (rows.length > 0) {
+                    for(i=0;i<rows.length;i++)
+                    {
+                        rows[i].Comment.value = decrypt(rows[i].Comment.value);
+                    }
                     res.json({
                         type: true,
                         data: rows
@@ -206,7 +215,7 @@ router.post('/insertConversationData', function (req, res) {
         });
         request.addParameter('FeedbackId', TYPES.VarChar, req.body.feedbackId);
         request.addParameter('Username', TYPES.VarChar, req.body.username);
-        request.addParameter('Comment', TYPES.VarChar, req.body.comment);
+        request.addParameter('Comment', TYPES.VarChar, encrypt(req.body.comment));
        // request.addParameter('CommentDateTime', TYPES.DateTime,);
         connection.execSql(request);
     }

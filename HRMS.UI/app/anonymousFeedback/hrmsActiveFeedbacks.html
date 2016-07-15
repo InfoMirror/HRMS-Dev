@@ -1,42 +1,4 @@
-<style type="text/css">
-* { 
-	margin: 0; 
-	padding: 0; 
-}
-body { 
-	font: 14px/1.4 Georgia, Serif; 
-}
-#page-wrap {
-	margin: 50px;
-}
-p {
-	margin: 20px 0; 
-}
-
-	/* 
-	Generic Styling, for Desktops/Laptops 
-	*/
-	table { 
-		width: 100%; 
-		border-collapse: collapse; 
-	}
-	/* Zebra striping */
-	tr:nth-of-type(odd) { 
-		background: #eee; 
-	}
-	th { 
-		background: #333; 
-		color: white; 
-		font-weight: bold; 
-	}
-	td, th { 
-		padding: 6px; 
-		border: 1px solid #ccc; 
-		text-align: left; 
-	}
-</style>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -47,14 +9,7 @@ p {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="">
-	<style type="text/css">
-	.rowClick {
-		cursor: pointer;
-	}
-	tr.rowClick:hover {
-		background-color: #a9a9a9;
-	}
-	 </style>
+	
 </head>
 
 <body>
@@ -63,7 +18,7 @@ p {
 
 	<h2>Feedbacks</h2>
 		
-	<table>
+	<table ng-show="activeFeedbacks.length">
 		<tr>
 			<th>S.No.</th>
 			<th>Subject</th>
@@ -79,6 +34,9 @@ p {
 			<td>{{feedback.Resolve.value==0?'Active':'Resolved'}}</td>
 		</tr>
 	</table>
+	<div ng-show="activeFeedbacks.length==0">
+		There are no active feedbacks.
+	</div>
 	
 	</div>
 		

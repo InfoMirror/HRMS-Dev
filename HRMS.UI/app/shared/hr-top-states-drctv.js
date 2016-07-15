@@ -1,5 +1,5 @@
-hrBaseApp.directive('hrTopStatesDrctv', ['$state', '$rootScope',
-    function ($state, $rootScope) {
+hrBaseApp.directive('hrTopStatesDrctv', ['$state',
+    function ($state) {
         'use strict';
 
         var p = {};
@@ -14,23 +14,19 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state', '$rootScope',
         };
         p.controller = function ($scope, $state, $rootScope) {
 
-            /*$scope.showHideMenus = function () {
-                debugger;
-                if ($rootScope.Role == 'HR' && $rootScope.userDetails.ProfileStatus.value != 24) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }*/
             $scope.filterStates = function () {
+
                 $scope.states = $state.get().filter(function (x) {
+
+                    //if no permisson, return false
+                    if (angular.isDefined(x.roles) && angular.isArray(x.roles) && x.roles.indexOf($rootScope.Role) == -1)
+                        return false;
 
                     if ((x.name.indexOf($scope.parentState) == 0) && x.name.split('.').length == $scope.parentState.split('.').length + 1 && !x.hideInMenu) {
                         if (x.abstract) {
                             x.redirectState = $scope.findFirstChildState(x);
                         } else {
                             x.redirectState = x.name;
-
                         }
                         return true;
                     } else
@@ -85,7 +81,6 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state', '$rootScope',
                     $state.get().filter(function (x) {
                         if (x.name == pageLocation) {
                             $scope.stateName = x.friendlyName;
-                            $scope.userEmail = $rootScope.userDetails.UserEmail.value;
                         }
                     });
                     return 'active';
@@ -93,7 +88,11 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state', '$rootScope',
                     return '';
                 }
             }
+
+
+
         }
 
         return p;
-}]);
+    }
+]);
