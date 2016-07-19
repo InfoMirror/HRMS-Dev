@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h1>Employee Review Form </h1>
+</div>
+<div style="height:500px;" class="modal-body">
+  <div class="form-horizontal">
+    <div class="row" ng-repeat="question in questions">
+      <div class="col-md-10" align="Left">
+        <h5 ><b>{{question}}</b></h5>
+      </div>
+      <div class="col-md-2" align="center">
+        <select>
+<option ng-repeat="x in names">{{x}}</option>
+</select>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">Submit</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

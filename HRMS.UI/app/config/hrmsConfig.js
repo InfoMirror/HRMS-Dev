@@ -162,5 +162,11 @@ hrBaseApp.config([
                 controller: 'hrmsActiveFeedbacksCtrl',
                 friendlyName: 'Archived Feedbacks'
             })
+             .state('home.appraisal', {
+                url: 'Appraisal',
+                templateUrl: '/app/appraisal/hrmsAppraisal.html',
+                controller: 'hrmsAppraisalCtrl',
+                friendlyName: 'Appraisal'
+            })
     }
 ]);
