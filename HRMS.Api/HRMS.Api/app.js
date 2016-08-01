@@ -19,6 +19,7 @@ var adminattendance = require('./routes/adminattendance.js');
 var dashboard = require('./routes/dashboard.js');
 
 var approval = require('./routes/approvalCompOffOD.js');
+var appraisal = require('./routes/appraisal.js');
 
 
 app.use(bodyParser.urlencoded({
@@ -43,6 +44,7 @@ app.use('/dashboard', dashboard);
 app.use('/profile', profile);
 
 app.use('/approval',approval);
+app.use('/appraisal',appraisal);
 
 app.set('port', process.env.PORT || 9095);
 

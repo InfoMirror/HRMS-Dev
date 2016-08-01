@@ -163,7 +163,7 @@ hrBaseApp.config([
                 friendlyName: 'Archived Feedbacks'
             })
              .state('home.appraisal', {
-                url: 'Appraisal',
+                url: 'appraisal',
                 templateUrl: '/app/appraisal/hrmsAppraisal.html',
                 controller: 'hrmsAppraisalCtrl',
                 friendlyName: 'Appraisal'
