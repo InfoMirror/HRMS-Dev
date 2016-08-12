@@ -5,7 +5,9 @@ hrBaseApp.factory('appraisalFctry', ['$http', '$resource', '$q', function ($http
     }, {
             'addAppraisalInfo':{method: 'POST', params: {action: 'addAppraisalInfo'}},
             'updateAppraisalInfo':{method: 'POST', params: {action: 'updateAppraisalInfo'}},
-            'getAppraisal':{method: 'POST', params: {action: 'getAppraisal'}}
+            'submitAppraisal':{method: 'POST', params: {action: 'submitAppraisal'}},
+            'getAppraisal':{method: 'POST', params: {action: 'getAppraisal'}},
+            'getAppraisalQues':{method: 'POST', params: {action: 'getAppraisalQues'}},
         });
 
     appraisalFctryData.api = resource;

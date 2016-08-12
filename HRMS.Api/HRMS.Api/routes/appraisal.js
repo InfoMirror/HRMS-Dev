@@ -135,7 +135,41 @@ router.post('/getAppraisal', function (req, res) {
     }
 });
 
+router.post('/getAppraisalQues', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
 
-// Not the movie transporter!
+    function executeStatement() {
+      request = new Request("exec sp_getEmployeeAppraisalQues  @isTrainee", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_getEmployeeAppraisalQues');
+                console.log(rowCount);
+                if (rows.length > 0 || rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                    connection.close();
+                }
+            }
+        });
+
+        request.addParameter('isTrainee', TYPES.VarChar, req.body.isTrainee);
+        connection.execSql(request);
+    }
+});
+
+
+
 
 module.exports = router;

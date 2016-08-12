@@ -1,6 +1,6 @@
 {
-    "server":"INFOOBJECTS_PC",
-    "database":"dbHRMS",
-    "userName":"sa",
+      "server":"Infocus-PC",
+    "database":"Damini_PC",
+    "userName":"info_mirror",
     "password":"1234"
 }

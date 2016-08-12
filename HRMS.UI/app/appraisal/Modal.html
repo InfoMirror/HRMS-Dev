@@ -6,30 +6,26 @@
 
 
   <div class="form-horizontal">
-    <div class="row" ng-repeat="question in questions"  value="{{question.id}}">
+    <div class="row" ng-repeat="question in questions"  value="{{question}}">
 
       <div class="col-md-10" align="Left">
-        <h5><b>{{question.name}}</b></h5>
+        <h5><b>{{question}}</b></h5>
 
         <div class="form-horizontal">
           <div class="row">
 
-            <div class="col-md-2" align="Left">
-              <h6><b>Comments:</b></h6>
+            <div class="col-md-12" align="Left">
+              <h6><b><i><a href="#" ng-click="boxShow=!boxShow">Additional Comments</a></i></b></h6>
+              <textarea  id="inputsm" class="form-control" ng-show="boxShow"  type="text" style="resize:vertical;width:100%;" placeholder="Additional Comments..."/>
             </div>
-
-            <div class="col-md-10" align="Left">
-              <input size="70" id="inputsm"  type="text">
-            </div>
-
-
           </div>
         </div>
+        
 
       </div>
 
       <div class="col-md-2" align="center">
-        <select  name="select" required ng-model="data.singleSelect[question.id]">
+        <select  name="select" required ng-model="data.singleSelect[question]">
           <option  value="" >-- Select --</option>
        <option ng-repeat="rating in ratings"  value="{{rating.number}}">{{rating.number}}</option>
        </select>

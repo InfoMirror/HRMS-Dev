@@ -2,11 +2,24 @@
 'use strict';
 hrBaseApp.controller('ModalCtrl', ['$scope', '$rootScope', '$modal', '$modalInstance', 'appraisalFctry', function ($scope, $rootScope, $modal, $modalInstance, appraisalFctry) {
     // $scope.names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-    $scope.questions = [
-        { id: '0', name: 'Ques: ffdgsdgsdg' },
-        { id: '1', name: 'Ques: hghgihggrtgr' },
-        { id: '2', name: 'Ques: djfbfghfgdfbjhbdfbvjhdfbvhf' }
-    ]
+
+    appraisalFctry.api.getAppraisalQues({
+        isTrainee: 'False'
+    },
+        function (response) {
+            var rating = new Array();
+            if (response.data.length > 0) {
+                for (var i = 0; i < response.data.length; i++) {
+                    rating.push(response.data[i].Q_Description.value);
+
+                }
+                $scope.questions = rating;
+                //alert(rating);
+            }
+            else {
+                $scope.showErrorMsg = true;
+            }
+        });
     $scope.ratings = [
         { id: '1', number: '1' },
         { id: '2', number: '2' },
@@ -24,12 +37,15 @@ hrBaseApp.controller('ModalCtrl', ['$scope', '$rootScope', '$modal', '$modalInst
         singleSelect: []
     };
 
+
+
+
     function submitAppraisal() {
         appraisalFctry.api.submitAppraisal({
             userId: $rootScope.userDetails.UserEmail.value,
-            apprMonth:"March",
-            apprYear:"2016",
-            isAppraisal:0,
+            apprMonth: "March",
+            apprYear: "2016",
+            isAppraisal: 0,
             status: "Pending"
         },
             function (response) {
@@ -59,5 +75,6 @@ hrBaseApp.controller('ModalCtrl', ['$scope', '$rootScope', '$modal', '$modalInst
         $modalInstance.dismiss('cancel');
 
     };
+
 }]);
 
