@@ -17,7 +17,7 @@ var config = {
     }
 };
 
-router.post('/submitAppraisal', function (req, res) {
+router.post('/addAppraisalInfo', function (req, res) {
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -60,6 +60,47 @@ router.post('/submitAppraisal', function (req, res) {
 
 });
 
+router.post('/updateAppraisalInfo', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+      request = new Request("exec sp_updateAppraisalInfo  @user_id, @appraisal_month, @appraisal_year, @status", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_updateAppraisalInfo');
+                if (rows.length > 0 || rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                    connection.close();
+                }
+            }
+        });
+
+        request.addParameter('user_id', TYPES.VarChar, req.body.userId);
+        request.addParameter('appraisal_month', TYPES.VarChar, req.body.apprMonth);
+        request.addParameter('appraisal_year', TYPES.VarChar, req.body.apprYear);
+        request.addParameter('status', TYPES.VarChar, req.body.status);
+        
+        connection.execSql(request);
+    }
+
+
+    
+
+});
+
 router.post('/getAppraisal', function (req, res) {
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
@@ -79,14 +120,14 @@ router.post('/getAppraisal', function (req, res) {
             } else {
                 console.log('sp_getAppraisalInfo');
                 console.log(rowCount);
-                if (rows.length > 0 || rowCount > 0) {
+                //if (rows.length > 0 || rowCount > 0) {
                     res.json({
                         type: true,
                         data: rows
                     });
                     connection.close();
                 }
-            }
+            //}
         });
 
         request.addParameter('user_id', TYPES.VarChar, req.body.userId);

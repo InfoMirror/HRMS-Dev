@@ -1,0 +1,34 @@
+<div class="jumbotron text-center">
+  <h4 id="reviewReminder">{{reviewReminder}}</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div align="center" class="col-sm-4" ng-show="showEmpReviewForm">
+      <h3>Employee:</h3>
+      <button type="button" class="btn btn-primary" ng-click="click()">
+        Review
+    </button>
+    </div>
+
+    <div align="center" class="col-sm-4">
+      <h3>Team Lead:</h3>
+      <button id="reviewTL" type="button" disabled="true" class="btn btn-primary">
+        Review 
+    </button>
+      <button id="remindTL" type="button" disabled="true" class="btn btn-primary">
+     Remind
+    </button>
+    </div>
+
+    <div align="center" class="col-sm-4">
+      <h3>HR Management:</h3>
+      <button id="reviewHR" class="btn btn-primary" disabled="true" type="button">
+        Review 
+    </button>
+      <button id="remindHR" class="btn btn-primary" disabled="true" type="button">
+     Remind
+    </button>
+    </div>
+  </div>
+</div>

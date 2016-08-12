@@ -162,11 +162,24 @@ hrBaseApp.config([
                 controller: 'hrmsActiveFeedbacksCtrl',
                 friendlyName: 'Archived Feedbacks'
             })
-             .state('home.appraisal', {
+             .state('home.appraisals', {
                 url: 'appraisal',
                 templateUrl: '/app/appraisal/hrmsAppraisal.html',
                 controller: 'hrmsAppraisalCtrl',
-                friendlyName: 'Appraisal'
+                friendlyName: 'Appraisals',
+                abstract: true
+            })
+            .state('home.appraisals.empAppraisal', {
+                url: '/selfAppraisal',
+                templateUrl: '/app/appraisal/hrmsSelfAppraisal.html',
+                controller: 'hrmsEmpAppraisalCtrl',
+                friendlyName: 'Self Appraisal'
+            })
+            .state('home.appraisals.teamMembersAppraisal', {
+                url: '/teamMembersAppraisal',
+                templateUrl: '/app/appraisal/hrmsTeamMembersAppraisal.html',
+                controller: 'hrmsEmpAppraisalCtrl',
+                friendlyName: 'Team Members Appraisal'
             })
     }
 ]);

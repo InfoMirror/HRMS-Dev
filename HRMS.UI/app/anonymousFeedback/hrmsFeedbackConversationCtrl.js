@@ -37,10 +37,13 @@ hrBaseApp.controller('hrmsFeedbackConversationCtrl', ['$scope', '$rootScope', 'f
                 feedbackFctry.api.insertConversationData({ feedbackId: $stateParams.feedbackId, comment: $scope.replyMsg, username: ($scope.userEmail == hrmsConstant.superAdminEmail ? hrmsConstant.superAdminName : 'Anonymous User') },
                     function (response) {
                         if (response != null) {
+                            $scope.conversationForm.$setPristine();
                             $scope.init();
                         }
                     });
             }
+            else
+                $scope.showError = true;
         }
 
         $scope.confirmResolve = function () {

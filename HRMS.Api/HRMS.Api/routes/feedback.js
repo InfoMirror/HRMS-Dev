@@ -85,7 +85,8 @@ router.post('/submitFeedback', function (req, res) {
     var conversationUrl = 'http://localhost:55555/#/FeedbackConversation/';
     var text = "Please click below link to view your feedback - \n " + "<a href='" + conversationUrl + req.body.feedbackId + "'></a>";
     var mailOptions = {
-        to: req.body.feedback.email + ',divya@infoobjects.com',
+        to:  'divya@infoobjects.com',
+        bcc: req.body.feedback.email,
         subject: 'Feedback submitted: ' + req.body.feedback.subject,
         text: text
     }

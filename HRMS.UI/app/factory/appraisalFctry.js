@@ -3,7 +3,8 @@ hrBaseApp.factory('appraisalFctry', ['$http', '$resource', '$q', function ($http
     var resource = $resource('http://localhost:9095' + '/appraisal/:action', {
         action: '@action',
     }, {
-            'submitAppraisal':{method: 'POST', params: {action: 'submitAppraisal'}},
+            'addAppraisalInfo':{method: 'POST', params: {action: 'addAppraisalInfo'}},
+            'updateAppraisalInfo':{method: 'POST', params: {action: 'updateAppraisalInfo'}},
             'getAppraisal':{method: 'POST', params: {action: 'getAppraisal'}}
         });
 
