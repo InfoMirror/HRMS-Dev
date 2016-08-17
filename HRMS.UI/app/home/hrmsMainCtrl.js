@@ -66,6 +66,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 {
                     field: 'DOB.value',
                     displayName: 'Birthday',
+                    cellTemplate: '<div>{{row.entity.DOB.value | date:\'dd\-MMM\'}}</div>',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
                 }
             ]

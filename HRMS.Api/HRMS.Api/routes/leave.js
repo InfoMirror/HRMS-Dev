@@ -217,7 +217,7 @@ router.post('/insertCompOff', function (req, res) {
                 request.addParameter('EndTime', TYPES.NVarChar, '');
                 request.addParameter('CompOffStatus', TYPES.Int, req.body.CompOffStatus);
                 request.addParameter('IsManual', TYPES.Bit, req.body.isManual);
-                request.addParameter('CompOffReason', TYPES.NVarChar, req.body.compOffReason.value);
+                request.addParameter('CompOffReason', TYPES.NVarChar, req.body.compOffReason);
                 connection.execSql(request);
             }
             /*sql.open(sqlConfig, function (err, conn) {

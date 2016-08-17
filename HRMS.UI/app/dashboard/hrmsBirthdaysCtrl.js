@@ -3,7 +3,7 @@ hrBaseApp.controller('hrmsBirthdaysCtrl', ['$scope', 'dashboardFctry', function 
 
     /*Initialize*/
     $scope.init = function () {
-        $scope.message = 'Hello, There is no Upcoming Birthdays now';
+        $scope.message = 'No Upcoming Birthdays now';
         $scope.getData();
     }
 

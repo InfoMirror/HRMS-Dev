@@ -158,6 +158,7 @@ router.get('/getAllEmployeesData', function (req, res) {
                         rows[i].Name = rows[i].Name.value;
                         rows[i].UserEmail = rows[i].UserEmail.value;
                         rows[i].Team = rows[i].Team.value;
+						rows[i].ImageUrl = rows[i].ImageUrl.value;
                     }
                     res.json({
                         type: true,

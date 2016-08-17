@@ -87,7 +87,7 @@ router.post('/upload', function (req, res) {
             return;
         }
         //console.log(filename);
-     
+     //   excuteexcel(filename);
 
         isDuplicateDate(getfulldateDailySheet(fnameorginal),0,function(isduplicate){
            if(isduplicate){
@@ -108,7 +108,6 @@ router.post('/upload', function (req, res) {
     })
 
 });
-
 function excuteexcel(filename) {
     var xlsFile = 'C:/upload/' + filename;
 
@@ -206,7 +205,6 @@ var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
     });
 
 }
-
 function getfulldateDailySheet(filename){
      var date = filename.substring(0, 2);
     var month = getmonth(filename.substring(2, 5));
@@ -391,9 +389,6 @@ request.addParameter('empId', TYPES.VarChar, empId);
             if (err) {
                 console.log(err);
             } else {
-                if(AttdenceDate=="2016-05-04"){
-                    var t="ll";
-                }
               if (rows[0].RCount.value > 0) {
                     callback(true,eId,robj);
                 } else {

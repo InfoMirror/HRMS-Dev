@@ -173,6 +173,15 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.updateEmpDetails = function () {
+	if($rootScope.Role!='HR'){
+		$scope.formData.DOJ.value = null;
+		$scope.formData.BankAccountNumber.value = null;
+		$scope.formData.ReportingHead.value = null;
+		$scope.formData.PFNo.value = null;
+		$scope.formData.UAN.value = null;
+		$scope.formData.EmpId.value = null;
+		$scope.formData.Team.value = null;
+	}
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -239,7 +248,7 @@ if($scope.formData.hrAccess){
             } else if ($rootScope.Role == 'HR') {
                 alert("Profile has been updated successfully");
                 $rootScope.ShowAllStates = true;
-                $state.go('home.dashboard');
+//                $state.go('home.dashboard');
             } else if ($scope.formData.ProfileStatus.value == 24) {
                 alert("Profile has been updated successfully");
             }

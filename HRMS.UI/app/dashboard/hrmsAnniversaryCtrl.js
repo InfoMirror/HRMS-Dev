@@ -3,7 +3,7 @@ hrBaseApp.controller('hrmsAnniversaryCtrl', ['$scope', 'dashboardFctry', functio
 
     /*Initialize*/
     $scope.init = function () {
-        $scope.message = 'No Upcoming Anniversaries now !!!!!';
+        $scope.message = 'No Upcoming Work Anniversaries now !!!!!';
         $scope.getData();
     }
 
@@ -15,7 +15,7 @@ hrBaseApp.controller('hrmsAnniversaryCtrl', ['$scope', 'dashboardFctry', functio
             },
             {
                 field: 'DOJ',
-                displayName: 'Anniversary',
+                displayName: 'Date of Joining',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             }
         ]
