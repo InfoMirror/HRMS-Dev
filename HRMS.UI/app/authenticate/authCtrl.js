@@ -48,7 +48,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                 $scope.profile = str;
 				// alert(JSON.stringify(resp));
 				
-                if (resp["domain"] == 'infoobjects.com') {
+                if (resp["domain"] == 'infoobjects.com' || resp["domain"] == 'hoojook.com') {
                     var formdata = {
                         email: email,
                         image: resp.image.url,
@@ -89,7 +89,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                             console.log(error);
                         });
                 } else {
-                    alert('You are not authorized to login to this portal. Please try to login with your infoobjects.com account.');
+                    alert('You are not authorized to login to this portal. Please try to login with your infoobjects.com/hoojook.com account.');
                     $rootScope.isLoggedIn = false;
                     gapi.auth.signOut();
                     location.reload();
