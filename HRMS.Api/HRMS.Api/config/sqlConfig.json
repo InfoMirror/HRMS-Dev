@@ -1,6 +1,6 @@
 {
-    "server":"INFOOBJECTS_PC",
-    "database":"dbHRMS",
+    "server":"localhost",
+    "database":"InfoMirror",
     "userName":"sa",
-    "password":"1234"
+    "password":"Info2016!"
 }

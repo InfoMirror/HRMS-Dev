@@ -21,7 +21,7 @@ var attendanceCtrl=hrBaseApp.controller('attendanceCtrl',['Upload','$window','at
           
           
             Upload.upload({
-                url: 'http://184.168.22.225:9095/admin/upload', //webAPI exposed to upload the file
+                url: 'http://q1a.com:9095/admin/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
              

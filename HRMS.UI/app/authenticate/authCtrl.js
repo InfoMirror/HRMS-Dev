@@ -13,7 +13,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
     $scope.signin = function () {
 
         var myParams = {
-            'clientid': '142159620286-m8khm27vosmf3ovj9lbgrtj1vqd52jtj.apps.googleusercontent.com',
+            'clientid': '155870173216-9bojpojb3cgjorl5hqj6hs7oltgu764a.apps.googleusercontent.com',
             'cookiepolicy': 'single_host_origin',
             'callback': $scope.loginCallback,
             'approvalprompt': 'force',
@@ -46,6 +46,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                 str += "Email:" + email + "<br>";
                 //alert(str);
                 $scope.profile = str;
+				// alert(JSON.stringify(resp));
+				
                 if (resp["domain"] == 'infoobjects.com') {
                     var formdata = {
                         email: email,
@@ -107,7 +109,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
     }
 
     function onLoadCallback() {
-        gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
+        gapi.client.setApiKey('AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms');
+		// API Key= AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms
         gapi.client.load('plus', 'v1', function () {});
     }
 
