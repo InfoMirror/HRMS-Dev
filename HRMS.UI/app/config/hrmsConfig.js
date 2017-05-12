@@ -61,6 +61,13 @@ hrBaseApp.config([
                 friendlyName: 'Approve Profile',
                 roles: ['HR']
             })
+           .state('home.hr.deactivateUser', {
+                url: '/ApproveProfile',
+                templateUrl: '/app/home/hrmsUserDeactivation.html',
+                controller: 'hrmsUserDeactivation',
+                friendlyName: 'Activate User',
+                roles: ['HR']
+            })
             .state('home.attendance', {
                 url: 'attendance',
                 templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',
