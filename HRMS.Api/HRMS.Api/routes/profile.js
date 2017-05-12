@@ -111,26 +111,39 @@ router.get('/getAllEmployees', function (req, res) {
 
         connection.execSql(request);
     }
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_GetAllEpmloyees', tableObjectValue, function (err, results, output) {
+});
+
+
+router.get('/getDeactivatedEmployees', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_GetDeactivatedEmployees", function (err, rowCount, rows) {
             if (err) {
-                console.log('Error: ');
                 console.log(err);
             } else {
-                if (results.length > 0) {
-                    console.log(results);
+                console.log('sp_GetDeactivatedEmployees');
+                console.log(rows);
+                if (rowCount > 0) {
                     res.json({
                         type: true,
-                        data: results
+                        data: rows
                     });
                 }
             }
         });
-    });*/
+
+        connection.execSql(request);
+    }
 });
 
 router.get('/getAllEmployeesData', function (req, res) {
@@ -247,38 +260,7 @@ router.post('/getMasterValues', function (req, res) {
 });
 
 router.post('/updateEmployeeDetails', function (req, res) {
-    var connection = new sqlConnection(config);
-    /* var Request = require('tedious').Request;
-     var TYPES = require('tedious').TYPES;
-     connection.on('connect', function(err) {
-                                          request = new Request("exec TestProc @p1,@p2",function(err,rowC,rws){
-                                             if(err){
-                                                 console.log(err);
-                                             }else{
-                                                 console.log(rws); 
-                                                  connection.on('connect', function(err) {
-                                          request = new Request("exec sp_AllotLeaves @EmpId",function(err,rowC,rws){
-                                               console.log('done2'); 
-                                             if(err){
-                                                 console.log(err);
-                                             }else{
-                                                 console.log('done'); 
-                                             }
-                                              
-                                          });
-                                       
-                                      request.addParameter('EmpId', TYPES.Int,req.body.EmpId); 
-                                       connection.execSql(request);
-                                     });
-                                             }
-                                              
-                                          });
-                                       
-                                      request.addParameter('p1', TYPES.Int,null); 
-         request.addParameter('p2', TYPES.Date,null); 
-                                       connection.execSql(request);
-                                     });*/
-
+    var connection = new sqlConnection(config);    
     connection.on('connect', function (err) {
         if (err) {
             return console.error(err);
@@ -292,7 +274,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
     function executeStatement() {
 
-        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@Role", function (err, rowCount, rows) {
+        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -359,6 +341,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
         request.addParameter('ownVisa', TYPES.Bit, req.body.ownVisa.value);
         request.addParameter('visaCountry', TYPES.NVarChar, req.body.visaCountry.value);
         request.addParameter('visaExpiryDate', TYPES.Date, req.body.visaExpiryDate.value);
+        request.addParameter('IsActive', TYPES.Bit, req.body.IsActive.value);
         request.addParameter('Role', TYPES.VarChar, req.body.Role.value);
 
 
@@ -366,6 +349,40 @@ router.post('/updateEmployeeDetails', function (req, res) {
         connection.execSql(request);
     }
 
+});
+
+router.post('/updateEmployeeIsActive', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+    console.log(req.body);
+
+    function executeStatement() {
+        request = new Request("exec sp_UpdateIsActive @EmpId, @IsActive", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_UpdateIsActive');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        request.addParameter('EmpId', TYPES.NVarChar, req.body.EmpId);
+        request.addParameter('IsActive', TYPES.Bit, req.body.IsActive);
+        connection.execSql(request);    }
+    
 });
 
 
@@ -527,6 +544,7 @@ router.post('/updateEmpId', function (req, res) {
 
     function executeStatement() {
         request = new Request("exec sp_UpdateEmpId @UserEmail, @EmpId", function (err, rowCount, rows) {
+            debugger;
             if (err) {
                 console.log(err);
             } else {
@@ -545,10 +563,10 @@ router.post('/updateEmpId', function (req, res) {
                 }
             }
         });
-
-        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);
+        
+        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);        
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-
+        
         connection.execSql(request);
     }
 });

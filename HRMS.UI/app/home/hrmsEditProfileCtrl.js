@@ -3,13 +3,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
     $scope.init = function () {
         //$scope.Warningmsg=false;
+       $scope.setIsActive=true;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         } else {
             $scope.getEmpData($rootScope.passedUserEmail);
-            $rootScope.passedUserEmail = null;
+            //$rootScope.passedUserEmail = null;
         }
-
+   
         //$scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
         //   $scope.IsPassportChecked = $rootScope.userDetails.ownPassport.value;
 
@@ -104,8 +105,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 $scope.formData.hrAccess=true;
             }else{
                $scope.formData.hrAccess=false;
-            }
-            //$scope.checkVal = 1;
+            }           
+            
         });
     }
 
@@ -173,15 +174,17 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.updateEmpDetails = function () {
-	if($rootScope.Role!='HR'){
-		$scope.formData.DOJ.value = null;
-		$scope.formData.BankAccountNumber.value = null;
-		$scope.formData.ReportingHead.value = null;
-		$scope.formData.PFNo.value = null;
-		$scope.formData.UAN.value = null;
-		$scope.formData.EmpId.value = null;
-		$scope.formData.Team.value = null;
-	}
+        if($rootScope.Role!='HR'){
+            $scope.formData.DOJ.value = null;
+            $scope.formData.BankAccountNumber.value = null;
+            $scope.formData.ReportingHead.value = null;
+            $scope.formData.PFNo.value = null;
+            $scope.formData.UAN.value = null;
+            $scope.formData.EmpId.value = null;
+            $scope.formData.Team.value = null;
+        }
+        if ($scope.formData.IsActive.value == '' || $scope.formData.IsActive.value == undefined)
+            $scope.formData.IsActive.value = true;
         if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
             $scope.formData.Children1.value = null;
         if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -212,12 +215,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 value: null
             };
         }
-
-if($scope.formData.hrAccess){
-    $scope.formData.Role.value="HR";
-}else{
-    $scope.formData.Role.value="Employee";
-}
+        if($scope.formData.hrAccess){
+            $scope.formData.Role.value="HR";
+        }else{
+            $scope.formData.Role.value="Employee";
+        }
         //Profile Status as per to the Role
         if ($rootScope.Role == 'HR') {
             $scope.formData.ProfileStatus.value = 24;
@@ -235,10 +237,10 @@ if($scope.formData.hrAccess){
         profileFctry.updateEmpDetails($scope.formData).then(function (response) {
             if (response.data == 'Profile Updated') {
                 $scope.getEmpData($rootScope.userDetails.UserEmail);
-                /*alert('Your profile has been updated successfully.');
+                alert('Your profile has been updated successfully.');
                 if($rootScope.Role=='HR'){
                     $state.go('home.dashboard')
-                }*/
+                }
             }
             $rootScope.passedUserEmail = undefined;
             if ($scope.formData.ProfileStatus.value == 23 || $scope.formData.ProfileStatus.value == 22) {
@@ -299,12 +301,13 @@ if($scope.formData.hrAccess){
             size: 'md',
             resolve: {
                 aValue: function () {
-                    return $rootScope.userDetails.UserEmail
+
+                    return $rootScope.passedUserEmail
+                    
                 }
             }
         });
-        modalInstance.result.then(function (paramFromDialog) {
-            debugger;
+        modalInstance.result.then(function (paramFromDialog) {           
             $scope.paramFromDialog = paramFromDialog;
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);  
         });
