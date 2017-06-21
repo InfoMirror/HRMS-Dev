@@ -24,10 +24,12 @@
     "multer": "^1.1.0",
     "node-sqlserver-unofficial": "^1.4.0",
     "node-xlsx": "^0.6.0",
-    "tedious": "^1.14.0"
+    "tedious": "^1.14.0",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "bower-sync": "^0.1.1",
+    "gulp": "^3.9.1",
     "gulp-inject": "^3.0.0",
     "wiredep": "^3.0.0"
   }

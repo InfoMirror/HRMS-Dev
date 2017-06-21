@@ -6,6 +6,7 @@
 
 
   <div class="form-horizontal">
+
     <div class="row" ng-repeat="question in questions"  value="{{question}}">
 
       <div class="col-md-10" align="Left">
@@ -16,7 +17,7 @@
 
             <div class="col-md-12" align="Left">
               <h6><b><i><a href="#" ng-click="boxShow=!boxShow">Additional Comments</a></i></b></h6>
-              <textarea  id="inputsm" class="form-control" ng-show="boxShow"  type="text" style="resize:vertical;width:100%;" placeholder="Additional Comments..."/>
+              <textarea  id="txtArea" ng-model="data.textAreaValue[$index]"  class="form-control" ng-show="boxShow"  type="text" style="resize:vertical;width:100%;" placeholder="Additional Comments..."/>
             </div>
           </div>
         </div>
@@ -24,12 +25,11 @@
 
       </div>
 
-      <div class="col-md-2" align="center">
-        <select  name="select" required ng-model="data.singleSelect[question]">
-          <option  value="" >-- Select --</option>
+      <div   class="col-md-2" align="center">
+        <select  name="select" id="form_select" class="form-control" ng-model="data.singleSelect[$index]" required>
+        <option  value=""  ng-disabled="true" >-- Select --</option>
        <option ng-repeat="rating in ratings"  value="{{rating.number}}">{{rating.number}}</option>
        </select>
-
       </div>
 
 
@@ -41,7 +41,8 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">Submit</button>
+  <button class="btn btn-primary"  ng-click="saveForm()">Save</button>
+  <button class="btn btn-primary" type="submit"  ng-click="submitform()">Submit</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
 </form>

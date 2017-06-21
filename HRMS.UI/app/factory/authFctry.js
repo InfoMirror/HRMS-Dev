@@ -1,7 +1,7 @@
 hrBaseApp.factory('authFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var authDataFctry = {};
   //  var resource = $resource("http://mayank-pc:9095" + '/account/:action', {
-    var resource = $resource("http://localhost:9095" + '/account/:action', {
+    var resource = $resource("http://192.168.0.202:9095" + '/account/:action', {
         action: '@action',
     },
     {

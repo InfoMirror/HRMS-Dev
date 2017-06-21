@@ -181,5 +181,17 @@ hrBaseApp.config([
                 controller: 'hrmsEmpAppraisalCtrl',
                 friendlyName: 'Team Members Appraisal'
             })
+            .state('home.appraisals.archievedAppraisals', {
+                url: '/archievedAppraisals',
+                templateUrl: '/app/appraisal/archievedAppraisals.html',
+                controller: 'archievedAppraisalsCtrl',
+                friendlyName: 'Archieved Appraisals'
+            })
+            .state('home.appraisals.addRemoveQuestion', {
+                url: '/addRemoveQuestion',
+                templateUrl: '/app/appraisal/addRemoveQuestion.html',
+                controller: 'addRemoveQuestionCtrl',
+                friendlyName: 'Add/Remove Questions'
+            })
     }
 ]);

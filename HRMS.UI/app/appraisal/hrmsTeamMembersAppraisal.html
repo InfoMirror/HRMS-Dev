@@ -1,0 +1,14 @@
+<div class="jumbotron text-center">
+  <h2>{{pendingAppraisal}}</h2>
+</div>
+
+<div class= "container form-horizontal">
+ <div  ng-repeat="teamMember in teamMembers" value="{{teamMember}}">
+ <div class="col-md-10"  align="Left">
+        <h5><b>{{teamMember}} review is pending</b></h5>      
+      </div>
+      <div style="margin-top: 5px;"  class="col-md-2" >
+        <button class="btn btn-primary" ng-click="fillReviewForm(teamMember)">Review</button>
+      </div>
+</div>
+  </div>

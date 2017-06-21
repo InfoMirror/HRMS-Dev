@@ -2,7 +2,7 @@ hrBaseApp.factory('attendanceFctry', ['$http', '$resource', '$q', function ($htt
     //$httpProvider.defaults.headers.post['Content-Type'] = undefined;
     var attendanceFctry = {};
    // var resource = $resource("http://mayank-pc:9095" + '/admin/:action', {
-    var resource = $resource("http://localhost:9095" + '/account/:action', {
+    var resource = $resource("http://192.168.0.202:9095" + '/account/:action', {
         action: '@action',
     },
     {

@@ -1,0 +1,28 @@
+<form name = "myForm" >
+<div class="modal-header">
+  <h1>Remove Questions </h1>
+</div>
+<div style="overflow:scroll; height:500px;" class="modal-body">
+
+
+  <div class="form-horizontal">
+
+    <div class="row" ng-repeat="question in questions"  value="{{question}}" >
+      <div class="col-md-1" align="Left" >
+           <input type="checkbox" style="height:20px;width:25px;margin-left:10px" ng-model="question.ISQuestionChecked">
+      </div>
+       <div   class="col-md-11" align="Left"  >
+           <h4>{{question.Q_Description}}</h4>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary"  ng-click="remove()">Remove</button>
+</div>
+</form>

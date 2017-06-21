@@ -1,0 +1,17 @@
+<div class="jumbotron ">
+
+  <div ng-click="yearList.show = !yearList.show" ng-repeat="appraisals in archievedAppraisals| orderBy:'year'" >
+
+    <div  style="margin-left:10px;">
+      <i ng-if="!yearList.show" class='fa fa-plus-square fa-lg data-toggle' style='float:left; margin-top:5px' data-toggle='collapse'
+        aria-expanded='true'>&nbsp;</i>
+      <i ng-if="yearList.show" class='fa fa-minus-square-o fa-lg data-toggle' style='float:left; margin-top:5px' data-toggle='collapse'
+        aria-expanded='true'>&nbsp;</i>
+      <h3 ><b>{{appraisals.year}}</b></h3>
+    </div>
+    <div class="row" ng-repeat="review in appraisals.reviews| orderBy:'name'" value="{{review.name}}" ng-if="yearList.show"
+    style="margin-left:30px;" ng-click="getEmpAppraisalRating(review.name,appraisals.year)">
+    <h5><a href="#">{{review.name}}</a></h5>
+  </div>
+  </div>
+</div>

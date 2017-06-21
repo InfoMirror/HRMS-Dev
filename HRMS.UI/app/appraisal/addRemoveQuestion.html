@@ -1,0 +1,109 @@
+<div class="clearfix">
+
+</div>
+<div class="cell-marginT-2x">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>Add New Question</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form form-horizontal" name="feedbackForm" autocomplete="off">
+                        <div class="control-group">
+                            <label>Skills:<span class="text-danger">*</span></label>
+                            <div class="controls">
+                                <select name="skill" id="form_select" class="form-control" ng-model="skillModel" required>
+                                     <option  value=""  ng-disabled="true" >-- Select Skills --</option>
+                                     <option >Hard</option>
+                                       <option >Soft</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label>Trainee <span class="text-danger">*</span></label>
+                                <div class="controls">
+                                    <select name="trainee" id="form_select" ng-model="traineeModel" class="form-control"  required>
+                                     <option  value=""  ng-disabled="true" >-- Select --</option>
+                                     <option >True</option>
+                                       <option >False</option>
+
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label>Weightage <span class="text-danger">*</span></label>
+                                <div class="controls">
+                                    <select name="weightage" id="form_select" ng-model="weightageModel" class="form-control"  required>
+                                     <option  value=""  ng-disabled="true" >-- Select --</option>
+                                     <option >1</option>
+                                       <option >2</option>
+
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label>Question Active <span class="text-danger">*</span></label>
+                                <div class="controls">
+                                    <select name="activeQuestion" id="form_select"  ng-model="activeModel"class="form-control"  required>
+                                     <option  value=""  ng-disabled="true" >-- Select --</option>
+                                     <option >True</option>
+                                       <option >False</option>
+
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label>Question Desciption <span class="text-danger">*</span></label>
+                                <div class="controls">
+                                     <textarea class="form-control" name="description" ng-model="descriptionModel" placeholder="Enter Description" style="resize:vertical;width:100%;"  required></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="control-group">
+                                <div class="control-group">
+                                    <label></label>
+                                    <div class="controls">
+                                        <button type="submit" ng-click="AddQuestion()" class="btn btn-primary">
+                                            Add Question
+                                        </button>
+                                    </div>
+                                </div>
+                    </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-offset-1 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>Remove Existing Question</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form class="form form-vertical" name="trackFeedbackForm">
+
+                        <div class="control-group">
+                            <label></label>
+                            <div class="controls center">
+                                <button type="submit" ng-click="RemoveQuestion()"  class="btn btn-primary ">
+                                            Remove
+                                        </button>
+                            </div>
+                            <br>
+                        </div>
+                    </form>
+                </div>
+            </div>

@@ -15,7 +15,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
         var myParams = {
             'clientid': '142159620286-m8khm27vosmf3ovj9lbgrtj1vqd52jtj.apps.googleusercontent.com',
             'cookiepolicy': 'single_host_origin',
-            'callback': $scope.loginCallback,
+            'callback': function(){alert(0);},
             'approvalprompt': 'force',
             'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
         };
