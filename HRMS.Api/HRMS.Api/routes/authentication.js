@@ -19,6 +19,7 @@ var config = {
 };
 
 router.post('/login', function (req, res) {
+    console.log('config: ', config)
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -182,23 +183,7 @@ function insertupdateuser(userid, email) {
         request.addParameter('UserId', TYPES.NVarChar, userid);
         request.addParameter('Email', TYPES.NVarChar, email);
         connection.execSql(request);
-    }
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(userid, email);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_InsertUpdateLogin', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(output[0]);
-                console.log(results);
-            }
-        });
-        if (err) {
-            console.log('Connection Error: ' + err);
-        }
-
-    });*/
+    } 
 }
 var empData = [];
 
@@ -230,26 +215,6 @@ function selectEmployeeDetails(email) {
         request.addParameter('UserEmail', TYPES.VarChar, email);
         connection.execSql(request);
     }
-    /*sql.open(sqlConfig, function (err, conn) {
-        //  console.log(res.body.email);
-        var tableObjectValue = new Array("SelectByEmail", email);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log(err);
-            } else {
-                //  console.log(results);
-                empData = results;
-                return results;
-            }
-        });
-        if (err) {
-            console.log('Connection Error: ' + err);
-        }
-
-
-
-    });*/
 }
 
 function InsertEmployeeDetails(email) {
@@ -317,25 +282,6 @@ function InsertEmployeeDetails(email) {
         reqEmpDetailsInsert.addParameter('Role', TYPES.VarChar, "Employee");
 
         connection.execSql(reqEmpDetailsInsert);
-    }
-    /*sql.open(sqlConfig, function (err, conn) {
-        //  console.log(res.body.email);
-        var tableObjectValue = new Array("0", email, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 22);
-        var pm = conn.procedureMgr();
-        pm.callproc('[sp_InsertUpdateEmployeeDetails]', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log(err);
-            } else {
-                //  console.log(results);
-
-            }
-        });
-        if (err) {
-            console.log('Connection Error: ' + err);
-        }
-
-
-
-    });*/
+    } 
 }
 module.exports = router;

@@ -564,7 +564,7 @@ router.post('/updateEmpId', function (req, res) {
             }
         });
         
-        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail.value);        
+        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail);        
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
         
         connection.execSql(request);

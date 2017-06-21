@@ -255,26 +255,7 @@ router.post('/getLeaveSummary', function (req, res) {
         });
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
         connection.execSql(request);
-    }
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(req.body.EmpId, '');
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_GetLeaveSummaryWithBreakup', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log('Error: ');
-                console.log(err);
-            } else {
-                if (results.length > 0) {
-                    console.log(results);
-                    res.json({
-                        type: true,
-                        data: results
-                    });
-                }
-            }
-        });
-    });*/
+ } 
 });
 
 router.get('/getHolidayCalendar', function (req, res) {
@@ -306,27 +287,6 @@ router.get('/getHolidayCalendar', function (req, res) {
         });
 
         connection.execSql(request);
-    }
-
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_getHolidayCalendar', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log('Error: ');
-                console.log(err);
-            } else {
-                if (results.length > 0) {
-                    console.log(results);
-                    res.json({
-                        type: true,
-                        data: results
-                    });
-                }
-            }
-        });
-    });*/
+    }   
 });
 module.exports = router;

@@ -6,7 +6,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
        $scope.setIsActive=true;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
-        } else {
+        }       
+        else {
             $scope.getEmpData($rootScope.passedUserEmail);
             //$rootScope.passedUserEmail = null;
         }
@@ -100,6 +101,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
+            console.log($scope.formData)
             $scope.userDetails = $scope.formData;
             if($scope.formData.Role.value=="HR"){
                 $scope.formData.hrAccess=true;
@@ -266,6 +268,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getGenders = function (MasterTypeId) {
         profileFctry.getMasterValue(MasterTypeId).then(function (response) {
             $scope.genders = response.data;
+            console.log($scope.genders)
         });
     }
 

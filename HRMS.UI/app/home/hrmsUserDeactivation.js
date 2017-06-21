@@ -22,6 +22,14 @@ hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 
                 field: 'Team.value',
                 displayName: 'Team'
           },
+            
+            {
+                field: 'StatusType.value',
+                displayName: 'Show Details',
+                enableColumnMenu: true,
+                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
+
+            },
 
             {
                 field: 'Action',
@@ -43,6 +51,11 @@ hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 
         function(response) {
             $scope.message = "Error in populating employee details.";
         });
+        
+         $scope.getEmployeeDetails = function (rowId) {
+            $rootScope.passedUserEmail = rowId;
+            $state.go('home.editProfile');
+        }
     }
 
     /*$scope.updateStatus = function (IsActive, rowId) {
