@@ -57,62 +57,19 @@ hrBaseApp.controller('hrmsMainCtrl', [
             ]
         }
 
-        $scope.birthdaysGridOptions = {
-            columnDefs: [
-                {
-                    field: 'Name.value',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'DOB.value',
-                    displayName: 'Birthday',
-                    cellTemplate: '<div>{{row.entity.DOB.value | date:\'dd\-MMM\'}}</div>',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
-
-        $scope.AnniversaryGridOptions = {
-            columnDefs: [
-                {
-                    field: 'Name.value',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'DOJ.value',
-                    displayName: 'Anniversary',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
-
-        $scope.holidayCalendarGridOptions = {
-            columnDefs: [
-                {
-                    field: 'FestivalName.value',
-                    displayName: 'Festival Name'
-                },
-                {
-                    field: 'FestivalDate.value',
-                    displayName: 'Festival Date',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
-
 
         $scope.getBirthdayData = function () {
             dashboardFctry.getBirthdays().then(function (response) {
-                $scope.birthdaysGridOptions.data = response.data;
+                //$scope.birthdaysGridOptions.data = response.data;
+                 $scope.getBirthdays = response.data;
+                 //console.log("hello",$scope.getBirthdays)
             });
         }
 
         $scope.getAnniversaryData = function () {
             dashboardFctry.getAnniversary().then(function (response) {
-                $scope.AnniversaryGridOptions.data = response.data;
+               // $scope.AnniversaryGridOptions.data = response.data;
+                $scope.getAnniversaries = response.data;
             });
         }
 
@@ -126,7 +83,8 @@ hrBaseApp.controller('hrmsMainCtrl', [
         $scope.getHolidayCalendar = function () {
             dashboardFctry.getHolidayCalendar().then(function (response) {
                 // console.log(response.data);
-                $scope.holidayCalendarGridOptions.data = response.data;
+               // $scope.holidayCalendarGridOptions.data = response.data;
+                $scope.holidayCalendar = response.data;
             });
         }
 
