@@ -6,29 +6,30 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
 
     $scope.approveCompOffGridOptions = {
         enableSorting: true,
-        enableFiltering: true,
+        enableColumnMenus: true,
+        enableFiltering:true,
         filter: true,
         columnDefs: [
             {
                 field:'Name.value',
-                displayName:'Name'
+                displayName:'NAME',
             },
             {
                 field: 'CompOffDate.value',
-                displayName: 'Date',
+                displayName: 'DATE',
                 cellFilter: 'date:\'dd-MMM-yyyy\''
             },
             {
                 field: 'CompOffReason.value',
-                displayName: 'CompOff Reason'
+                displayName: 'COMP OFF REASON'
             },
             {
                 field: 'CompOffStatus.value',
-                displayName: 'Approval Status'
+                displayName: 'APPROVAL STATUS'
             },
             {
                 field: 'Action',
-                displayName: 'Action',
+                displayName: 'ACTION',
                 cellTemplate: '<div ng-show="row.entity.CompOffStatus.value==\'Filed\'"><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
                 enableFiltering: false
 
