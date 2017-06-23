@@ -32,14 +32,15 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
                 displayName: 'Reason',
                 enableFiltering: false
             },
-            {
-                field: 'Status.value',
-                displayName: 'Approval Status'
-            },
+            // {
+            //     field: 'Status.value',
+            //     displayName: 'Approval Status',
+            //     cellTemplate: '<div style="margin-left: 30%;" ng-class="{\'fa fa-check clr-green\':row.entity.Status.value == \'Approved\',\'fa fa-close clr-red\':row.entity.Status.value == \'Rejected\'}">{{row.entity.Status.value}}</div>'
+            // },
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div ng-show="row.entity.Status.value==\'Pending\'"><a ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%; ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)">Reject</button></div>',
                 enableFiltering: false
             }
         ]

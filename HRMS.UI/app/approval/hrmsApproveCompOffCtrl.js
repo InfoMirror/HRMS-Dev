@@ -23,17 +23,18 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
                 field: 'CompOffReason.value',
                 displayName: 'COMP OFF REASON'
             },
-            {
-                field: 'CompOffStatus.value',
-                displayName: 'APPROVAL STATUS'
-            },
+            // {
+            //     field: 'CompOffStatus.value',
+            //     displayName: 'APPROVAL STATUS',
+            //     cellTemplate: '<div ng-if="CompOffStatus.value ==\'Pending\'">Pending</div><div class="fa fa-check" ng-if="CompOffStatus.value == \'Approved\'">Approved</div><div class="fa fa-close" ng-if="CompOffStatus.value == \'Denied\'">Denied</div>'
+            // },
             {
                 field: 'Action',
                 displayName: 'ACTION',
-                cellTemplate: '<div ng-show="row.entity.CompOffStatus.value==\'Filed\'"><a ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a> </hr> <a ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
+                cellTemplate: '<div style="margin-top: 2%;margin-left: 30%;" ng-show="row.entity.CompOffStatus.value==\'Filed\'"><button class="btn btn-xs btn-green"  ng-click="grid.appScope.updateStatus\(\'approved\',row.entity.Id)"">Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.updateStatus\(\'rejected\',row.entity.Id)" style="margin-left:5%;">Reject</button></div>',
                 enableFiltering: false
-
             }
+            
         ]
     };
 

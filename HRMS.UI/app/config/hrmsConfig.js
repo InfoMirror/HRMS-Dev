@@ -44,7 +44,8 @@ hrBaseApp.config([
                 templateUrl: '/app/home/hrmsEditProfileCtrl.html',
                 controller: 'hrmsEditProfileCtrl',
                 friendlyName: 'Edit Profile',
-                roles: ['Employee', 'HR']
+                roles: ['Employee', 'HR'],
+                hideInMenu: true
             })
             .state('home.hr', {
                 url: 'hr',
@@ -61,7 +62,7 @@ hrBaseApp.config([
                 friendlyName: 'Approve Profile',
                 roles: ['HR']
             })
-           .state('home.hr.deactivateUser', {
+            .state('home.hr.deactivateUser', {
                 url: '/ApproveProfile',
                 templateUrl: '/app/home/hrmsUserDeactivation.html',
                 controller: 'hrmsUserDeactivation',
@@ -155,5 +156,5 @@ hrBaseApp.config([
                 roles: ['Employee', 'HR']
             })
 
-      }
+    }
 ]);

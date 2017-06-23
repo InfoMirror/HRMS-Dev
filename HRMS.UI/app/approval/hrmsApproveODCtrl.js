@@ -23,14 +23,15 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
                 displayName: 'Reason',
                 enableFiltering: false
             },
-            {
-                field: 'ODStatus.value',
-                displayName: 'Approval Status'
-            },
+            // {
+            //     field: 'ODStatus.value',
+            //     displayName: 'Approval Status',
+            //     cellTemplate: '<div style="margin-left: 30%;" ng-class="{\'fa fa-check clr-green\':row.entity.ODStatus.value == \'Approved\',\'fa fa-close clr-red\':row.entity.ODStatus.value == \'Rejected\'}">{{row.entity.ODStatus.value}}</div>'
+            // },
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div ng-show="row.entity.ODStatus.value==\'Filed\'"><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
+                cellTemplate: '<div style="margin-left: 30%; margin-top:2%;" ng-show="row.entity.ODStatus.value==\'Filed\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" >Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-left: 5%;">Reject</button></div>'
             }
         ]
     };
