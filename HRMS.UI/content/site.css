@@ -167,10 +167,11 @@ tr.text-center {
     height: 150px;
 }
 .rowRed{
- background-color: #ff4c4c !important;
+
+ color:  #e56060 !important;
 }
 
 .rowawq{
-    background-color: #4ca64c !important;
+    color: #37a000 !important;   
 }
 

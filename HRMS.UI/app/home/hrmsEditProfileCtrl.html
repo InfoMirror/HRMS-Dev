@@ -72,16 +72,15 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="row" ng-show="!checkRole()">
                     <div class="employee-info">
                         <div class="col-sm-4">
                             <p> <span class="font-regular">Employee Email:</span> <span class="clr-light">{{userDetails.UserEmail.value}}</span>
                                 <br>
                                 <span class="font-regular">Date of joining:</span> <span class="clr-light">{{userDetails.DOJ.value}}</span>                                </p>
-                                <br>
-                                  <span class="font-regular">Designation: </span>
-                                <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
+                            <br>
+                            <span class="font-regular">Designation: </span>
+                            <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
                                                         <option value=" " style="display:none">Select One</option>
                                                         <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation.value==designation.Id.value}}">{{designation.Value.value}}</option>
                                                     </select>
@@ -281,9 +280,9 @@
                                             <div class="form-group">
                                                 <label class="required">Relation with Emergency Contact</label>
                                                 <select class="form-control" ng-model="formData.RelationWithEC.value">
-                     <option value="0" style="display:none">Select One</option>
-                     <option ng-repeat="relation in relations" value="{{relation.Id.value}}" ng-selected="{{formData.RelationWithEC.value==relation.Id.value}}">{{relation.Value.value}}</option>
-                     </select>
+                                                  <option value="0" style="display:none">Select One</option>
+                                                <option ng-repeat="relation in relations" value="{{relation.Id.value}}" ng-selected="{{formData.RelationWithEC.value==relation.Id.value}}">{{relation.Value.value}}</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -345,104 +344,108 @@
                                                 <label>Bank Account Number</label>
                                                 <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-model="formData.BankAccountNumber.value"
                                                     ng-minlength="11" ng-maxlength="15">
-                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength">
-        Your Bank Account Number Should Contain Atleast 11 Characters</span>
-                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength">
-        Sorry You are Exceeding the Limit</span>
+                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength">Your Bank Account Number Should Contain Atleast 11 Characters</span>
+                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength">Sorry You are Exceeding the Limit</span>
                                                     <span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="text-danger">Required*</span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="form-group">
-                                        <label for="passport" class="mr5">Do you own Passport</label>
-                                        <input type="checkbox" name="passport" id="passport">
-                                        <div class="reveal-if-active">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Passport No</label>
-                                                        <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value">
-                                                        <span ng-show="editForm.passportNo.$error.required && editForm.passportNo.$dirty" class="text-danger">Required*</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Passport Issue Place</label>
-                                                        <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value">
-                                                        <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="text-danger">Required*</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Passport Issue Date</label>
-                                                        <olca-date class="form-control" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value"
-                                                            date-required="false" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
-
-                                                            <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Passport Expiry Date</label>
-                                                        <olca-date min-date="ToMin" class="form-control" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
-                                                            input-name="formData.PassportExpiryDate.value" date-required="false"
-                                                            ng-click="endDateCalOpen($event)" show-cal="true"></olca-date> >
-                                                            <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label for="passport" class="mr5">Do you own Passport</label>
+                                <input type="checkbox" name="passport" id="passport">
+                                <div class="reveal-if-active">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport No</label>
+                                                <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value">
+                                                <span ng-show="editForm.passportNo.$error.required && editForm.passportNo.$dirty" class="text-danger">Required*</span>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport Issue Place</label>
+                                                <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value">
+                                                <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport Issue Date</label>
+                                                <olca-date class="form-control" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value"
+                                                    date-required="false" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
 
-                                    <div class="form-group">
-                                        <label for="visa" class="mr5">Do you own Visa Status</label>
-                                        <input type="checkbox" name="visa" id="visa" ng-model="formData.ownVisa.value">
-                                        <div class="reveal-if-active">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Visa Country</label>
-                                                        <select class="form-control" ng-model="formData.visaCountry.value" visibility="false">
+                                                    <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport Expiry Date</label>
+                                                <olca-date min-date="ToMin" class="form-control" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
+                                                    input-name="formData.PassportExpiryDate.value" date-required="false" ng-click="endDateCalOpen($event)"
+                                                    show-cal="true"></olca-date> >
+                                                    <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="visa" class="mr5">Do you own Visa Status</label>
+                                <input type="checkbox" name="visa" id="visa" ng-model="formData.ownVisa.value">
+                                <div class="reveal-if-active">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Visa Country</label>
+                                                <select class="form-control" ng-model="formData.visaCountry.value" visibility="false">
                                                         <option value=" " style="display:none">Select One</option>
                                                         <option value="USA">USA</option>
                                                         <option value="France">France</option>
                                                         <option value="Thailand">Thailand</option>
                                                     </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Visa Expiry Date</label>
-                                                        <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"
-                                                            show-cal="true"></olca-date>
-                                                            <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">
-                                        <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Back</a>
-
-
-
-                                        <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
-
-                                        <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="checkRole()">Approve & Save</button>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Visa Expiry Date</label>
+                                                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"
+                                                    show-cal="true"></olca-date>
+                                                    <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">&nbsp;</div>
-                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group" ng-show="checkRole()">
+                                <label class="mr5" for="hrAccess">HR Access:</label>
+                                <input type="checkbox" ng-model="formData.hrAccess"> </label>
+                            </div>
+
+                            <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">
+                                <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Back</a>
+
+
+
+                                <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
+
+                                <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="checkRole()">Approve & Save</button>
                             </div>
                         </div>
-                        <!-- Tab pane Other Info -->
+                        <div class="col-sm-6">&nbsp;</div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
+                <!-- Tab pane Other Info -->
             </div>
-        </form>
     </div>
+</div>
+</form>
+</div>
 </div>

@@ -30,7 +30,8 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
                 //console.log('OD Data: ');
                 //console.log(response.data);
                 if (response.data == "OD Updated") {
-                    // $scope.getAbsentData($rootScope.userDetails);
+                    alert("OD Filed");
+                   $scope.getAbsentData($rootScope.userDetails);
                 }
             });
         }

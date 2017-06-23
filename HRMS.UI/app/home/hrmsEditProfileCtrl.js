@@ -275,6 +275,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getDesignations = function (MasterTypeId) {
         profileFctry.getMasterValue(MasterTypeId).then(function (response) {
             $scope.designations = response.data;
+            console.log($scope.designations);
         });
     }
 

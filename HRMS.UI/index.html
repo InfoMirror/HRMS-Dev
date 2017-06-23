@@ -15,18 +15,18 @@
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- text fonts -->
-   
 
 
-    <!-- ace styles -->     
+
+    <!-- ace styles -->
     <link href="/assets/css/style.css" rel="stylesheet">
-  
-    <!-- ace settings handler -->  
+
+    <!-- ace settings handler -->
 
     <link href="/Content/toastr.min.css" rel="stylesheet" />
 
     <link href="/Content/site.css" rel="stylesheet" />
-    <link href="/Content/styles.css" rel="stylesheet" />
+    
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script');
@@ -39,7 +39,7 @@
 
         function onLoadCallback() {
             gapi.client.setApiKey('AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms');
-            gapi.client.load('plus', 'v1', function () {});
+            gapi.client.load('plus', 'v1', function () { });
         }
     </script>
 </head>
@@ -66,7 +66,7 @@
     <script src="/assets/js/bootstrap.js"></script>
 
 
- 
+
 
     <!-- JS -->
     <script src="/Scripts/toastr.min.js"></script>
@@ -121,7 +121,7 @@
     <script src="/app/home/hrmsMainCtrl.js"></script>
     <script src="/app/home/hrmsNoRights.js"></script>
     <script src="/app/home/hrRoleCtrl.js"></script>
-     <script src="/app/home/hrmsUserDeactivation.js"></script>    
+    <script src="/app/home/hrmsUserDeactivation.js"></script>
     <script src="/app/leaves/applyCompOffMdlCtrl.js"></script>
     <script src="/app/leaves/applyleaveCtrl.js"></script>
     <script src="/app/leaves/applyleaveMdlCtrl.js"></script>
@@ -138,7 +138,35 @@
     <script src="/app/shared/hr-top-states-drctv.js"></script>
     <script src="/app/values/hrmsSettingsVal.js"></script>
     <!--endinject-->
+    <script>
+        var FormStuff = {
 
+            init: function () {
+                this.applyConditionalRequired();
+                this.bindUIActions();
+            },
+
+            bindUIActions: function () {
+                $("input[type='radio'], input[type='checkbox']").on("change", this.applyConditionalRequired);
+            },
+
+            applyConditionalRequired: function () {
+
+                $(".require-if-active").each(function () {
+                    var el = $(this);
+                    if ($(el.data("require-pair")).is(":checked")) {
+                        el.prop("required", true);
+                    } else {
+                        el.prop("required", false);
+                    }
+                });
+
+            }
+
+        };
+
+        FormStuff.init();
+    </script>
 </body>
 
 </html>
