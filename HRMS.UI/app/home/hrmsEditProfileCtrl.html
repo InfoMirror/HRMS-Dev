@@ -133,7 +133,6 @@
                                                     <label class="required">First Name</label>
                                                     <input type="text" class="form-control" id="FirstName" name="firstName" required ng-model="formData.FirstName.value">
 
-
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -425,14 +424,17 @@
                             </div>
                             <div class="form-group" ng-show="checkRole()">
                                 <label class="mr5" for="hrAccess">HR Access:</label>
-                                <input type="checkbox" ng-model="formData.hrAccess"> </label>
+                                <input type="checkbox" ng-model="formData.hrAccess"> 
+                            </div>
+
+                            <div class="form-group" ng-show="checkRole()">
+                                <label class="mr5 required" for="IsActive">IsActive:</label>                               
+                                <input type="checkbox" ng-model="formData.IsActive.value" required>
+                             <label class="mr5">   (Uncheck this checkbox to deactivate the Employee)</label>
                             </div>
 
                             <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">
                                 <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Back</a>
-
-
-
                                 <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
 
                                 <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="checkRole()">Approve & Save</button>

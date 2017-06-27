@@ -12,7 +12,7 @@
             <br>
             <i ng-show="upload_form.file.$error.maxSize">File too large 
             {{file.size / 1000000|number:1}}MB: max 20M</i>
-            <button type="submit" ng-click="submit()">submit</button>
+            <button class="btn btn-green" type="submit" ng-click="submit()">submit</button>
             <p>{{progress}}</p>
         </div>
 
