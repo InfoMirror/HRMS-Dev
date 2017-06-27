@@ -20,8 +20,7 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             },
             {
                 field: 'ODReason.value',
-                displayName: 'Reason',
-                enableFiltering: false
+                displayName: 'Reason'
             },
             // {
             //     field: 'ODStatus.value',

@@ -47,26 +47,38 @@ router.post('/getAbsents', function (req, res) {
         });
         request.addParameter('EmployeeId', TYPES.VarChar, req.body.EmpId.value);
         connection.execSql(request);
-    }
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array(req.body.EmpId, "");
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_GetAbsentByEmployeeId', tableObjectValue, function (err, results, output) {
+    }   
+});
+
+router.get('/getAllAbsents', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_GetAllAbsent", function (err, rowCount, rows) {
             if (err) {
-                console.log('Error in Getting Absents: ');
                 console.log(err);
             } else {
-                if (results.length > 0) {
-                    console.log(results);
+                console.log('sp_GetAllAbsent');
+                console.log(rows);
+                if (rowCount > 0) {
                     res.json({
                         type: true,
-                        data: results
+                        data: rows
                     });
                 }
             }
-        });
-    });*/
+        });       
+        connection.execSql(request);
+    }
 });
 
 router.post('/fileOD', function (req, res) {

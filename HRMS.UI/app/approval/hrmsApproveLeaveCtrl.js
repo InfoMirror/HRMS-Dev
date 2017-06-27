@@ -29,8 +29,7 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             },
             {
                 field: 'Reason.value',
-                displayName: 'Reason',
-                enableFiltering: false
+                displayName: 'Reason'
             },
             // {
             //     field: 'Status.value',
@@ -40,8 +39,8 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%; ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)">Reject</button></div>',
-                enableFiltering: false
+                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%; ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)">Reject</button></div>'
+                
             }
         ]
     }

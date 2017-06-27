@@ -57,6 +57,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                     authFctry.login(formdata).then(function (response) {
 
                             if (response.data.length > 0) {
+                                
                                 $rootScope.userDetails = response.data[0];
                                 $rootScope.Role = response.data[0].Role.value;
                                 /* if ($rootScope.userDetails.Role == 'HR') {
