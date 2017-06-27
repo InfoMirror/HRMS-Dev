@@ -6,14 +6,6 @@ hrBaseApp.config([
             .setStorageType('sessionStorage')
             .setNotify(true, true)
 
-        //$httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
-        //$httpProvider.defaults.headers.common.Pragma = "no-cache";
-
-        //alert($rootScope.Role);
-        //$locationProvider.html5Mode(true).hashPrefix('!');
-
-        // $urlRouterProvider.otherwise("/404");
-
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.when('/', '');
         $stateProvider
@@ -49,7 +41,7 @@ hrBaseApp.config([
             })
             .state('home.hr', {
                 url: 'hr',
-                templateUrl: '/app/home/hrRoleCtrl.html',
+                templateUrl: '/app/HRRoles/hrRoleCtrl.html',
                 controller: 'hrRoleCtrl',
                 friendlyName: 'HR Roles',
                 abstract: true,
@@ -57,16 +49,25 @@ hrBaseApp.config([
             })
             .state('home.hr.approveProfile', {
                 url: '/ApproveProfile',
-                templateUrl: '/app/home/hrmsApproveProfileCtrl.html',
+                templateUrl: '/app/HRRoles/hrmsApproveProfileCtrl.html',
                 controller: 'hrmsApproveProfileCtrl',
                 friendlyName: 'Approve Profile',
                 roles: ['HR']
             })
+
             .state('home.hr.deactivateUser', {
-                url: '/ApproveProfile',
-                templateUrl: '/app/home/hrmsUserDeactivation.html',
+                url: '/DeactivateUser',
+                templateUrl: '/app/HRRoles/hrmsUserDeactivation.html',
                 controller: 'hrmsUserDeactivation',
                 friendlyName: 'Activate User',
+                roles: ['HR']
+            })
+
+            .state('home.hr.getAllAbsents', {
+                url: '/GetAllAbsents',
+                templateUrl: '/app/HRRoles/getAllAbsentsCtrl.html',
+                controller: 'getAllAbsentsCtrl',
+                friendlyName: 'Employee Absents',
                 roles: ['HR']
             })
             .state('home.attendance', {
@@ -155,6 +156,6 @@ hrBaseApp.config([
                 hideInMenu: true,
                 roles: ['Employee', 'HR']
             })
-
+  
     }
 ]);
