@@ -12,14 +12,13 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             columnDefs: [
                 {
                     field: 'AbsentDate.value',
-                    displayName: 'Date',
+                    displayName: 'DATE',
                     enableColumnMenu: false,
                     cellFilter: 'date:\'dd-MMM-yyyy\''
             }
             , {
                     field: 'AbsentType.value',
-                    displayName: 'Absent Type',
-                    enableFiltering: false,
+                    displayName: 'ABSENT TYPE',
                     enableColumnMenu: false
             }
          /*   ,{
@@ -29,19 +28,17 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             }*/
             , {
                     field: 'StartTime.value',
-                    displayName: 'Start Time',
-                    enableFiltering: false,
+                    displayName: 'START TIME',
                     enableColumnMenu: false
             }
             , {
                     field: 'EndTime.value',
-                    displayName: 'End Time',
-                    enableFiltering: false,
+                    displayName: 'END TIME',
                     enableColumnMenu: false
             }
             , {
                     field: 'ODStatus.value',
-                    displayName: 'Approval Status',
+                    displayName: 'APPROVAL STATUS',
                     enableColumnMenu: false,
                     cellTemplate: '<div>{{row.entity.ODStatus.value}}<a ng-click="grid.appScope.openModal(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus.value)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
             }

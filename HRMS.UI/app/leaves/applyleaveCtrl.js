@@ -16,7 +16,7 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
         columnDefs: [
             {
                 field: 'FromDate.value',
-                displayName: 'From Date',
+                displayName: 'FROM DATE',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\''
                 /*filter: {
@@ -25,7 +25,7 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             },
             {
                 field: 'ToDate.value',
-                displayName: 'To Date',
+                displayName: 'TO DATE',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\''
                 /*filter: {
@@ -39,14 +39,13 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             },*/
             {
                 field: 'Reason.value',
-                displayName: 'Reason',
-                enableFiltering: false,
+                displayName: 'REASON',
                 enableColumnMenu: false
 
             },
             {
                 field: 'Status.value',
-                displayName: 'Current Status',
+                displayName: 'CURRENT STATUS',
                 enableColumnMenu: false
                 /*filter: {
                     condition: uiGridConstants.filter.CONTAINS

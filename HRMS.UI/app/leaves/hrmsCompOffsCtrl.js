@@ -16,7 +16,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
         columnDefs: [
             {
                 field: 'CompOffDate.value',
-                displayName: 'CompOff Date',
+                displayName: 'COMP OFF DATE',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
                 filter: {
@@ -31,14 +31,13 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
             },*/
             {
                 field: 'IsManual.value',
-                displayName: 'Sytem Identified',
+                displayName: 'SYTEM IDENTIFIED',
                 enableColumnMenu: false,
-                enableFiltering: false,
                 cellTemplate: '<input type="checkbox" disabled ng-checked="grid.appScope.isSystemIdentified(row.entity.IsManual.value)">'
             },
             {
                 field: 'CompOffStatus.value',
-                displayName: 'Approval Status',
+                displayName: 'APPROVAL STATUS',
                 enableColumnMenu: false,
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS

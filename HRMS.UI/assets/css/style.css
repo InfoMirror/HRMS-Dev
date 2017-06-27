@@ -587,5 +587,10 @@ input[type="radio"]:checked ~ .reveal-if-active, input[type="checkbox"]:checked 
 
 }
 
+i.ui-grid-icon-down-dir {
+    color: #37a000;
+}
 
-
+i.ui-grid-icon-up-dir {
+    color: #37a000;
+}
