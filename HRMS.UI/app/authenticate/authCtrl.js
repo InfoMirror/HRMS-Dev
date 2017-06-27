@@ -13,7 +13,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
     $scope.signin = function () {
 
         var myParams = {
-            'clientid': '155870173216-9bojpojb3cgjorl5hqj6hs7oltgu764a.apps.googleusercontent.com',
+            'clientid': '992426570127-t4qu0240qtparq2p66mlllgvk0g48e1c.apps.googleusercontent.com',
             'cookiepolicy': 'single_host_origin',
             'callback': $scope.loginCallback,
             'approvalprompt': 'force',
@@ -110,7 +110,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
     }
 
     function onLoadCallback() {
-        gapi.client.setApiKey('AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms');
+        gapi.client.setApiKey('AIzaSyAN-28GWZMmudO6dlrtY5fEqTI8-YmiByE');
 		// API Key= AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms
         gapi.client.load('plus', 'v1', function () {});
     }
