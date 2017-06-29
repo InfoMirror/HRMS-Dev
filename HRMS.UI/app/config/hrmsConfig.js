@@ -1,16 +1,17 @@
-hrBaseApp.config([
-    '$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'localStorageServiceProvider',
-    function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
+hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+    'localStorageServiceProvider',
+    function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider,
+        localStorageServiceProvider) {
         localStorageServiceProvider
             .setPrefix('hrmsApp')
             .setStorageType('sessionStorage')
             .setNotify(true, true)
-
+        $locationProvider.html5Mode(true);
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.when('/', '');
         $stateProvider
             .state('home', {
-                url: '/',
+                url: '',
                 templateUrl: '/app/home/hrmsFrameCtrl.html',
                 controller: 'hrmsFrameCtrl',
                 abstract: true,
@@ -25,14 +26,14 @@ hrBaseApp.config([
                 roles: ['Employee', 'HR']
             })
             .state('home.dashboard', {
-                url: 'dashboard',
+                url: '/dashboard',
                 templateUrl: '/app/home/hrmsMainCtrl.html',
                 controller: 'hrmsMainCtrl',
                 friendlyName: 'Dashboard',
                 roles: ['Employee', 'HR']
             })
             .state('home.editProfile', {
-                url: 'editProfile',
+                url: '/editProfile',
                 templateUrl: '/app/home/hrmsEditProfileCtrl.html',
                 controller: 'hrmsEditProfileCtrl',
                 friendlyName: 'Edit Profile',
@@ -40,7 +41,7 @@ hrBaseApp.config([
                 hideInMenu: true
             })
             .state('home.hr', {
-                url: 'hr',
+                url: '/hr',
                 templateUrl: '/app/HRRoles/hrRoleCtrl.html',
                 controller: 'hrRoleCtrl',
                 friendlyName: 'HR Roles',
@@ -71,7 +72,7 @@ hrBaseApp.config([
                 roles: ['HR']
             })
             .state('home.attendance', {
-                url: 'attendance',
+                url: '/attendance',
                 templateUrl: '/app/leaves/hrmsAttendanceCtrl.html',
                 controller: 'hrmsAttendanceCtrl',
                 friendlyName: 'Attendance Tracker',
@@ -121,7 +122,7 @@ hrBaseApp.config([
                 roles: ['HR']
             })
             .state('home.approval', {
-                url: 'approval',
+                url: '/approval',
                 templateUrl: '/app/approval/hrmsApprovalCtrl.html',
                 controller: 'hrmsApprovalCtrl',
                 friendlyName: 'Give Approval',
@@ -150,12 +151,11 @@ hrBaseApp.config([
                 roles: ['Employee', 'HR']
             })
             .state('home.norights', {
-                url: 'NoRights',
+                url: '/NoRights',
                 templateUrl: '/app/home/hrmsNoRights.html',
                 controller: 'hrmsNoRights',
                 hideInMenu: true,
                 roles: ['Employee', 'HR']
             })
-  
     }
 ]);

@@ -3,10 +3,16 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
     // #region Initialize
 
     $scope.init = function () {
-        $rootScope.userDetails = localStorageService.get('userDetails');
-        if ($rootScope.userDetails != undefined) {
-            localStorageService.set('userDetails', undefined);
-            location.reload();
+        var isLoggedIn = localStorageService.get('isLoggedIn');
+        if (isLoggedIn !== 'true') {
+            $rootScope.userDetails = localStorageService.get('userDetails');
+            if ($rootScope.userDetails != undefined) {
+                localStorageService.set('userDetails', undefined);
+                location.reload();
+            }
+        }
+        else {
+            $state.go('home.dashboard');
         }
     }
 
@@ -46,8 +52,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                 str += "Email:" + email + "<br>";
                 //alert(str);
                 $scope.profile = str;
-				// alert(JSON.stringify(resp));
-				
+                // alert(JSON.stringify(resp));
+
                 if (resp["domain"] == 'infoobjects.com' || resp["domain"] == 'hoojook.com') {
                     var formdata = {
                         email: email,
@@ -56,36 +62,37 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                     console.log(formdata);
                     authFctry.login(formdata).then(function (response) {
 
-                            if (response.data.length > 0) {
-                                
-                                $rootScope.userDetails = response.data[0];
-                                $rootScope.Role = response.data[0].Role.value;
-                                /* if ($rootScope.userDetails.Role == 'HR') {
-                                     $rootScope.Role = $rootScope.userDetails.Role;
-                                 } else {
-                                     $rootScope.Role = $rootScope.userDetails.Role;
-                                 }*/
-                                $rootScope.isLoggedIn = true;
-                                $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
-                                localStorageService.set('userDetails', $rootScope.userDetails);
-                                localStorageService.set('role', $rootScope.Role);
-                                /*if (response.data[0].Role.value == "Employee" && (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23)) {
-                                    $rootScope.ShowAllStates = false;
-                                    $state.go('home.editProfile');
-                                } else if (response.data[0].Role.value == "HR") {
-                                    $rootScope.ShowAllStates = true;
-                                    $state.go('home.dashboard');
-                                }*/
-                                if (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23) {
-                                    $rootScope.ShowAllStates = false;
-                                    $state.go('home.editProfile');
-                                } else {
-                                    $rootScope.ShowAllStates = true;
-                                    $state.go('home.dashboard');
-                                }
-                            }
+                        if (response.data.length > 0) {
 
-                        },
+                            $rootScope.userDetails = response.data[0];
+                            $rootScope.Role = response.data[0].Role.value;
+                            /* if ($rootScope.userDetails.Role == 'HR') {
+                                 $rootScope.Role = $rootScope.userDetails.Role;
+                             } else {
+                                 $rootScope.Role = $rootScope.userDetails.Role;
+                             }*/
+                            $rootScope.isLoggedIn = true;
+                            localStorageService.set('isLoggedIn', true);
+                            $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
+                            localStorageService.set('userDetails', $rootScope.userDetails);
+                            localStorageService.set('role', $rootScope.Role);
+                            /*if (response.data[0].Role.value == "Employee" && (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23)) {
+                                $rootScope.ShowAllStates = false;
+                                $state.go('home.editProfile');
+                            } else if (response.data[0].Role.value == "HR") {
+                                $rootScope.ShowAllStates = true;
+                                $state.go('home.dashboard');
+                            }*/
+                            if (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23) {
+                                $rootScope.ShowAllStates = false;
+                                $state.go('home.editProfile');
+                            } else {
+                                $rootScope.ShowAllStates = true;
+                                $state.go('home.dashboard');
+                            }
+                        }
+
+                    },
                         function (error) {
 
                             console.log(error);
@@ -103,8 +110,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
     }
 
-
-
     $scope.logout = function () {
         gapi.auth.signOut();
         location.reload();
@@ -112,8 +117,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
     function onLoadCallback() {
         gapi.client.setApiKey('AIzaSyAN-28GWZMmudO6dlrtY5fEqTI8-YmiByE');
-		// API Key= AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms
-        gapi.client.load('plus', 'v1', function () {});
+        // API Key= AIzaSyCqxVsrNNoPSCgGvoalJaYjDmjlSkfO6ms
+        gapi.client.load('plus', 'v1', function () { });
     }
 
     $scope.init();

@@ -26,11 +26,11 @@ hrBaseApp.directive('hrHeaderDrctv', [
 
         p.controller = function ($scope, $rootScope, $state) {
             $scope.logout1 = function () {
-                //   alert('1');
-                gapi.auth.signOut();
                 $rootScope.isLoggedIn = false;
                 $rootScope.userDetails = [];
-                localStorageService.set('userDetails', '');
+                localStorageService.set('userDetails', undefined);
+                localStorageService.set('isLoggedIn', undefined);
+                localStorageService.set('role', undefined);
                 $state.go('account');
             }
 

@@ -1,17 +1,17 @@
-hrBaseApp.run(['$rootScope', '$http', '$modal', '$state', '$window',
-    function ($rootScope, $http, $modal, $state, $window) {
-        $rootScope.isModified = false;
+hrBaseApp.run(['$rootScope', '$http', '$modal', '$state', '$window', 'localStorageService',
+    function ($rootScope, $http, $modal, $state, $window, localStorageService) {
+        //$rootScope.isModified = false;
+        var isLoggedIn = localStorageService.get('isLoggedIn');
+        if (isLoggedIn !== 'true') {
+            $state.go('account');
+        }
         $rootScope.$on("$stateChangeStart", function (event, next, current, fromState) {
+            var currentRole = localStorageService.get('role');
             $rootScope.toState = next.name;
             $rootScope.error = null;
-            if (next.name.includes('hr') && $rootScope.Role != 'HR') {
+            if (next.name.includes('hr') && currentRole != 'HR') {
                 event.preventDefault();
                 $state.go('home.norights');
-            }
-
-             if ($rootScope.toState == "account" && $rootScope.isLoggedIn == true) {    
-                 event.preventDefault();            
-                $state.go(fromState.name);
             }
         });
     }
