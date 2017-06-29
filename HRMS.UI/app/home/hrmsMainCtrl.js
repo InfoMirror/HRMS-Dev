@@ -1,5 +1,5 @@
 hrBaseApp.controller('hrmsMainCtrl', [
-  '$scope', '$rootScope', 'dashboardFctry', '$state',
+    '$scope', '$rootScope', 'dashboardFctry', '$state',
     function ($scope, $rootScope, dashboardFctry, $state) {
         'use strict';
         //  $rootScope.mywindow = $window;
@@ -60,37 +60,37 @@ hrBaseApp.controller('hrmsMainCtrl', [
 
         $scope.getBirthdayData = function () {
             dashboardFctry.getBirthdays().then(function (response) {
-                //$scope.birthdaysGridOptions.data = response.data;
-                 $scope.getBirthdays = response.data;
-                 //console.log("hello",$scope.getBirthdays)
+                if (response.data.length <= 0) {
+                   $scope.noBirthday = true;
+                }
+                else {
+                    $scope.getBirthdays = response.data;
+                }
             });
         }
 
         $scope.getAnniversaryData = function () {
             dashboardFctry.getAnniversary().then(function (response) {
-               // $scope.AnniversaryGridOptions.data = response.data;
-                $scope.getAnniversaries = response.data;
+                if (response.data.length <= 0) {
+                    $scope.noAnniversary = true;
+                }
+                else {
+                    $scope.getAnniversaries = response.data;
+                }
             });
         }
-
-        /*$scope.getHolidayData = function () {
-            dashboardFctry.getHolidays().then(function (response) {
-                // console.log(response.data);
-                $scope.holidaysGridOptions.data = response.data;
-            });
-        }*/
 
         $scope.getHolidayCalendar = function () {
             dashboardFctry.getHolidayCalendar().then(function (response) {
                 // console.log(response.data);
-               // $scope.holidayCalendarGridOptions.data = response.data;
+                // $scope.holidayCalendarGridOptions.data = response.data;
                 $scope.holidayCalendar = response.data;
             });
         }
 
-       /* $scope.showCalendarData = function () {
-            $scope.ShowCalendar = true;
-        }*/
+        /* $scope.showCalendarData = function () {
+             $scope.ShowCalendar = true;
+         }*/
 
         $scope.getProfileData = function () {
             if ($rootScope.userDetails != undefined) {
@@ -114,5 +114,5 @@ hrBaseApp.controller('hrmsMainCtrl', [
         }
 
         $scope.init();
-  }
+    }
 ]);
