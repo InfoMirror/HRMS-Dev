@@ -21,7 +21,7 @@ var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','a
           
           
             Upload.upload({
-                url: 'http://184.168.22.225:9095/admin/uploadMonthly', //webAPI exposed to upload the file
+                url: 'http://localhost:9095/admin/uploadMonthly', //webAPI exposed to upload the file
                 data:{file:file,month:$scope.SelMonth,year:$scope.SelYear} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
