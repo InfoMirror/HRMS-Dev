@@ -1,17 +1,18 @@
 hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', '$modal', function ($scope, $rootScope, profileFctry, $state, $timeout, $modal) {
     'use strict';
-
+    $scope.validAlphaOnly = /^[A-z]+$/;
+    $scope.Issubmitted = false;
     $scope.init = function () {
         //$scope.Warningmsg=false;
-       $scope.setIsActive=true;
+        $scope.setIsActive = true;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
-        }       
+        }
         else {
             $scope.getEmpData($rootScope.passedUserEmail);
             //$rootScope.passedUserEmail = null;
         }
-   
+
         //$scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
         //   $scope.IsPassportChecked = $rootScope.userDetails.ownPassport.value;
 
@@ -61,6 +62,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         // alert($rootScope.message);
     }
 
+    $scope.onNextClick = function () {
+        $scope.Issubmitted = true;
+        
+    }
+
     $scope.checkDOJ = function () {
         var currDate = new Date();
         $scope.formData.DOJ.value = document.getElementById("DOJ").children[0].value;
@@ -103,12 +109,12 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.formData = response.data[0];
             console.log($scope.formData)
             $scope.userDetails = $scope.formData;
-            if($scope.formData.Role.value=="HR"){
-                $scope.formData.hrAccess=true;
-            }else{
-               $scope.formData.hrAccess=false;
-            }           
-            
+            if ($scope.formData.Role.value == "HR") {
+                $scope.formData.hrAccess = true;
+            } else {
+                $scope.formData.hrAccess = false;
+            }
+
         });
     }
 
@@ -176,7 +182,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.updateEmpDetails = function () {
-        if($rootScope.Role!='HR'){
+        if ($rootScope.Role != 'HR') {
             $scope.formData.DOJ.value = null;
             $scope.formData.BankAccountNumber.value = null;
             $scope.formData.ReportingHead.value = null;
@@ -217,10 +223,10 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 value: null
             };
         }
-        if($scope.formData.hrAccess){
-            $scope.formData.Role.value="HR";
-        }else{
-            $scope.formData.Role.value="Employee";
+        if ($scope.formData.hrAccess) {
+            $scope.formData.Role.value = "HR";
+        } else {
+            $scope.formData.Role.value = "Employee";
         }
         //Profile Status as per to the Role
         if ($rootScope.Role == 'HR') {
@@ -240,7 +246,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             if (response.data == 'Profile Updated') {
                 $scope.getEmpData($rootScope.userDetails.UserEmail);
                 alert('Your profile has been updated successfully.');
-                if($rootScope.Role=='HR'){
+                if ($rootScope.Role == 'HR') {
                     $state.go('home.dashboard')
                 }
             }
@@ -252,7 +258,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             } else if ($rootScope.Role == 'HR') {
                 alert("Profile has been updated successfully");
                 $rootScope.ShowAllStates = true;
-//                $state.go('home.dashboard');
+                //                $state.go('home.dashboard');
             } else if ($scope.formData.ProfileStatus.value == 24) {
                 alert("Profile has been updated successfully");
             }
@@ -307,13 +313,13 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 aValue: function () {
 
                     return $rootScope.passedUserEmail
-                    
+
                 }
             }
         });
-        modalInstance.result.then(function (paramFromDialog) {           
+        modalInstance.result.then(function (paramFromDialog) {
             $scope.paramFromDialog = paramFromDialog;
-            $scope.getEmpData($rootScope.userDetails.UserEmail.value);  
+            $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         });
     }
 
