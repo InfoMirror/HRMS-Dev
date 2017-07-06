@@ -14,18 +14,16 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                     field: 'AbsentDate.value',
                     displayName: 'DATE',
                     enableColumnMenu: false,
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
+                    cellFilter: 'date:\'dd-MMM-yyyy\'',
+                    headerCellClass: 'text-center'
             }
             , {
                     field: 'AbsentType.value',
                     displayName: 'ABSENT TYPE',
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    headerCellClass: 'text-center'
             }
-         /*   ,{
-                field: 'EmployeeName',
-                displayName: 'Name',
-                enableColumnMenu: false
-            }*/
+       
             , {
                     field: 'StartTime.value',
                     displayName: 'START TIME',

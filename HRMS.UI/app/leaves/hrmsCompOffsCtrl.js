@@ -22,19 +22,13 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS
                 }
-            },
-           /* {
-                field: 'EmployeeName',
-                displayName: 'Name',
-                filterCellFiltered:true,
-                enableColumnMenu: false
-            },*/
-            {
-                field: 'IsManual.value',
-                displayName: 'SYTEM IDENTIFIED',
-                enableColumnMenu: false,
-                cellTemplate: '<input type="checkbox" disabled ng-checked="grid.appScope.isSystemIdentified(row.entity.IsManual.value)">'
-            },
+            },          
+            // {
+            //     field: 'IsManual.value',
+            //     displayName: 'SYTEM IDENTIFIED',
+            //     enableColumnMenu: false,
+            //     cellTemplate: '<input type="checkbox" disabled ng-checked="grid.appScope.isSystemIdentified(row.entity.IsManual.value)">'
+            // },
             {
                 field: 'CompOffStatus.value',
                 displayName: 'APPROVAL STATUS',
@@ -42,7 +36,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS
                 },
-                cellTemplate: '<div>{{row.entity.CompOffStatus.value}}<a ng-click="grid.appScope.markCompOff(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.CompOffStatus.value)" style="margin-right: 8%;float: right;" href="">File CompOff</a></div>'
+                cellTemplate: '<div style="text-align: center;">{{row.entity.CompOffStatus.value}}<a ng-click="grid.appScope.markCompOff(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.CompOffStatus.value)" style="margin-right: 8%;float: right;" href="">File CompOff</a></div>'
             }
         ]
     };

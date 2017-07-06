@@ -60,7 +60,7 @@ hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '
                 url: '/DeactivateUser',
                 templateUrl: '/app/HRRoles/hrmsUserDeactivation.html',
                 controller: 'hrmsUserDeactivation',
-                friendlyName: 'Activate User',
+                friendlyName: 'Deactivated User',
                 roles: ['HR']
             })
 

@@ -11,27 +11,32 @@ hrBaseApp.controller('getAllAbsentsCtrl', ['$scope', 'leaveFctry', '$rootScope',
             data: null,
             columnDefs: [
                 {
+                    field: 'EmployeeName.value',
+                    displayName: 'Employee Name',
+                    enableColumnMenu: false
+                },
+                {
                     field: 'AbsentDate.value',
                     displayName: 'DATE',
                     enableColumnMenu: false,
                     cellFilter: 'date:\'dd-MMM-yyyy\''
-            }
-            , {
+                }
+                , {
                     field: 'AbsentType.value',
                     displayName: 'ABSENT TYPE',
                     enableColumnMenu: false
-            }         
-            , {
+                }
+                , {
                     field: 'StartTime.value',
                     displayName: 'START TIME',
                     enableColumnMenu: false
-            }
-            , {
+                }
+                , {
                     field: 'EndTime.value',
                     displayName: 'END TIME',
                     enableColumnMenu: false
-            }                  
-        ]
+                }
+            ]
         };
     }
 
