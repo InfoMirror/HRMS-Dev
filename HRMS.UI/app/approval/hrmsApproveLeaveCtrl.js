@@ -1,4 +1,5 @@
-hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state', function ($scope, $rootScope, approvalFctry, $state) {
+hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state','$modal', 
+function ($scope, $rootScope, approvalFctry, $state,$modal) {
 
     $scope.init = function () {
         $scope.getAppliedLeaves({
@@ -39,7 +40,7 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.updateStatus(\'Approved\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%; ng-click="grid.appScope.updateStatus(\'Rejected\',row.entity.Id)">Reject</button></div>'
+                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.openModal(\'Approve\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%"; ng-click="grid.appScope.openModal(\'Reject\',row.entity.Id)">Reject</button></div>'
                 
             }
         ]
@@ -50,12 +51,32 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             $scope.approveLeaveGridOptions.data = response.data;
         });
     }
+      $scope.openModal = function (status, rowId) {
+            {
+
+                var modalInstance = $modal.open({
+                    templateUrl: '/app/shared/confirmationBoxMdlCtrl.html',
+                    controller: 'confirmationBoxMdlCtrl',
+                    size: 'md',
+                    resolve: {
+                        aValue: function () {
+                            return status
+                        }
+                    }
+                });
+                modalInstance.result.then(function (paramFromDialog) {
+                    if (paramFromDialog) {
+                        $scope.updateStatus(status, rowId);
+                    }
+                });
+            }
+        }
 
     $scope.updateStatus = function (status, rowId) {
         var _status;
-        if (status == 'Approved')
+        if (status == 'Approve')
             _status = 18;
-        else if (status == 'Rejected')
+        else if (status == 'Reject')
             _status = 19;
 
         approvalFctry.approveLeave({

@@ -427,7 +427,7 @@ background: rgba(243,143,29,0.3);
 }
 .employee-info {
 	margin-bottom: 15px;
-	border-bottom: #eee 1px solid;
+	border-bottom: #dddddd 1px solid;
 }
 .form-tab .nav-tabs > li > a {
     border-radius: 0;
