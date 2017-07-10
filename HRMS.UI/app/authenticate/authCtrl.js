@@ -59,7 +59,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                         email: email,
                         image: resp.image.url,
                     }
-                    console.log(formdata);
                     authFctry.login(formdata).then(function (response) {
 
                         if (response.data.length > 0) {
@@ -94,7 +93,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
 
                     },
                         function (error) {
-
                             console.log(error);
                         });
                 } else {

@@ -45,7 +45,6 @@ hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 
     
     $scope.getDeactivatedEmployees = function(){
         profileFctry.getDeactivatedEmployees().then(function(response){
-            console.log(response.data);
              $scope.UserDeactivateGridOptions.data = response.data;
         },
         function(response) {
@@ -70,8 +69,6 @@ hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 
     }*/
     
     $scope.updateStatus = function (status, rowId) {
-        console.log(status,rowId);        
-  
        profileFctry.updateEmployeeIsActive({
             EmpId: rowId,
             IsActive: status

@@ -58,27 +58,7 @@ router.get('/getAllRelations', function (req, res) {
         });
 
         connection.execSql(request);
-    }
-    /*sql.open(sqlConfig, function (err, conn) {
-        var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
-        var pm = conn.procedureMgr();
-        pm.callproc('sp_GetAllRelations', tableObjectValue, function (err, results, output) {
-            if (err) {
-                console.log('Error: ');
-                console.log(err);
-            } else {
-                if (results.length > 0) {
-                    console.log(results);
-                    res.json({
-                        type: true,
-                        data: results
-                    });
-                }
-            }
-        });
-    });*/
+    }  
 });
 
 router.get('/getAllEmployees', function (req, res) {
@@ -113,7 +93,7 @@ router.get('/getAllEmployees', function (req, res) {
     }
 });
 
-router.get('/getReportingHeadByEmpId', function (req, res) {
+router.post('/getReportingHeadByEmpId', function (req, res) {
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {

@@ -43,7 +43,6 @@ hrBaseApp.controller('getAllAbsentsCtrl', ['$scope', 'leaveFctry', '$rootScope',
     $scope.getAllAbsentData = function () {
         // alert(empData.EmpId);
         leaveFctry.getAllAbsents().then(function (response) {
-            console.log(response.data);
             if (response.data != null) {
                 $scope.getAllAbsentsGridOptions.data = response.data;
             }

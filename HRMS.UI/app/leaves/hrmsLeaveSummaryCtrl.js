@@ -9,7 +9,6 @@ hrBaseApp.controller('hrmsLeaveSummaryCtrl', ['$scope', '$rootScope', 'dashboard
 
     $scope.getLeaveSummary = function (empId) {
         dashboardFctry.getLeaveSummary(empId).then(function (response) {
-            console.log(response.data);
             $scope.leaveData = response.data[0];
         });
     }

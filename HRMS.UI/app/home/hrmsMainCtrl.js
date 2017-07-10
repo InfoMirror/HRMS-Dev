@@ -13,49 +13,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
             $scope.getAnniversaryData();
           //  $scope.getHolidayData();
             $scope.getHolidayCalendar();
-        }
-
-        /*  $scope.profileGridOptions = {
-              columnDefs: [
-                  {
-                      field: 'Name',
-                      displayName: 'Name'
-                  }
-                  , {
-                      field: 'Gender',
-                      displayName: 'Gender'
-                  }
-                  , {
-                      field: 'Designation',
-                      displayName: 'Designation'
-                  }
-                  , {
-                      field: 'ReportingHead',
-                      displayName: 'Reporting Head'
-                  }
-              ]
-          }*/
-
-        $scope.holidaysGridOptions = {
-            columnDefs: [
-                {
-                    field: 'FestivalName',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'FestivalDate',
-                    displayName: 'Festival',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                },
-                {
-                    field: 'Action',
-                    displayName: 'Show Calendar',
-                    cellEditableCondition: false,
-                    /*cellTemplate: '<div><a ng-show="ShowCalendar" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>' */
-                    cellTemplate: '<div><a href="" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>'
-                }
-            ]
-        }
+        }     
 
 
         $scope.getBirthdayData = function () {
@@ -65,6 +23,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 }
                 else {
                     $scope.getBirthdays = response.data;
+                    console.log("birthdays", $scope.getBirthdays)
                 }
             });
         }
@@ -81,7 +40,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
         }
 
         $scope.getHolidayCalendar = function () {
-            dashboardFctry.getHolidayCalendar().then(function (response) {
+            dashboardFctry.getHolidays().then(function (response) {
                 // console.log(response.data);
                 // $scope.holidayCalendarGridOptions.data = response.data;
                 $scope.holidayCalendar = response.data;

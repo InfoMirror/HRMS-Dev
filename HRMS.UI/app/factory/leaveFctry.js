@@ -87,7 +87,6 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
     var _getCompOffs = function (parms) {
         var deferred = $q.defer();
         resource.getCompOffs(parms, function (response) {
-            console.log(response);
             deferred.resolve(response);
         },
             function (response) {
@@ -100,7 +99,6 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
     var _insertCompOff = function (parms) {
         var deferred = $q.defer();
         resource.insertCompOff(parms, function (response) {
-            console.log(response);
             deferred.resolve(response);
         },
             function (response) {
@@ -114,7 +112,6 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
     var _markCompOff = function (parms) {
         var deferred = $q.defer();
         resource.markCompOff(parms, function (response) {
-            console.log(response);
             deferred.resolve(response);
         },
             function (response) {

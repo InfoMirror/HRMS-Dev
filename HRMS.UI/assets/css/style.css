@@ -399,7 +399,8 @@ a, .btn {
 	color:#999;
 }
 .mh-full {
-	max-height:405px;
+   max-height:302px;
+	height:302px;
 	overflow-y:auto;
 }
 ::-webkit-scrollbar {

@@ -23,7 +23,6 @@ hrBaseApp.controller('hrmsHolidaysCtrl', ['$scope', 'dashboardFctry', function (
 
     $scope.getData = function () {
         dashboardFctry.getHolidays().then(function (response) {
-            console.log(response.data);
             $scope.holidaysGridOptions.data = response.data;
         });
     }

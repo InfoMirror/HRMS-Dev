@@ -36,14 +36,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
                 params: {
                     action: 'getEmpProfileData'
                 }
-            },
-
-            'getHolidayCalendar': {
-                method: 'GET',
-                params: {
-                    action: 'getHolidayCalendar'
-                }
-            }
+            },        
 
         });
 
@@ -60,7 +53,6 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
     var _getAnniversary = function () {
         var deferred = $q.defer();
         resource.getAnniversary(function (response) {
-            console.log(response);
             deferred.resolve(response)
         }, function (response) {
             deferred.reject(response);
@@ -109,16 +101,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
         });
         return deffered.promise;
     };
-
-    var _getHolidayCalendar = function () {
-        var deffered = $q.defer();
-        resource.getHolidayCalendar(function (response) {
-            deffered.resolve(response)
-        }, function (response) {
-            deffered.reject(response);
-        });
-        return deffered.promise;
-    };
+   
 
 
     dashboardFctryData.getBirthdays = _getBirthdays;
@@ -127,9 +110,7 @@ hrBaseApp.factory('dashboardFctry', ['$http', '$resource', '$q', function ($http
 
     dashboardFctryData.getHolidays = _getHolidays;
 
-    dashboardFctryData.getLeaveSummary = _getLeaveSummary;
-
-    dashboardFctryData.getHolidayCalendar = _getHolidayCalendar;
+    dashboardFctryData.getLeaveSummary = _getLeaveSummary;    
 
     dashboardFctryData.getEmpProfileData = _getEmpProfileData;
 

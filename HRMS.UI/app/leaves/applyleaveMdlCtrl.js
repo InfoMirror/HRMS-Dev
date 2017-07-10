@@ -29,7 +29,6 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
                 $scope.ApplyLeave.FromDate = $scope.FromDate;
                 $scope.ApplyLeave.ToDate = $scope.ToDate;
                 $scope.ApplyLeave.Reason = $scope.LReason;
-                console.log($scope.ApplyLeave);
                 $scope.insertLeave($scope.ApplyLeave);
             }
         }

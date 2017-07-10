@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body mh-full">
           <div class="list" ng-repeat="birthdays in getBirthdays">
-            <div class="row current">
+            <div class="row">
               <div class="col-xs-3 col-sm-2"><img class="avatar" src="/assets/img/avatar-1.jpg" alt="Abhishek Bagria" title="Abhishek Bagria"></div>
               <div class="col-xs-7 col-sm-8">
                 <p class="list-p">{{birthdays.Name.value}}<br>
@@ -20,13 +20,13 @@
               <div class="clearfix"></div>
             </div>
           </div>
-          <h5  ng-if="noBirthday" class="text-center" style="color: grey">No Upcoming birthdays.</h5>
+          <h5  ng-if="noBirthday" class="text-center" style="color: grey; height:405px">No Upcoming birthdays.</h5>
         </div>
         <!--  <div ui-grid="birthdaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div> -->
       </div>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-6 cell-margin">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Upcoming Work Anniversaries</h3>
