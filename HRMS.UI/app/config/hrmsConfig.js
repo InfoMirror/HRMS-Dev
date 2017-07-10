@@ -44,7 +44,7 @@ hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '
                 url: '/hr',
                 templateUrl: '/app/HRRoles/hrRoleCtrl.html',
                 controller: 'hrRoleCtrl',
-                friendlyName: 'HR Roles',
+                friendlyName: 'HR Operations',
                 abstract: true,
                 roles: ['HR']
             })
@@ -125,7 +125,7 @@ hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '
                 url: '/approval',
                 templateUrl: '/app/approval/hrmsApprovalCtrl.html',
                 controller: 'hrmsApprovalCtrl',
-                friendlyName: 'Give Approval',
+                friendlyName: 'Pending Approval',
                 abstract: true,
                 roles: ['Employee', 'HR']
             })

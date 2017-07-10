@@ -113,6 +113,38 @@ router.get('/getAllEmployees', function (req, res) {
     }
 });
 
+router.get('/getReportingHeadByEmpId', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_getReportingHeadByEmpId @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('sp_getReportingHeadByEmpId');
+                console.log(rows);
+                if (rowCount > 0) {
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                }
+            }
+        });
+        request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId);
+        connection.execSql(request);
+    }
+});
+
 
 router.get('/getDeactivatedEmployees', function (req, res) {
     var connection = new sqlConnection(config);

@@ -107,6 +107,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
+            $scope.designationId =  $scope.formData.Designation.value;
             console.log($scope.formData)
             $scope.userDetails = $scope.formData;
             if ($scope.formData.Role.value == "HR") {
@@ -281,7 +282,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getDesignations = function (MasterTypeId) {
         profileFctry.getMasterValue(MasterTypeId).then(function (response) {
             $scope.designations = response.data;
-            console.log($scope.designations);
+            $scope.employeeDesignation = $scope.designations[$scope.designationId].Value.value;
+            console.log("designations", $scope.employeeDesignation);
         });
     }
 
@@ -294,6 +296,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getReportingHeads = function () {
         profileFctry.getAllEmployees().then(function (response) {
             $scope.reportingHeads = response.data;
+            console.log("Reporing Heads",$scope.reportingHeads)
         });
     }
 

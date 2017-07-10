@@ -87,7 +87,13 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
             $scope.getCompOffsData($rootScope.userDetails.EmpId);
         });
     }
-
+ $scope.openLatestModal = function () {
+    var modalInstance = $modal.open({
+            templateUrl: '/app/leaves/compOffMsg.html',
+            controller: 'compOffMsgCtrl',
+            size: 'md',            
+        }); 
+ }
 
     $scope.markCompOff = function (rowId) {
         leaveFctry.markCompOff({

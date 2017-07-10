@@ -1,3 +1,3 @@
 ﻿var hrmsSettingsVal = {
-    jsonUrl: 'http://q1a.com:9095'
+    jsonUrl: 'http://localhost:9095'
 };

@@ -16,18 +16,17 @@
                                 <br>
                                 <br>
                                 <div class="col-sm-12">
-
                                     <span class="font-regular col-sm-6 required" style="margin-left: -10%; margin-right: -30px; padding-top: 6px;">Date of joining:</span>
                                     <olca-date id="DOJ" class="col-sm-6" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value"
                                         date-required="checkRole()" date-disabled="!checkRole()" show-cal="checkRole()" date-changed="checkDOJ()"></olca-date>
-
                                         <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
                                 </div>
                                 <br><br><br>
-                                <span class="font-regular required"> Employee Unique Id:</span>
-                                <input type="text" id="EmpId" name="empId" ng-readonly="true" ng-required="true" ng-model="formData.EmpId.value">
-
-                                <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="text-danger">Required*</span>
+                                <span class="font-regular required">Reporting Head:</span>
+                                <select ng-model="formData.ReportingHead.value" ng-disabled="!checkRole()">
+                                <option value=" " style="display:none">Select One</option>
+                                <option ng-repeat="head in reportingHeads" value="{{head.Id.value}}" ng-selected="{{formData.ReportingHead.value==head.Id.value}}">{{head.Name.value}}</option>
+                                </select>
                             </p>
                         </div>
                         <div class="col-sm-4">
@@ -40,15 +39,17 @@
                                 <br>
                                 <br>
                                 <div class="col-sm-12">
-
                                     <span class="font-regular col-sm-6 required" style="margin-left: -9%; margin-right: -15%; padding-top: 6px;">PF Number:</span>
                                     <input type="text" class="col-sm-6" id="PFNo" name="pfNo" ng-readonly="!checkRole()" ng-model="formData.PFNo.value">
-                                    <span ng-show="editForm.pfNo.$error.required && editForm.pfNo.$dirty" class="text-danger">Required*</span>
                                 </div>
                                 <br>
                                 <br>
                                 <br>
-                                <button type="button" class="btn btn-green" ng-click="openModal()">Update Employee Id</button>
+                                <span class="font-regular required"> Employee Unique Id:</span>
+                                <input type="text" id="EmpId" name="empId" ng-readonly="true" ng-required="true" ng-model="formData.EmpId.value">
+
+                                <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="text-danger">Required*</span>
+
                             </p>
                         </div>
                         <div class="col-sm-4">
@@ -57,12 +58,14 @@
                                 <span ng-show="editForm.team.$error.required && editForm.team.$dirty" class="text-danger">Required*</span>
                                 <br>
                                 <br>
-                                <div class="col-sm-12">
 
-                                    <span class="font-regular col-sm-6" style="margin-left: -8%; margin-right: -31%;; padding-top: 6px;">UAN:<span class="text-danger">*</span></span>
-                                    <input type="text" class="col-sm-6" id="UAN" name="uan" ng-readonly="!checkRole()" ng-model="formData.UAN.value">
-                                    <span ng-show="editForm.uan.$error.required && editForm.uan.$dirty" class="text-danger">Required*</span>
-                                </div>
+                                <span class="font-regular col-sm-6" style="margin-left: -8%; margin-right: -31%;; padding-top: 6px;">UAN:</span>
+                                <input type="text" class="col-sm-6" id="UAN" name="uan" ng-readonly="!checkRole()" ng-model="formData.UAN.value">
+
+
+                                <br>
+                                <button type="button" class="btn btn-green" ng-click="openModal()">Update Employee Id</button>
+
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -76,16 +79,12 @@
                         <div class="col-sm-4">
                             <p> <span class="font-regular">Employee Email:</span> <span class="clr-light">{{userDetails.UserEmail.value}}</span>
                                 <br>
-                                <span class="font-regular">Date of joining:</span> <span class="clr-light">{{userDetails.DOJ.value}}</span>                                </p>
+                                <span class="font-regular">Date of joining:</span> <span class="clr-light">{{userDetails.DOJ.value| date : "dd/MM/y"}}</span>                                </p>
                             <br>
-                            <span class="font-regular">Designation: </span>
-                            <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
-                                                        <option value=" " style="display:none">Select One</option>
-                                                        <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation.value==designation.Id.value}}">{{designation.Value.value}}</option>
-                                                    </select>
+                            <span class="font-regular">Designation: </span><span class="clr-light">{{employeeDesignation}}</span>                            </p>
                         </div>
                         <div class="col-sm-4">
-                            <p> <span class="font-regular">Employee Unique Id:</span> <span class="clr-light">{{userDetails.Id.value}}</span>
+                            <p> <span class="font-regular">Employee Unique Id:</span> <span class="clr-light">{{userDetails.EmpId.value}}</span>
                                 <br>
                                 <span class="font-regular">PF Number:</span> <span class="clr-light">{{userDetails.PFNo.value}}</span>
                                 <br>
