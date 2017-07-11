@@ -15,17 +15,18 @@
 
     </ul-->
         <!-- /.breadcrumb -->
-        <ul class="nav nav-tabs" role="tablist" id="centerTabs">
-            <li role="presentation" ng-repeat="state in states" ng-class="setMenuActive(state.name,state.abstract)"><a ui-sref="{{state.redirectState}}" >{{state.friendlyName}}</a></li>
+        <ul class="nav nav-tabs navbar-nav" role="tablist" id="centerTabs">
+            <li role="presentation" ng-repeat="state in states" ng-class="setMenuActive(state.name,state.abstract)"><a ui-sref="{{state.redirectState}}">{{state.friendlyName}}</a></li>
         </ul>
     </div>
-    <div class="page-header">
+   <!-- <div class="page-header">
         <h1>
             {{stateName}}
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Introduction
+                <label ng-hide="(stateName=='Edit Profile')">Introduction</label>
+                <label ng-show="(stateName=='Edit Profile')">{{userEmail}}</label>
             </small>
         </h1>
-    </div>
+    </div>-->
 </div>

@@ -1,5 +1,5 @@
 hrBaseApp.controller('hrmsMainCtrl', [
-  '$scope', '$rootScope', 'dashboardFctry', '$state',
+    '$scope', '$rootScope', 'dashboardFctry', '$state',
     function ($scope, $rootScope, dashboardFctry, $state) {
         'use strict';
         //  $rootScope.mywindow = $window;
@@ -13,125 +13,43 @@ hrBaseApp.controller('hrmsMainCtrl', [
             $scope.getAnniversaryData();
           //  $scope.getHolidayData();
             $scope.getHolidayCalendar();
-        }
-
-        /*  $scope.profileGridOptions = {
-              columnDefs: [
-                  {
-                      field: 'Name',
-                      displayName: 'Name'
-                  }
-                  , {
-                      field: 'Gender',
-                      displayName: 'Gender'
-                  }
-                  , {
-                      field: 'Designation',
-                      displayName: 'Designation'
-                  }
-                  , {
-                      field: 'ReportingHead',
-                      displayName: 'Reporting Head'
-                  }
-              ]
-          }*/
-
-        $scope.holidaysGridOptions = {
-            columnDefs: [
-                {
-                    field: 'FestivalName',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'FestivalDate',
-                    displayName: 'Festival',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                },
-                {
-                    field: 'Action',
-                    displayName: 'Show Calendar',
-                    cellEditableCondition: false,
-                    /*cellTemplate: '<div><a ng-show="ShowCalendar" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>' */
-                    cellTemplate: '<div><a href="" ng-click="grid.appScope.showCalendarData()">Show Calendar</a></div>'
-                }
-            ]
-        }
-
-        $scope.birthdaysGridOptions = {
-            columnDefs: [
-                {
-                    field: 'Name',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'DOB',
-                    displayName: 'Birthday',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
-
-        $scope.AnniversaryGridOptions = {
-            columnDefs: [
-                {
-                    field: 'Name',
-                    displayName: 'Name'
-                },
-                {
-                    field: 'DOJ',
-                    displayName: 'Anniversary',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
-
-        $scope.holidayCalendarGridOptions = {
-            columnDefs: [
-                {
-                    field: 'FestivalName',
-                    displayName: 'Festival Name'
-                },
-                {
-                    field: 'FestivalDate',
-                    displayName: 'Festival Date',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
-                }
-            ]
-        }
-
+        }     
 
 
         $scope.getBirthdayData = function () {
             dashboardFctry.getBirthdays().then(function (response) {
-                $scope.birthdaysGridOptions.data = response.data;
+                if (response.data.length <= 0) {
+                   $scope.noBirthday = true;
+                }
+                else {
+                    $scope.getBirthdays = response.data;
+                    console.log("birthdays", $scope.getBirthdays)
+                }
             });
         }
 
         $scope.getAnniversaryData = function () {
             dashboardFctry.getAnniversary().then(function (response) {
-                $scope.AnniversaryGridOptions.data = response.data;
-            });
-        }
-
-        $scope.getHolidayData = function () {
-            dashboardFctry.getHolidays().then(function (response) {
-                // console.log(response.data);
-                $scope.holidaysGridOptions.data = response.data;
+                if (response.data.length <= 0) {
+                    $scope.noAnniversary = true;
+                }
+                else {
+                    $scope.getAnniversaries = response.data;
+                }
             });
         }
 
         $scope.getHolidayCalendar = function () {
-            dashboardFctry.getHolidayCalendar().then(function (response) {
+            dashboardFctry.getHolidays().then(function (response) {
                 // console.log(response.data);
-                $scope.holidayCalendarGridOptions.data = response.data;
+                // $scope.holidayCalendarGridOptions.data = response.data;
+                $scope.holidayCalendar = response.data;
             });
         }
 
-        $scope.showCalendarData = function () {
-            $scope.ShowCalendar = true;
-        }
+        /* $scope.showCalendarData = function () {
+             $scope.ShowCalendar = true;
+         }*/
 
         $scope.getProfileData = function () {
             if ($rootScope.userDetails != undefined) {
@@ -155,5 +73,5 @@ hrBaseApp.controller('hrmsMainCtrl', [
         }
 
         $scope.init();
-  }
+    }
 ]);

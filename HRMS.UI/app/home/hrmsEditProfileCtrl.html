@@ -1,291 +1,460 @@
-<style>
-    div.disabled {
-        pointer-events: none;
-        /* for "disabled" effect */
-        opacity: 0.5;
-    }
-</style>
-
 <div class="container">
-    <div class="row bg-info" ng-show="showMessage()">
-        <p style="margin: 5px 30px;">{{message}}</p>
+    <h1 class="page-title">Edit Profile</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{userDetails.FirstName.value}} {{userDetails.LastName.value}}</h3>
+        </div>
+        <form name="editForm" role="form" novalidate>
+            <div class="panel-body">
+                <div class="row" ng-show="checkRole()">
+                    <div class="employee-info">
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Employee Email:</span> <span class="clr-light"><b>{{userDetails.UserEmail.value}}</b></span>
+                                <br>
+                                <br>
+                                <div class="col-sm-12">
+                                    <span class="font-regular col-sm-6 required" style="margin-left: -10%; margin-right: -30px; padding-top: 6px;">Date of joining:</span>
+                                    <olca-date id="DOJ" class="col-sm-6" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value"
+                                        date-required="checkRole()" date-disabled="!checkRole()" show-cal="checkRole()" date-changed="checkDOJ()"></olca-date>
+                                    <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
+                                </div>
+                                <br><br><br>
+                                <span class="font-regular required">Reporting Head:</span>
+                                <select ng-model="formData.ReportingHead.value" ng-disabled="!checkRole()" ng-required="checkRole()">
+                                <option value="" style="display:none">- Select -</option>
+                                <option ng-repeat="head in reportingHeads" value="{{head.Id.value}}" ng-selected="{{formData.ReportingHead.value==head.Id.value}}">{{head.Name.value}}</option>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p>
+                                <span class="font-regular regular required">Designation:</span>
+                                <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
+                                                       <option value="" style="display:none">- Select -</option>
+                                                        <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation.value==designation.Id.value}}">{{designation.Value.value}}</option>
+                                                    </select>
+                                <br>
+                                <br>
+                                <div class="col-sm-12">
+                                    <span class="font-regular col-sm-6" style="margin-left: -9%; margin-right: -15%; padding-top: 6px;">PF Number:</span>
+                                    <input type="text" class="col-sm-6" id="PFNo" name="pfNo" ng-readonly="!checkRole()" ng-model="formData.PFNo.value">
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <span class="font-regular required"> Employee Unique Id:</span>
+                                <input type="text" id="EmpId" name="empId" ng-readonly="(!checkRole())" ng-required="checkRole()" ng-model="formData.EmpId.value">
+
+                                <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="text-danger">Required*</span>
+
+                            </p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Team:<span class="text-danger">*</span></span>
+                                <input type="text" id="Team" name="team" ng-required="checkRole()" ng-model="formData.Team.value">
+                                <span ng-show="editForm.team.$error.required && editForm.team.$dirty" class="text-danger">Required*</span>
+                                <br>
+                                <br>
+
+                                <span class="font-regular">UAN:</span>
+                                <input type="text" id="UAN" name="uan" ng-model="formData.UAN.value">
+
+                                <br>
+                                <br>
+                                <br>
+                                <button type="button" class="btn btn-green" ng-click="openModal()">Update Employee Id</button>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h4 class="clr-orange">Introduce yourself</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row" ng-show="!checkRole()">
+                    <div class="employee-info">
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Employee Email:</span> <span class="clr-light">{{userDetails.UserEmail.value}}</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Employee Unique Id:</span> <span class="clr-light">{{userDetails.Id.value}}</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Team:</span> <span class="clr-light">{{userDetails.Team.value}}</span></p>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">Date of joining:</span> <span class="clr-light">{{userDetails.DOJ.value}}</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p> <span class="font-regular">PF Number:</span> <span class="clr-light">{{userDetails.PFNo.value}}</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p><span class="font-regular">UAN:</span> <span class="clr-light">{{userDetails.UAN.value}}</span>                                </p>
+                        </div>
+                        <div class="col-sm-12">
+                            <br>
+                        </div>
+                        <div class="col-sm-12">
+                            <span class="font-regular">Designation: </span><span class="clr-light">{{employeeDesignation}}</span>   
+                        </div>
+                        <div class="clearfix">
+                            &nbsp;
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h4 class="clr-orange">Introduce yourself</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="profile-block">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="PersonalDetails">
+                            <h4>Portrait</h4>
+                            <div class="row">
+                                <div class="col-sm-2 portrait-info">
+                                    <p class="mar0"><img class="bdr" src="/assets/img/user.jpg" height="133" width="135"></p>
+                                    <div class="upload">
+                                        <input type="file">
+                                        <span>Update profile pic</span> </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5>Your profile portrait:</h5>
+                                    <p>Must be an actual picture of you! Logos, clip-art, group pictures, and digitally-altered
+                                        images not allowed.</p>
+                                </div>
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="mt30">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="required">First Name</label>
+                                                    <input type="text" class="form-control" id="FirstName" name="firstName" ng-pattern="validAlphaOnly" required ng-model="formData.FirstName.value">
+                                                    <span ng-show="editForm.firstName.$error.required && editForm.firstName.$dirty" class="text-danger">Required*</span>
+                                                    <span ng-show="editForm.firstName.$touched && editForm.firstName.$error.pattern">Invalid First Name.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="required">Last Name</label>
+                                                    <input type="text" class="form-control" id="LastName" name="lastName" ng-pattern="validAlphaOnly" required ng-model="formData.LastName.value">
+                                                    <span ng-show="editForm.lastName.$error.required && editForm.lastName.$dirty" class="text-danger">Required*</span>
+                                                    <span ng-show="editForm.lastName.$touched && editForm.lastName.$error.pattern">Invalid Last Name.</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="required">Date of Birth </label>
+
+                                                    <olca-date id="DOB" date-options="dateOptions" name="DOB" input-value="formData.DOB.value" input-name="formData.DOB.value"
+                                                        date-required="true" show-cal="true"></olca-date>
+                                                    <span ng-show="editForm.DOB.$error.required && editForm.DOB.$dirty" class="text-danger">Required*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="required">Blood Group</label>
+                                                    <input type="text" class="form-control" placeholder="Last Name" id="BloodGroup" name="bloodGrp" required ng-model="formData.BloodGroup.value">
+                                                    <span ng-show="editForm.bloodGrp.$error.required && editForm.bloodGrp.$dirty" class="text-danger">Required*</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="required">Gender</label>
+
+                                            <select class="form-control" ng-model="formData.Gender.value">
+                                                        <option value="" style="display:none">- Select -</option>
+                                                        <option ng-repeat="gender in genders" value="{{gender.Id.value}}" ng-selected="{{formData.Gender.value==gender.Id.value}}">{{gender.Value.value}}</option>
+                                                    </select>
+                                        </div>
+                                        <a href="#FamilyDetails" role="tab" data-toggle="tab" ng-disabled="disableNext" class="btn btn-green">Next</a>
+                                    </div>
+                                    <div class="col-sm-6">&nbsp;</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tab pane Personal Details -->
+
+                        <div role="tabpanel" class="tab-pane fade" id="FamilyDetails">
+                            <h4>Family Details</h4>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="required">Marital Status</label>
+                                        <select class="form-control" ng-model="formData.Gender.value">
+                                                        <option value="" style="display:none">- Select -</option>
+                                                        <option ng-repeat="status in maritalStatus" value="{{status.Id.value}}" ng-selected="{{formData.MaritalStatus.value==status.Id.value}}">{{status.Value.value}}</option>
+                                                    </select>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Nominee</label>
+                                                <input type="text" class="form-control" id="Nominee" name="nominee" required ng-model="formData.Nominee.value">
+                                                <span ng-show="editForm.nominee.$error.required && editForm.nominee.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Relation with Nominee</label>
+                                                <select class="form-control" ng-model="formData.RelationWithNominee.value">
+                                                         <option value="" style="display:none">- Select -</option>
+                                                        <option ng-repeat="relation in relations" value="{{relation.Id.value}}" ng-selected="{{formData.RelationWithNominee.value==relation.Id.value}}">{{relation.Value.value}}</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Child 1</label>
+                                                <input type="text" class="form-control" id="Children1" ng-model="formData.Children1.value">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Child 2</label>
+                                                <input type="text" class="form-control" id="Children2" ng-model="formData.Children2.value">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <a href="#PersonalDetails" role="tab" data-toggle="tab" class="btn btn
+                                                                            default">Previous
+                                        </a>
+                                    <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-green">Next</a>
+                                </div>
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <!-- Tab pane Family Details -->
+                        <div role="tabpanel" class="tab-pane fade" id="ContactDetails">
+                            <h4>Contact Details</h4>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Contact No</label>
+                                                <input type="text" class="form-control" id="ContactNo" name="contactNumber" required ng-model="formData.ContactNo.value"
+                                                    ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
+                                                <span ng-show="editForm.contactNumber.$error.required && editForm.contactNumber.$dirty" class="text-danger">Required*</span>
+                                                <span ng-show="!editForm.contactNumber.$error.required && (editForm.contactNumber.$error.minlength || editForm.contactNumber.$error.maxlength || editForm.contactNumber.$error.pattern) && editForm.contactNumber.$dirty"
+                                                    class="text-danger">Contact Number is not Valid</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Emergency Contact No</label>
+                                                <input type="text" class="form-control" id="EmergencyContactNo" name="emergencyContactNumber" required ng-model="formData.EmergencyContactNo.value"
+                                                    ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
+                                                <span ng-show="editForm.emergencyContactNumber.$error.required && editForm.emergencyContactNumber.$dirty" class="text-danger">Required*</span>
+                                                <span ng-show="!editForm.emergencyContactNumber.$error.required && (editForm.emergencyContactNumber.$error.minlength || editForm.emergencyContactNumber.$error.maxlength || editForm.emergencyContactNumber.$error.pattern) && editForm.emergencyContactNumber.$dirty"
+                                                    class="text-danger">Contact Number is not Valid</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Name of Emergency Contact</label>
+                                                <input type="text" class="form-control" id="NameOfEC" name="nameOfEC" required ng-model="formData.NameOfEC.value">
+                                                <span ng-show="editForm.nameOfEC.$error.required && editForm.nameOfEC.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Relation with Emergency Contact</label>
+                                                <select class="form-control" ng-model="formData.RelationWithEC.value">
+                                                   <option value="" style="display:none">- Select -</option>
+                                                <option ng-repeat="relation in relations" value="{{relation.Id.value}}" ng-selected="{{formData.RelationWithEC.value==relation.Id.value}}">{{relation.Value.value}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Personal Email</label>
+                                                <input type="email" class="form-control" id="PersonalEmail" name="personalEmail" ng-model="formData.PersonalEmail.value"
+                                                    ng-pattern="emailpattern" required>
+
+                                                <span ng-show="editForm.personalEmail.$error.required && editForm.personalEmail.$dirty" class="text-danger">Required*</span>
+
+                                                <span ng-show="editForm.personalEmail.$error.pattern" class="text-danger">Invalid Email</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Skype ID</label>
+                                                <input type="text" class="form-control" id="SkypeID" name="skypeId" ng-model="formData.SkypeID.value">                                                
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Current Address</label>
+                                        <textarea type="textarea" class="form-control" id="CurrentAddress" name="currentAddress" required ng-model="formData.CurrentAddress.value"> </textarea>
+                                        <span ng-show="editForm.currentAddress.$error.required && editForm.currentAddress.$dirty" class="text-danger">Required*</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Permanent Address</label>
+                                        <textarea type="textarea" class="form-control" id="PermanentAddress" name="permanentAddress" required ng-model="formData.PermanentAddress.value"></textarea>
+                                        <span ng-show="editForm.permanentAddress.$error.required && editForm.permanentAddress.$dirty" class="text-danger">Required*</span>
+                                    </div>
+                                    <a href="#FamilyDetails" role="tab" data-toggle="tab" class="btn btn-default">Previous</a>
+                                    <a href="#OtherInfo" role="tab" data-toggle="tab" class="btn btn-green">Next</a>
+                                </div>
+                                <div class="col-sm-6">&nbsp;</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <!-- Tab pane Contact Details -->
+
+                        <div role="tabpanel" class="tab-pane fade" id="OtherInfo">
+                            <h4>Other Info</h4>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">PAN Number</label>
+                                                <input type="text" class="form-control" id="PanCard" name="panNo" required ng-model="formData.PanCard.value">
+                                                <span ng-show="editForm.panNo.$error.required && editForm.panNo.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Bank Account Number</label>
+                                                <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-model="formData.BankAccountNumber.value"
+                                                    ng-minlength="11" ng-maxlength="15">
+                                                <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength">Your Bank Account Number Should Contain Atleast 11 Characters</span>
+                                                <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength">Sorry You are Exceeding the Limit</span>
+                                                <!--<span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="text-danger">Required*</span>-->
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="passport" class="mr5">Do you own Passport</label>
+                                <input type="checkbox" name="passport" id="passport" ng-model="formData.ownPassport.value">
+                                <div class="reveal-if-active">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Passport No</label>
+                                                <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value" ng-required="formData.ownPassport.value">
+                                                <span ng-show="editForm.passportNo.$error.required && editForm.passportNo.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Passport Issue Place</label>
+                                                <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value" ng-required="formData.ownPassport.value">
+                                                <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Passport Issue Date</label>
+                                                <olca-date class="form-control" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value"
+                                                    date-required="formData.ownPassport.value" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
+
+                                                <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Passport Expiry Date</label>
+                                                <olca-date min-date="ToMin" class="form-control" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
+                                                    input-name="formData.PassportExpiryDate.value" date-required="
+                                                    formData.ownPassport.value" ng-click="endDateCalOpen($event)"
+                                                    show-cal="true"></olca-date> >
+                                                <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="visa" class="mr5">Do you own Visa Status</label>
+                                <input type="checkbox" name="visa" id="visa" ng-model="formData.ownVisa.value">
+                                <div class="reveal-if-active">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Visa Country</label>
+                                                <select class="form-control" name="visaCountry" ng-required="formData.ownVisa.value" ng-model="formData.visaCountry.value" visibility="false">
+                                                        <option value="Select" style="display:none">- Select -</option>
+                                                        <option value="USA">USA</option>
+                                                        <option value="France">France</option>
+                                                        <option value="Thailand">Thailand</option>
+                                                    </select>
+                                                     <span ng-show="editForm.visaCountry.$error.required && editForm.visaCountry.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required">Visa Expiry Date</label>
+                                                <olca-date min-date="startMin" date-options="dateOptions" ng-required="formData.ownVisa.value" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"
+                                                    show-cal="true"></olca-date>
+                                                <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="checkRole()">
+                                <label class="mr5" for="hrAccess">HR Access:</label>
+                                <input type="checkbox" ng-model="formData.hrAccess">
+                            </div>
+
+                            <div class="form-group" ng-show="checkRole()">
+                                <label class="mr5 required" for="IsActive">IsActive:</label>
+                                <input type="checkbox" ng-model="formData.IsActive.value" required>
+                                <label class="mr5">   (Uncheck this checkbox to deactivate the Employee)</label>
+                            </div>
+
+                            <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">
+                                <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Back</a>
+                                <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
+
+                                <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="checkRole()">Approve & Save</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">&nbsp;</div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- Tab pane Other Info -->
+            </div>
     </div>
-    <form name="editForm" class="form form-horizontal" role="form" novalidate>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="UserEmail">User Email:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="UserEmail" name="userEmail" ng-readonly="true" required ng-model="formData.UserEmail">
-
-                <span ng-show="editForm.userEmail.$error.required && editForm.userEmail.$dirty" class="text-danger">Required*</span>
-                <span ng-show="!editForm.userEmail.$error.required && editForm.userEmail.$error.email && myForm.userEmail.$dirty" class="text-danger">Invalid Email</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="FirstName">First Name:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="FirstName" name="firstName" required ng-model="formData.FirstName">
-
-                <span ng-show="editForm.firstName.$error.required && editForm.firstName.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="LastName">Last Name:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="LastName" name="lastName" required ng-model="formData.LastName">
-                <span ng-show="editForm.lastName.$error.required && editForm.lastName.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Team">Team:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="Team" name="team" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.Team">
-                <span ng-show="editForm.team.$error.required && editForm.team.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Designation">Designation:<span class="text-danger">*</span> </label>
-            <div class="col-sm-10">
-                <select ng-model="formData.Designation" ng-disabled="!checkRole()">
-                    <option value="0">Select One</option>
-                    <option ng-repeat="designation in designations" value="{{designation.Id}}" ng-selected="{{formData.Designation==designation.Id}}">{{designation.Value}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Gender">Gender:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <label class="radio-inline" ng-repeat="gender in genders">
-                    <input type="radio" ng-model="formData.Gender" name="gender" value="{{gender.Id}}" required>{{gender.Value}}
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="CurrentAddress">Current Address:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="textarea" class="form-control" id="CurrentAddress" name="currentAddress" required ng-model="formData.CurrentAddress">
-                <span ng-show="editForm.currentAddress.$error.required && editForm.currentAddress.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PermanentAddress">Permanent Address:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="textarea" class="form-control" id="PermanentAddress" name="permanentAddress" required ng-model="formData.PermanentAddress">
-                <span ng-show="editForm.permanentAddress.$error.required && editForm.permanentAddress.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PersonalEmail">Personal Email:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="PersonalEmail" name="personalEmail" required ng-model="formData.PersonalEmail">
-                <span ng-show="editForm.personalEmail.$error.required && editForm.personalEmail.$dirty" class="text-danger">Required*</span>
-                <span ng-show="!editForm.personalEmail.$error.required && editForm.personalEmail.$error.email && editForm.personalEmail.$dirty" class="text-danger">Invalid Email</span>
-            </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': editForm.contactNumber.$error.number}">
-            <label class="control-label col-sm-2" for="ContactNo">Contact No:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="ContactNo" name="contactNumber" required ng-model="formData.ContactNo" ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
-                <span ng-show="editForm.contactNumber.$error.required && editForm.contactNumber.$dirty" class="text-danger">Required*</span>
-                <span ng-show="!editForm.contactNumber.$error.required && (editForm.contactNumber.$error.minlength || editForm.contactNumber.$error.maxlength || editForm.contactNumber.$error.pattern) && editForm.contactNumber.$dirty" class="text-danger">Contact Number is not Valid</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="EmergencyContactNo">Emergency Contact No:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="EmergencyContactNo" name="emergencyContactNumber" required ng-model="formData.EmergencyContactNo" ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
-                <span ng-show="editForm.emergencyContactNumber.$error.required && editForm.emergencyContactNumber.$dirty" class="text-danger">Required*</span>
-                <span ng-show="!editForm.emergencyContactNumber.$error.required && (editForm.emergencyContactNumber.$error.minlength || editForm.emergencyContactNumber.$error.maxlength || editForm.emergencyContactNumber.$error.pattern) && editForm.emergencyContactNumber.$dirty" class="text-danger">Contact Number is not Valid</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="NameOfEC">Name of Emergency Contact:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="NameOfEC" name="nameOfEC" required ng-model="formData.NameOfEC">
-                <span ng-show="editForm.nameOfEC.$error.required && editForm.nameOfEC.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="RelationWithEC">Relation with Emergency Contact:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <select ng-model="formData.RelationWithEC">
-                    <option value="0">Select One</option>
-                    <option ng-repeat="relation in relations" value="{{relation.Id}}" ng-selected="{{formData.RelationWithEC==relation.Id}}">{{relation.Value}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="BloodGroup">Blood Group:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="BloodGroup" name="bloodGrp" required ng-model="formData.BloodGroup">
-                <span ng-show="editForm.bloodGrp.$error.required && editForm.bloodGrp.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="DOB">Date of Birth:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.DOB" input-name="formData.DOB" date-required="true" date-changed="resetResults1()" date-click="open($event)"></olca-date>
-                <!--  <input type="text" class="form-control" id="DOB" required ng-model="formData.DOB">-->
-            </div>
-            <!--<div class="input-group date" id="dtpDOB">
-                <input type="text" class="form-control" />
-                <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>-->
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="Nominee">Nominee:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="Nominee" name="nominee" required ng-model="formData.Nominee">
-                <span ng-show="editForm.nominee.$error.required && editForm.nominee.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="RelationWithNominee">Relation with Nominee:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <select ng-model="formData.RelationWithNominee">
-                    <option value="0">Select One</option>
-                    <option ng-repeat="relation in relations" value="{{relation.Id}}" ng-selected="{{formData.RelationWithNominee==relation.Id}}">{{relation.Value}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="SkypeID">Skype ID:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="SkypeID" name="skypeId" ng-model="formData.SkypeID">
-                <!--<span ng-show="editForm.skypeId.$error.required && editForm.skypeId.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PassportNumber">Passport No:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber">
-                <!--<span ng-show="editForm.passportNo.$error.required && editForm.passportNo.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PassportIssueDate">Passport Issue Date:</label>
-            <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportIssueDate" input-name="formData.PassportIssueDate" date-required="false"></olca-date>
-                <!--    <input type="text" class="form-control" id="PassportIssueDate" name="passportIssueDate" ng-model="formData.PassportIssueDate">-->
-                <!--<span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PassportExpiryDate">Passport Expiry Date:</label>
-            <div class="col-sm-10">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.PassportExpiryDate" input-name="formData.PassportExpiryDate" date-required="false"></olca-date>
-                <!-- <input type="text" class="form-control" id="PassportExpiryDate" name="passportExpiryDate" ng-model="formData.PassportExpiryDate">-->
-                <!--<span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PassportIssuePlace">Passport Issue Place:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace">
-                <!--<span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="PanCard">PAN No:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="PanCard" name="panNo" required ng-model="formData.PanCard">
-                <span ng-show="editForm.panNo.$error.required && editForm.panNo.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="MaritalStatus">Marital Status:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <label class="radio-inline" ng-repeat="status in maritalStatus">
-                    <input type="radio" value="{{status.Id}}" name="maritalStatus" required ng-model="formData.MaritalStatus">{{status.Value}}
-                </label>
-            </div>
-        </div>
-        <div class="form-group" display:none>
-            <label class="control-label col-sm-2" for="Children1">Children1:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="Children1" ng-model="formData.Children1">
-            </div>
-        </div>
-        <div class="form-group" visibility="hidden">
-            <label class="control-label col-sm-2" for="Children2">Children 2:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="Children2" ng-model="formData.Children2">
-            </div>
-        </div>
-        <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="DOJ">Date of joining:<span class="text-danger">*</span></label>
-            <div class="col-sm-10" ng-class="{'disabled':!checkRole()}">
-                <olca-date min-date="startMin" date-options="dateOptions" input-value="formData.DOJ" input-name="formData.DOJ" date-required="checkRole()" ng-disabled="!checkRole()"></olca-date>
-                <!--<input type="text" class="form-control" id="DOJ" name="doj" ng-required="checkRole()" ng-readonly="!checkRole()" ng-model="formData.DOJ">-->
-                <span ng-show="editForm.doj.$error.required && editForm.doj.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="BankAccountNumber">Bank Account Number:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-readonly="!checkRole()" ng-required="checkRole()" ng-model="formData.BankAccountNumber">
-                <span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="text-danger">Required*</span>
-            </div>
-        </div>
-        <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="ReportingHead">Reporting Head:<span class="text-danger">*</span></label>
-            <div class="col-sm-10">
-                <select ng-model="formData.ReportingHead" ng-disabled="!checkRole()">
-                    <option value="0">Select One</option>
-                    <option ng-repeat="head in reportingHeads" value="{{head.Id}}" ng-selected="{{formData.ReportingHead==head.Id}}">{{head.Name}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="PFNo">PF Number:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="PFNo" name="pfNo" ng-readonly="!checkRole()" ng-model="formData.PFNo">
-                <!-- <span ng-show="editForm.pfNo.$error.required && editForm.pfNo.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group" ng-readonly="true">
-            <label class="control-label col-sm-2" for="UAN">UAN:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="UAN" name="uan" ng-readonly="!checkRole()" ng-model="formData.UAN">
-                <!-- <span ng-show="editForm.uan.$error.required && editForm.uan.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="ownVisa">Do you own Visa Status:</label>
-            <div class="col-sm-10">
-                <label class="radio-inline">
-                    <input type="checkbox" ng-model="formData.ownVisa" ng-change="ShowHide()">
-                </label>
-            </div>
-        </div>
-        <div class="form-group" ng-show="IsVisible">
-            <label class="control-label col-sm-2" for="visaCountry">Visa Country:</label>
-            <div class="col-sm-10">
-                <select ng-model="formData.visaCountry" visibility="false" text="Select One">
-                    <option value="USA">USA</option>
-                    <option value="France">France</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group" ng-show="IsVisible">
-            <label class="control-label col-sm-2" for="visaExpiryDate">Visa Expiry Date:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="visaExpiryDate" name="visaExpiryDate" ng-model="formData.visaExpiryDate">
-                <!-- <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>-->
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" ng-click="submit()" ng-disabled="!editForm.$valid">Submit</button>
-            </div>
-        </div>
-        <!--<button type="submit" class="btn btn-default" ng-click="submit()" ng-disabled="!editForm.$valid">Submit</button>-->
-    </form>
 </div>
-
-<!--<script type="text/javascript">
-    $(function () {
-        $("#dtpDOB").datepicker();
-    });
-</script>-->
+</form>
+</div>
+</div>

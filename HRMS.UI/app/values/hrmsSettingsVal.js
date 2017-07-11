@@ -1,3 +1,3 @@
 ﻿var hrmsSettingsVal = {
-    jsonUrl: '/app/appConstant.json'
+    jsonUrl: 'http://localhost:9095'
 };

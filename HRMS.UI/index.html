@@ -8,29 +8,25 @@
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" href="../../favicon.ico">
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="/content/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="/assets/css/ace-fonts.css" />
-    <link rel="stylesheet" href="/assets/css/chosen.css" />
+
 
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
-
-
-    <link rel="stylesheet" href="/assets/css/ace-rtl.css" />
+    <link href="/assets/css/style.css" rel="stylesheet">
 
     <!-- ace settings handler -->
-    <script src="/assets/js/ace-extra.js"></script>
 
-    <link href="/Content/toastr.min.css" rel="stylesheet" />
+    <link href="/Content/toastr.min.css" />
 
-    <link href="/Content/site.css" rel="stylesheet" />
-    <link href="/Content/styles.css" rel="stylesheet" />
+    <link href="/Content/site.css" />
+    
     <script type="text/javascript">
         (function () {
             var po = document.createElement('script');
@@ -42,13 +38,13 @@
         })();
 
         function onLoadCallback() {
-            gapi.client.setApiKey('AIzaSyCNpwkECtLeyE5eRqNxoCmOjG9DQuL3Dp8');
-            gapi.client.load('plus', 'v1', function () {});
+            gapi.client.setApiKey('AIzaSyAN-28GWZMmudO6dlrtY5fEqTI8-YmiByE');
+            gapi.client.load('plus', 'v1', function () { });
         }
     </script>
 </head>
 
-<body class="no-skin">
+<body class="bg-light-grey">
     <!-- == InfoMirror Application === -->
     <div ui-view></div>
     <!-- /InfoMirror Application -->
@@ -69,29 +65,8 @@
     </script>
     <script src="/assets/js/bootstrap.js"></script>
 
-    <!-- ace scripts -->
-    <script src="/assets/js/ace/elements.scroller.js"></script>
-    <script src="/assets/js/ace/elements.colorpicker.js"></script>
-    <script src="/assets/js/ace/elements.fileinput.js"></script>
-    <script src="/assets/js/ace/elements.typeahead.js"></script>
-    <script src="/assets/js/ace/elements.wysiwyg.js"></script>
-    <script src="/assets/js/ace/elements.spinner.js"></script>
-    <script src="/assets/js/ace/elements.treeview.js"></script>
-    <script src="/assets/js/ace/elements.wizard.js"></script>
-    <script src="/assets/js/ace/elements.aside.js"></script>
-    <script src="/assets/js/ace/ace.js"></script>
-    <script src="/assets/js/ace/ace.ajax-content.js"></script>
-    <script src="/assets/js/ace/ace.touch-drag.js"></script>
-    <script src="/assets/js/ace/ace.sidebar.js"></script>
-    <script src="/assets/js/ace/ace.sidebar-scroll-1.js"></script>
-    <script src="/assets/js/ace/ace.submenu-hover.js"></script>
-    <script src="/assets/js/ace/ace.widget-box.js"></script>
-    <script src="/assets/js/ace/ace.settings.js"></script>
-    <script src="/assets/js/ace/ace.settings-rtl.js"></script>
-    <script src="/assets/js/ace/ace.settings-skin.js"></script>
-    <script src="/assets/js/ace/ace.widget-on-reload.js"></script>
-    <script src="/assets/js/ace/ace.searchbox-autocomplete.js"></script>
-    <script src="/assets/js/chosen.jquery.js"></script>
+
+
 
     <!-- JS -->
     <script src="/Scripts/toastr.min.js"></script>
@@ -139,13 +114,18 @@
     <script src="/app/factory/dashboardFctry.js"></script>
     <script src="/app/factory/leaveFctry.js"></script>
     <script src="/app/factory/profileFctry.js"></script>
-    <script src="/app/home/hrmsApproveProfileCtrl.js"></script>
+    <script src="/app/home/addEditEmpId.js"></script>
+    <script src="/app/HRRoles/hrmsApproveProfileCtrl.js"></script>
     <script src="/app/home/hrmsEditProfileCtrl.js"></script>
     <script src="/app/home/hrmsFrameCtrl.js"></script>
     <script src="/app/home/hrmsMainCtrl.js"></script>
     <script src="/app/home/hrmsNoRights.js"></script>
-    <script src="/app/home/hrRoleCtrl.js"></script>
+    <script src="/app/HRRoles/hrRoleCtrl.js"></script>
+    <script src="/app/HRRoles/hrmsUserDeactivation.js"></script>
+    <script src="/app/HRRoles/getAllAbsentsCtrl.js"></script>
     <script src="/app/leaves/applyCompOffMdlCtrl.js"></script>
+    <script src="/app/leaves/compOffmsgCtrl.js"></script>
+    
     <script src="/app/leaves/applyleaveCtrl.js"></script>
     <script src="/app/leaves/applyleaveMdlCtrl.js"></script>
     <script src="/app/leaves/hrmsAttendanceCtrl.js"></script>
@@ -154,6 +134,7 @@
     <script src="/app/leaves/hrmsLeaveSummaryCtrl.js"></script>
     <script src="/app/leaves/leaveFileODMdlCtrl.js"></script>
     <script src="/app/run/hrRun.js"></script>
+    <script src="/app/shared/confirmationBoxMdlCtrl.js"></script>
     <script src="/app/shared/drctDate.js"></script>
     <script src="/app/shared/hr-footer-drctv.js"></script>
     <script src="/app/shared/hr-header-drctv.js"></script>
@@ -161,7 +142,35 @@
     <script src="/app/shared/hr-top-states-drctv.js"></script>
     <script src="/app/values/hrmsSettingsVal.js"></script>
     <!--endinject-->
+    <script>
+        var FormStuff = {
 
+            init: function () {
+                this.applyConditionalRequired();
+                this.bindUIActions();
+            },
+
+            bindUIActions: function () {
+                $("input[type='radio'], input[type='checkbox']").on("change", this.applyConditionalRequired);
+            },
+
+            applyConditionalRequired: function () {
+
+                $(".require-if-active").each(function () {
+                    var el = $(this);
+                    if ($(el.data("require-pair")).is(":checked")) {
+                        el.prop("required", true);
+                    } else {
+                        el.prop("required", false);
+                    }
+                });
+
+            }
+
+        };
+
+        FormStuff.init();
+    </script>
 </body>
 
 </html>

@@ -1,139 +1,79 @@
-<!-- #section:basics/content.breadcrumbs -->
-<!--<div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
-    </script>
-
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
-            <a ui-sref="home.index">Home</a>
-        <li class="active">Dashboard</li>
-
-    </ul> /.breadcrumb 
-</div>-->
-
-<!-- /section:basics/content.breadcrumbs -->
-<div class="page-content">
-    <div class="row">
-        <!--   <div class="col-md-6">
-            <h4>Profile Data</h4> <hr/>
-            <div class="container" width="100%">
-                <div>
-                    <label for="name">Name: </label>
-                    {{profileData.Name}}
-                </div>
-                <div>
-                    <label for="name">Gender: </label>
-                    {{profileData.Gender}}
-                </div>
-                <div>
-                    <label for="name"> Designation: </label>
-                    {{profileData.Designation}}
-                </div>
-                <div>
-                    <label for="name">Reporting Head: </label>
-                    {{profileData.ReportingHead}}
-                </div>
-                <div>
-                    <label for="name">Team: </label>
-                    {{profileData.Team}}
-                </div>
-                <div>
-                    <label for="name">Blood Group: </label>
-                    {{profileData.BloodGroup}}
-                </div>
-                <div>
-                    <label for="name">Email: </label>
-                    {{profileData.Email}}
-                </div>
-                <div>
-                    <label for="name">Emp Id: </label>
-                    {{profileData.EmpId}}
-                </div>
-                <div>
-                    <label for="name">Current Address: </label>
-                    {{profileData.CurrentAddress}}
-                </div>
-                <div>
-                    <label for="name">Contact No: </label>
-                    {{profileData.ContactNo}}
-                </div>
-                <div>
-                    <label for="name">Blood Group: </label>
-                    {{profileData.SkypeID}}
-                </div>
-                <div>
-                    <label for="name">Date of Joining: </label>
-                    {{profileData.DOJ | date:'dd-MMM-yyyy'}}
-                </div>
-                <div>
-                    <label for="name">Birthday: </label>
-                    {{profileData.DOB | date:'dd-MMM-yyyy'}}
-                </div>
+<div class="container">
+  <h1 class="page-title">Dashboard</h1>
+  <div class="row">
+    <div class="col-sm-6 cell-margin">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Upcoming Birthdays</h3>
+        </div>
+        <div class="panel-body mh-full">
+          <div class="list" ng-repeat="birthdays in getBirthdays">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2"><img class="avatar" src="/assets/img/avatar-1.jpg" alt="Abhishek Bagria" title="Abhishek Bagria"></div>
+              <div class="col-xs-7 col-sm-8">
+                <p class="list-p">{{birthdays.Name.value}}<br>
+                  <small>{{birthdays.Designation.value}}</small></p>
+              </div>
+              <div class="col-xs-2 col-sm-2">
+                <p class="list-dt text-right">{{birthdays.DOB.value | date:"MMMM ','dd"}}</p>
+              </div>
+              <div class="clearfix"></div>
             </div>
-        </div>-->
-       <!-- <div class="col-md-6">
-            <h4>Upcoming Holidays</h4>
-            <hr/>
-            <div ui-grid="holidaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-
-        </div>-->
-        <div class="col-md-6">
-            <h4>Holiday Calendar for this year</h4>
-            <hr/>
-            <div ui-grid="holidayCalendarGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+          </div>
+          <h5  ng-if="noBirthday" class="text-center" style="color: grey; height:405px">No Upcoming birthdays.</h5>
         </div>
+        <!--  <div ui-grid="birthdaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div> -->
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h4>Upcoming Birthdays</h4>
-            <hr/>
-            <div ui-grid="birthdaysGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+    <div class="col-sm-6 cell-margin">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Upcoming Work Anniversaries</h3>
         </div>
-        <div class="col-md-6">
-            <h4>Upcoming Anniversaries</h4>
-            <hr/>
-            <div ui-grid="AnniversaryGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+        <div class="panel-body mh-full">
+          <div class="list" ng-repeat="anniversaries in getAnniversaries">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2"><img class="avatar" src="/assets/img/avatar-6.jpg" title="Prashant Kapoor"></div>
+              <div class="col-xs-7 col-sm-8">
+                <p class="list-p">{{anniversaries.Name.value}}<br>
+                  <small>{{anniversaries.Designation.value}}</small></p>
+              </div>
+              <div class="col-xs-2 col-sm-2">
+                <p class="list-dt text-right">{{anniversaries.DOJ.value | date:"MMMM ','dd"}}</p>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+           <h5 ng-if="noAnniversary" class="text-center" style="color: grey">No Upcoming anniversaries.</h5>
         </div>
+      </div>
     </div>
-
-    <!--<div ui-grid="birthdaysGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-
-    <div ui-grid="AnniversaryGridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>-->
-
-    <!-- /.page-header -->
-    <!--<div>
-        Name: {{userDetails.FirstName}} {{userDetails.LastName}}
-        <br /> Email: {{userDetails.UserEmail}}
-        <br /> Team: {{userDetails.Team}}
-        <br /> Skype ID: {{userDetails.SkypeID}}
-        <br /> Bank Account Number: {{userDetails.BankAccountNumber}}
-        <br /> Blood Group: {{userDetails.BloodGroup}}
-        <br /> Children1: {{userDetails.Children1}}
-        <br /> Children2: {{userDetails.Children2}}
-        <br /> Contact No: {{userDetails.ContactNo}}
-        <br /> Current Address: {{userDetails.CurrentAddress}}
-        <br /> DOB: {{userDetails.DOB}}
-        <br /> DOJ: {{userDetails.DOJ}}
-        <br /> Designation: {{userDetails.Designation}}
-        <br /> Emergency Contact No: {{userDetails.EmergencyContactNo}}
-        <br /> Name Of Emergency Contact: {{userDetails.NameOfEC}}
-        <br /> Nominee: {{userDetails.Nominee}}
-        <br /> PanCard: {{userDetails.PanCard}}
-        <br /> Passport Expiry Date: {{userDetails.PassportExpiryDate}}
-        <br /> Passport Issue Date: {{userDetails.PassportIssueDate}}
-        <br /> Passport Issue Place: {{userDetails.PassportIssuePlace}}
-        <br /> Passport Number: {{userDetails.PassportNumber}}
-        <br /> Permanent Address: {{userDetails.PermanentAddress}}
-        <br /> Personal Email: {{userDetails.PersonalEmail}}
-        <br /> Gender: {{userDetails.Gender}}
-        <br /> MaritalStatus: {{userDetails.MaritalStatus}}
-        <br /> RelationWithEC: {{userDetails.RelationWithEC}}
-        <br /> RelationWithNominee: {{userDetails.RelationWithNominee}}
-        <br /> ReportingHead: {{userDetails.ReportingHead}}
-        <br />
-    </div>-->
+  </div>
+</div>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Holiday Calendar for this year</h3>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <tbody>
+            <tr class="info">
+              <th>Festival</th>
+              <th>Festival Date</th>
+            </tr>
+            <tr ng-repeat="holidayCal in holidayCalendar">
+              <td>{{holidayCal.FestivalName.value}}</td>
+              <td>{{holidayCal.FestivalDate.value | date:'dd-MMM-yyyy'}}</td>
+            </tr>         
+            <tr>
+            </tr>
+          </tbody>
+        </table>
+      </div>     
+    </div>
+  </div>
 </div>
 <!-- /.page-content -->

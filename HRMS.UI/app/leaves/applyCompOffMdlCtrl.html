@@ -15,22 +15,22 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Date:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
-                           <olca-date max-date="startMax" date-options="dateOptions" input-value="CompOffDate" input-name="startDate" date-required="true" date-changed="resetResults()" date-click="open($event)"></olca-date>
-                       <!-- <olca-date min-date="startMin2" date-options="dateOptions" input-value="startDateDisplay1" input-name="startDate" date-required="true" date-changed="resetResults1()" date-click="open1($event)"></olca-date>-->
-                       <!-- <input type="date" ng-model="CompOffDate" name="date" required>-->
+                        <olca-date id="CompOffDate" min-date="startMin" date-options="dateOptions" input-value="CompOffData.CompOffDate" input-name="startDate" date-required="true" date-changed="resetResults()" date-click="open($event)" show-cal="true"></olca-date>
+                        <!-- <olca-date min-date="startMin2" date-options="dateOptions" input-value="startDateDisplay1" input-name="startDate" date-required="true" date-changed="resetResults1()" date-click="open1($event)"></olca-date>-->
+                        <!-- <input type="date" ng-model="CompOffDate" name="date" required>-->
                         <span ng-show="applyCompOffForm.date.$error.required && applyCompOffForm.date.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">CompOff Reason:<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <textarea style="width: 25%;" rows="3" ng-model="CompOffReason" name="compOffReason" required></textarea>
+                        <textarea style="width: 25%;" rows="3" ng-model="CompOffData.compOffReason" name="compOffReason" required></textarea>
                         <span ng-show="applyCompOffForm.compOffReason.$error.required && applyCompOffForm.compOffReason.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default btn-sm" ng-click="submit()" ng-disabled="!applyCompOffForm.$valid">Submit</button>
+                        <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!applyCompOffForm.$valid">Submit</button>
                     </div>
                 </div>
             </form>

@@ -1,7 +1,14 @@
-<div style="padding-bottom:5px">
-    <button type="button" ng-click="openModal()" href="">Apply CompOff</button>
+<div class="row">
+    <div class="col-md-6" style="padding-bottom: 20px;">
+        <span class="clr-orange" style="font-size: 18px;font-family: 'open_sanssemibold';">
+    Comp Off
+    </span>
+    </div>
+    <div class="col-md-6">
+        <button type="button" ng-click="openLatestModal()" href="" class="btn btn-green pull-right">Apply CompOff</button>
+    </div>
 </div>
-<div style="margin:0 5%">
-    <div ui-grid="CompOffsGridOptions" ui-grid-filter ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
-</div>
+
 <div>
+    <div ui-grid="CompOffsGridOptions" ui-grid-resize-columns ui-grid-auto-resize class="gridTable"></div>
+</div>

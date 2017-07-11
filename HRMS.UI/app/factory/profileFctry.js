@@ -1,47 +1,76 @@
 hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, $resource, $q) {
     var profileFctryData = {};
-var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
-   // var resource = $resource('http://localhost:9095' + '/profile/:action', {
+
+    var resource = $resource(hrmsSettingsVal.jsonUrl + '/profile/:action', {
         action: '@action',
     }, {
-        'getAllRelations': {
-            method: 'GET',
-            params: {
-                action: 'getAllRelations'
+            'getAllRelations': {
+                method: 'GET',
+                params: {
+                    action: 'getAllRelations'
+                }
+            },
+            'getAllEmployees': {
+                method: 'GET',
+                params: {
+                    action: 'getAllEmployees'
+                }
+            },
+            'getDeactivatedEmployees': {
+                method: 'GET',
+                params: {
+                    action: 'getDeactivatedEmployees'
+                }
+            },
+            'getMasterValues': {
+                method: 'POST',
+                params: {
+                    action: 'getMasterValues'
+                }
+            },
+            'updateEmployeeDetails': {
+                method: 'POST',
+                params: {
+                    action: 'updateEmployeeDetails'
+                }
+            },
+            'getEmpDetails': {
+                method: 'POST',
+                params: {
+                    action: 'getEmpDetails'
+                }
+            },
+            'getReportingHeadByEmpId': {        
+                method: 'POST',
+                params: {
+                    action: 'getReportingHeadByEmpId'
+                }
+            },
+            'getApprovalReqEmp': {
+                method: 'POST',
+                params: {
+                    action: 'getApprovalReqEmp'
+                }
+            },
+            'IsEmpIdExist': {
+                method: 'POST',
+                params: {
+                    action: 'IsEmpIdExist'
+                }
+            },
+            'updateEmpId': {
+                method: 'POST',
+                params: {
+                    action: 'updateEmpId'
+                }
+            },
+            'updateEmployeeIsActive': {
+                method: 'POST',
+                params: {
+                    action: 'updateEmployeeIsActive'
+                }
             }
-        },
-        'getAllEmployees': {
-            method: 'GET',
-            params: {
-                action: 'getAllEmployees'
-            }
-        },
-        'getMasterValues': {
-            method: 'POST',
-            params: {
-                action: 'getMasterValues'
-            }
-        },
-        'updateEmployeeDetails': {
-            method: 'POST',
-            params: {
-                action: 'updateEmployeeDetails'
-            }
-        },
-        'getEmpDetails': {
-            method: 'POST',
-            params: {
-                action: 'getEmpDetails'
-            }
-        },
-        'getApprovalReqEmp': {
-            method: 'POST',
-            params: {
-                action: 'getApprovalReqEmp'
-            }
-        }
-    });
-
+        });
     var _getAllRelations = function () {
         var deffered = $q.defer();
         resource.getAllRelations(function (response) {
@@ -55,6 +84,16 @@ var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
     var _getAllEmployees = function () {
         var deffered = $q.defer();
         resource.getAllEmployees(function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _getDeactivatedEmployees = function () {
+        var deffered = $q.defer();
+        resource.getDeactivatedEmployees(function (response) {
             deffered.resolve(response)
         }, function (response) {
             deffered.reject(response);
@@ -91,6 +130,15 @@ var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
         });
         return deffered.promise;
     };
+    var _getReportingHeadByEmpId = function (parms) {
+        var deffered = $q.defer();
+        resource.getReportingHeadByEmpId(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
 
     var _getApprovalReqEmp = function (parms) {
         var deffered = $q.defer();
@@ -102,17 +150,58 @@ var resource = $resource("http://mayank-pc:9095" + "/profile/:action", {
         return deffered.promise;
     };
 
+    var _isEmpIdExist = function (parms) {
+        var deffered = $q.defer();
+        resource.IsEmpIdExist(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _updateEmpId = function (parms) {
+        var deffered = $q.defer();
+        resource.updateEmpId(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+    var _updateEmployeeIsActive = function (parms) {
+        var deffered = $q.defer();
+        resource.updateEmployeeIsActive(parms, function (response) {
+            deffered.resolve(response)
+        }, function (response) {
+            deffered.reject(response);
+        });
+        return deffered.promise;
+    };
+
+
     profileFctryData.getAllRelations = _getAllRelations;
 
     profileFctryData.getAllEmployees = _getAllEmployees;
+
+    profileFctryData.getDeactivatedEmployees = _getDeactivatedEmployees;
 
     profileFctryData.getMasterValue = _getMasterValues;
 
     profileFctryData.updateEmpDetails = _updateEmpDetails;
 
     profileFctryData.getEmpDetails = _getEmpDetails;
+    
+    profileFctryData.getReportingHeadByEmpId = _getReportingHeadByEmpId;
 
     profileFctryData.getApprovalReqEmp = _getApprovalReqEmp;
+
+    profileFctryData.isEmpIdExist = _isEmpIdExist;
+
+    profileFctryData.updateEmpId = _updateEmpId;
+
+    profileFctryData.updateEmployeeIsActive = _updateEmployeeIsActive;
 
     return profileFctryData;
 }]);

@@ -140,9 +140,9 @@
 .ui-grid-header-cell {
   position: relative;
   box-sizing: border-box;
-  background-color: inherit;
+  background-color:#d9edf7;
   border-right: 1px solid;
-  border-color: #d4d4d4;
+  border-color: transparent;
   display: table-cell;
   -webkit-user-select: none;
   -moz-user-select: none;

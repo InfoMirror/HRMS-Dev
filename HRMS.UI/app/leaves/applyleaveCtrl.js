@@ -15,22 +15,22 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
         data: null,
         columnDefs: [
             {
-                field: 'FromDate',
-                displayName: 'From Date',
+                field: 'FromDate.value',
+                displayName: 'FROM DATE',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
+                cellFilter: 'date:\'dd-MMM-yyyy\''
+                /*filter: {
                     condition: uiGridConstants.filter.CONTAINS
-                }
+                }*/
             },
             {
-                field: 'ToDate',
-                displayName: 'To Date',
+                field: 'ToDate.value',
+                displayName: 'TO DATE',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
+                cellFilter: 'date:\'dd-MMM-yyyy\''
+                /*filter: {
                     condition: uiGridConstants.filter.CONTAINS
-                }
+                }*/
             },
           /*  {
                 field: 'EmployeeName',
@@ -38,19 +38,18 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
                 enableColumnMenu: false
             },*/
             {
-                field: 'Reason',
-                displayName: 'Reason',
-                enableFiltering: false,
+                field: 'Reason.value',
+                displayName: 'REASON',
                 enableColumnMenu: false
 
             },
             {
-                field: 'Status',
-                displayName: 'Current Status',
-                enableColumnMenu: false,
-                filter: {
+                field: 'Status.value',
+                displayName: 'CURRENT STATUS',
+                enableColumnMenu: false
+                /*filter: {
                     condition: uiGridConstants.filter.CONTAINS
-                }
+                }*/
             }
         ]
     };

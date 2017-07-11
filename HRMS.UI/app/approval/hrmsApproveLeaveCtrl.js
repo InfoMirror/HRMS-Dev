@@ -1,4 +1,5 @@
-hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state', 'uiGridConstants', function ($scope, $rootScope, approvalFctry, $state, uiGridConstants) {
+hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalFctry', '$state','$modal', 
+function ($scope, $rootScope, approvalFctry, $state,$modal) {
 
     $scope.init = function () {
         $scope.getAppliedLeaves({
@@ -12,34 +13,35 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
         filter: true,
         columnDefs: [
             {
-                field: 'FromDate',
+                field:'Name.value',
+                displayName:'Name'
+            },
+            {
+                field: 'FromDate.value',
                 displayName: 'From',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+
             },
             {
-                field: 'ToDate',
+                field: 'ToDate.value',
                 displayName: 'To',
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }
+
             },
             {
-                field: 'Reason',
+                field: 'Reason.value',
                 displayName: 'Reason'
             },
-            {
-                field: 'Status',
-                displayName: 'Approval Status'
-            },
+            // {
+            //     field: 'Status.value',
+            //     displayName: 'Approval Status',
+            //     cellTemplate: '<div style="margin-left: 30%;" ng-class="{\'fa fa-check clr-green\':row.entity.Status.value == \'Approved\',\'fa fa-close clr-red\':row.entity.Status.value == \'Rejected\'}">{{row.entity.Status.value}}</div>'
+            // },
             {
                 field: 'Action',
                 displayName: 'Action',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>',
-                enableFiltering: false
+                cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.openModal(\'Approve\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%"; ng-click="grid.appScope.openModal(\'Reject\',row.entity.Id)">Reject</button></div>'
+                
             }
         ]
     }
@@ -49,23 +51,42 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             $scope.approveLeaveGridOptions.data = response.data;
         });
     }
+      $scope.openModal = function (status, rowId) {
+            {
+
+                var modalInstance = $modal.open({
+                    templateUrl: '/app/shared/confirmationBoxMdlCtrl.html',
+                    controller: 'confirmationBoxMdlCtrl',
+                    size: 'md',
+                    resolve: {
+                        aValue: function () {
+                            return status
+                        }
+                    }
+                });
+                modalInstance.result.then(function (paramFromDialog) {
+                    if (paramFromDialog) {
+                        $scope.updateStatus(status, rowId);
+                    }
+                });
+            }
+        }
 
     $scope.updateStatus = function (status, rowId) {
         var _status;
-        if (status == 'approved')
+        if (status == 'Approve')
             _status = 18;
-        else if (status == 'rejected')
+        else if (status == 'Reject')
             _status = 19;
 
         approvalFctry.approveLeave({
             Id: rowId,
             Status: _status
         }).then(function (response) {
-            //alert("Leave Is Approved");
-            //$state.go('home.approval');
-              $scope.getAppliedLeaves({
-                  Id: $rootScope.userDetails.Id
-              });
+            alert("Leave " + status);
+            $scope.getAppliedLeaves({
+                Id: $rootScope.userDetails.Id
+            });
         });
     }
 

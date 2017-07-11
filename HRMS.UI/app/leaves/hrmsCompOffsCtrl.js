@@ -1,71 +1,76 @@
-hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','$modal','uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal,uiGridConstants) {
+hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', 'uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants) {
     'use strict';
-   // alert(0);
+    // alert(0);
     /* Initialize */
     $scope.init = function () {
         $scope.message = 'Hello, Welcome to CompOff Page';
-        $scope.getCompOffsData($rootScope.userDetails);
-    //    $scope.markCompOff($rootScope.userDetails.Id);
+        $scope.getCompOffsData($rootScope.userDetails.EmpId);
+        //    $scope.markCompOff($rootScope.userDetails.Id);
     }
 
     $scope.CompOffsGridOptions = {
         enableSorting: true,
-        enableFiltering:true,
-        filter:true,
+        enableFiltering: true,
+        filter: true,
         data: null,
         columnDefs: [
             {
-                field: 'CompOffDate',
-                displayName: 'CompOff Date',
+                field: 'CompOffDate.value',
+                displayName: 'COMP OFF DATE',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
-                filter: { condition: uiGridConstants.filter.CONTAINS}
-            },
-           /* {
-                field: 'EmployeeName',
-                displayName: 'Name',
-                filterCellFiltered:true,
-                enableColumnMenu: false
-            },*/
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                }
+            },          
+            // {
+            //     field: 'IsManual.value',
+            //     displayName: 'SYTEM IDENTIFIED',
+            //     enableColumnMenu: false,
+            //     cellTemplate: '<input type="checkbox" disabled ng-checked="grid.appScope.isSystemIdentified(row.entity.IsManual.value)">'
+            // },
             {
-                field: 'IsManual',
-                displayName: 'Sytem Identified',
+                field: 'CompOffStatus.value',
+                displayName: 'APPROVAL STATUS',
                 enableColumnMenu: false,
-                enableFiltering:false,
-                cellTemplate: '<input type="checkbox" disabled ng-model="row.entity.IsManual">'
-            },
-            {
-                field: 'CompOffStatus',
-                displayName: 'Approval Status',
-                enableColumnMenu: false,
-                 filter: { condition: uiGridConstants.filter.CONTAINS},
-                cellTemplate: '<div>{{row.entity.CompOffStatus}}<a ng-click="grid.appScope.markCompOff(row.entity.Id)" ng-show="grid.appScope.enableDisableLink(row.entity.CompOffStatus)" style="margin-right: 8%;float: right;" href="">File CompOff</a></div>'
+                filter: {
+                    condition: uiGridConstants.filter.CONTAINS
+                },
+                cellTemplate: '<div style="text-align: center;">{{row.entity.CompOffStatus.value}}<a ng-click="grid.appScope.markCompOff(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.CompOffStatus.value)" style="margin-right: 8%;float: right;" href="">File CompOff</a></div>'
             }
         ]
     };
-   /* $scope.insertCompOff = function () {
+    /* $scope.insertCompOff = function () {
 
-    }*/
+     }*/
     $scope.getCompOffsData = function (empData) {
-        leaveFctry.getCompOffs(empData).then(function (response) {
-            console.log(response.data);
+        leaveFctry.getCompOffs({
+            EmpId: empData
+        }).then(function (response) {
             $scope.CompOffsGridOptions.data = response.data;
         });
     }
 
+    $scope.isSystemIdentified = function (isManual) {
+        if(isManual){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
-    $scope.insertCompOff = function (CompOffData) {
+    /*$scope.insertCompOff = function (CompOffData) {
         leaveFctry.insertCompOff(CompOffData).then(function (response) {
             if (response.data == "CompOff Applied") {
-              //  console.log(response.data);
-                $scope.getCompOffsData($rootScope.userDetails);
+                //  console.log(response.data);
+                $scope.getCompOffsData($rootScope.userDetails.EmpId.value);
             }
         });
-    }
+    }*/
 
 
     $scope.openModal = function () {
-    
+
         var modalInstance = $modal.open({
             templateUrl: '/app/leaves/applyCompOffMdlCtrl.html',
             controller: 'applyCompOffMdlCtrl',
@@ -74,34 +79,43 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope','
                 aValue: function () {
                     return $rootScope.userDetails.EmpId
                 }
-                }                                
+            }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            $scope.paramFromDialog = paramFromDialog;
-            $scope.getCompOffsData($rootScope.userDetails);
+            debugger;
+           // $scope.paramFromDialog = paramFromDialog;
+            $scope.getCompOffsData($rootScope.userDetails.EmpId);
         });
     }
+ $scope.openLatestModal = function () {
+    var modalInstance = $modal.open({
+            templateUrl: '/app/leaves/compOffMsg.html',
+            controller: 'compOffMsgCtrl',
+            size: 'md',            
+        }); 
+ }
 
-  
-    $scope.markCompOff = function(rowId){
-           leaveFctry.markCompOff({Id:rowId}).then(function (response) {
+    $scope.markCompOff = function (rowId) {
+        leaveFctry.markCompOff({
+            Id: rowId
+        }).then(function (response) {
             if (response.data == "CompOff Marked") {
-           // $scope.markCompOff();
+                // $scope.markCompOff();
                 alert('CompOff Filed Successfully !!! Please wait for Approval');
                 $scope.getCompOffsData($rootScope.userDetails);
             }
-        });  
+        });
     }
-    
-    
+
+
     $scope.IsManualTrue = function (IsManual) {
         if (IsManual == 1)
             return true
         else
             IsManual = 1
     }
-    
-      $scope.enableDisableLink = function (compOffStatus) {
+
+    $scope.enableDisableLink = function (compOffStatus) {
         if (compOffStatus == "Not Filed")
             return true
         else

@@ -1,60 +1,85 @@
-hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', function ($scope, $rootScope, approvalFctry) {
+hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', '$modal',
+    function ($scope, $rootScope, approvalFctry, $modal) {
 
-    $scope.init = function () {
-        $scope.getFiledOD($rootScope.userDetails);
-    }
-
-    $scope.approveODGridOptions = {
-        columnDefs: [
-            /*{
-                field: 'Name',
-                displayName: 'Name'
-                
-            },*/
-            {
-                field: 'AbsentDate',
-                displayName: 'Date',
-                cellFilter: 'date:\'dd-MMM-yyyy\''
-            },
-            {
-                field: 'ODReason',
-                displayName: 'Reason'
-            },
-            {
-                field: 'ODStatus',
-                displayName: 'Approval Status'
-            },
-            {
-                field: 'Action',
-                displayName: 'Action',
-                cellTemplate: '<div><a ng-click="grid.appScope.updateStatus(\'approved\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Approve</a></hr><a ng-click="grid.appScope.updateStatus(\'rejected\',row.entity.Id)" style="margin-right: 8%;float: right;" href="">Reject</a></div>'
-            }
-        ]
-    };
-
-    $scope.getFiledOD = function (rowId) {
-        approvalFctry.getFiledOD(rowId).then(function (response) {
-            $scope.approveODGridOptions.data = response.data;
-        });
-    }
-
-    $scope.updateStatus = function (status, rowId) {
-        var ODStatus;
-        if (status == "approved") {
-            ODStatus = 18;
-        } else if (status == "rejected") {
-            ODStatus = 19;
+        $scope.init = function () {
+            $scope.getFiledOD($rootScope.userDetails);
         }
-        approvalFctry.approveOD({
-            Id: rowId,
-            ODStatus: ODStatus
-        }).then(function (response) {
-            if (response.data == "Status Updated") {
-                $scope.getFiledOD($rootScope.userDetails);
-                /*$scope.approveODGridOptions.data = response.data;*/
-            }
-        });
-    }
 
-    $scope.init();
-}])
+        $scope.approveODGridOptions = {
+            enableSorting: true,
+            enableFiltering: true,
+            filter: true,
+            columnDefs: [
+                {
+                    field: 'Name.value',
+                    displayName: 'Name'
+                },
+                {
+                    field: 'AbsentDate.value',
+                    displayName: 'Date',
+                    cellFilter: 'date:\'dd-MMM-yyyy\''
+                },
+                {
+                    field: 'ODReason.value',
+                    displayName: 'Reason'
+                },
+                // {
+                //     field: 'ODStatus.value',
+                //     displayName: 'Approval Status',
+                //     cellTemplate: '<div style="margin-left: 30%;" ng-class="{\'fa fa-check clr-green\':row.entity.ODStatus.value == \'Approved\',\'fa fa-close clr-red\':row.entity.ODStatus.value == \'Rejected\'}">{{row.entity.ODStatus.value}}</div>'
+                // },
+                {
+                    field: 'Action',
+                    displayName: 'Action',
+                    cellTemplate: '<div style="margin-left: 30%; margin-top:2%;" ng-show="row.entity.ODStatus.value==\'Filed\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.openModal(\'approve\',row.entity.Id)" >Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.openModal(\'reject\',row.entity.Id)" style="margin-left: 5%;">Reject</button></div>'
+                }
+            ]
+        };
+
+        $scope.getFiledOD = function (rowId) {
+            approvalFctry.getFiledOD(rowId).then(function (response) {
+                $scope.approveODGridOptions.data = response.data;
+            });
+        }
+
+        $scope.openModal = function (status, rowId) {
+            {
+
+                var modalInstance = $modal.open({
+                    templateUrl: '/app/shared/confirmationBoxMdlCtrl.html',
+                    controller: 'confirmationBoxMdlCtrl',
+                    size: 'md',
+                    resolve: {
+                        aValue: function () {
+                            return status
+                        }
+                    }
+                });
+                modalInstance.result.then(function (paramFromDialog) {
+                    if (paramFromDialog) {
+                        $scope.updateStatus(status, rowId);
+                    }
+                });
+            }
+        }
+
+        $scope.updateStatus = function (status, rowId) {
+            var ODStatus;
+            if (status == "approve") {
+                ODStatus = 18;
+            } else if (status == "reject") {
+                ODStatus = 19;
+            }
+            approvalFctry.approveOD({
+                Id: rowId,
+                ODStatus: ODStatus
+            }).then(function (response) {
+                alert("OD is " + status);
+                $scope.getFiledOD({
+                    Id: $rootScope.userDetails.Id
+                });
+            });
+        }
+
+        $scope.init();
+    }])

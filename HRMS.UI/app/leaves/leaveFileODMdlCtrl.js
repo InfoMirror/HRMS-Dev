@@ -1,20 +1,24 @@
 hrBaseApp.controller('leaveFileODMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope',
-    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry',
+    function ($scope, $modalInstance, aValue, leaveFctry) {
         'use strict';
 
         $scope.init = function () {
             // $scope.valuePassed = aValue;
             $scope.odData = {
-                Id: aValue,
-                ODReason: ''
+                Id: {
+                    value: aValue
+                },
+                ODReason: {
+                    value: ''
+                }
             }
         }
 
         $scope.submit = function () {
-            $scope.odData.ODReason = $scope.odReason;
+            $scope.odData.ODReason.value = $scope.odReason;
 
-            if ($scope.odData.ODReason != '' && $scope.odData.ODReason != undefined) {
+            if ($scope.odData.ODReason.value != '' && $scope.odData.ODReason.value != undefined) {
                 $scope.fileOD($scope.odData);
             }
 
@@ -23,7 +27,12 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
 
         $scope.fileOD = function (OdData) {
             leaveFctry.fileOD(OdData).then(function (response) {
-                $modalInstance.close();
+                //console.log('OD Data: ');
+                //console.log(response.data);
+                if (response.data == "OD Updated") {
+                    alert("OD Filed");
+                   $scope.getAbsentData($rootScope.userDetails);
+                }
             });
         }
 

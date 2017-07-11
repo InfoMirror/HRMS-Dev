@@ -18,6 +18,10 @@ hrBaseApp.directive('hrTopStatesDrctv', ['$state',
 
                 $scope.states = $state.get().filter(function (x) {
 
+                    //if no permisson, return false
+                    if (angular.isDefined(x.roles) && angular.isArray(x.roles) && x.roles.indexOf($rootScope.Role) == -1)
+                        return false;
+
                     if ((x.name.indexOf($scope.parentState) == 0) && x.name.split('.').length == $scope.parentState.split('.').length + 1 && !x.hideInMenu) {
                         if (x.abstract) {
                             x.redirectState = $scope.findFirstChildState(x);
