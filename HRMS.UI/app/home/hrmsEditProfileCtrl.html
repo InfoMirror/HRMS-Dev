@@ -365,14 +365,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="required">Passport No</label>
-                                                <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value" ng-required="!formData.ownPassport.value">
+                                                <input type="text" class="form-control" id="PassportNumber" name="passportNo" ng-model="formData.PassportNumber.value" ng-required="formData.ownPassport.value">
                                                 <span ng-show="editForm.passportNo.$error.required && editForm.passportNo.$dirty" class="text-danger">Required*</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="required">Passport Issue Place</label>
-                                                <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value" ng-required="!formData.ownPassport.value">
+                                                <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value" ng-required="formData.ownPassport.value">
                                                 <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="text-danger">Required*</span>
                                             </div>
                                         </div>
@@ -380,7 +380,7 @@
                                             <div class="form-group">
                                                 <label class="required">Passport Issue Date</label>
                                                 <olca-date class="form-control" date-options="dateOptions" input-value="formData.PassportIssueDate.value" input-name="formData.PassportIssueDate.value"
-                                                    date-required="!formData.ownPassport.value" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
+                                                    date-required="formData.ownPassport.value" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
 
                                                 <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="text-danger">Required*</span>
                                             </div>
@@ -389,7 +389,8 @@
                                             <div class="form-group">
                                                 <label class="required">Passport Expiry Date</label>
                                                 <olca-date min-date="ToMin" class="form-control" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
-                                                    input-name="formData.PassportExpiryDate.value" date-required="!formData.ownPassport.value" ng-click="endDateCalOpen($event)"
+                                                    input-name="formData.PassportExpiryDate.value" date-required="
+                                                    formData.ownPassport.value" ng-click="endDateCalOpen($event)"
                                                     show-cal="true"></olca-date> >
                                                 <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="text-danger">Required*</span>
                                             </div>
@@ -407,8 +408,8 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="required">Visa Country</label>
-                                                <select class="form-control" name="visaCountry" ng-required="!formData.ownVisa.value" ng-model="formData.visaCountry.value" visibility="false">
-                                                        <option value="" style="display:none">- Select -</option>
+                                                <select class="form-control" name="visaCountry" ng-required="formData.ownVisa.value" ng-model="formData.visaCountry.value" visibility="false">
+                                                        <option value="Select" style="display:none">- Select -</option>
                                                         <option value="USA">USA</option>
                                                         <option value="France">France</option>
                                                         <option value="Thailand">Thailand</option>
@@ -419,7 +420,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="required">Visa Expiry Date</label>
-                                                <olca-date min-date="startMin" date-options="dateOptions" ng-required="!formData.ownVisa.value" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"
+                                                <olca-date min-date="startMin" date-options="dateOptions" ng-required="formData.ownVisa.value" input-value="formData.visaExpiryDate.value" input-name="formData.visaExpiryDate.value"
                                                     show-cal="true"></olca-date>
                                                 <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="text-danger">Required*</span>
                                             </div>

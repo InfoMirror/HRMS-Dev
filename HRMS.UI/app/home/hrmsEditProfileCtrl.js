@@ -335,13 +335,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            $scope.paramFromDialog = paramFromDialog;
-            $scope.passedUserEmail = undefined;
-            $state.go('home.hr.approveProfile') ;        
+            if(paramFromDialog){
+            $scope.getEmpData($rootScope.passedUserEmail);
+            };
+                 
         });        
     }
 
-
+    
     $scope.init();
 
 }]);
