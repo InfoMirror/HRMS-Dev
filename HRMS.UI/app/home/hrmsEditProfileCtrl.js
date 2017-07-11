@@ -3,9 +3,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.validAlphaOnly = /^[A-z]+$/;
     $scope.Issubmitted = false;
     $scope.init = function () {
-        //$scope.Warningmsg=false;
-         $scope.disableNext = false;
-         $scope.designationId = null;
+        //$scope.Warningmsg=false;        
         $scope.setIsActive = true;
         if ($rootScope.passedUserEmail == undefined) {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
@@ -109,6 +107,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
+            console.log("form data",$scope.formData)
             $scope.designationId =  $scope.formData.Designation.value;
             $scope.userDetails = $scope.formData;
             if ($scope.formData.Role.value == "HR") {
