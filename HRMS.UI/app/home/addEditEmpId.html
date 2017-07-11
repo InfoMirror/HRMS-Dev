@@ -9,15 +9,16 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Employee Unique Id:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="EmpId" name="empId" ng-required="true" ng-model="editEmpId.EmpId.value">
+                        <input type="text" class="form-control" id="EmpId" name="empId" ng-required="true" ng-model="editEmpId.EmpId.value" required>
 
                         <span ng-show="addEditEmpId.empId.$error.required && addEditEmpId.empId.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>
-            </form>
+          
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="submit()">Update</button>
+        <button type="button" class="btn btn-primary" ng-disabled="!addEditEmpId.$valid" ng-click="submit()">Update</button>
     </div>
+</form>
 </div>

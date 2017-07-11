@@ -4,6 +4,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.Issubmitted = false;
     $scope.init = function () {
         //$scope.Warningmsg=false;
+         $scope.disableNext = false;
          $scope.designationId = null;
         $scope.setIsActive = true;
         if ($rootScope.passedUserEmail == undefined) {
@@ -305,14 +306,21 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
 
-    // $scope.checkEmpty = function(formData){
-    //        if ($rootScope.Role == 'HR') {
+    $scope.checkEmpty = function(formData){
+           if ($rootScope.Role == 'HR') {
                
-    //        }
-    //        else{
-    //             formData.ReportingHead.value
-    //        }
-    // }
+           }
+           else{
+                if ( !formData.FirstName.value
+				   || !formData.LastName.value
+				   || !formData.DOB.value
+				   || !formData.BloodGroup.value
+				   || !formData.Gender.value
+				   ){
+                         $scope.disableNext = true;
+                   }                
+           }
+    }
 
     $scope.openModal = function () {
         var modalInstance = $modal.open({

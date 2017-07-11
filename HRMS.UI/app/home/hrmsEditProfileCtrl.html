@@ -179,7 +179,7 @@
                                                         <option ng-repeat="gender in genders" value="{{gender.Id.value}}" ng-selected="{{formData.Gender.value==gender.Id.value}}">{{gender.Value.value}}</option>
                                                     </select>
                                         </div>
-                                        <a href="#FamilyDetails" role="tab" data-toggle="tab" class="btn btn-green">Next</a>
+                                        <a href="#FamilyDetails" role="tab" data-toggle="tab" ng-disabled="disableNext" class="btn btn-green">Next</a>
                                     </div>
                                     <div class="col-sm-6">&nbsp;</div>
                                     <div class="clearfix"></div>

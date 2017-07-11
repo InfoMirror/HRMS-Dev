@@ -3,7 +3,7 @@ hrBaseApp.controller('addEditEmpId', [
     function ($scope, $modalInstance, aValue, $rootScope, $state, profileFctry) {
         'use strict';
 
-        $scope.init = function () {
+        $scope.init = function () {            
             $scope.editEmpId = {
                 UserEmail: aValue,
                 EmpId: ''
