@@ -112,7 +112,8 @@
                 <div class="profile-block">
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="PersonalDetails">
+
+                        <div role="tabpanel" class="tab-pane fade in active" id="PersonalDetails" ng-form="editForm_personalDetails">
                             <h4>Portrait</h4>
                             <div class="row">
                                 <div class="col-sm-2 portrait-info">
@@ -179,7 +180,7 @@
                                                         <option ng-repeat="gender in genders" value="{{gender.Id.value}}" ng-selected="{{formData.Gender.value==gender.Id.value}}">{{gender.Value.value}}</option>
                                                     </select>
                                         </div>
-                                        <a href="#FamilyDetails" role="tab" data-toggle="tab" ng-disabled="disableNext" class="btn btn-green">Next</a>
+                                        <a href="#FamilyDetails" role="tab" data-toggle="tab" ng-disabled="!editForm_personalDetails.$valid" class="btn btn-green">Next</a>
                                     </div>
                                     <div class="col-sm-6">&nbsp;</div>
                                     <div class="clearfix"></div>
@@ -188,7 +189,7 @@
                         </div>
                         <!-- Tab pane Personal Details -->
 
-                        <div role="tabpanel" class="tab-pane fade" id="FamilyDetails">
+                        <div role="tabpanel" class="tab-pane fade" id="FamilyDetails" ng-form="editForm_familyDetails">
                             <h4>Family Details</h4>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -237,14 +238,14 @@
                                     <a href="#PersonalDetails" role="tab" data-toggle="tab" class="btn btn
                                                                             default">Previous
                                         </a>
-                                    <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-green">Next</a>
+                                    <a href="#ContactDetails" role="tab" data-toggle="tab" ng-disabled="!editForm_familyDetails.$valid" class="btn btn-green">Next</a>
                                 </div>
                                 <div class="col-sm-6">&nbsp;</div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
                         <!-- Tab pane Family Details -->
-                        <div role="tabpanel" class="tab-pane fade" id="ContactDetails">
+                        <div role="tabpanel" class="tab-pane fade" id="ContactDetails" ng-form="editForm_contactDetails">
                             <h4>Contact Details</h4>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -322,7 +323,7 @@
                                         <span ng-show="editForm.permanentAddress.$error.required && editForm.permanentAddress.$dirty" class="text-danger">Required*</span>
                                     </div>
                                     <a href="#FamilyDetails" role="tab" data-toggle="tab" class="btn btn-default">Previous</a>
-                                    <a href="#OtherInfo" role="tab" data-toggle="tab" class="btn btn-green">Next</a>
+                                    <a href="#OtherInfo" role="tab" data-toggle="tab" ng-disabled="!editForm_contactDetails.$valid" class="btn btn-green">Next</a>
                                 </div>
                                 <div class="col-sm-6">&nbsp;</div>
                                 <div class="clearfix"></div>
