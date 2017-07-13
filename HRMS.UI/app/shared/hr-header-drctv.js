@@ -42,6 +42,10 @@ hrBaseApp.directive('hrHeaderDrctv', [
                 }*/
             }
 
+            $scope.setIsSelf = function(){
+                $rootScope.isSelf = true;
+            }
+
         }
 
         return p;

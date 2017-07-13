@@ -35,6 +35,7 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 }
                 else {
                     $scope.getAnniversaries = response.data;
+                    console.log("birthdays", $scope.getAnniversaries)
                 }
             });
         }

@@ -292,20 +292,7 @@ router.post('/updateEmployeeDetails', function (req, res) {
             } else {
                 console.log('sp_InsertUpdateEmployeeDetails');
                 if (req.body.EmpId.value != null) {
-                    console.log('EmpId: ' + req.body.EmpId.value);
-                    // request1 = new Request("exec sp_AllotLeaves @EmpId", function (err1, rowC, rws) {
-                    //     console.log('sp_AllotLeaves');
-                    //     if (err1) {
-                    //         console.log(err1);
-                    //     } else {
-                    //         console.log(rowC);
-                    //         console.log(rws);
-                    //     }
-                    // });
-                    // console.log('sp_AllotLeaves');
-                    // request1.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-                    // connection.execSql(request1);
-                    // });
+                    console.log('EmpId: ' + req.body.EmpId.value);                  
                 }
             }
             res.json({
@@ -398,7 +385,8 @@ router.post('/updateEmployeeIsActive', function (req, res) {
 });
 
 
-router.post('/getEmpDetails', function (req, res) {
+router.get('/getEmpDetails', function (req, res) {
+    console.log(req.query)
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -426,8 +414,7 @@ router.post('/getEmpDetails', function (req, res) {
             }
         });
         request.addParameter('Action', TYPES.VarChar, "SelectByEmail");
-        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail);
-
+        request.addParameter('UserEmail', TYPES.VarChar, req.query.UserEmail);
         connection.execSql(request);
     }
     /*sql.open(sqlConfig, function (err, conn) {

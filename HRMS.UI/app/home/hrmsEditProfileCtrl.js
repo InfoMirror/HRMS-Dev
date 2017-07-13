@@ -3,6 +3,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.validAlphaOnly = /^[A-z]+$/;
     $scope.Issubmitted = false;
     $scope.init = function () {
+        $scope.emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+        $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+        $scope.validAlphaOnly = /^[A-z]+$/;
+        $scope.validBloodGroup = /^[A-z\+]+$/;
+        $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
+        $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
+        $scope.onlyNumbers = /^\d+$/;
+        $scope.setIsActive = true;
         //$scope.Warningmsg=false;        
         $scope.setIsActive = true;
         if ($rootScope.passedUserEmail == undefined) {
@@ -37,8 +45,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         };
         // $scope.checkVal = 0;
     }
-    $scope.emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-    $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
     $scope.startMin = new Date();
     $scope.showMessage = function () {
 
@@ -64,7 +70,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
     $scope.onNextClick = function () {
         $scope.Issubmitted = true;
-        
+
     }
 
     $scope.checkDOJ = function () {
@@ -107,8 +113,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             UserEmail: userEmail
         }).then(function (response) {
             $scope.formData = response.data[0];
-            console.log("form data",$scope.formData)
-            $scope.designationId =  $scope.formData.Designation.value;
+            console.log("form data", $scope.formData)
+            $scope.designationId = $scope.formData.Designation.value;
             $scope.userDetails = $scope.formData;
             if ($scope.formData.Role.value == "HR") {
                 $scope.formData.hrAccess = true;
@@ -298,27 +304,27 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.checkRole = function () {
-        if ($rootScope.Role == 'HR') 
+        if ($rootScope.Role == 'HR')
             return true;
         else
             return false;
     }
 
 
-    $scope.checkEmpty = function(formData){
-           if ($rootScope.Role == 'HR') {
-               
-           }
-           else{
-                if ( !formData.FirstName.value
-				   || !formData.LastName.value
-				   || !formData.DOB.value
-				   || !formData.BloodGroup.value
-				   || !formData.Gender.value
-				   ){
-                         $scope.disableNext = true;
-                   }                
-           }
+    $scope.checkEmpty = function (formData) {
+        if ($rootScope.Role == 'HR') {
+
+        }
+        else {
+            if (!formData.FirstName.value
+                || !formData.LastName.value
+                || !formData.DOB.value
+                || !formData.BloodGroup.value
+                || !formData.Gender.value
+            ) {
+                $scope.disableNext = true;
+            }
+        }
     }
 
     $scope.openModal = function () {
@@ -335,14 +341,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             }
         });
         modalInstance.result.then(function (paramFromDialog) {
-            if(paramFromDialog){
-            $scope.getEmpData($rootScope.passedUserEmail);
+            if (paramFromDialog) {
+                $scope.getEmpData($rootScope.passedUserEmail);
             };
-                 
-        });        
+
+        });
     }
 
-    
+
     $scope.init();
 
 }]);

@@ -35,9 +35,10 @@ hrBaseApp.factory('profileFctry', ['$http', '$resource', '$q', function ($http, 
                 }
             },
             'getEmpDetails': {
-                method: 'POST',
+                method: 'GET',
                 params: {
-                    action: 'getEmpDetails'
+                   action:'getEmpDetails', 
+                  UserEmail:'@UserEmail'
                 }
             },
             'getReportingHeadByEmpId': {        

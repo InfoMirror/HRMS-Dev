@@ -70,6 +70,7 @@ alert(row);
         });
         $scope.getEmployeeDetails = function (rowId) {
             $rootScope.passedUserEmail = rowId;
+            $rootScope.setisSelf = false;
             $state.go('home.editProfile');
         }
 
