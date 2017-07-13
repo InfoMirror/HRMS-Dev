@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', '$modal', function ($scope, $rootScope, profileFctry, $state, $timeout, $modal) {
+hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', '$modal','localStorageService', function ($scope, $rootScope, profileFctry, $state, $timeout, $modal,localStorageService) {
     'use strict';
     $scope.validAlphaOnly = /^[A-z]+$/;
     $scope.Issubmitted = false;
@@ -11,19 +11,21 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
         $scope.onlyNumbers = /^\d+$/;
         $scope.setIsActive = true;
-        //$scope.Warningmsg=false;        
         $scope.setIsActive = true;
-        if ($rootScope.passedUserEmail == undefined) {
+         var isSelf = localStorageService.get('isSelf');
+        if (isSelf === "true") {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         }
-        else {
+        if (isSelf === "false") {
             $scope.getEmpData($rootScope.passedUserEmail);
-            //$rootScope.passedUserEmail = null;
         }
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+    }
 
-        //$scope.IsVisaChecked = $rootScope.userDetails.ownVisa.value;
-        //   $scope.IsPassportChecked = $rootScope.userDetails.ownPassport.value;
-
+    $scope.afterInit = function () {
         $scope.getReportingHeads();
 
         $scope.getGenders({
@@ -39,11 +41,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.getRelations({
             MasterTypeId: 4
         });
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
-        // $scope.checkVal = 0;
+
     }
     $scope.startMin = new Date();
     $scope.showMessage = function () {
@@ -63,9 +61,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                         return true;
                     }
                 }
-            } /**/
+            }
         }
-        // alert($rootScope.message);
     }
 
     $scope.onNextClick = function () {
@@ -109,9 +106,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     }
 
     $scope.getEmpData = function (userEmail) {
-        profileFctry.getEmpDetails({
-            UserEmail: userEmail
-        }).then(function (response) {
+        console.log("userEmail",userEmail)
+        profileFctry.getEmpDetails({UserEmail: userEmail}).then(function (response) {
             $scope.formData = response.data[0];
             console.log("form data", $scope.formData)
             $scope.designationId = $scope.formData.Designation.value;
@@ -121,7 +117,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             } else {
                 $scope.formData.hrAccess = false;
             }
-
+            $scope.afterInit();
         });
     }
 
@@ -256,8 +252,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 if ($rootScope.Role == 'HR') {
                     $state.go('home.dashboard')
                 }
-            }
-            $rootScope.passedUserEmail = undefined;
+            }            
             if ($scope.formData.ProfileStatus.value == 23 || $scope.formData.ProfileStatus.value == 22) {
                 alert("Your Profile has been subbmited. Please wait for the approval.");
                 //$scope.Warningmsg=true;
@@ -346,9 +341,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             };
 
         });
-    }
-
-
+    }   
     $scope.init();
 
 }]);

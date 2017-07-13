@@ -40,6 +40,14 @@ hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '
                 roles: ['Employee', 'HR'],
                 hideInMenu: true
             })
+            .state('home.editMyProfile', {
+                url: '/editMyProfile',
+                templateUrl: '/app/home/hrmsEditProfileCtrl.html',
+                controller: 'hrmsEditProfileCtrl',
+                friendlyName: 'Edit Profile',
+                roles: ['Employee', 'HR'],
+                hideInMenu: true
+            })
             .state('home.hr', {
                 url: '/hr',
                 templateUrl: '/app/HRRoles/hrRoleCtrl.html',

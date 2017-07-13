@@ -24,7 +24,7 @@ hrBaseApp.directive('hrHeaderDrctv', [
             }
         }
 
-        p.controller = function ($scope, $rootScope, $state) {
+        p.controller = function ($scope, $rootScope, $state,localStorageService) {
             $scope.logout1 = function () {
                 $rootScope.isLoggedIn = false;
                 $rootScope.userDetails = [];
@@ -43,7 +43,9 @@ hrBaseApp.directive('hrHeaderDrctv', [
             }
 
             $scope.setIsSelf = function(){
-                $rootScope.isSelf = true;
+                $rootScope.setisSelf = true;
+                localStorageService.set('isSelf', $rootScope.setisSelf);
+                $state.go('home.editMyProfile');
             }
 
         }

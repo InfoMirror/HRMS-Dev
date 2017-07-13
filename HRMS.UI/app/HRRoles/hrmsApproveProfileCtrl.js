@@ -1,4 +1,4 @@
-hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope', 'profileFctry', function ($scope, $state, $rootScope, profileFctry) {
+hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope', 'profileFctry', 'localStorageService', function ($scope, $state, $rootScope, profileFctry, localStorageService) {
     'use strict';
 
     $scope.init = function () {
@@ -6,47 +6,47 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
         $scope.getEmployees();
     }
     $scope.getBkgColorTable = function (row) {
-alert(row);
+        alert(row);
         //return 'may';
         switch (row.entity.ProfileStatus) {
-        case 22:
-            alert(22);
-            return 'rowRed';
-            break;
-        case 23:
-            alert(23);
-            return 'rowawq';
-            break;
-        default: // anything but 0 and -1, alerts
-            //  alert(24);
-            return 'rowlime';
+            case 22:
+                alert(22);
+                return 'rowRed';
+                break;
+            case 23:
+                alert(23);
+                return 'rowawq';
+                break;
+            default: // anything but 0 and -1, alerts
+                //  alert(24);
+                return 'rowlime';
         }
     };
     //style="{\'background-color\': grid.appScope.getBkgColorTable()}" 
 
-   // var rowtpl = '<div><div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'rowlime\':row.entity.ProfileStatus==24,\'rowawq\':row.entity.ProfileStatus==23,\'rowRed\':row.entity.ProfileStatus==22 }" ui-grid-cell></div></div>';
+    // var rowtpl = '<div><div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'rowlime\':row.entity.ProfileStatus==24,\'rowawq\':row.entity.ProfileStatus==23,\'rowRed\':row.entity.ProfileStatus==22 }" ui-grid-cell></div></div>';
 
     //var rowTemplate = '<div style="height: 100%" ng-class="{rowRed: row.entity.ProfileStatus.value == 22, rowawq: row.entity.ProfileStatus.value == 24}"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' + '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
 
-    var rowtpl='<div><div ng-class="{rowRed: row.entity.ProfileStatus.value == 22, rowawq: row.entity.ProfileStatus.value == 24}" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" ui-grid-cell></div></div>';
+    var rowtpl = '<div><div ng-class="{rowRed: row.entity.ProfileStatus.value == 22, rowawq: row.entity.ProfileStatus.value == 24}" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" ui-grid-cell></div></div>';
 
     $scope.ApproveProfileGridOptions = {
         rowTemplate: rowtpl,
-		enableFiltering: true,
+        enableFiltering: true,
         columnDefs: [
-          /*  {
-                field: 'Name',
-                displayName: 'Name'
-            },*/
-			
+            /*  {
+                  field: 'Name',
+                  displayName: 'Name'
+              },*/
+
             {
                 field: 'UserEmail.value',
                 displayName: 'Email Id'
-          },
+            },
             {
                 field: 'Team.value',
                 displayName: 'Team'
-          },
+            },
 
             {
                 field: 'StatusType.value',
@@ -71,9 +71,10 @@ alert(row);
         $scope.getEmployeeDetails = function (rowId) {
             $rootScope.passedUserEmail = rowId;
             $rootScope.setisSelf = false;
+            localStorageService.set('isSelf', undefined);
+            localStorageService.set('isSelf', $rootScope.setisSelf);
             $state.go('home.editProfile');
         }
-
     }
     $scope.init();
 
