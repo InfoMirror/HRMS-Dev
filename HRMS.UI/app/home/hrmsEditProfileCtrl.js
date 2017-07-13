@@ -13,11 +13,12 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.setIsActive = true;
         $scope.setIsActive = true;
          var isSelf = localStorageService.get('isSelf');
+          var passedUserEmail = localStorageService.get('passedUserEmail');
         if (isSelf === "true") {
             $scope.getEmpData($rootScope.userDetails.UserEmail.value);
         }
         if (isSelf === "false") {
-            $scope.getEmpData($rootScope.passedUserEmail);
+            $scope.getEmpData(passedUserEmail);
         }
         $scope.dateOptions = {
             formatYear: 'yy',
@@ -303,24 +304,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             return true;
         else
             return false;
-    }
-
-
-    $scope.checkEmpty = function (formData) {
-        if ($rootScope.Role == 'HR') {
-
-        }
-        else {
-            if (!formData.FirstName.value
-                || !formData.LastName.value
-                || !formData.DOB.value
-                || !formData.BloodGroup.value
-                || !formData.Gender.value
-            ) {
-                $scope.disableNext = true;
-            }
-        }
-    }
+    }   
 
     $scope.openModal = function () {
         var modalInstance = $modal.open({

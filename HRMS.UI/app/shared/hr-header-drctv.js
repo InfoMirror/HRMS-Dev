@@ -43,8 +43,8 @@ hrBaseApp.directive('hrHeaderDrctv', [
             }
 
             $scope.setIsSelf = function(){
-                $rootScope.setisSelf = true;
-                localStorageService.set('isSelf', $rootScope.setisSelf);
+                $scope.setisSelf = true;
+                localStorageService.set('isSelf', $scope.setisSelf);
                 $state.go('home.editMyProfile');
             }
 

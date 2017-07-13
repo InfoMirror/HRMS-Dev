@@ -73,6 +73,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
             $rootScope.setisSelf = false;
             localStorageService.set('isSelf', undefined);
             localStorageService.set('isSelf', $rootScope.setisSelf);
+             localStorageService.set('passedUserEmail',$rootScope.passedUserEmail);
             $state.go('home.editProfile');
         }
     }
