@@ -290,6 +290,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
     $scope.getMaritalStatus = function (MasterTypeId) {
         profileFctry.getMasterValue(MasterTypeId).then(function (response) {
             $scope.maritalStatus = response.data;
+            console.log("marital Status", $scope.maritalStatus)
         });
     }
 

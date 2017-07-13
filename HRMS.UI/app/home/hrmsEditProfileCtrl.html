@@ -160,8 +160,14 @@
                                         <div class="form-group">
 
                                             <label class="required">Gender</label>
+                                             <!--<select class="form-control" id="states" name="states"
+											ng-model="formData.Gender.value" value="{{gender.Id.value}}" ng-selected="{{formData.Gender.value==gender.Value.value}}" required
+											ng-options="gender.Id.value as gender.Value.value for gender in genders">
+                                            
+                                              <option value='' style="display: none">Select</option>
+                                             </select>-->
 
-                                            <select class="form-control" ng-model="formData.Gender.value" required>
+                                            <select class="form-control" ng-model="formData.Gender.value" required>                                               
                                                         <option value='' style="display: none">select</option>
                                                         <option ng-repeat="gender in genders" value="{{gender.Id.value}}" ng-selected="{{formData.Gender.value==gender.Id.value}}">{{gender.Value.value}}</option>
                                                     </select>
@@ -181,7 +187,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="required">Marital Status</label>
-                                        <select class="form-control" ng-model="formData.Gender.value" required>
+                                        <select class="form-control" ng-model="formData.MaritalStatus.value" required>
                                                         <option ng-repeat="status in maritalStatus" value="{{status.Id.value}}" ng-selected="{{formData.MaritalStatus.value==status.Id.value}}">{{status.Value.value}}</option>
                                                     </select>
                                     </div>
