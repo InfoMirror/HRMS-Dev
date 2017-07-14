@@ -1,6 +1,6 @@
 hrBaseApp.controller('addEditEmpId', [
-    '$scope', '$modalInstance', 'aValue', '$rootScope', '$state', 'profileFctry',
-    function ($scope, $modalInstance, aValue, $rootScope, $state, profileFctry) {
+    '$scope', '$modalInstance', 'aValue', '$rootScope', '$state', 'profileFctry','toastr',
+    function ($scope, $modalInstance, aValue, $rootScope, $state, profileFctry, toastr) {
         'use strict';
 
         $scope.init = function () {
@@ -15,7 +15,7 @@ hrBaseApp.controller('addEditEmpId', [
             //alert(JSON.stringify($scope.editEmpId));
             profileFctry.updateEmpId($scope.editEmpId).then(function (response) {              
                         $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
-                        alert("Employee Id Updated Successfully!"); 
+                         toastr.success("Employee Id Updated Successfully!"); 
             });
             $scope.close(true);
         }

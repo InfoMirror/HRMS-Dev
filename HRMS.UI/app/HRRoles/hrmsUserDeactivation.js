@@ -1,4 +1,5 @@
-hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 'profileFctry', function ($scope, $state, $rootScope, profileFctry) {
+hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 'profileFctry', 'toastr',
+function ($scope, $state, $rootScope, profileFctry, toastr) {
     'use strict';
 
     $scope.init = function () {
@@ -73,7 +74,7 @@ hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 
             EmpId: rowId,
             IsActive: status
         }).then(function (response) {
-            alert("Activated Employee Details.")
+             toastr.success("Activated Employee Details.")
                 $scope.getDeactivatedEmployees();       
         });
     }

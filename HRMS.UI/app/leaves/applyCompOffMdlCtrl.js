@@ -1,6 +1,6 @@
 hrBaseApp.controller('applyCompOffMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', '$state', 'dashboardFctry', '$filter',
-    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, $state, dashboardFctry, $filter) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', '$state', 'dashboardFctry', '$filter','toastr',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, $state, dashboardFctry, $filter, toastr) {
         'use strict';
 
         $scope.init = function () {
@@ -52,8 +52,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                             FestivalDate: $scope.comparingDate
                         });
                         if ($scope.holiday == null || $scope.holiday == undefined || $scope.holiday.length == 0) {
-                            alert('This was a working day, so you can not apply comp off for this. May be you should file OD for this.');
-                           
+                             toastr.warning('This was a working day, so you can not apply comp off for this. May be you should file OD for this.');
                             $modalInstance.close();
                         } else {
                             $scope.insertCompOff($scope.CompOffData);
@@ -70,7 +69,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
             $scope.CompOffData.CompOffDate = document.getElementById("CompOffDate").children[0].value;
             var compOffDate = new Date($scope.CompOffData.CompOffDate);
             if (compOffDate > currDate) {
-                alert("Comp Off can not be applied to the future dates.");
+                 toastr.warning("Comp Off can not be applied to the future dates.");
                 $scope.CompOffData.CompOffDate = currDate;
             }
         }
@@ -79,12 +78,12 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                 leaveFctry.insertCompOff(CompOffData).then(function (response) {
                     //alert(response.data);
                     if (response.data == "CompOff Applied") {
-                        alert('CompOff Applied Successfully');
+                         toastr.success('CompOff Applied Successfully');
                         //$state.go('home.attendance.compoffs');              
                         // $scope.getCompOffsData($rootScope.userDetails);
                         $modalInstance.close();
                     } else {
-                        alert('You have already applied for this comp off');
+                         toastr.wa('You have already applied for this comp off');
                         $modalInstance.close();
                     }
                 });

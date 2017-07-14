@@ -1,6 +1,6 @@
 hrBaseApp.controller('applyleaveMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope',
-    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope','toastr',
+    function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, toastr) {
         'use strict';
 
         $scope.init = function () {
@@ -38,12 +38,11 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             // alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
-                    alert("Leave is Applied");
-                    $scope.disableSubmit = false;
+                     toastr.success("Leave is Applied");
                     $modalInstance.close();
                     // $scope.getAppliedLeaves($rootScope.userDetails);
                 } else {
-                    alert("Applied Leave on same Date already exist");
+                     toastr.warning("Applied Leave on same Date already exist");
                     $modalInstance.close();
                 }
             });
@@ -55,7 +54,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
 
         $scope.startDateCalOpen = function ($event) {
             if ($scope.FromDate > $scope.ToDate) {
-                alert("From Date can not be greater than To Date");
+                 toastr.warning("From Date can not be greater than To Date");
                 $scope.ToDate = $scope.FromDate;
             }
         }

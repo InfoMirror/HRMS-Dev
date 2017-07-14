@@ -1,5 +1,5 @@
-hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', '$modal',
-    function ($scope, $rootScope, approvalFctry, $modal) {
+hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctry', '$modal', 'toastr',
+    function ($scope, $rootScope, approvalFctry, $modal, toastr) {
 
         $scope.init = function () {
             $scope.getFiledOD($rootScope.userDetails);
@@ -74,7 +74,7 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
                 Id: rowId,
                 ODStatus: ODStatus
             }).then(function (response) {
-                alert("OD is " + status);
+                toastr.success("OD is " + status);
                 $scope.getFiledOD({
                     Id: $rootScope.userDetails.Id
                 });

@@ -1,6 +1,6 @@
 hrBaseApp.controller('leaveFileODMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry',
-    function ($scope, $modalInstance, aValue, leaveFctry) {
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry','toastr',
+    function ($scope, $modalInstance, aValue, leaveFctry, toastr) {
         'use strict';
 
         $scope.init = function () {
@@ -31,8 +31,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
                 //console.log('OD Data: ');
                 //console.log(response.data);
                 if (response.data == "OD Updated") {
-                    alert("OD Filed");
-                    $scope.disableSubmit = false;
+                     toastr.success("OD Filed");
                    $scope.getAbsentData($rootScope.userDetails);
                 }
             });

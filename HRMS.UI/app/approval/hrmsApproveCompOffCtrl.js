@@ -1,5 +1,5 @@
-hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', '$modal',
-    function ($scope, $rootScope, approvalFctry, $modal) {
+hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approvalFctry', '$modal', 'toastr',
+    function ($scope, $rootScope, approvalFctry, $modal, toastr) {
 
         $scope.init = function () {
             $scope.getFiledCompOff($rootScope.userDetails);
@@ -76,7 +76,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
                 Id: rowId,
                 compOffStatus: compOffStatus
             }).then(function (response) {
-                alert("CompOff " + status);
+                toastr.success("CompOff " + status);
                 $scope.getFiledCompOff({
                     Id: $rootScope.userDetails.Id
                 });

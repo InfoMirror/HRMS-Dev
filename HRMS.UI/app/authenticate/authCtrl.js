@@ -1,4 +1,5 @@
-var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', 'localStorageService', function (authFctry, $scope, $state, $rootScope, localStorageService) {
+var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state', '$rootScope', 'localStorageService', 'toastr',
+function (authFctry, $scope, $state, $rootScope, localStorageService, toastr) {
 
     // #region Initialize
 
@@ -96,7 +97,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                             console.log(error);
                         });
                 } else {
-                    alert('You are not authorized to login to this portal. Please try to login with your infoobjects.com/hoojook.com account.');
+                     toastr.error('You are not authorized to login to this portal. Please try to login with your infoobjects.com/hoojook.com account.');
                     $rootScope.isLoggedIn = false;
                     gapi.auth.signOut();
                     location.reload();

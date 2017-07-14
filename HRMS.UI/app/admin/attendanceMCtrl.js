@@ -1,4 +1,6 @@
-var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','attendanceFctry','$scope','$state','$rootScope',function(Upload,$window,attendanceFctry, $scope,$state,$rootScope){
+var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','attendanceFctry',
+'$scope','$state','$rootScope','toastr',
+function(Upload,$window,attendanceFctry, $scope,$state,$rootScope,toastr){
         var vm = this;
         
         $scope.init = function(){
@@ -12,7 +14,7 @@ var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','a
                 $scope.file.fileName=$scope.SelMonth + $scope.SelYear +'.xlsx';
                 $scope.upload($scope.file); //call upload function
             }else{
-                alert('File name is not correct is should be like:- Feb2016.xlsx');
+                toastr.warning('File name is not correct is should be like:- Feb2016.xlsx');
             }
         }
         
@@ -25,13 +27,12 @@ var attendanceCtrl=hrBaseApp.controller('attendanceMCtrl',['Upload','$window','a
                 data:{file:file,month:$scope.SelMonth,year:$scope.SelYear} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                    toastr.success('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
                 } else {
-                    $window.alert('an error occured');
+                    toastr.error('an error occured');
                 }
             }, function (resp) { //catch error
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
+                toastr.error('Error status: ' + resp.status);
             }, function (evt) { 
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);

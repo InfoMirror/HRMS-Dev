@@ -1,4 +1,5 @@
-hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', 'uiGridConstants', function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants) {
+hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', '$modal', 'uiGridConstants','toastr', 
+function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants, toastr) {
     'use strict';
     // alert(0);
     /* Initialize */
@@ -101,7 +102,7 @@ hrBaseApp.controller('hrmsCompOffsCtrl', ['$scope', 'leaveFctry', '$rootScope', 
         }).then(function (response) {
             if (response.data == "CompOff Marked") {
                 // $scope.markCompOff();
-                alert('CompOff Filed Successfully !!! Please wait for Approval');
+                 toastr.success('CompOff Filed Successfully !!! Please wait for Approval');
                 $scope.getCompOffsData($rootScope.userDetails);
             }
         });

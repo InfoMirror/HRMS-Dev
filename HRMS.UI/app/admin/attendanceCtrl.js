@@ -1,4 +1,6 @@
-var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window', 'attendanceFctry', '$scope', '$state', '$rootScope', function (Upload, $window, attendanceFctry, $scope, $state, $rootScope) {
+var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window', 'attendanceFctry', '$scope', 
+'$state', '$rootScope', 'toastr',
+function (Upload, $window, attendanceFctry, $scope, $state, $rootScope,toastr) {
     var vm = this;
 
     $scope.init = function () {
@@ -6,12 +8,10 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
     }
 
     $scope.submit = function () {
-        /*  alert($scope.file.url);//function to call on form submit
-      condole.log($('#myfile'));*/
         if ($scope.upload_form.file.$valid && $scope.file && /[0-9]{2,2}[A-Z][a-z]{2,2} [0-9]{4,4}(.xlsx)/g.test($scope.file.name)) { //check if from is valid
             $scope.upload($scope.file); //call upload function
         } else {
-            alert('file name is not correct it should be like this :- 02Feb 2016.xlsx');
+           toastr.warning('file name is not correct it should be like this :- 02Feb 2016.xlsx');
         }
     }
 
@@ -25,19 +25,18 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
 
             if (resp.data.error_code === 0) { //validate 
                 if (resp.data.error_weekend === 1) {
-                    $window.alert('Excel upload is not allowed for weekend');
+                   toastr.warning('Excel upload is not allowed for weekend');
                 } else {
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded.');
+                    toastr.success('Success ' + resp.config.data.file.name + 'uploaded.');
                 }
             }
         else if(resp.data.error_code === 11) {
-            $window.alert('Attandace for this date is already uploaded');
+            toastr.warning('Attandace for this date is already uploaded');
         } else {
-            $window.alert('an error occured');
+            toastr.error('an error occured');
         }
     }, function (resp) { //catch error
-        console.log('Error status: ' + resp.status);
-        $window.alert('Error status: ' + resp.status);
+       toastr.error('Error status: ' + resp.status);
     }, function (evt) {
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
