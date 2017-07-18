@@ -41,6 +41,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getRelations({
                 MasterTypeId: 4
             });
+              $scope.formData.visaCountry.value = "USA";
 
         }
         $scope.startMin = new Date();
@@ -286,15 +287,20 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             });
         }
 
-        $scope.getRelations = function (MasterTypeId) {
+         $scope.getRelations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.relations = response.data;
+                $scope.formData.RelationWithNominee.value =
+                    $scope.relations[0].Id.value;
+                    $scope.formData.RelationWithEC.value =
+                    $scope.relations[0].Id.value;
+                    
             });
         }
-
-        $scope.getGenders = function (MasterTypeId) {
+       $scope.getGenders = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.genders = response.data;
+                $scope.formData.Gender.value = $scope.genders[0].Id.value;
             });
         }
 
@@ -305,10 +311,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             });
         }
 
-        $scope.getMaritalStatus = function (MasterTypeId) {
+       $scope.getMaritalStatus = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.maritalStatus = response.data;
-                console.log("marital Status", $scope.maritalStatus)
+                $scope.formData.MaritalStatus.value =
+                    $scope.maritalStatus[0].Id.value;
             });
         }
 
