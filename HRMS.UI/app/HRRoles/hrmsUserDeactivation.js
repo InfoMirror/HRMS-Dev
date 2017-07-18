@@ -1,5 +1,5 @@
-hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 'profileFctry', 'toastr',
-function ($scope, $state, $rootScope, profileFctry, toastr) {
+hrBaseApp.controller('hrmsUserDeactivation', ['$scope', '$state', '$rootScope', 'profileFctry', 'toastr','localStorageService',
+function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) {
     'use strict';
 
     $scope.init = function () {
