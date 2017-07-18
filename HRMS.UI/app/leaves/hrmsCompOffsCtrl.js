@@ -63,7 +63,6 @@ function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants, toastr) {
     /*$scope.insertCompOff = function (CompOffData) {
         leaveFctry.insertCompOff(CompOffData).then(function (response) {
             if (response.data == "CompOff Applied") {
-                //  console.log(response.data);
                 $scope.getCompOffsData($rootScope.userDetails.EmpId.value);
             }
         });

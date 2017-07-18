@@ -141,7 +141,7 @@ hrBaseApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '
                 url: '/CompOffsApproval',
                 templateUrl: '/app/approval/hrmsApproveCompOffCtrl.html',
                 controller: 'hrmsApproveCompOffCtrl',
-                friendlyName: 'CompOff Approval',
+                friendlyName: 'Comp Off Approval',
                 roles: ['Employee', 'HR']
             })
             .state('home.approval.od', {

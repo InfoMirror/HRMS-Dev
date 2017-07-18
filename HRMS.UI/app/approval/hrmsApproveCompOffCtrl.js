@@ -7,31 +7,26 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
 
         $scope.approveCompOffGridOptions = {
             enableSorting: true,
-            enableColumnMenus: true,
             enableFiltering: true,
             filter: true,
             columnDefs: [
                 {
                     field: 'Name.value',
-                    displayName: 'NAME',
+                    displayName: 'Name',
                 },
                 {
                     field: 'CompOffDate.value',
-                    displayName: 'DATE',
+                    displayName: 'Date',
                     cellFilter: 'date:\'dd-MMM-yyyy\''
                 },
                 {
                     field: 'CompOffReason.value',
-                    displayName: 'COMP OFF REASON'
+                    displayName: 'Comp off reason'
                 },
-                // {
-                //     field: 'CompOffStatus.value',
-                //     displayName: 'APPROVAL STATUS',
-                //     cellTemplate: '<div ng-if="CompOffStatus.value ==\'Pending\'">Pending</div><div class="fa fa-check" ng-if="CompOffStatus.value == \'Approved\'">Approved</div><div class="fa fa-close" ng-if="CompOffStatus.value == \'Denied\'">Denied</div>'
-                // },
                 {
                     field: 'Action',
-                    displayName: 'ACTION',
+                    displayName: 'Action',
+                    enableColumnMenu: false,
                     enableFiltering: false,
                     cellTemplate: '<div style="margin-top: 2%;margin-left: 30%;" ng-show="row.entity.CompOffStatus.value==\'Filed\'"><button class="btn btn-xs btn-green"  ng-click="grid.appScope.openModal\(\'approve\',row.entity.Id)"">Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.openModal\(\'reject\',row.entity.Id)" style="margin-left:5%;">Reject</button></div>'
 

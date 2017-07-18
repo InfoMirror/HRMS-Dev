@@ -107,10 +107,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         }
 
         $scope.getEmpData = function (userEmail) {
-            console.log("userEmail", userEmail)
             profileFctry.getEmpDetails({ UserEmail: userEmail }).then(function (response) {
                 $scope.formData = response.data[0];
-                console.log("form data", $scope.formData)
                 $scope.designationId = $scope.formData.Designation.value;
                 $scope.userDetails = $scope.formData;
                 if ($scope.formData.Role.value == "HR") {

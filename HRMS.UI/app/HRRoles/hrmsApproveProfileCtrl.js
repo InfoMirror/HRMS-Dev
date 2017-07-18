@@ -51,7 +51,7 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
             {
                 field: 'StatusType.value',
                 displayName: 'Show Details',
-                enableColumnMenu: true,
+                enableColumnMenu: false,
                 enableFiltering: false,
                 cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
 

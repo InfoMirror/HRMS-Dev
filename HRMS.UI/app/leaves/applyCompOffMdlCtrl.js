@@ -60,7 +60,6 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                         }
                     });
                 }
-                //console.log($scope.CompOffData);
             }
         }
 

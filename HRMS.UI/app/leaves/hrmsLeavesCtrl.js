@@ -73,8 +73,6 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
 
     $scope.fileOD = function (OdData) {
         leaveFctry.fileOD(OdData).then(function (response) {
-            //console.log('OD Data: ');
-            //console.log(response.data);
             if (response.data == "OD Updated") {
                 $scope.getAbsentData($rootScope.userDetails);
             }

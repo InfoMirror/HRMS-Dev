@@ -5,7 +5,6 @@ hrBaseApp.controller('hrmsFrameCtrl', [
         //alert('Hello, I am in Frame Controller');
         //$rootScope.User = $stateParams.User;
         //$rootScope.OEM = $stateParams.oemName;
-        //console.log($rootScope.User);
 
         $rootScope.userDetails = localStorageService.get('userDetails');
         $rootScope.Role = localStorageService.get('role');

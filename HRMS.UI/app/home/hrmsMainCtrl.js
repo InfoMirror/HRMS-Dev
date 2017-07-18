@@ -23,7 +23,6 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 }
                 else {
                     $scope.getBirthdays = response.data;
-                    console.log("birthdays", $scope.getBirthdays)
                 }
             });
         }
@@ -35,14 +34,12 @@ hrBaseApp.controller('hrmsMainCtrl', [
                 }
                 else {
                     $scope.getAnniversaries = response.data;
-                    console.log("birthdays", $scope.getAnniversaries)
                 }
             });
         }
 
         $scope.getHolidayCalendar = function () {
             dashboardFctry.getHolidays().then(function (response) {
-                // console.log(response.data);
                 // $scope.holidayCalendarGridOptions.data = response.data;
                 $scope.holidayCalendar = response.data;
             });

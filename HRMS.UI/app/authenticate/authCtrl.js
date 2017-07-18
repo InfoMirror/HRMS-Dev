@@ -95,7 +95,6 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                         },
                             function (error) {
                                 toastr.error('Sorry, something went wrong: Please try again later.');
-                                // console.log(error);
                             });
                     } else {
                         toastr.error('You are not authorized to login to this portal. Please try to login with your infoobjects.com/hoojook.com account.');

@@ -27,7 +27,8 @@ function ($scope, $state, $rootScope, profileFctry, toastr) {
             {
                 field: 'StatusType.value',
                 displayName: 'Show Details',
-                enableColumnMenu: true,
+                enableColumnMenu: false,
+                enableFiltering: false,
                 cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
 
             },
@@ -36,6 +37,7 @@ function ($scope, $state, $rootScope, profileFctry, toastr) {
                 field: 'Action',
                 displayName: 'Activate Employee',
                 enableColumnMenu: false,
+                enableFiltering: false,
                 cellTemplate: '<div><label>Activate Again</label><input ng-model="row.entity.IsActive.value" type="checkbox" ng-click="grid.appScope.updateStatus(row.entity.IsActive.value,row.entity.EmpId.value)"/></div>'
 
             }
