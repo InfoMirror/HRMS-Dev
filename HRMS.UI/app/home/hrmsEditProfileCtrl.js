@@ -187,6 +187,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 }
             });
         }
+
+
         $scope.submit = function () {
             if ($rootScope.Role == 'HR') {
                 profileFctry.isEmpIdExist($scope.formData).then(function (response) {
@@ -273,11 +275,12 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                     toastr.success("Your Profile has been subbmited. Please wait for the approval.");
                     //$scope.Warningmsg=true;
                     // $state.go('home.editProfile');
-                } else if ($rootScope.Role == 'HR') {
+                } else if ($rootScope.Role === 'HR' && $state.current.name ==='home.editMyProfile') {
+                    
                     toastr.success("Profile has been updated successfully");
                     $rootScope.ShowAllStates = true;
                     $state.go('home.dashboard');
-                } else if ($scope.formData.ProfileStatus.value == 24) {
+                } else if ($scope.formData.ProfileStatus.value === 24 && $state.current.name ==='home.editProfile') {
                     
                     toastr.success("Profile has been updated successfully");
                      $state.go('home.hr.approveProfile');

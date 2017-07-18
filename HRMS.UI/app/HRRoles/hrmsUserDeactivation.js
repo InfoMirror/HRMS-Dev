@@ -55,7 +55,11 @@ function ($scope, $state, $rootScope, profileFctry, toastr) {
         });
         
          $scope.getEmployeeDetails = function (rowId) {
-            $rootScope.passedUserEmail = rowId;
+           $rootScope.passedUserEmail = rowId;
+            $rootScope.setisSelf = false;
+            localStorageService.set('isSelf', undefined);
+            localStorageService.set('isSelf', $rootScope.setisSelf);
+             localStorageService.set('passedUserEmail',$rootScope.passedUserEmail);
             $state.go('home.editProfile');
         }
     }
