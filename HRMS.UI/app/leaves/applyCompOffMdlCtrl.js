@@ -4,7 +4,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
         'use strict';
 
         $scope.init = function () {
-
+               
                 $scope.CompOffData = {
                     EmpId: aValue,
                     CompOffDate: new Date(),
@@ -36,6 +36,7 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
         }
 
         $scope.submit = function () {
+             $scope.disableSubmit = true;
             if ($scope.CompOffData.compOffReason != '' && $scope.CompOffData.compOffReason != undefined) {
                 debugger;
                 if (new Date($scope.CompOffData.CompOffDate).getDay() == 6 || new Date($scope.CompOffData.CompOffDate).getDay() == 0) {
@@ -52,9 +53,11 @@ hrBaseApp.controller('applyCompOffMdlCtrl', [
                         });
                         if ($scope.holiday == null || $scope.holiday == undefined || $scope.holiday.length == 0) {
                             alert('This was a working day, so you can not apply comp off for this. May be you should file OD for this.');
+                           
                             $modalInstance.close();
                         } else {
                             $scope.insertCompOff($scope.CompOffData);
+                             $scope.disableSubmit = false;
                         }
                     });
                 }

@@ -4,7 +4,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         'use strict';
 
         $scope.init = function () {
-
+             $scope.disableSubmit = false;
             $scope.ApplyLeave = {
                 EmpId: aValue,
                 FromDate: new Date(),
@@ -22,6 +22,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         $scope.startMax = moment().add(30, 'days').format('MM/DD/YYYY');
 
         $scope.submit = function () {
+             $scope.disableSubmit = true;
             $scope.ApplyLeave.Reason = $scope.LReason;
             //alert($scope.ApplyLeave.Reason);
             // $scope.Reason.Reason = $scope.Reason;
@@ -38,6 +39,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
                     alert("Leave is Applied");
+                    $scope.disableSubmit = false;
                     $modalInstance.close();
                     // $scope.getAppliedLeaves($rootScope.userDetails);
                 } else {

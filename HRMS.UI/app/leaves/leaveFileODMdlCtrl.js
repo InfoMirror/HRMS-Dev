@@ -4,7 +4,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
         'use strict';
 
         $scope.init = function () {
-            // $scope.valuePassed = aValue;
+           $scope.disableSubmit = false;
             $scope.odData = {
                 Id: {
                     value: aValue
@@ -16,6 +16,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
         }
 
         $scope.submit = function () {
+            $scope.disableSubmit = true;
             $scope.odData.ODReason.value = $scope.odReason;
 
             if ($scope.odData.ODReason.value != '' && $scope.odData.ODReason.value != undefined) {
@@ -31,6 +32,7 @@ hrBaseApp.controller('leaveFileODMdlCtrl', [
                 //console.log(response.data);
                 if (response.data == "OD Updated") {
                     alert("OD Filed");
+                    $scope.disableSubmit = false;
                    $scope.getAbsentData($rootScope.userDetails);
                 }
             });

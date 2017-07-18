@@ -1,18 +1,16 @@
-hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout','toastr','$modal', 'localStorageService',
-    function ($scope, $rootScope, profileFctry, $state, $timeout,toastr, $modal, localStorageService) {
+hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFctry', '$state', '$timeout', 'toastr', '$modal', 'localStorageService',
+    function ($scope, $rootScope, profileFctry, $state, $timeout, toastr, $modal, localStorageService) {
         'use strict';
-        $scope.validAlphaOnly = /^[A-z]+$/;
+        $scope.validName = /^[a-zA-Z\s-]+$/;
         $scope.Issubmitted = false;
         $scope.init = function () {
             $scope.emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
             $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
             $scope.validAlphaOnly = /^[A-z]+$/;
-            $scope.validBloodGroup = /^[A-z\+]+$/;
+            $scope.validBloodGroup = /^[A-z\+-]+$/;
             $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
             $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
-            $scope.onlyNumbers = /^\d+$/;
-            $scope.setIsActive = true;
-            $scope.setIsActive = true;
+            $scope.onlyNumbers = /^\d+$/;            
             var isSelf = localStorageService.get('isSelf');
             var passedUserEmail = localStorageService.get('passedUserEmail');
             if (isSelf === "true") {
@@ -166,7 +164,30 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 }
             }
         }
-
+        $scope.updateEmpId = function () {
+            profileFctry.isEmpIdExist($scope.formData).then(function (response) {
+                $scope.editEmpId = {
+                    UserEmail: $scope.formData.UserEmail.value,
+                    EmpId: $scope.formData.EmpId
+                }
+                //alert(JSON.stringify(response));
+                if (response.data.length > 0) {
+                    if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
+                        toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+                    } else {
+                        profileFctry.updateEmpId($scope.editEmpId).then(function (response) {
+                            $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
+                            alert("Employee Id Updated Successfully!");
+                        });
+                    }
+                } else {
+                    profileFctry.updateEmpId($scope.editEmpId).then(function (response) {
+                        $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
+                        alert("Employee Id Updated Successfully!");
+                    });
+                }
+            });
+        }
         $scope.submit = function () {
             if ($rootScope.Role == 'HR') {
                 profileFctry.isEmpIdExist($scope.formData).then(function (response) {
@@ -195,9 +216,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 $scope.formData.UAN.value = null;
                 $scope.formData.EmpId.value = null;
                 $scope.formData.Team.value = null;
-            }
-            if ($scope.formData.IsActive.value == '' || $scope.formData.IsActive.value == undefined)
-                $scope.formData.IsActive.value = true;
+            }          
             if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
                 $scope.formData.Children1.value = null;
             if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -258,9 +277,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 } else if ($rootScope.Role == 'HR') {
                     toastr.success("Profile has been updated successfully");
                     $rootScope.ShowAllStates = true;
-                    //                $state.go('home.dashboard');
+                    $state.go('home.dashboard');
                 } else if ($scope.formData.ProfileStatus.value == 24) {
+                    
                     toastr.success("Profile has been updated successfully");
+                     $state.go('home.hr.approveProfile');
                 }
             });
         }

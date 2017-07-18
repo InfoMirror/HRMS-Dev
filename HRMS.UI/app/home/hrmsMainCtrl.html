@@ -10,12 +10,12 @@
           <div class="list" ng-repeat="birthdays in getBirthdays">
             <div class="row">
               <div class="col-xs-3 col-sm-2"><img class="avatar" src="/assets/img/avatar-1.jpg" alt="Abhishek Bagria" title="Abhishek Bagria"></div>
-              <div class="col-xs-7 col-sm-8">
-                <p class="list-p">{{birthdays.Name.value}}<br>
+              <div class="col-xs-5 col-sm-6">
+                <p class="list-p text-uppercase">{{birthdays.Name.value}}<br>
                   <small>{{birthdays.Designation.value}}</small></p>
               </div>
-              <div class="col-xs-2 col-sm-2">
-                <p class="list-dt text-right">{{birthdays.DOB.value | date:"MMMM ','dd"}}</p>
+              <div class="col-xs-4 col-sm-4">
+                <p class="list-dt text-right">{{birthdays.Day.value}}, {{birthdays.DOB.value | date:"MMM','dd"}}</p>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -35,12 +35,12 @@
           <div class="list" ng-repeat="anniversaries in getAnniversaries">
             <div class="row">
               <div class="col-xs-3 col-sm-2"><img class="avatar" src="/assets/img/avatar-6.jpg" title="Prashant Kapoor"></div>
-              <div class="col-xs-7 col-sm-8">
-                <p class="list-p">{{anniversaries.Name.value}}<br>
+              <div class="col-xs-5 col-sm-6">
+                <p class="list-p text-uppercase">{{anniversaries.Name.value}}<br>
                   <small>{{anniversaries.Designation.value}}</small></p>
               </div>
-              <div class="col-xs-2 col-sm-2">
-                <p class="list-dt text-right">{{anniversaries.DOJ.value | date:"MMMM ','dd"}}</p>
+              <div class="col-xs-4 col-sm-4">
+                <p class="list-dt text-right">{{anniversaries.Day.value}}, {{anniversaries.DOJ.value | date:"MMM','dd"}}</p>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -65,7 +65,7 @@
               <th>Festival Date</th>
             </tr>
             <tr ng-repeat="holidayCal in holidayCalendar">
-              <td>{{holidayCal.FestivalName.value}}</td>
+              <td class="text-uppercase">{{holidayCal.FestivalName.value}}</td>
               <td>{{holidayCal.FestivalDate.value | date:'dd-MMM-yyyy'}}</td>
             </tr>         
             <tr>
