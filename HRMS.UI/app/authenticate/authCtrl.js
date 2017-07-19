@@ -36,6 +36,8 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                     'userId': 'me'
                 });
                 request.execute(function (resp) {
+
+
                     var email = '';
                     if (resp['emails']) {
                         for (var i = 0; i < resp['emails'].length; i++) {
@@ -58,24 +60,32 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                     if (resp["domain"] == 'infoobjects.com' || resp["domain"] == 'hoojook.com') {
                         var formdata = {
                             email: email,
-                            image: resp.image.url,
+                            image: resp.image.url
+
                         }
+                        var firstName = resp.name.givenName;
+                        var lastName = resp.name.familyName;
                         authFctry.login(formdata).then(function (response) {
-
+                           
                             if (response.data.length > 0) {
-
+                                
                                 $rootScope.userDetails = response.data[0];
                                 $rootScope.Role = response.data[0].Role.value;
+                                $rootScope.gmailFirstName = firstName;
+                                $rootScope.gmailLastName = lastName;
                                 /* if ($rootScope.userDetails.Role == 'HR') {
                                      $rootScope.Role = $rootScope.userDetails.Role;
                                  } else {
                                      $rootScope.Role = $rootScope.userDetails.Role;
                                  }*/
+                                console.log("response from google API", $rootScope.userDetails)
                                 $rootScope.isLoggedIn = true;
                                 localStorageService.set('isLoggedIn', true);
                                 $rootScope.userDetails.isLoggedIn = $rootScope.isLoggedIn;
-                                localStorageService.set('userDetails', $rootScope.userDetails);
+                                localStorageService.set('userDetails', $rootScope.userDetails) ;
                                 localStorageService.set('role', $rootScope.Role);
+                                  localStorageService.set('firstName', $rootScope.gmailFirstName);
+                                    localStorageService.set('lastName', $rootScope.gmailLastName + "fg");
                                 /*if (response.data[0].Role.value == "Employee" && (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23)) {
                                     $rootScope.ShowAllStates = false;
                                     $state.go('home.editProfile');

@@ -19,8 +19,12 @@ hrBaseApp.directive('hrHeaderDrctv', [
             $scope.changeState1 = function () {
                 $scope.changeState();
             }
-            if (localStorageService.get('userDetails') != null) {
-                $scope.activeUserName = localStorageService.get('userDetails').FirstName.value + ' ' + localStorageService.get('userDetails').LastName.value;
+           var userDetails = localStorageService.get('userDetails');
+           var profileStatus = userDetails.ProfileStatus.value;
+            if (profileStatus != 24) {
+                $scope.activeUserName = localStorageService.get('firstName') + ' ' + localStorageService.get('lastName');
+            }else{
+                 $scope.activeUserName = userDetails.FirstName.value + ' ' + userDetails.LastName.value;
             }
         }
 
