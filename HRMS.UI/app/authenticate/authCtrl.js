@@ -95,7 +95,7 @@ var authCtrl = hrBaseApp.controller('authCtrl', ['authFctry', '$scope', '$state'
                                 }*/
                                 if (response.data[0].ProfileStatus.value == 22 || response.data[0].ProfileStatus.value == 23) {
                                     $rootScope.ShowAllStates = false;
-                                    $state.go('home.editProfile');
+                                    $state.go('home.editMyProfile');
                                 } else {
                                     $rootScope.ShowAllStates = true;
                                     $state.go('home.dashboard');

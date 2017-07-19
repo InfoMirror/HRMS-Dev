@@ -19,16 +19,16 @@ hrBaseApp.directive('hrHeaderDrctv', [
             $scope.changeState1 = function () {
                 $scope.changeState();
             }
-           var userDetails = localStorageService.get('userDetails');
-           var profileStatus = userDetails.ProfileStatus.value;
+            var userDetails = localStorageService.get('userDetails');
+            var profileStatus = userDetails.ProfileStatus.value;
             if (profileStatus != 24) {
                 $scope.activeUserName = localStorageService.get('firstName') + ' ' + localStorageService.get('lastName');
-            }else{
-                 $scope.activeUserName = userDetails.FirstName.value + ' ' + userDetails.LastName.value;
+            } else {
+                $scope.activeUserName = userDetails.FirstName.value + ' ' + userDetails.LastName.value;
             }
         }
 
-        p.controller = function ($scope, $rootScope, $state,localStorageService) {
+        p.controller = function ($scope, $rootScope, $state, localStorageService) {
             $scope.logout1 = function () {
                 $rootScope.isLoggedIn = false;
                 $rootScope.userDetails = [];
@@ -41,12 +41,14 @@ hrBaseApp.directive('hrHeaderDrctv', [
             $scope.changeState = function () {
                 if (localStorageService.get('userDetails').ProfileStatus.value == 24) {
                     $state.go('home.dashboard');
-                } /*else {
-                    $state.go('home.editprofile');
-                }*/
+                } else {
+                    $scope.setisSelf = true;
+                    localStorageService.set('isSelf', $scope.setisSelf);
+                    $state.go('home.editMyprofile');
+                }
             }
 
-            $scope.setIsSelf = function(){
+            $scope.setIsSelf = function () {
                 $scope.setisSelf = true;
                 localStorageService.set('isSelf', $scope.setisSelf);
                 $state.go('home.editMyProfile');

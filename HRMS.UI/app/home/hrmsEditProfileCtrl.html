@@ -14,9 +14,11 @@
                             </div>
                             <div class="col-sm-4">
                                 <span class="font-regular required">Designation:</span>
-                                <select ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
+                                <select name="designations" ng-model="formData.Designation.value" ng-disabled="!checkRole()" ng-required="checkRole()">
                             <option ng-repeat="designation in designations" value="{{designation.Id.value}}" ng-selected="{{formData.Designation.value==designation.Id.value}}">{{designation.Value.value}}</option>
                             </select>
+
+                              <span ng-show="editForm.designations.$error.required && editForm.designations.$dirty" class="error-message">Required*</span>
                             </div>
 
                             <div class="col-sm-4">
