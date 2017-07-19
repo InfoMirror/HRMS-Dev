@@ -6,15 +6,12 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
         $scope.getEmployees();
     }
     $scope.getBkgColorTable = function (row) {
-        alert(row);
         //return 'may';
         switch (row.entity.ProfileStatus) {
-            case 22:
-                alert(22);
+            case 22:  
                 return 'rowRed';
                 break;
             case 23:
-                alert(23);
                 return 'rowawq';
                 break;
             default: // anything but 0 and -1, alerts

@@ -10,7 +10,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.validBloodGroup = /^[A-z\+-]+$/;
             $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
             $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
-            $scope.onlyNumbers = /^\d+$/;            
+            $scope.onlyNumbers = /^\d+$/;
             var isSelf = localStorageService.get('isSelf');
             var passedUserEmail = localStorageService.get('passedUserEmail');
             if (isSelf === "true") {
@@ -41,7 +41,9 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getRelations({
                 MasterTypeId: 4
             });
-              $scope.formData.visaCountry.value = "USA";
+            if (angular.isUndefined($scope.formData.visaCountry.value)) {
+                $scope.formData.visaCountry.value = "USA";
+            }
 
         }
         $scope.startMin = new Date();
@@ -164,28 +166,32 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             }
         }
         $scope.updateEmpId = function () {
-            profileFctry.isEmpIdExist($scope.formData).then(function (response) {
-                $scope.editEmpId = {
-                    UserEmail: $scope.formData.UserEmail.value,
-                    EmpId: $scope.formData.EmpId
-                }
-                //alert(JSON.stringify(response));
-                if (response.data.length > 0) {
-                    if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
-                        toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+            if ($scope.formData.EmpId.value !== null) {
+                profileFctry.isEmpIdExist($scope.formData).then(function (response) {
+                    $scope.editEmpId = {
+                        UserEmail: $scope.formData.UserEmail.value,
+                        EmpId: $scope.formData.EmpId
+                    }
+                    //alert(JSON.stringify(response));
+                    if (response.data.length > 0) {
+                        if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
+                            toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+                        } else {
+                            profileFctry.updateEmpId($scope.editEmpId).then(function (response) {
+                                $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
+                                toastr.success("Employee Id Updated Successfully!");
+                            });
+                        }
                     } else {
                         profileFctry.updateEmpId($scope.editEmpId).then(function (response) {
                             $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
-                            alert("Employee Id Updated Successfully!");
+                            toastr.success("Employee Id Updated Successfully!");
                         });
                     }
-                } else {
-                    profileFctry.updateEmpId($scope.editEmpId).then(function (response) {
-                        $rootScope.userDetails.EmpId = $scope.editEmpId.EmpId;
-                        alert("Employee Id Updated Successfully!");
-                    });
-                }
-            });
+                });
+            } else {
+                toastr.warning('please enter the employee Id')
+            }
         }
 
 
@@ -217,7 +223,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 $scope.formData.UAN.value = null;
                 $scope.formData.EmpId.value = null;
                 $scope.formData.Team.value = null;
-            }          
+            }
             if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
                 $scope.formData.Children1.value = null;
             if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -275,35 +281,42 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                     toastr.success("Your Profile has been subbmited. Please wait for the approval.");
                     //$scope.Warningmsg=true;
                     // $state.go('home.editProfile');
-                } else if ($rootScope.Role === 'HR' && $state.current.name ==='home.editMyProfile') {
-                    
+                } else if ($rootScope.Role === 'HR' && $state.current.name === 'home.editMyProfile') {
+
                     toastr.success("Profile has been updated successfully");
                     $rootScope.ShowAllStates = true;
                     $state.go('home.dashboard');
-                } else if ($scope.formData.ProfileStatus.value === 24 && $state.current.name ==='home.editProfile') {
-                    
+                } else if ($scope.formData.ProfileStatus.value === 24 && $state.current.name === 'home.editProfile') {
+
                     toastr.success("Profile has been updated successfully");
-                     $state.go('home.hr.approveProfile');
+                    $state.go('home.hr.approveProfile');
                 }
             });
         }
 
-         $scope.getRelations = function (MasterTypeId) {
+        $scope.getRelations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.relations = response.data;
-                $scope.formData.RelationWithNominee.value =
-                    $scope.relations[0].Id.value;
+                if (angular.isUndefined($scope.formData.RelationWithNominee.value)) {
+                    $scope.formData.RelationWithNominee.value =
+                        $scope.relations[0].Id.value;
+                }
+                if (angular.isUndefined($scope.formData.RelationWithEC.value)) {
                     $scope.formData.RelationWithEC.value =
-                    $scope.relations[0].Id.value;
-                    
+                        $scope.relations[0].Id.value;
+                }
+
             });
         }
-       $scope.getGenders = function (MasterTypeId) {
+        $scope.getGenders = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.genders = response.data;
-                $scope.formData.Gender.value = $scope.genders[0].Id.value;
+                if (angular.isUndefined($scope.formData.Gender.value)) {
+                    $scope.formData.Gender.value = $scope.genders[0].Id.value;
+                }
             });
         }
+
 
         $scope.getDesignations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
@@ -311,15 +324,16 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
                 $scope.employeeDesignation = $scope.designations[$scope.designationId].Value.value;
             });
         }
-
-       $scope.getMaritalStatus = function (MasterTypeId) {
+        $scope.getMaritalStatus = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.maritalStatus = response.data;
-                $scope.formData.MaritalStatus.value =
-                    $scope.maritalStatus[0].Id.value;
+                if (angular.isUndefined($scope.formData.MaritalStatus.value)) {
+                    $scope.formData.MaritalStatus.value =
+                        $scope.maritalStatus[0].Id.value;
+                }
             });
-        }
 
+        }
         $scope.getReportingHeads = function () {
             profileFctry.getAllEmployees().then(function (response) {
                 $scope.reportingHeads = response.data;
