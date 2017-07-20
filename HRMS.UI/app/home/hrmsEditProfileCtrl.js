@@ -7,7 +7,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
             $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
             $scope.validAlphaOnly = /^[A-z]+$/;
-            $scope.validBloodGroup = /^[A-z\+-]+$/;
+            $scope.validBloodGroup = /^(A|B|AB|O)[+-]?$/;
             $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
             $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
             $scope.onlyNumbers = /^\d+$/;
@@ -41,9 +41,13 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
             $scope.getRelations({
                 MasterTypeId: 4
             });
-            if (angular.isUndefined($scope.formData.visaCountry.value)) {
+            if (angular.isUndefined($scope.formData.visaCountry.value) && $scope.formData.ownVisa.value == true) {
                 $scope.formData.visaCountry.value = "USA";
             }
+               
+        //    if (angular.isUndefined($scope.formData.visaExpiryDate.value) && $scope.formData.ownVisa.value == true) {
+        //         $scope.formData.visaCountry.value = "USA";
+        //     }  
 
         }
         $scope.startMin = new Date();
@@ -111,7 +115,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
         $scope.getEmpData = function (userEmail) {
             profileFctry.getEmpDetails({ UserEmail: userEmail }).then(function (response) {
                 $scope.formData = response.data[0];
-                $scope.designationId = $scope.formData.Designation.value;
+                $scope.employeeDesignation = $scope.formData.Designation.value;
+           
                 $scope.userDetails = $scope.formData;
                 if ($scope.formData.Role.value == "HR") {
                     $scope.formData.hrAccess = true;
@@ -320,8 +325,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$scope', '$rootScope', 'profileFct
 
         $scope.getDesignations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
-                $scope.designations = response.data;
-                $scope.employeeDesignation = $scope.designations[$scope.designationId].Value.value;
+                $scope.designations = response.data;                                
+                if (angular.isUndefined($scope.employeeDesignation)) {
+                    $scope.employeeDesignation = $scope.designations[0].Value.value;
+                   
+                }
             });
         }
         $scope.getMaritalStatus = function (MasterTypeId) {
