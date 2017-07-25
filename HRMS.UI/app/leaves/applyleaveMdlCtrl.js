@@ -19,7 +19,7 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             };
         }
         $scope.startMin = moment().subtract(0, 'days').format('MM/DD/YYYY');
-        $scope.startMax = moment().add(30, 'days').format('MM/DD/YYYY');
+        $scope.startMax = moment().add(90, 'days').format('MM/DD/YYYY');
 
         $scope.submit = function () {
              $scope.disableSubmit = true;

@@ -14,23 +14,30 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
             columnDefs: [
                 {
                     field: 'Name.value',
-                    displayName: 'Name'
+                    displayName: 'Employee Name',
+                    headerCellClass: 'text-center'
                 },
                 {
                     field: 'FromDate.value',
-                    displayName: 'From',
+                    displayName: 'From Date',
+                    headerCellClass: 'text-center',
                     cellFilter: 'date:\'dd-MMM-yyyy\'',
+                    cellClass: 'text-center'
 
                 },
                 {
                     field: 'ToDate.value',
-                    displayName: 'To',
+                    displayName: 'To Date',
                     cellFilter: 'date:\'dd-MMM-yyyy\'',
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
 
                 },
                 {
                     field: 'Reason.value',
-                    displayName: 'Reason'
+                    displayName: 'Reason',
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
                 },
                 // {
                 //     field: 'Status.value',
@@ -42,6 +49,9 @@ hrBaseApp.controller('hrmsApproveLeaveCtrl', ['$scope', '$rootScope', 'approvalF
                     displayName: 'Action',
                     enableColumnMenu: false,
                     enableFiltering: false,
+                    cellClass: 'text-center',
+                    enableSorting: false,
+                    headerCellClass: 'text-center',
                     cellTemplate: '<div style="margin-top: 2%;margin-left: 20%;"  ng-show="row.entity.Status.value==\'Pending\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.openModal(\'Approved\',row.entity.Id)">Approve</button></hr><button class="btn btn-xs btn-red"  style="margin-left:5%"; ng-click="grid.appScope.openModal(\'Rejected\',row.entity.Id)">Reject</button></div>'
 
                 }

@@ -17,9 +17,11 @@ function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants, toastr) {
         columnDefs: [
             {
                 field: 'CompOffDate.value',
-                displayName: 'COMP OFF DATE',
+                displayName: 'Comp Off Date',
                 enableColumnMenu: false,
                 cellFilter: 'date:\'dd-MMM-yyyy\'',
+                headerCellClass: 'text-center',
+                cellClass: 'text-center',
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS
                 }
@@ -32,8 +34,9 @@ function ($scope, leaveFctry, $rootScope, $modal, uiGridConstants, toastr) {
             // },
             {
                 field: 'CompOffStatus.value',
-                displayName: 'APPROVAL STATUS',
+                displayName: 'Approval Status',
                 enableColumnMenu: false,
+                headerCellClass: 'text-center',
                 filter: {
                     condition: uiGridConstants.filter.CONTAINS
                 },

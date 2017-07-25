@@ -12,32 +12,41 @@ hrBaseApp.controller('hrmsLeavesCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
             columnDefs: [
                 {
                     field: 'AbsentDate.value',
-                    displayName: 'DATE',
+                    displayName: 'Absent Date',
                     enableColumnMenu: false,
                     cellFilter: 'date:\'dd-MMM-yyyy\'',
-                    headerCellClass: 'text-center'
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center',
             }
             , {
                     field: 'AbsentType.value',
-                    displayName: 'ABSENT TYPE',
+                    displayName: 'Absent Type',
                     enableColumnMenu: false,
-                    headerCellClass: 'text-center'
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center',
+                    
             }
        
             , {
                     field: 'StartTime.value',
-                    displayName: 'START TIME',
-                    enableColumnMenu: false
+                    displayName: 'In Time',
+                    enableColumnMenu: false,
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
             }
             , {
                     field: 'EndTime.value',
-                    displayName: 'END TIME',
-                    enableColumnMenu: false
+                    displayName: 'Out Time',
+                    enableColumnMenu: false,
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
             }
             , {
                     field: 'ODStatus.value',
-                    displayName: 'APPROVAL STATUS',
+                    displayName: 'Approval Status',
                     enableColumnMenu: false,
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center',
                     cellTemplate: '<div>{{row.entity.ODStatus.value}}<a ng-click="grid.appScope.openModal(row.entity.Id.value)" ng-show="grid.appScope.enableDisableLink(row.entity.ODStatus.value)" style="margin-right: 8%;float: right;" href="">File OD</a></div>'
             }
             /*,{

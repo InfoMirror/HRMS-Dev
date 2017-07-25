@@ -12,16 +12,21 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
             columnDefs: [
                 {
                     field: 'Name.value',
-                    displayName: 'Name'
+                    displayName: 'Employee Name',
+                    headerCellClass: 'text-center'
                 },
                 {
                     field: 'AbsentDate.value',
-                    displayName: 'Date',
-                    cellFilter: 'date:\'dd-MMM-yyyy\''
+                    displayName: 'OD Date',
+                    cellFilter: 'date:\'dd-MMM-yyyy\'',
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
                 },
                 {
                     field: 'ODReason.value',
-                    displayName: 'Reason'
+                    displayName: 'Reason',
+                    headerCellClass: 'text-center',
+                    cellClass: 'text-center'
                 },
                 // {
                 //     field: 'ODStatus.value',
@@ -33,6 +38,9 @@ hrBaseApp.controller('hrmsApproveODCtrl', ['$scope', '$rootScope', 'approvalFctr
                     displayName: 'Action',
                     enableColumnMenu: false,
                     enableFiltering: false,
+                    cellClass: 'text-center',
+                    enableSorting: false,
+                    headerCellClass: 'text-center',
                     cellTemplate: '<div style="margin-left: 30%; margin-top:2%;" ng-show="row.entity.ODStatus.value==\'Filed\'"><button class="btn btn-xs btn-green" ng-click="grid.appScope.openModal(\'approve\',row.entity.Id)" >Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.openModal(\'reject\',row.entity.Id)" style="margin-left: 5%;">Reject</button></div>'
                 }
             ]

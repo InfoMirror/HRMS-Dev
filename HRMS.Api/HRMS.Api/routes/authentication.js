@@ -14,7 +14,7 @@ var config = {
         database: connectionConfig.database,
         rowCollectionOnRequestCompletion: true,
         useColumnNames: true,
-		instanceName: connectionConfig.instanceName
+        instanceName: connectionConfig.instanceName
     }
 };
 
@@ -68,7 +68,7 @@ router.post('/login', function (req, res) {
                         } else {
                             console.log('Sp_InsertLogin');
                             console.log(rows);
-                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
+                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedBy,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
                                 if (err) {
                                     console.log(err);
                                 } else {
@@ -94,6 +94,7 @@ router.post('/login', function (req, res) {
                             });
 
                             reqEmpDetailsInsert.addParameter('Id', TYPES.BigInt, "0");
+                            reqEmpDetailsInsert.addParameter('CreatedBy', TYPES.NVarChar, req.body.email);
                             reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.email);
                             reqEmpDetailsInsert.addParameter('EmpId', TYPES.VarChar, null);
                             reqEmpDetailsInsert.addParameter('FirstName', TYPES.NVarChar, null);
@@ -132,7 +133,7 @@ router.post('/login', function (req, res) {
                             reqEmpDetailsInsert.addParameter('ownVisa', TYPES.Bit, null);
                             reqEmpDetailsInsert.addParameter('visaCountry', TYPES.NVarChar, null);
                             reqEmpDetailsInsert.addParameter('visaExpiryDate', TYPES.Date, null);
-                             reqEmpDetailsInsert.addParameter('IsActive', TYPES.Bit, 1);
+                            reqEmpDetailsInsert.addParameter('IsActive', TYPES.Bit, 1);
                             reqEmpDetailsInsert.addParameter('Role', TYPES.VarChar, "Employee");
                             //reqEmpDetailsInsert.addParameter('ImageUrl', TYPES.NVarChar, req.body.image);
 
@@ -183,7 +184,7 @@ function insertupdateuser(userid, email) {
         request.addParameter('UserId', TYPES.NVarChar, userid);
         request.addParameter('Email', TYPES.NVarChar, email);
         connection.execSql(request);
-    } 
+    }
 }
 var empData = [];
 
@@ -230,7 +231,7 @@ function InsertEmployeeDetails(email) {
     var TYPES = require('tedious').TYPES;
 
     function executeStatement() {
-        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id, @UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID,@ownPassport, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate,IsActive, @Role", function (err, rowCount, rows) {
+        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@ModifiedBy, @UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID,@ownPassport, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate,IsActive, @Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
@@ -240,6 +241,7 @@ function InsertEmployeeDetails(email) {
         });
 
         reqEmpDetailsInsert.addParameter('Id', TYPES.BigInt, "0");
+         reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.ModifiedByEmail);
         reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.email);
         reqEmpDetailsInsert.addParameter('EmpId', TYPES.VarChar, null);
         reqEmpDetailsInsert.addParameter('FirstName', TYPES.NVarChar, null);
@@ -278,10 +280,10 @@ function InsertEmployeeDetails(email) {
         reqEmpDetailsInsert.addParameter('ownVisa', TYPES.Bit, null);
         reqEmpDetailsInsert.addParameter('visaCountry', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('visaExpiryDate', TYPES.Date, null);
-         reqEmpDetailsInsert.addParameter('IsActive', TYPES.Bit, 1);
+        reqEmpDetailsInsert.addParameter('IsActive', TYPES.Bit, 1);
         reqEmpDetailsInsert.addParameter('Role', TYPES.VarChar, "Employee");
 
         connection.execSql(reqEmpDetailsInsert);
-    } 
+    }
 }
 module.exports = router;

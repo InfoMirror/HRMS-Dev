@@ -143,6 +143,7 @@ function excuteexcel(filename) {
                                     continue;
                                 }
                                 if (obj[0].data[i] == 'undefined') {
+                                    console.log("undefined",undefined)
 
                                 } else {
 
@@ -152,6 +153,7 @@ function excuteexcel(filename) {
                                         // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
                                         // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
                                         // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
+                                        console.log("Data is",obj[0].data[i][2])
                                         if (obj[0].data[i][2].split(":")[0].length == 1) {
                                             obj[0].data[i][2] = "0" + obj[0].data[i][2];
                                         }

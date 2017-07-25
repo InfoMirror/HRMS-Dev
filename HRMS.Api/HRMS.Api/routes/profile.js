@@ -272,6 +272,7 @@ router.post('/getMasterValues', function (req, res) {
 });
 
 router.post('/updateEmployeeDetails', function (req, res) {
+    console.log("Request",req)
     var connection = new sqlConnection(config);    
     connection.on('connect', function (err) {
         if (err) {
@@ -286,13 +287,14 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
     function executeStatement() {
 
-        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
+        request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedDate,@CreatedBy,@ModifiedDate,@ModifiedBy,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
             } else {
                 console.log('sp_InsertUpdateEmployeeDetails');
                 if (req.body.EmpId.value != null) {
-                    console.log('EmpId: ' + req.body.EmpId.value);                  
+                    console.log('EmpId: ' + req.body.EmpId.value);    
+                    console.log('ModifiedBy: ' + req.body.ModifiedBy.value);                 
                 }
             }
             res.json({
@@ -303,6 +305,10 @@ router.post('/updateEmployeeDetails', function (req, res) {
         console.log(req.body);
 
         request.addParameter('Id', TYPES.BigInt, req.body.Id.value);
+        request.addParameter('CreatedDate', TYPES.Date, req.body.CreatedDate.value);
+        request.addParameter('CreatedBy', TYPES.NVarChar, req.body.CreatedBy.value);
+        request.addParameter('ModifiedDate', TYPES.Date, req.body.ModifiedDate.value);
+        request.addParameter('ModifiedBy', TYPES.NVarChar, req.body.ModifiedBy.value);
         request.addParameter('UserEmail', TYPES.NVarChar, req.body.UserEmail.value);
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
         request.addParameter('FirstName', TYPES.NVarChar, req.body.FirstName.value);

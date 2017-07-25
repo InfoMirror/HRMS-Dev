@@ -32,12 +32,12 @@ var attendanceCtrl = hrBaseApp.controller('attendanceMCtrl', ['Upload', '$window
                 data: { file: file, month: $scope.SelMonth, year: $scope.SelYear } //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if (resp.data.error_code === 0) { //validate success
-                    toastr.success('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                    toastr.success('Monthly attendance sheet uploaded successfully. ');
                 } else {
-                    toastr.error('an error occured');
+                    toastr.error('Some error occured');
                 }
             }, function (resp) { //catch error
-                toastr.error('Error status: ' + resp.status);
+            toastr.error('Monthly attendance sheet could not be uploaded');
             }, function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);

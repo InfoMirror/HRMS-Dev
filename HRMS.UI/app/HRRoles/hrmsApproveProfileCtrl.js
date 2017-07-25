@@ -38,11 +38,14 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
 
             {
                 field: 'UserEmail.value',
-                displayName: 'Email Id'
+                displayName: 'Email Id',
+                headerCellClass: 'text-center'
             },
             {
                 field: 'Team.value',
-                displayName: 'Team'
+                displayName: 'Team',
+                headerCellClass: 'text-center',
+                cellClass: 'text-center'
             },
 
             {
@@ -50,7 +53,9 @@ hrBaseApp.controller('hrmsApproveProfileCtrl', ['$scope', '$state', '$rootScope'
                 displayName: 'Show Details',
                 enableColumnMenu: false,
                 enableFiltering: false,
-                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
+                  enableSorting: false,
+                headerCellClass: 'text-center',
+                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" class="text-center" style="margin-left: 35%" href="">Show Details</a></div>'
 
             }
 

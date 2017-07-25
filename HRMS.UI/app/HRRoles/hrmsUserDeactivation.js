@@ -7,7 +7,8 @@ function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) 
         $scope.getDeactivatedEmployees();
     }
    
-       $scope.UserDeactivateGridOptions = {      
+       $scope.UserDeactivateGridOptions = {   
+   
 		enableFiltering: true,
         columnDefs: [
           /*  {
@@ -17,19 +18,24 @@ function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) 
 			
             {
                 field: 'UserEmail.value',
-                displayName: 'Email Id'
+                displayName: 'Email Id',
+                headerCellClass: 'text-center'
           },
             {
                 field: 'Team.value',
-                displayName: 'Team'
+                displayName: 'Team',
+                headerCellClass: 'text-center',
+                cellClass: 'text-center'
           },
             
             {
                 field: 'StatusType.value',
-                displayName: 'Show Details',
+                displayName: 'Show Employee Details',
                 enableColumnMenu: false,
                 enableFiltering: false,
-                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 15%;" href="">Show Details</a></div>'
+                  enableSorting: false,
+                headerCellClass: 'text-center',
+                cellTemplate: '<div>{{row.entity.Action}}<a ng-click="grid.appScope.getEmployeeDetails(row.entity.UserEmail.value)" style="margin-left: 30%;" href="">Show Details</a></div>'
 
             },
 
@@ -38,6 +44,9 @@ function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) 
                 displayName: 'Activate Employee',
                 enableColumnMenu: false,
                 enableFiltering: false,
+                  enableSorting: false,
+                headerCellClass: 'text-center',
+                 cellClass: 'text-center',
                 cellTemplate: '<div><label>Activate Again</label><input ng-model="row.entity.IsActive.value" type="checkbox" ng-click="grid.appScope.updateStatus(row.entity.IsActive.value,row.entity.EmpId.value)"/></div>'
 
             }
@@ -80,7 +89,7 @@ function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) 
             EmpId: rowId,
             IsActive: status
         }).then(function (response) {
-             toastr.success("Activated Employee Details.")
+             toastr.success("Activated employee successfully.")
                 $scope.getDeactivatedEmployees();       
         });
     }

@@ -16,40 +16,35 @@ hrBaseApp.controller('applyleaveCtrl', ['$scope', 'leaveFctry', '$rootScope', '$
         columnDefs: [
             {
                 field: 'FromDate.value',
-                displayName: 'FROM DATE',
+                displayName: 'From Date',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\''
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                headerCellClass: 'text-center',
+                cellClass: 'text-center'
                 /*filter: {
                     condition: uiGridConstants.filter.CONTAINS
                 }*/
             },
             {
                 field: 'ToDate.value',
-                displayName: 'TO DATE',
+                displayName: 'To Date',
                 enableColumnMenu: false,
-                cellFilter: 'date:\'dd-MMM-yyyy\''
-                /*filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }*/
+                cellFilter: 'date:\'dd-MMM-yyyy\'',
+                headerCellClass: 'text-center'
             },
-          /*  {
-                field: 'EmployeeName',
-                displayName: 'Name',
-                enableColumnMenu: false
-            },*/
+       
             {
                 field: 'Reason.value',
-                displayName: 'REASON',
-                enableColumnMenu: false
+                displayName: 'Reason',
+                enableColumnMenu: false,
+                headerCellClass: 'text-center'
 
             },
             {
                 field: 'Status.value',
-                displayName: 'CURRENT STATUS',
-                enableColumnMenu: false
-                /*filter: {
-                    condition: uiGridConstants.filter.CONTAINS
-                }*/
+                displayName: 'Current Status',
+                enableColumnMenu: false,
+                headerCellClass: 'text-center'
             }
         ]
     };

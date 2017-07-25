@@ -31,7 +31,7 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
                     if (resp.data.error_weekend === 1) {
                         toastr.warning('Excel upload is not allowed for weekend');
                     } else {
-                        toastr.success('Success ' + resp.config.data.file.name + 'uploaded.');
+                        toastr.success('Daily attendance sheet uploaded successfully.');
                     }
                 }
                 else if (resp.data.error_code === 11) {
@@ -40,7 +40,7 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
                     toastr.error('an error occured');
                 }
             }, function (resp) { //catch error
-                toastr.error('Error status: ' + resp.status);
+                toastr.error('Daily attendance sheet could not be uploaded');
             }, function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
