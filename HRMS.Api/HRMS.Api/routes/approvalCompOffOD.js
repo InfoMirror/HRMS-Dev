@@ -38,6 +38,7 @@ router.post('/getFiledCompOff', function (req, res) {
                 console.log('sp_getFiledCompOffsByReportingHeads');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -93,6 +94,7 @@ router.post('/getFiledOD', function (req, res) {
                 console.log('sp_getFiledODByReportingHead');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -146,6 +148,7 @@ router.post('/getAppliedLeaves', function (req, res) {
                 console.log('sp_GetAppliedLeavesByReportingHead');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -200,6 +203,7 @@ router.post('/approveCompOff', function (req, res) {
                 console.log('sp_ApproveCompOffByReportingHead');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -253,6 +257,7 @@ router.post('/approveOD', function (req, res) {
                 console.log('sp_ApprovRejectFileODByReportingHead');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -288,6 +293,7 @@ router.post('/approveLeave', function (req, res) {
                 console.log('sp_UpdateLeaveStatus');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows

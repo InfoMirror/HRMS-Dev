@@ -38,6 +38,7 @@ router.post('/getEmpProfileData', function (req, res) {
                 console.log('sp_SelectDeleteEmployeeDetails');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -89,6 +90,7 @@ router.get('/getBirthdays', function (req, res) {
                 console.log('sp_getUpcomingBirthdays');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -141,6 +143,7 @@ router.get('/getAnniversary', function (req, res) {
                 console.log('sp_getUpcominAnniversary');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -193,6 +196,7 @@ router.get('/getHolidays', function (req, res) {
                 console.log('sp_getFestiveHolidays');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -246,6 +250,7 @@ router.post('/getLeaveSummary', function (req, res) {
                 console.log('sp_GetLeaveSummaryWithBreakup');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -278,6 +283,7 @@ router.get('/getHolidayCalendar', function (req, res) {
                 console.log('sp_getHolidayCalendar');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows

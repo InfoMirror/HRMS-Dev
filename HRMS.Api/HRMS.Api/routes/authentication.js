@@ -36,6 +36,7 @@ router.post('/login', function (req, res) {
 
     function executeStatement() {
         request = new Request("exec sp_SelectDeleteLogin @Action, @Email, @UserId", function (err, rowCount, rows) {
+            console.log("hi1")
             if (err) {
                 console.log(err);
             } else {
@@ -43,12 +44,14 @@ router.post('/login', function (req, res) {
                 console.log(rows);
                 console.log(rowCount);
                 if (rowCount > 0) {
+                    console.log("hi2")
                     request1 = new Request("exec sp_SelectDeleteEmployeeDetails @Action, @UserEmail", function (err, rowCount, rows) {
                         if (err) {
                             console.log(err);
                         } else {
                             console.log("sp_SelectDeleteEmployeeDetails");
                             console.log(rows);
+                            connection.close();
                             res.json({
                                 type: true,
                                 data: rows
@@ -63,22 +66,26 @@ router.post('/login', function (req, res) {
 
                 } else {
                     request2 = new Request("exec Sp_InsertLogin @Email", function (err, rowCount, rows) {
+                        console.log("no login")
                         if (err) {
-                            console.log(err);
+                            console.log("Error in inserting login details", err);
                         } else {
-                            console.log('Sp_InsertLogin');
-                            console.log(rows);
-                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedBy,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
+                            console.log("hi3")
+                            console.log("Row value", rows);
+                            reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedDate,@CreatedBy,@ModifiedDate,@ModifiedBy,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
                                 if (err) {
-                                    console.log(err);
-                                } else {
+                                    console.log("Error in inserting new emp details", err);
+                                } 
+                                else {
                                     console.log('sp_InsertUpdateEmployeeDetails');
+                                    console.log("coming here")
                                     reqGettingEmpDetails = new Request("exec sp_SelectDeleteEmployeeDetails @Action, @UserEmail", function (err, rowCount, rows) {
                                         if (err) {
                                             console.log(err);
                                         } else {
                                             console.log('sp_SelectDeleteEmployeeDetails');
                                             console.log(rows);
+                                            connection.close();
                                             res.json({
                                                 type: true,
                                                 data: rows
@@ -92,9 +99,12 @@ router.post('/login', function (req, res) {
                                     connection.execSql(reqGettingEmpDetails);
                                 }
                             });
-
+                            console.log("currentDate",new Date().getTime())
                             reqEmpDetailsInsert.addParameter('Id', TYPES.BigInt, "0");
+                            reqEmpDetailsInsert.addParameter('CreatedDate', TYPES.Date, new Date());
                             reqEmpDetailsInsert.addParameter('CreatedBy', TYPES.NVarChar, req.body.email);
+                            reqEmpDetailsInsert.addParameter('ModifiedDate', TYPES.Date, null);
+                            reqEmpDetailsInsert.addParameter('ModifiedBy', TYPES.NVarChar, null);
                             reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.email);
                             reqEmpDetailsInsert.addParameter('EmpId', TYPES.VarChar, null);
                             reqEmpDetailsInsert.addParameter('FirstName', TYPES.NVarChar, null);
@@ -160,6 +170,7 @@ router.post('/login', function (req, res) {
 
 
 function insertupdateuser(userid, email) {
+    console.log("hi4")
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -189,6 +200,7 @@ function insertupdateuser(userid, email) {
 var empData = [];
 
 function selectEmployeeDetails(email) {
+    console.log("hi5")
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -203,7 +215,7 @@ function selectEmployeeDetails(email) {
     function executeStatement() {
         request = new Request("exec sp_SelectDeleteEmployeeDetails @Action, @UserEmail", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                console.log("error in selecting employee details", err);
             } else {
                 console.log('sp_SelectDeleteEmployeeDetails');
                 console.log(rows);
@@ -219,6 +231,7 @@ function selectEmployeeDetails(email) {
 }
 
 function InsertEmployeeDetails(email) {
+    console.log("hello")
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -231,9 +244,9 @@ function InsertEmployeeDetails(email) {
     var TYPES = require('tedious').TYPES;
 
     function executeStatement() {
-        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@ModifiedBy, @UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID,@ownPassport, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate,IsActive, @Role", function (err, rowCount, rows) {
+        reqEmpDetailsInsert = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedDate,@CreatedBy,@ModifiedDate,@ModifiedBy,@UserEmail, @EmpId, @FirstName, @LastName, @Team, @Designation, @Gender, @MaritalStatus, @Children1, @Children2, @CurrentAddress, @PermanentAddress, @PersonalEmail, @ContactNo, @EmergencyContactNo, @NameOfEC, @RelationWithEC, @BloodGroup, @DOJ, @DOB, @Nominee, @RelationWithNominee, @SkypeID,@ownPassport, @PassportNumber, @PassportIssueDate, @PassportExpiryDate, @PassportIssuePlace, @PanCard, @BankAccountNumber, @ReportingHead, @PFNo, @UAN, @ProfileStatus, @ownVisa, @visaCountry, @visaExpiryDate,IsActive, @Role", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                console.log("error in insering data", err);
             } else {
                 console.log('sp_GetCompOffByEmployeeId');
                 console.log(rows);
@@ -241,14 +254,16 @@ function InsertEmployeeDetails(email) {
         });
 
         reqEmpDetailsInsert.addParameter('Id', TYPES.BigInt, "0");
-         reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.ModifiedByEmail);
+       reqEmpDetailsInsert.addParameter('CreatedDate', TYPES.Date, new Date());
+        reqEmpDetailsInsert.addParameter('CreatedBy', TYPES.NVarChar, req.body.email);
+        reqEmpDetailsInsert.addParameter('ModifiedDate', TYPES.Date, null);
+        reqEmpDetailsInsert.addParameter('ModifiedBy', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('UserEmail', TYPES.NVarChar, req.body.email);
         reqEmpDetailsInsert.addParameter('EmpId', TYPES.VarChar, null);
         reqEmpDetailsInsert.addParameter('FirstName', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('LastName', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('Team', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('Designation', TYPES.NVarChar, null);
-
         reqEmpDetailsInsert.addParameter('Gender', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('MaritalStatus', TYPES.NVarChar, null);
         reqEmpDetailsInsert.addParameter('Children1', TYPES.NVarChar, null);

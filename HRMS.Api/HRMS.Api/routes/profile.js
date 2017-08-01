@@ -49,6 +49,7 @@ router.get('/getAllRelations', function (req, res) {
                 console.log('sp_GetAllRelations');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -58,7 +59,7 @@ router.get('/getAllRelations', function (req, res) {
         });
 
         connection.execSql(request);
-    }  
+    }
 });
 
 router.get('/getAllEmployees', function (req, res) {
@@ -81,6 +82,7 @@ router.get('/getAllEmployees', function (req, res) {
                 console.log('sp_GetAllEpmloyees');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -113,6 +115,7 @@ router.post('/getReportingHeadByEmpId', function (req, res) {
                 console.log('sp_getReportingHeadByEmpId');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -146,6 +149,7 @@ router.get('/getDeactivatedEmployees', function (req, res) {
                 console.log('sp_GetDeactivatedEmployees');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -183,8 +187,9 @@ router.get('/getAllEmployeesData', function (req, res) {
                         rows[i].Name = rows[i].Name.value;
                         rows[i].UserEmail = rows[i].UserEmail.value;
                         rows[i].Team = rows[i].Team.value;
-						rows[i].ImageUrl = rows[i].ImageUrl.value;
+                        rows[i].ImageUrl = rows[i].ImageUrl.value;
                     }
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -207,6 +212,7 @@ router.get('/getAllEmployeesData', function (req, res) {
             } else {
                 if (results.length > 0) {
                     console.log(results);
+                    connection.close();                     
                     res.json({
                         type: true,
                         data: results
@@ -237,6 +243,7 @@ router.post('/getMasterValues', function (req, res) {
                 console.log('sp_SelectMasterValue');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -261,6 +268,7 @@ router.post('/getMasterValues', function (req, res) {
             } else {
                 if (results.length > 0) {
 
+                    connection.close();                     
                     res.json({
                         type: true,
                         data: results
@@ -272,8 +280,8 @@ router.post('/getMasterValues', function (req, res) {
 });
 
 router.post('/updateEmployeeDetails', function (req, res) {
-    console.log("Request",req)
-    var connection = new sqlConnection(config);    
+    console.log("Request", req)
+    var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
             return console.error(err);
@@ -289,25 +297,28 @@ router.post('/updateEmployeeDetails', function (req, res) {
 
         request = new Request("exec sp_InsertUpdateEmployeeDetails @Id,@CreatedDate,@CreatedBy,@ModifiedDate,@ModifiedBy,@UserEmail,@EmpId,@FirstName,@LastName,@Team,@Designation,@Gender,@MaritalStatus,@Children1,@Children2,@CurrentAddress,@PermanentAddress,@PersonalEmail,@ContactNo,@EmergencyContactNo,@NameOfEC,@RelationWithEC,@BloodGroup,@DOJ,@DOB,@Nominee,@RelationWithNominee,@SkypeID,@ownPassport,@PassportNumber,@PassportIssueDate,@PassportExpiryDate,@PassportIssuePlace,@PanCard,@BankAccountNumber,@ReportingHead,@PFNo,@UAN,@ProfileStatus,@ownVisa,@visaCountry,@visaExpiryDate,@IsActive,@Role", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                console.log("Error in updating details", err);
+                connection.close(); 
+                res.json({
+                    type: true,
+                    data: 'Profile Updation Failed'
+                });
+
             } else {
                 console.log('sp_InsertUpdateEmployeeDetails');
-                if (req.body.EmpId.value != null) {
-                    console.log('EmpId: ' + req.body.EmpId.value);    
-                    console.log('ModifiedBy: ' + req.body.ModifiedBy.value);                 
-                }
+                connection.close(); 
+                res.json({
+                    type: true,
+                    data: 'Profile Updated'
+                });
             }
-            res.json({
-                type: true,
-                data: 'Profile Updated'
-            });
         });
         console.log(req.body);
 
         request.addParameter('Id', TYPES.BigInt, req.body.Id.value);
         request.addParameter('CreatedDate', TYPES.Date, req.body.CreatedDate.value);
         request.addParameter('CreatedBy', TYPES.NVarChar, req.body.CreatedBy.value);
-        request.addParameter('ModifiedDate', TYPES.Date, req.body.ModifiedDate.value);
+        request.addParameter('ModifiedDate', TYPES.Date, new Date());
         request.addParameter('ModifiedBy', TYPES.NVarChar, req.body.ModifiedBy.value);
         request.addParameter('UserEmail', TYPES.NVarChar, req.body.UserEmail.value);
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
@@ -377,6 +388,7 @@ router.post('/updateEmployeeIsActive', function (req, res) {
                 console.log('sp_UpdateIsActive');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -386,8 +398,9 @@ router.post('/updateEmployeeIsActive', function (req, res) {
         });
         request.addParameter('EmpId', TYPES.NVarChar, req.body.EmpId);
         request.addParameter('IsActive', TYPES.Bit, req.body.IsActive);
-        connection.execSql(request);    }
-    
+        connection.execSql(request);
+    }
+
 });
 
 
@@ -412,6 +425,7 @@ router.get('/getEmpDetails', function (req, res) {
                 console.log('sp_SelectDeleteEmployeeDetails');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -434,6 +448,7 @@ router.get('/getEmpDetails', function (req, res) {
                 console.log(err);
             } else {
                 if (results.length > 0) {
+                    connection.close();                     
                     res.json({
                         type: true,
                         data: results
@@ -464,6 +479,7 @@ router.post('/getApprovalReqEmp', function (req, res) {
                 console.log('sp_GetApprovalReqEmp');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -484,6 +500,7 @@ router.post('/getApprovalReqEmp', function (req, res) {
                 console.log(err);
             } else {
                 if (results.length > 0) {
+                    connection.close();                     
                     res.json({
                         type: true,
                         data: results
@@ -515,11 +532,13 @@ router.post('/IsEmpIdExist', function (req, res) {
                 console.log('sp_IsEmpIdExist');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
                     });
                 } else {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -556,11 +575,13 @@ router.post('/updateEmpId', function (req, res) {
                 console.log('sp_UpdateEmpId');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
                     });
                 } else {
+                    connection.close(); 
                     res.json({
                         type: true,
                         data: rows
@@ -568,10 +589,10 @@ router.post('/updateEmpId', function (req, res) {
                 }
             }
         });
-        
-        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail);        
+
+        request.addParameter('UserEmail', TYPES.VarChar, req.body.UserEmail);
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
-        
+
         connection.execSql(request);
     }
 });

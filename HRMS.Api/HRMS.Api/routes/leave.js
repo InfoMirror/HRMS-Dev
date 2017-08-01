@@ -38,6 +38,7 @@ router.post('/getAbsents', function (req, res) {
                 console.log('sp_GetAbsentByEmployeeId');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -70,6 +71,7 @@ router.get('/getAllAbsents', function (req, res) {
                 console.log('sp_GetAllAbsent');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close()
                     res.json({
                         type: true,
                         data: rows
@@ -100,6 +102,7 @@ router.post('/fileOD', function (req, res) {
             } else {
                 console.log('sp_FileOD');
                 console.log(rows);
+                connection.close()
                 res.json({
                     type: true,
                     data: 'OD Updated'
@@ -151,6 +154,7 @@ router.post('/getCompOffs', function (req, res) {
                 console.log(req.body);
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
@@ -216,6 +220,7 @@ router.post('/insertCompOff', function (req, res) {
                     } else {
                         console.log('Sp_InsertCompOff');
                         console.log(rows);
+                        connection.close();
                         res.json({
                             type: true,
                             data: 'CompOff Applied'
@@ -273,6 +278,7 @@ router.post('/markCompOff', function (req, res) {
             } else {
                 console.log('sp_MarkComOff');
                 console.log(rows);
+                connection.close();
                 res.json({
                     type: true,
                     data: 'CompOff Marked'
@@ -322,11 +328,13 @@ router.post('/getAppliedLeaves', function (req, res) {
                 console.log('sp_GetappliedLeavesByEmployeeId');
                 console.log(rows);
                 if (rowCount > 0) {
+                    connection.close();
                     res.json({
                         type: true,
                         data: rows
                     });
                 } else {
+                    connection.close();
                     res.json({
                         type: true,
                         data: 'No Records Found'
@@ -393,6 +401,7 @@ router.post('/insertLeave', function (req, res) {
                     } else {
                         console.log('Sp_InsertLeave');
                         console.log(rows);
+                        connection.close();
                         res.json({
                             type: true,
                             data: 'Leave Applied'

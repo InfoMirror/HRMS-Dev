@@ -205,8 +205,9 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
         request = new Request("exec InsertAbsent @EmpId,@AbsentDate,@StartTime,@EndTime,@AbsentType,@ODStatus,@IsAdminEntry", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
-
+                connection.close();
             }
         });
         request.addParameter('EmpId', TYPES.VarChar, empId);
@@ -238,8 +239,9 @@ function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, is
         request = new Request("exec Sp_InsertCompOff @EmpId,@CompOffDate,@StartTime,@EndTime,@CompOffStatus,@IsManual,@CompOffReason", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
-
+                connection.close();
             }
         });
         request.addParameter('EmpId', TYPES.VarChar, empId);
@@ -272,6 +274,7 @@ function isHoliDay(AttdenceDate, callback) {
         request = new Request("exec Sp_CheckIsHoliday @Date", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
                 console.log(rows[0].IsHoliDay.value);
                 if (rows[0].IsHoliDay.value > 0) {
@@ -281,6 +284,7 @@ function isHoliDay(AttdenceDate, callback) {
 
                     callback(false);
                 }
+                connection.close();
             }
         });
         request.addParameter('Date', TYPES.Date, AttdenceDate);
@@ -305,12 +309,14 @@ function isDuplicateDate(AttdenceDate, empId, callback) {
         request = new Request("exec Sp_IsDuplicateDate @Date,@empId", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
                     callback(true);
                 } else {
                     callback(false);
                 }
+                connection.close();
             }
         });
         request.addParameter('Date', TYPES.Date, AttdenceDate);
@@ -335,12 +341,14 @@ function isDuplicateCompOff(AttdenceDate, empId, callback) {
         request = new Request("exec Sp_IsDuplicateCompoff @CompOffDate,@empId", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
                     callback(true);
                 } else {
                     callback(false);
                 }
+                connection.close();
             }
         });
         request.addParameter('CompOffDate', TYPES.Date, AttdenceDate);
@@ -365,12 +373,14 @@ function isDuplicateDate_New(AttdenceDate, robj, eId, callback) {
         request = new Request("exec Sp_IsDuplicateDate @Date,@empId", function (err, rowCount, rows) {
             if (err) {
                 console.log(err);
+                connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
                     callback(true, eId, robj);
                 } else {
                     callback(false, eId, robj);
                 }
+                connection.close();
             }
         });
         request.addParameter('Date', TYPES.Date, AttdenceDate);
