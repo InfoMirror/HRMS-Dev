@@ -52,7 +52,7 @@
                                 <span class="pull-left font-regular required">Date of joining:</span>
                                 <olca-date id="DOJ" class="pull-left col-md-6" date-options="dateOptions" input-value="formData.DOJ.value" input-name="formData.DOJ.value"
                                     date-required="checkRole()" show-cal="checkRole()"></olca-date>
-                                    <span ng-show="editForm.DOJ.$error.required && editForm.DOJ.$dirty" class="error-message">Required*</span>
+                                <span ng-show="editForm.DOJ.$error.required && editForm.DOJ.$dirty" class="error-message">Required*</span>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -60,15 +60,14 @@
 
                                     <olca-date id="DOB" class="col-md-6" date-options="dateOptions" name="DOB" input-value="formData.DOB.value" date-required="checkRole()"
                                         show-cal="true"></olca-date>
-                                        <span ng-show="editForm_personalDetails.DOB.$error.required && editForm_personalDetails.DOB.$dirty" class="error-message">Required*</span>
-                                        <span ng-show="age > 100" class="error-message">Please enter correct age.</span>
+                                    <span ng-show="editForm_personalDetails.DOB.$error.required && editForm_personalDetails.DOB.$dirty" class="error-message">Required*</span>
+                                    <span ng-show="age > 100" class="error-message">Please enter correct age.</span>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <div class="col-sm-6">
-
+                            <div class="col-sm-6" style="margin-bottom: 10px;">
                                 <span class="font-regular required"> Employee Id:</span>
                                 <input type="text" id="EmpId" name="empId" ng-readonly="(!checkRole())" ng-required="checkRole()" ng-model="formData.EmpId.value">
                                 <span ng-show="editForm.empId.$error.required && editForm.empId.$dirty" class="error-message">Required*</span>
@@ -140,8 +139,8 @@
                                                     <label class="required">First Name</label>
                                                     <input type="text" class="form-control" placeholder="First Name" maxlength="50" id="FirstName" name="firstName" ng-pattern="validName"
                                                         required ng-model="formData.FirstName.value">
-                                                        <span ng-show="editForm_personalDetails.firstName.$error.required && editForm_personalDetails.firstName.$dirty" class="error-message">Required*</span>
-                                                        <span ng-show="editForm_personalDetails.firstName.$touched && editForm_personalDetails.firstName.$error.pattern" class="error-message">Invalid First Name.</span>
+                                                    <span ng-show="editForm_personalDetails.firstName.$error.required && editForm_personalDetails.firstName.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm_personalDetails.firstName.$touched && editForm_personalDetails.firstName.$error.pattern" class="error-message">Invalid First Name.</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -149,8 +148,8 @@
                                                     <label class="required">Last Name</label>
                                                     <input type="text" class="form-control" id="LastName" placeholder="Last Name" name="lastName" ng-pattern="validName" required
                                                         ng-model="formData.LastName.value" maxlength="50">
-                                                        <span ng-show="editForm_personalDetails.lastName.$error.required && editForm_personalDetails.lastName.$dirty" class="error-message">Required*</span>
-                                                        <span ng-show="editForm_personalDetails.lastName.$touched && editForm_personalDetails.lastName.$error.pattern" class="error-message">Invalid Last Name.</span>
+                                                    <span ng-show="editForm_personalDetails.lastName.$error.required && editForm_personalDetails.lastName.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm_personalDetails.lastName.$touched && editForm_personalDetails.lastName.$error.pattern" class="error-message">Invalid Last Name.</span>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -172,8 +171,8 @@
                                                     <input type="text" class="form-control" tooltip="Please enter capital letters only" placeholder="Blood Group" id="BloodGroup"
                                                         ng-pattern="validBloodGroup" name="bloodGrp" required ng-model="formData.BloodGroup.value"
                                                         maxlength="3">
-                                                        <span ng-show="editForm_personalDetails.bloodGrp.$error.required && editForm_personalDetails.bloodGrp.$dirty" class="error-message">Required*</span>
-                                                        <span ng-show="editForm_personalDetails.bloodGrp.$touched && editForm_personalDetails.bloodGrp.$error.pattern" class="error-message">Invalid Blood Group.</span>
+                                                    <span ng-show="editForm_personalDetails.bloodGrp.$error.required && editForm_personalDetails.bloodGrp.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm_personalDetails.bloodGrp.$touched && editForm_personalDetails.bloodGrp.$error.pattern" class="error-message">Invalid Blood Group.</span>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -203,8 +202,8 @@
                                                 <label class="required">Nominee</label>
                                                 <input type="text" class="form-control" id="Nominee" name="nominee" ng-model="formData.Nominee.value" ng-pattern="validName"
                                                     maxlength="50" required>
-                                                    <span ng-show="editForm_familyDetails.nominee.$error.required && editForm_familyDetails.nominee.$dirty" class="error-message">Required*</span>
-                                                    <span ng-show="editForm_familyDetails.nominee.$touched && editForm_familyDetails.nominee.$error.pattern" class="error-message">Invalid Nominee.</span>
+                                                <span ng-show="editForm_familyDetails.nominee.$error.required && editForm_familyDetails.nominee.$dirty" class="error-message">Required*</span>
+                                                <span ng-show="editForm_familyDetails.nominee.$touched && editForm_familyDetails.nominee.$error.pattern" class="error-message">Invalid Nominee.</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -234,10 +233,8 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <a href="#PersonalDetails" role="tab" data-toggle="tab" class="btn btn
-                                                                            default">Previous
-                                        </a>
-                                        <a href="#ContactDetails" role="tab" data-toggle="tab" ng-disabled="!editForm_familyDetails.$valid " class="btn btn-green">Next</a>
+                                    <a href="#PersonalDetails" role="tab" data-toggle="tab" class="btn btn-default">Previous</a>
+                                    <a href="#ContactDetails" role="tab" data-toggle="tab" ng-disabled="!editForm_familyDetails.$valid " class="btn btn-green">Next</a>
                                 </div>
                                 <div class="col-sm-6">&nbsp;</div>
                                 <div class="clearfix"></div>
@@ -254,9 +251,9 @@
                                                 <label class="required">Contact No</label>
                                                 <input type="text" class="form-control" id="ContactNo" name="contactNumber" required ng-model="formData.ContactNo.value"
                                                     ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
-                                                    <span ng-show="editForm_contactDetails.contactNumber.$error.required && editForm_contactDetails.contactNumber.$dirty" class="error-message">Required*</span>
-                                                    <span ng-show="!editForm_contactDetails.contactNumber.$error.required && (editForm_contactDetails.contactNumber.$error.minlength || editForm_contactDetails.contactNumber.$error.maxlength || editForm_contactDetails.contactNumber.$error.pattern) && editForm_contactDetails.contactNumber.$dirty"
-                                                        class="error-message">Invalid Contact Number</span>
+                                                <span ng-show="editForm_contactDetails.contactNumber.$error.required && editForm_contactDetails.contactNumber.$dirty" class="error-message">Required*</span>
+                                                <span ng-show="!editForm_contactDetails.contactNumber.$error.required && (editForm_contactDetails.contactNumber.$error.minlength || editForm_contactDetails.contactNumber.$error.maxlength || editForm_contactDetails.contactNumber.$error.pattern) && editForm_contactDetails.contactNumber.$dirty"
+                                                    class="error-message">Invalid Contact Number</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -264,10 +261,10 @@
                                                 <label class="required">Emergency Contact No</label>
                                                 <input type="text" class="form-control" id="EmergencyContactNo" name="emergencyContactNumber" required ng-model="formData.EmergencyContactNo.value"
                                                     ng-maxlength="10" ng-minlength="10" ng-pattern="phoneNumbr">
-                                                    <span ng-show="editForm_contactDetails.emergencyContactNumber.$error.required && editForm_contactDetails.emergencyContactNumber.$dirty"
-                                                        class="error-message">Required*</span>
-                                                        <span ng-show="!editForm_contactDetails.emergencyContactNumber.$error.required && (editForm_contactDetails.emergencyContactNumber.$error.minlength || editForm_contactDetails.emergencyContactNumber.$error.maxlength || editForm_contactDetails.emergencyContactNumber.$error.pattern) && editForm_contactDetails.emergencyContactNumber.$dirty"
-                                                            class="error-message">Invalid Contact Number</span>
+                                                <span ng-show="editForm_contactDetails.emergencyContactNumber.$error.required && editForm_contactDetails.emergencyContactNumber.$dirty"
+                                                    class="error-message">Required*</span>
+                                                <span ng-show="!editForm_contactDetails.emergencyContactNumber.$error.required && (editForm_contactDetails.emergencyContactNumber.$error.minlength || editForm_contactDetails.emergencyContactNumber.$error.maxlength || editForm_contactDetails.emergencyContactNumber.$error.pattern) && editForm_contactDetails.emergencyContactNumber.$dirty"
+                                                    class="error-message">Invalid Contact Number</span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -279,8 +276,8 @@
                                                 <label class="required">Name of Emergency Contact</label>
                                                 <input type="text" class="form-control" id="NameOfEC" name="nameOfEC" ng-pattern="validName" maxlength="40" ng-model="formData.NameOfEC.value"
                                                     maxlength="50" required>
-                                                    <span ng-show="editForm_contactDetails.nameOfEC.$error.required && editForm_contactDetails.nameOfEC.$dirty" class="error-message">Required*</span>
-                                                    <span ng-show="editForm_contactDetails.nameOfEC.$touched && editForm_contactDetails.nameOfEC.$error.pattern" class="error-message">Invalid Emergency Contact Name.</span>
+                                                <span ng-show="editForm_contactDetails.nameOfEC.$error.required && editForm_contactDetails.nameOfEC.$dirty" class="error-message">Required*</span>
+                                                <span ng-show="editForm_contactDetails.nameOfEC.$touched && editForm_contactDetails.nameOfEC.$error.pattern" class="error-message">Invalid Emergency Contact Name.</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -300,9 +297,9 @@
                                                 <input type="email" class="form-control" id="PersonalEmail" name="personalEmail" ng-model="formData.PersonalEmail.value"
                                                     ng-pattern="emailpattern" maxlength="50" required>
 
-                                                    <span ng-show="editForm_contactDetails.personalEmail.$error.required && editForm_contactDetails.personalEmail.$dirty" class="error-message">Required*</span>
+                                                <span ng-show="editForm_contactDetails.personalEmail.$error.required && editForm_contactDetails.personalEmail.$dirty" class="error-message">Required*</span>
 
-                                                    <span ng-show="editForm_contactDetails.personalEmail.$touched && editForm_contactDetails.personalEmail.$error.pattern" class="error-message">Invalid Personal Email</span>
+                                                <span ng-show="editForm_contactDetails.personalEmail.$touched && editForm_contactDetails.personalEmail.$error.pattern" class="error-message">Invalid Personal Email</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -310,7 +307,7 @@
                                                 <label>Skype ID</label>
                                                 <input type="text" name="skypeID" class="form-control" id="SkypeID" name="skypeId" maxlength="30" ng-model="formData.SkypeID.value"
                                                     ng-pattern="skypeUserName">
-                                                    <span ng-show="editForm_contactDetails.skypeID.$touched && editForm_contactDetails.skypeID.$error.pattern" class="error-message">Invalid Skype ID</span>
+                                                <span ng-show="editForm_contactDetails.skypeID.$touched && editForm_contactDetails.skypeID.$error.pattern" class="error-message">Invalid Skype ID</span>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -345,8 +342,8 @@
                                                 <label class="required">PAN Number</label>
                                                 <input type="text" class="form-control" id="PanCard" name="panNo" ng-pattern="validAlphaNum" maxlength="10" ng-model="formData.PanCard.value"
                                                     required>
-                                                    <span ng-show="editForm.panNo.$error.required && editForm.panNo.$dirty" class="error-message">Required*</span>
-                                                    <span ng-show="editForm.panNo.$touched && editForm.panNo.$error.pattern" class="error-message">Invalid PAN Number</span>
+                                                <span ng-show="editForm.panNo.$error.required && editForm.panNo.$dirty" class="error-message">Required*</span>
+                                                <span ng-show="editForm.panNo.$touched && editForm.panNo.$error.pattern" class="error-message">Invalid PAN Number</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -354,10 +351,10 @@
                                                 <label>Bank Account Number</label>
                                                 <input type="text" class="form-control" id="BankAccountNumber" name="bankAccNum" ng-model="formData.BankAccountNumber.value"
                                                     ng-minlength="11" ng-maxlength="15" ng-pattern="onlyNumbers">
-                                                    <span ng-show="editForm.bankAccNum.$touched && editForm.bankAccNum.$error.pattern" class="error-message">Invalid Bank Account Number</span>
-                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength" class="error-message">Your Bank Account Number Should Contain Atleast 11 Characters</span>
-                                                    <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength" class="error-message">Sorry You are Exceeding the Limit</span>
-                                                    <!--<span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="error-message">Required*</span>-->
+                                                <span ng-show="editForm.bankAccNum.$touched && editForm.bankAccNum.$error.pattern" class="error-message">Invalid Bank Account Number</span>
+                                                <span style="color:red" ng-show="editForm.bankAccNum.$error.minlength" class="error-message">Your Bank Account Number Should Contain Atleast 11 Characters</span>
+                                                <span style="color:red" ng-show="editForm.bankAccNum.$error.maxlength" class="error-message">Sorry You are Exceeding the Limit</span>
+                                                <!--<span ng-show="editForm.bankAccNum.$error.required && editForm.bankAccNum.$dirty" class="error-message">Required*</span>-->
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -382,7 +379,7 @@
                                                     <label class="required">Passport Issue Place</label>
                                                     <input type="text" class="form-control" id="PassportIssuePlace" name="passportIssuePlace" ng-model="formData.PassportIssuePlace.value"
                                                         ng-required="formData.ownPassport.value">
-                                                        <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm.passportIssuePlace.$error.required && editForm.passportIssuePlace.$dirty" class="error-message">Required*</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6" ng-show="formData.ownPassport.value">
@@ -391,7 +388,7 @@
                                                     <olca-date id="passportIssueDate" class="form-group" date-options="dateOptions" input-value="formData.PassportIssueDate.value"
                                                         date-required="formData.ownPassport.value" show-cal="true"></olca-date>
 
-                                                        <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="error-message">Required*</span>
                                                 </div>
                                             </div>
 
@@ -401,7 +398,7 @@
                                                     <label class="required">Passport Expiry Date</label>
                                                     <olca-date id="passportExpiryDate" class="form-group" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
                                                         date-required="formData.ownPassport.value" show-cal="true"></olca-date>
-                                                        <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="error-message">Required*</span>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -423,7 +420,7 @@
                                                         <option value="France">France</option>
                                                         <option value="Thailand">Thailand</option>
                                                         </select>
-                                                        <span ng-show="editForm.visaCountry.$error.required && editForm.visaCountry.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm.visaCountry.$error.required && editForm.visaCountry.$dirty" class="error-message">Required*</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6" ng-show="formData.ownVisa.value">
@@ -431,7 +428,7 @@
                                                     <label class="required">Visa Expiry Date</label>
                                                     <olca-date id="visaExpDate" date-options="dateOptions" date-required="formData.ownVisa.value" min-date="startMin" input-value="formData.visaExpiryDate.value"
                                                         show-cal="true"></olca-date>
-                                                        <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="error-message">Required*</span>
+                                                    <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="error-message">Required*</span>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -450,7 +447,7 @@
                                     </div>
 
                                     <div class="tooltip-wrapper" title="{{(!editForm.$valid?'Please fill all the required fields' : '')}}">
-                                        <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Back</a>
+                                        <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Previous</a>
                                         <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
 
                                         <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid || checkAge" ng-show="checkRole()">Approve & Save</button>
