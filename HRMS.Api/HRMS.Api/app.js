@@ -7,6 +7,7 @@ var path = require('path');
 var multer = require('multer');
 var fs = require("fs");
 var xlsx = require('node-xlsx');
+var compression = require('compression')
 
 var routes = require('./routes/index');
 var authenticate = require('./routes/authentication.js');
@@ -31,6 +32,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(compression())
 app.use('/', routes);
 app.use('/account', authenticate);
 app.use('/leave', leave);

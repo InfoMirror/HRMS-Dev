@@ -4,13 +4,14 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.validName = /^[a-zA-Z\s.]+$/;
         $scope.Issubmitted = false;
         $scope.init = function () {
+            $scope.startMin = new Date();
             $scope.emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
             $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
             $scope.validAlphaOnly = /^[A-z]+$/;
             $scope.validBloodGroup = /^(A|B|AB|O)[+-]?$/;
             $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
             $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
-            $scope.onlyNumbers = /^\d+$/;
+            $scope.onlyNumbers = /^\d+$/;           
             var isSelf = localStorageService.get('isSelf');
             var passedUserEmail = localStorageService.get('passedUserEmail');
 
@@ -21,12 +22,19 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
                 $scope.getEmpData(passedUserEmail);
             }
             $scope.dateOptions = {
-                formatYear: 'yy',
+
+                formatYear: 'yyyy',
+                maxDate: new Date(),
+                minDate: new Date(1920, 0, 1),
                 startingDay: 1
             };
         }
 
+        $scope.dob = function () {
+            $scope.popup.opened = true;
+        };
         $scope.afterInit = function () {
+
             $scope.getReportingHeads();
 
             $scope.getGenders({
@@ -42,16 +50,42 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
             $scope.getRelations({
                 MasterTypeId: 4
             });
-            if (angular.isUndefined($scope.formData.visaCountry.value) && $scope.formData.ownVisa.value == true) {
-                $scope.formData.visaCountry.value = "USA";
-            }
-
-            //    if (angular.isUndefined($scope.formData.visaExpiryDate.value) && $scope.formData.ownVisa.value == true) {
-            //         $scope.formData.visaCountry.value = "USA";
-            //     }  
-
         }
-        $scope.startMin = new Date();
+
+        $scope.setvisaPlace = function () {
+            if ($scope.formData.ownVisa.value == true) {
+                if ($scope.formData.visaCountry.value === null || $scope.formData.visaCountry.value === undefined) {
+                    $scope.formData.visaCountry.value = 'USA';
+                }
+                $scope.formData.visaExpiryDate.value = null;
+            }
+            if ($scope.formData.ownVisa.value == false) {
+                $scope.formData.visaCountry.value = null;
+                $scope.formData.visaExpiryDate.value = null;
+            }
+        }
+
+
+        $scope.setPassportDetails = function () {
+            if ($scope.formData.ownPassport.value == true) {
+                if ($scope.formData.PassportExpiryDate.value === undefined || $scope.formData.PassportExpiryDate.value == null) {
+                    $scope.formData.PassportExpiryDate.value = new Date();
+                }
+                if ($scope.formData.PassportIssueDate.value === undefined || $scope.formData.PassportIssueDate.value == null) {
+                    $scope.formData.PassportIssueDate.value = new Date();
+                }
+
+            }
+            if ($scope.formData.ownPassport.value == false) {
+                $scope.formData.PassportIssueDate.value = null;
+                $scope.formData.PassportExpiryDate.value = null;
+                $scope.formData.PassportNumber.value = null;
+                $scope.formData.PassportIssuePlace.value = null;
+            }
+        }
+
+
+
 
         $scope.dobValidate = function () {
             $scope.formData.DOB.value = document.getElementById("DOB").children[0].value;
@@ -66,20 +100,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
             $scope.age = $scope.nowyear - $scope.birthyear;
             $scope.age_month = $scope.nowmonth - $scope.birthmonth;
             $scope.age_day = $scope.nowday - $scope.birthday;
-
-
-            if ($scope.age > 100) {
-                alert("Age cannot be more than 100 Years.Please enter correct age")
-                return false;
-            }
-            if ($scope.age_month < 0 || ($scope.age_month == 0 && $scope.age_day < 0)) {
-                $scope.age = parseInt($scope.age) - 1;
-
-
-            }
             if (($scope.age == 18 && $scope.age_month <= 0 && $scope.age_day <= 0) || $scope.age < 18) {
-                alert("Age should be more than 18 years.Please enter a valid Date of Birth");
-                return false;
+                toastr.warning("Age cannot be less than 18 years.");
+                return false
+            } else {
+                return true
             }
         }
         $scope.showMessage = function () {
@@ -115,18 +140,21 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
             $scope.formData.DOB.value = document.getElementById("DOB").children[0].value;
             var dateOfJoining = new Date($scope.formData.DOJ.value);
             var dateOfBirth = new Date($scope.formData.DOB.value);
-            //Check for DOB<DOJ
+
             if ($scope.formData.DOB.value != null && $scope.formData.DOB.value != undefined) {
                 if (dateOfJoining < dateOfBirth) {
                     toastr.warning("Date of Joining can not be less than Date of Birth");
-                    $scope.formData.DOJ.value = new Date();
+                    // $scope.formData.DOJ.value = new Date();
+                    return false;
                 }
             }
             //Check for DOJ<Current Date
             if (dateOfJoining > currDate) {
                 toastr.warning("Date of Joining can not be a future date");
                 $scope.formData.DOJ.value = new Date();
+                return false;
             }
+            return true;
         }
 
         $scope.endDateCalOpen = function ($event) {
@@ -146,11 +174,11 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
         $scope.getEmpData = function (userEmail) {
             profileFctry.getEmpDetails({ UserEmail: userEmail }).then(function (response) {
-                console.log("factory response", response)
                 $scope.formData = response.data[0];
                 $scope.formData.ModifiedBy.value = $rootScope.userDetails.UserEmail.value;
                 $scope.employeeDesignation = $scope.formData.Designation.value;
                 $scope.getDOB = $scope.formData.DOB.value;
+
                 $scope.userDetails = $scope.formData;
                 if ($scope.formData.Role.value == "HR") {
                     $scope.formData.hrAccess = true;
@@ -160,27 +188,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
                 $scope.afterInit();
             });
-        }
-
-        $scope.ShowHide = function () {
-            //If DIV is visible it will be hidden and vice versa.
-            if ($scope.formData != null && $scope.formData != undefined) {
-                if ($scope.formData.ownVisa.value == 1) {
-                    //$scope.IsVisaChecked = true;
-                    return true;
-                } else {
-                    //$scope.IsVisaChecked = false;
-                    $scope.formData.visaCountry.value = null;
-                    $scope.formData.visaExpiryDate.value = null;
-                    return false;
-                }
-            } else {
-                if ($scope.userDetails.ownVisa.value == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
         }
 
         $scope.HidePassportDetails = function () {
@@ -236,34 +243,48 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
 
         $scope.submit = function () {
-            if ($rootScope.Role == 'HR') {
-                profileFctry.isEmpIdExist($scope.formData).then(function (response) {
-                    //alert(JSON.stringify(response));
-                    if (response.data.length > 0) {
-                        if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
-                            toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+            if ($rootScope.userDetails.ProfileStatus.value == 24) {
+                if ($scope.checkDOJ()) {
+                    if ($scope.dobValidate()) {
+                        if ($rootScope.Role == 'HR') {
+                            profileFctry.isEmpIdExist($scope.formData).then(function (response) {
+                                //alert(JSON.stringify(response));
+                                if (response.data.length > 0) {
+                                    if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
+                                        toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+                                    } else {
+                                        $scope.updateEmpDetails();
+                                    }
+                                } else {
+                                    $scope.updateEmpDetails();
+                                }
+                            });
                         } else {
                             $scope.updateEmpDetails();
                         }
-                    } else {
-                        $scope.updateEmpDetails();
                     }
-                });
+                }
             } else {
-                $scope.updateEmpDetails();
+                if ($rootScope.Role == 'HR') {
+                    profileFctry.isEmpIdExist($scope.formData).then(function (response) {
+                        //alert(JSON.stringify(response));
+                        if (response.data.length > 0) {
+                            if (response.data[0].UserEmail.value != $scope.formData.UserEmail.value) {
+                                toastr.warning('This Employee Unique Id already exist. Please change the Employee Unique Id and then update the profile');
+                            } else {
+                                $scope.updateEmpDetails();
+                            }
+                        } else {
+                            $scope.updateEmpDetails();
+                        }
+                    });
+                } else {
+                    $scope.updateEmpDetails();
+                }
             }
         }
 
         $scope.updateEmpDetails = function () {
-            if ($rootScope.Role != 'HR') {
-                $scope.formData.DOJ.value = null;
-                $scope.formData.BankAccountNumber.value = null;
-                $scope.formData.ReportingHead.value = null;
-                $scope.formData.PFNo.value = null;
-                $scope.formData.UAN.value = null;
-                $scope.formData.EmpId.value = null;
-                $scope.formData.Team.value = null;
-            }
             if ($scope.formData.Children1.value == '' || $scope.formData.Children1.value == undefined)
                 $scope.formData.Children1.value = null;
             if ($scope.formData.Children2.value == '' || $scope.formData.Children1.value == undefined)
@@ -317,38 +338,48 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
             profileFctry.updateEmpDetails($scope.formData).then(function (response) {
                 if (response.data == 'Profile Updated') {
+                    if ($scope.formData.ProfileStatus.value == 23 || $scope.formData.ProfileStatus.value == 22) {
+                        if ($rootScope.Role === 'HR' && $state.current.name === "home.editMyProfile") {
+                            toastr.success("Profile has been updated successfully");
+                            $window.location.reload();
+                        } else {
+                            toastr.success("Your Profile has been submitted. Please wait for the approval.");
+                        }
+                    }
+                    if ($scope.formData.ProfileStatus.value === 24 && $state.current.name === "home.editProfile" && $rootScope.Role === 'HR') {
+                        if ($scope.formData.IsActive.value == false) {
+                            toastr.success("Employee has been deactivated successfully");
+                            $state.go('home.hr.approveProfile');
+                        } else {
+                            toastr.success("Profile has been updated successfully");
+                            $state.go('home.hr.approveProfile');
+                        }
+                    }
+
+                    if ($scope.formData.ProfileStatus.value === 24 && $state.current.name === "home.editMyProfile") {
+
+                        toastr.success("Profile has been updated successfully");
+                        $state.go('home.dashboard');
+                    }
                     $scope.getEmpData($rootScope.userDetails.UserEmail);
                 }
-                if ($scope.formData.ProfileStatus.value == 23 || $scope.formData.ProfileStatus.value == 22) {
-                    if ($rootScope.Role === 'HR' && $state.current.name === "home.editMyProfile") {
-                        toastr.success("Profile has been updated successfully");
-                        $window.location.reload();
-                    } else {
-                        toastr.success("Your Profile has been subbmited. Please wait for the approval.");
-                    }
-                } 
-                if ($scope.formData.ProfileStatus.value === 24 && $state.current.name === "home.editProfile") {
-
-                    toastr.success("Profile has been updated successfully");
-                    $state.go('home.hr.approveProfile');
+                else {
+                    toastr.error("Profile could not be updated");
                 }
 
-                if ($scope.formData.ProfileStatus.value === 24 && $state.current.name === "home.editMyProfile") {
-
-                    toastr.success("Profile has been updated successfully");
-                    $state.go('home.dashboard');
-                }
+            }, function (error) {
+                toastr.error("Profile could not be updated");
             });
         }
 
         $scope.getRelations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.relations = response.data;
-                if (angular.isUndefined($scope.formData.RelationWithNominee.value)) {
+                if (angular.isUndefined($scope.formData.RelationWithNominee.value) || $scope.formData.RelationWithNominee.value == null) {
                     $scope.formData.RelationWithNominee.value =
                         $scope.relations[0].Id.value;
                 }
-                if (angular.isUndefined($scope.formData.RelationWithEC.value)) {
+                if (angular.isUndefined($scope.formData.RelationWithEC.value) || $scope.formData.RelationWithEC.value == null) {
                     $scope.formData.RelationWithEC.value =
                         $scope.relations[0].Id.value;
                 }
@@ -358,7 +389,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.getGenders = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.genders = response.data;
-                if (angular.isUndefined($scope.formData.Gender.value)) {
+                if (angular.isUndefined($scope.formData.Gender.value) || $scope.formData.Gender.value == null) {
                     $scope.formData.Gender.value = $scope.genders[0].Id.value;
                 }
             });
@@ -368,16 +399,26 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.getDesignations = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.designations = response.data;
-                if (angular.isUndefined($scope.employeeDesignation)) {
-                    $scope.employeeDesignation = $scope.designations[0].Value.value;
-
+                if ($rootScope.userDetails.ProfileStatus.value == 24) {
+                    if (angular.isUndefined($scope.employeeDesignation) || $scope.employeeDesignation == null) {
+                        $scope.employeeDesignationVal = $scope.designations[0].Value.value;
+                    }
+                    else {
+                        for (var i = 0; i < $scope.designations.length; i++) {
+                            if ($scope.designations[i].Id.value == $scope.employeeDesignation) {
+                                $scope.employeeDesignationVal = $scope.designations[i].Value.value;
+                            }
+                        }
+                    }
+                } else {
+                    $scope.employeeDesignationVal == null;
                 }
             });
         }
         $scope.getMaritalStatus = function (MasterTypeId) {
             profileFctry.getMasterValue(MasterTypeId).then(function (response) {
                 $scope.maritalStatus = response.data;
-                if (angular.isUndefined($scope.formData.MaritalStatus.value)) {
+                if (angular.isUndefined($scope.formData.MaritalStatus.value) || $scope.formData.MaritalStatus.value == null) {
                     $scope.formData.MaritalStatus.value =
                         $scope.maritalStatus[0].Id.value;
                 }
@@ -387,6 +428,10 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.getReportingHeads = function () {
             profileFctry.getAllEmployees().then(function (response) {
                 $scope.reportingHeads = response.data;
+                //  if (angular.isUndefined($scope.formData.ReportingHead.value)||$scope.formData.ReportingHead.value ==null) {
+                //     $scope.formData.ReportingHead.value =
+                //         $scope.reportingHead[0].Id.value;
+                // }
             });
         }
 
@@ -395,6 +440,12 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
                 return true;
             else
                 return false;
+        }
+
+        $scope.checkActivation = function () {
+            if ($scope.formData.IsActive.value == false) {
+                toastr.warning("Profile will be deactivated once you click 'Approve & Save' button");
+            }
         }
 
         $scope.openModal = function () {
@@ -418,5 +469,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
             });
         }
         $scope.init();
+
 
     }]);

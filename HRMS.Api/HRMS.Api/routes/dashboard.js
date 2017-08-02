@@ -33,10 +33,10 @@ router.post('/getEmpProfileData', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_SelectDeleteEmployeeDetails @Action, @UserEmail", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
             } else {
-                console.log('sp_SelectDeleteEmployeeDetails');
-                console.log(rows);
+                //console.log('sp_SelectDeleteEmployeeDetails');
+                //console.log(rows);
                 if (rowCount > 0) {
                     connection.close();
                     res.json({
@@ -56,10 +56,10 @@ router.post('/getEmpProfileData', function (req, res) {
         var pm = conn.procedureMgr();
         pm.callproc('sp_SelectDeleteEmployeeDetails', tableObjectValue, function (err, results, output) {
             if (err) {
-                console.log(err);
+                //console.log(err);
             } else {
                 if (results.length > 0) {
-                    console.log(results);
+                    //console.log(results);
                     res.json({
                         type: true,
                         data: results
@@ -85,10 +85,10 @@ router.get('/getBirthdays', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_getUpcomingBirthdays", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
             } else {
-                console.log('sp_getUpcomingBirthdays');
-                console.log(rows);
+                //console.log('sp_getUpcomingBirthdays');
+                //console.log(rows);
                 if (rowCount > 0) {
                     connection.close();
                     res.json({
@@ -103,16 +103,16 @@ router.get('/getBirthdays', function (req, res) {
     }
     /*sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
+        //console.log('Table Object Value: ');
+        //console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_getUpcomingBirthdays', tableObjectValue, function (err, results, output) {
             if (err) {
-                console.log('Error: ');
-                console.log(err);
+                //console.log('Error: ');
+                //console.log(err);
             } else {
                 if (results.length > 0) {
-                    console.log(results);
+                    //console.log(results);
                     res.json({
                         type: true,
                         data: results
@@ -138,17 +138,23 @@ router.get('/getAnniversary', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_getUpcominAnniversary", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
+                connection.close();
+                res.json({
+                    type: true,
+                    data: err
+                });
             } else {
-                console.log('sp_getUpcominAnniversary');
-                console.log(rows);
-                if (rowCount > 0) {
-                    connection.close();
-                    res.json({
-                        type: true,
-                        data: rows
-                    });
+                //console.log('sp_getUpcominAnniversary');
+                //console.log(rows);
+                if (rowCount <= 0) {
+                    rows = [];
                 }
+                connection.close();
+                res.json({
+                    type: true,
+                    data: rows
+                });
             }
         });
 
@@ -156,16 +162,16 @@ router.get('/getAnniversary', function (req, res) {
     }
     /*sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
+        //console.log('Table Object Value: ');
+        //console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_getUpcominAnniversary', tableObjectValue, function (err, results, output) {
             if (err) {
-                console.log('Error: ');
-                console.log(err);
+                //console.log('Error: ');
+                //console.log(err);
             } else {
                 if (results.length > 0) {
-                    console.log(results);
+                    //console.log(results);
                     res.json({
                         type: true,
                         data: results
@@ -191,35 +197,41 @@ router.get('/getHolidays', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_getFestiveHolidays", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
+                connection.close();
+                res.json({
+                    type: true,
+                    data: err
+                });
             } else {
-                console.log('sp_getFestiveHolidays');
-                console.log(rows);
-                if (rowCount > 0) {
-                    connection.close();
-                    res.json({
-                        type: true,
-                        data: rows
-                    });
+                //console.log('sp_getFestiveHolidays');
+                //console.log(rows);
+                 if (rowCount <= 0) {
+                    rows = [];
                 }
+                connection.close();
+                res.json({
+                    type: true,
+                    data: rows
+                });
             }
         });
 
         connection.execSql(request);
     }
-    /* console.log('Table Object Value: ');
+    /* //console.log('Table Object Value: ');
     sql.open(sqlConfig, function (err, conn) {
         var tableObjectValue = new Array();
-        console.log('Table Object Value: ');
-        console.log(tableObjectValue);
+        //console.log('Table Object Value: ');
+        //console.log(tableObjectValue);
         var pm = conn.procedureMgr();
         pm.callproc('sp_getFestiveHolidays', tableObjectValue, function (err, results, output) {
             if (err) {
-                console.log('Error: ');
-                console.log(err);
+                //console.log('Error: ');
+                //console.log(err);
             } else {
                 if (results.length > 0) {
-                    console.log(results);
+                    //console.log(results);
                     res.json({
                         type: true,
                         data: results
@@ -245,17 +257,23 @@ router.post('/getLeaveSummary', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_GetLeaveSummaryWithBreakup @EmpId", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
+                connection.close();
+                res.json({
+                    type: true,
+                    data: err
+                });
             } else {
-                console.log('sp_GetLeaveSummaryWithBreakup');
-                console.log(rows);
-                if (rowCount > 0) {
-                    connection.close();
-                    res.json({
-                        type: true,
-                        data: rows
-                    });
+                //console.log('sp_GetLeaveSummaryWithBreakup');
+                //console.log(rows);
+                 if (rowCount <= 0) {
+                    rows = [];
                 }
+                connection.close();
+                res.json({
+                    type: true,
+                    data: rows
+                });
             }
         });
         request.addParameter('EmpId', TYPES.VarChar, req.body.EmpId.value);
@@ -278,17 +296,23 @@ router.get('/getHolidayCalendar', function (req, res) {
     function executeStatement() {
         request = new Request("exec sp_getHolidayCalendar", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
+                connection.close();
+                res.json({
+                    type: true,
+                    data: err
+                });
             } else {
-                console.log('sp_getHolidayCalendar');
-                console.log(rows);
-                if (rowCount > 0) {
-                    connection.close();
-                    res.json({
-                        type: true,
-                        data: rows
-                    });
+                //console.log('sp_getHolidayCalendar');
+                //console.log(rows);
+                 if (rowCount <= 0) {
+                    rows = [];
                 }
+                connection.close();
+                res.json({
+                    type: true,
+                    data: rows
+                });
             }
         });
 

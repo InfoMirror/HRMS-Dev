@@ -52,16 +52,16 @@ var upload = multer({ //multer settings
 /** API path that will upload the files */
 router.post('/uploadMonthly', function (req, res) {
     upload(req, res, function (err) {
-        // console.log("uploadss");
+        // //console.log("uploadss");
         if (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 error_code: 1,
                 err_desc: err
             });
             return;
         }
-        //console.log(filename);
+        ////console.log(filename);
         excuteexcelmonthly(filename);
 
         res.json({
@@ -74,12 +74,12 @@ router.post('/uploadMonthly', function (req, res) {
 
 
 router.post('/upload', function (req, res) {
-    console.log("upload");
-    console.log(IsWeekend);
+    //console.log("upload");
+    //console.log(IsWeekend);
     upload(req, res, function (err) {
-        //   console.log("uploadss");
+        //   //console.log("uploadss");
         if (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 error_code: 1,
                 err_desc: err,
@@ -87,7 +87,7 @@ router.post('/upload', function (req, res) {
             });
             return;
         }
-        //console.log(filename);
+        ////console.log(filename);
         //   excuteexcel(filename);
 
         isDuplicateDate(getfulldateDailySheet(fnameorginal), 0, function (isduplicate) {
@@ -107,7 +107,7 @@ router.post('/upload', function (req, res) {
             }
         });
 
-        //console.log(res)
+        ////console.log(res)
     })
 
 });
@@ -120,7 +120,7 @@ function excuteexcel(filename) {
     var fulldate = moment(getfulldateDailySheet(fnameorginal), 'YYYY-MM-DD');
     var day = fulldate.format('ddd');
     fulldate = getfulldateDailySheet(fnameorginal);
-    console.log(day);
+    //console.log(day);
     isDuplicateDate(fulldate, 0, function (IsDuplicate) {
 
         if (!IsDuplicate) {
@@ -131,19 +131,19 @@ function excuteexcel(filename) {
                         var obj = xlsx.parse(xlsFile);
                         var len = obj[0].data.length;
                         if (day == 'Sat' || day == 'Sun' || IsHoliday) {
-                            console.log('holiday');
+                            //console.log('holiday');
                           IsWeekend = 1;
 
                         } else {
                              IsWeekend = 0;
-                            console.log('Not a holiday');
+                            //console.log('Not a holiday');
                             for (var i = 7; i <= len - 2; i = i + 3) {
                                 if (obj[0].data[i + 2] == 'DEPARTMENT: INFOOBJECTS') {
                                     i = i + 2;
                                     continue;
                                 }
                                 if (obj[0].data[i] == 'undefined') {
-                                    console.log("undefined",undefined)
+                                    //console.log("undefined",undefined)
 
                                 } else {
 
@@ -153,7 +153,7 @@ function excuteexcel(filename) {
                                         // var starttm = new Date(year, month, date, obj[0].data[i][2].substring(0, 2), obj[0].data[i][2].substring(3, 5))
                                         // var endtm = new Date(year, month, date, obj[0].data[i][3].substring(0, 2), obj[0].data[i][3].substring(3, 5))
                                         // var hh = Math.floor((endtm - starttm) / 1000 / 60 / 60);
-                                        console.log("Data is",obj[0].data[i][2])
+                                        //console.log("Data is",obj[0].data[i][2])
                                         if (obj[0].data[i][2].split(":")[0].length == 1) {
                                             obj[0].data[i][2] = "0" + obj[0].data[i][2];
                                         }
@@ -163,10 +163,10 @@ function excuteexcel(filename) {
                                         var d = moment.duration(ms);
                                         var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
                                         if (d.asHours() < 2) {
-                                            console.log(1);
+                                            //console.log(1);
                                             insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 20, 17, false);
                                         } else if (d.asHours() >= 2 && d.asHours() < 6) {
-                                            console.log(0);
+                                            //console.log(0);
                                             insertAbsent(obj[0].data[i][0], fulldate, obj[0].data[i][2], obj[0].data[i][3], 21, 17, false);
                                         }
                                     }
@@ -174,7 +174,7 @@ function excuteexcel(filename) {
                             }
                         }
                     } else {
-                        console.log('File does not exist');
+                        //console.log('File does not exist');
                     }
                 });
             });
@@ -204,7 +204,7 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
     function executeStatement() {
         request = new Request("exec InsertAbsent @EmpId,@AbsentDate,@StartTime,@EndTime,@AbsentType,@ODStatus,@IsAdminEntry", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 connection.close();
             } else {
                 connection.close();
@@ -223,7 +223,7 @@ function insertAbsent(empId, absentDate, startTime, endTime, absentType, odStatu
 }
 
 function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, isManualEntry, CompOffReason) {
-    console.log(compOffDate);
+    //console.log(compOffDate);
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {
@@ -238,7 +238,7 @@ function insertCompOff(empId, compOffDate, startTime, endTime, compOffStatus, is
     function executeStatement() {
         request = new Request("exec Sp_InsertCompOff @EmpId,@CompOffDate,@StartTime,@EndTime,@CompOffStatus,@IsManual,@CompOffReason", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                ////console.log(err);
                 connection.close();
             } else {
                 connection.close();
@@ -273,10 +273,10 @@ function isHoliDay(AttdenceDate, callback) {
     function executeStatement() {
         request = new Request("exec Sp_CheckIsHoliday @Date", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                ////console.log(err);
                 connection.close();
             } else {
-                console.log(rows[0].IsHoliDay.value);
+                ////console.log(rows[0].IsHoliDay.value);
                 if (rows[0].IsHoliDay.value > 0) {
 
                     callback(true);
@@ -308,7 +308,7 @@ function isDuplicateDate(AttdenceDate, empId, callback) {
     function executeStatement() {
         request = new Request("exec Sp_IsDuplicateDate @Date,@empId", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+               // //console.log(err);
                 connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
@@ -340,7 +340,7 @@ function isDuplicateCompOff(AttdenceDate, empId, callback) {
     function executeStatement() {
         request = new Request("exec Sp_IsDuplicateCompoff @CompOffDate,@empId", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                ////console.log(err);
                 connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
@@ -372,7 +372,7 @@ function isDuplicateDate_New(AttdenceDate, robj, eId, callback) {
     function executeStatement() {
         request = new Request("exec Sp_IsDuplicateDate @Date,@empId", function (err, rowCount, rows) {
             if (err) {
-                console.log(err);
+                ////console.log(err);
                 connection.close();
             } else {
                 if (rows[0].RCount.value > 0) {
@@ -420,16 +420,16 @@ function getmonth(m) {
 
 
 function excuteexcelmonthly(filename) {
-    console.log('excute');
+    //console.log('excute');
     var xlsFile = 'C:/upload/' + filename;
     var empId = 0;
-    console.log(fnameorginal);
+    //console.log(fnameorginal);
     var month = getmonth(fnameorginal.substring(0, 3));
 
     var year = fnameorginal.substring(3, 7);
     fs.exists(xlsFile, function (exists) {
         if (exists) {
-            console.log('tygui');
+            //console.log('tygui');
             var obj = xlsx.parse(xlsFile);
             var len = obj[0].data.length;
             for (var i = 8; i <= len - 2; i = i + 1) {
@@ -449,7 +449,7 @@ function excuteexcelmonthly(filename) {
                         if (!IsDuplicate) {
                             var Adate = year + '-' + month + '-' + robj[0];
                             if (robj[1] != 'Sat' && robj[1] != 'Sun') {
-                                console.log(Adate);
+                                //console.log(Adate);
                                 insertAbsent(Eid, Adate, robj[2], robj[3], 20, 17, false);
 
                             }
@@ -462,7 +462,7 @@ function excuteexcelmonthly(filename) {
                 }
             }
         } else {
-            console.log('File does not exist');
+            //console.log('File does not exist');
         }
 
 
@@ -484,10 +484,10 @@ function InsertMonthlyData(fulldate, robj, empId, year, month) {
                 var d = moment.duration(ms);
                 var s = Math.floor(d.asHours()) + moment.utc(ms).format(":mm:ss");
                 if (d.asHours() < 2) {
-                    console.log(fulldate);
+                    //console.log(fulldate);
                     insertAbsent(empId, fulldate, robj[2], robj[3], 20, 17, false);
                 } else if (d.asHours() >= 2 && d.asHours() < 6) {
-                    console.log(fulldate);
+                    //console.log(fulldate);
                     insertAbsent(empId, fulldate, robj[2], robj[3], 21, 17, false);
                 }
             }           
