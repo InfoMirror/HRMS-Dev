@@ -36,7 +36,7 @@ hrBaseApp.controller('hrmsApproveCompOffCtrl', ['$scope', '$rootScope', 'approva
                      enableSorting: false,
                     cellClass: 'text-center',
                     headerCellClass: 'text-center',
-                    cellTemplate: '<div style="margin-top: 2%;margin-left: 30%;" ng-show="row.entity.CompOffStatus.value==\'Filed\'"><button class="btn btn-xs btn-green"  ng-click="grid.appScope.openModal\(\'approve\',row.entity.Id)"">Approve</button><button class="btn btn-xs btn-red" ng-click="grid.appScope.openModal\(\'reject\',row.entity.Id)" style="margin-left:5%;">Reject</button></div>'
+                    cellTemplate: '<div style="margin-top: 2%;margin-left: 30%;" ng-show="row.entity.CompOffStatus.value==\'Filed\'"><button class="btn btn-xs btn-green"  ng-click="grid.appScope.openModal(\'approve\',row.entity.Id)"">Approve</button><button class="btn btn-xs btn-red" ng-click="(\'reject\',row.entity.Id)" style="margin-left:5%;">Reject</button></div>'
 
                 }
 

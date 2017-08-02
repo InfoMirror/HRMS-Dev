@@ -46,31 +46,14 @@
 <body class="bg-light-grey">
     <!-- == InfoMirror Application === -->
     <div ui-view></div>
-    <!-- /InfoMirror Application -->
-    <!-- basic scripts -->
-
     <script type="text/javascript">
         window.jQuery || document.write("<script src='/assets/js/jquery.js'>" + "<" + "/script>");
     </script>
-
-    <!--[if IE]>
-    <script type="text/javascript">
-     window.jQuery || document.write("<script src='/assets/js/jquery1x.js'>"+"<"+"/script>");
-    </script>
-    <![endif]-->
-
     <script type="text/javascript">
         if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
     </script>
     <script src="/assets/js/bootstrap.js"></script>
-
-
-
-    <!-- JS -->
-
-    <!-- App -->
     <script src="/Scripts/moment.min.js"></script>
-
     <!-- App scripts -->
     <script src="/Scripts/angular.min.js"></script>
     <script src="/scripts/angular-resource.min.js"></script>
@@ -82,65 +65,12 @@
     <script src="/Scripts/angular-touch.js"></script>
     <script src="/assets/js/toastr.min.js"></script>
     <link rel="stylesheet" href="/assets/css/toastr.min.css" />
-    <!--  <script src="/Scripts/ui-grid-unstable.js"></script>-->
     <script src="/Scripts/angular-ui-switch.js"></script>
     <script src="/scripts/angular-local-storage.min.js"></script>
-    <!--<script src="/scripts/angular-loading-bar.min.js"></script>-->
     <script src="/Scripts/ui-grid.js"></script>
     <script type="text/javascript" src="/Scripts/ng-file-upload.min.js"></script>
-    <!--<script type="text/javascript" src="/Scripts/ng-file-upload-shim.min.js"></script>-->
     <link rel="stylesheet" href="/Scripts/ui-grid.css" type="text/css" />
-    <!-- Injection Module -->
-    <!--<script src="app/hrmsBaseApp.js"></script>-->
-    <!-- inject:angular:js-->
-    <script src="/app/app.js"></script>
-    <script src="/app/admin/attendanceCtrl.js"></script>
-    <script src="/app/admin/attendanceMCtrl.js"></script>
-    <script src="/app/approval/hrmsApprovalCtrl.js"></script>
-    <script src="/app/approval/hrmsApproveCompOffCtrl.js"></script>
-    <script src="/app/approval/hrmsApproveLeaveCtrl.js"></script>
-    <script src="/app/approval/hrmsApproveODCtrl.js"></script>
-    <script src="/app/authenticate/authCtrl.js"></script>
-    <script src="/app/config/hrmsConfig.js"></script>
-    <script src="/app/config/routing-config.js"></script>
-    <script src="/app/dashboard/hrmsAnniversaryCtrl.js"></script>
-    <script src="/app/dashboard/hrmsBirthdaysCtrl.js"></script>
-    <script src="/app/dashboard/hrmsHolidaysCtrl.js"></script>
-    <script src="/app/Employee/employee.js"></script>
-    <script src="/app/factory/approvalFctry.js"></script>
-    <script src="/app/factory/attendanceFctry.js"></script>
-    <script src="/app/factory/authFctry.js"></script>
-    <script src="/app/factory/dashboardFctry.js"></script>
-    <script src="/app/factory/leaveFctry.js"></script>
-    <script src="/app/factory/profileFctry.js"></script>
-    <script src="/app/home/addEditEmpId.js"></script>
-    <script src="/app/HRRoles/hrmsApproveProfileCtrl.js"></script>
-    <script src="/app/home/hrmsEditProfileCtrl.js"></script>
-    <script src="/app/home/hrmsFrameCtrl.js"></script>
-    <script src="/app/home/hrmsMainCtrl.js"></script>
-    <script src="/app/home/hrmsNoRights.js"></script>
-    <script src="/app/HRRoles/hrRoleCtrl.js"></script>
-    <script src="/app/HRRoles/hrmsUserDeactivation.js"></script>
-    <script src="/app/HRRoles/getAllAbsentsCtrl.js"></script>
-    <script src="/app/leaves/applyCompOffMdlCtrl.js"></script>
-    <script src="/app/leaves/compOffmsgCtrl.js"></script>
-
-    <script src="/app/leaves/applyleaveCtrl.js"></script>
-    <script src="/app/leaves/applyleaveMdlCtrl.js"></script>
-    <script src="/app/leaves/hrmsAttendanceCtrl.js"></script>
-    <script src="/app/leaves/hrmsCompOffsCtrl.js"></script>
-    <script src="/app/leaves/hrmsLeavesCtrl.js"></script>
-    <script src="/app/leaves/hrmsLeaveSummaryCtrl.js"></script>
-    <script src="/app/leaves/leaveFileODMdlCtrl.js"></script>
-    <script src="/app/run/hrRun.js"></script>
-    <script src="/app/shared/confirmationBoxMdlCtrl.js"></script>
-    <script src="/app/shared/drctDate.js"></script>
-    <script src="/app/shared/hr-footer-drctv.js"></script>
-    <script src="/app/shared/hr-header-drctv.js"></script>
-    <script src="/app/shared/hr-sidemenu-drctv.js"></script>
-    <script src="/app/shared/hr-top-states-drctv.js"></script>
-    <script src="/app/values/hrmsSettingsVal.js"></script>
-    <!--endinject-->
+    <script src="/build/app.min.js"></script>
     <script>
         var FormStuff = {
 
