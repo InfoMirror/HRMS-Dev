@@ -1,10 +1,10 @@
 hrBaseApp.controller('applyleaveMdlCtrl', [
-    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope','toastr',
+    '$scope', '$modalInstance', 'aValue', 'leaveFctry', '$rootScope', 'toastr',
     function ($scope, $modalInstance, aValue, leaveFctry, $rootScope, toastr) {
         'use strict';
 
         $scope.init = function () {
-             $scope.disableSubmit = false;
+            $scope.disableSubmit = false;
             $scope.ApplyLeave = {
                 EmpId: aValue,
                 FromDate: new Date(),
@@ -22,15 +22,28 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
         $scope.startMax = moment().add(90, 'days').format('MM/DD/YYYY');
 
         $scope.submit = function () {
-             $scope.disableSubmit = true;
+            $scope.disableSubmit = true;
             $scope.ApplyLeave.Reason = $scope.LReason;
+
             //alert($scope.ApplyLeave.Reason);
             // $scope.Reason.Reason = $scope.Reason;
             if ($scope.ApplyLeave.Reason != '' && $scope.ApplyLeave.Reason != undefined) {
                 $scope.ApplyLeave.FromDate = $scope.FromDate;
                 $scope.ApplyLeave.ToDate = $scope.ToDate;
                 $scope.ApplyLeave.Reason = $scope.LReason;
-                $scope.insertLeave($scope.ApplyLeave);
+                if ($scope.ApplyLeave.FromDate.getDay() == 6 || $scope.ApplyLeave.FromDate.getDay() == 0 || $scope.ApplyLeave.ToDate.getDay() == 0 || $scope.ApplyLeave.ToDate.getDay() == 6) {
+                    toastr.warning("Leave can not be applied for weekends");
+                    return;
+                }
+                if ($scope.ApplyLeave.FromDate > $scope.ApplyLeave.ToDate) {
+                   
+                    toastr.warning("From Date can not be greater than To Date");
+                    $scope.ApplyLeave.ToDate = $scope.ApplyLeave.FromDate;
+                    return;
+                } else {
+                   
+                    $scope.insertLeave($scope.ApplyLeave);
+                }
             }
         }
 
@@ -38,11 +51,11 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             // alert(JSON.stringify(ApplyLeaveDate));
             leaveFctry.insertLeave(ApplyLeaveDate).then(function (response) {
                 if (response.data == "Leave Applied") {
-                     toastr.success("Leave is Applied");
+                    toastr.success("Leave is Applied");
                     $modalInstance.close();
                     // $scope.getAppliedLeaves($rootScope.userDetails);
                 } else {
-                     toastr.warning("Applied Leave on same Date already exist");
+                    toastr.warning("Applied Leave on same Date already exist");
                     $modalInstance.close();
                 }
             });
@@ -52,16 +65,18 @@ hrBaseApp.controller('applyleaveMdlCtrl', [
             $scope.ToMin = $scope.FromDate;
         }
 
+
         $scope.startDateCalOpen = function ($event) {
             if ($scope.FromDate > $scope.ToDate) {
-                 toastr.warning("From Date can not be greater than To Date");
+                toastr.warning("From Date can not be greater than To Date");
                 $scope.ToDate = $scope.FromDate;
             }
+
         }
         $scope.close = function () {
             $modalInstance.close();
         }
 
         $scope.init();
-                }
-                ]);
+    }
+]);

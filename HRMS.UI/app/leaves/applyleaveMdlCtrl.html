@@ -10,15 +10,15 @@
                     <label class="control-label col-sm-2">From Date:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
                         <olca-date min-date="startMin" max-date="startMax" date-options="dateOptions" input-value="FromDate" input-name="FromDate"
-                            date-required="true" ng-click="startDateCalOpen($event)" show-cal="true"></olca-date>
+                            date-required="true" date-change="startDateCalOpen($event)" show-cal="true" tooltip="From date should be less than to date"></olca-date>
                             <span ng-show="applyLeaveForm.fromDate.$error.required && applyLeaveForm.fromDate.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">To Date:<span class="text-danger">*</span></label>
                     <div class="col-sm-3">
-                        <olca-date min-date="ToMin" date-options="dateOptions" input-value="ToDate" input-name="ToDate" date-required="true" ng-click="endDateCalOpen($event)"
-                            show-cal="true"></olca-date>
+                        <olca-date min-date="ToMin" date-options="dateOptions" input-value="ToDate" input-name="ToDate" date-required="true" date-change="endDateCalOpen($event)"
+                            show-cal="true" tooltip="To date should be greater than from date"></olca-date>
                             <span ng-show="applyLeaveForm.toDate.$error.required && applyLeaveForm.toDate.$dirty" class="text-danger">Required*</span>
                     </div>
                 </div>

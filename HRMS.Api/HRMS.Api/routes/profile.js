@@ -318,7 +318,9 @@ router.post('/getMasterValues', function (req, res) {
 });
 
 router.post('/updateEmployeeDetails', function (req, res) {
-    //console.log("Request", req)
+    console.log("Request", req)
+    console.log("DOJ",req.body.DOJ.value)
+    console.log("DOB",req.body.DOB.value)
     var connection = new sqlConnection(config);
     connection.on('connect', function (err) {
         if (err) {

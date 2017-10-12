@@ -613,4 +613,48 @@ function IsLeaveDateExist(FromDate, ToDate, EmpId, CallBack) {
     });*/
 }
 
+router.post('/getAllottedLeaves', function (req, res) {
+    var connection = new sqlConnection(config);
+    connection.on('connect', function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        // If no error, then good to proceed.
+        executeStatement();
+    });
+    var Request = require('tedious').Request;
+    var TYPES = require('tedious').TYPES;
+
+    function executeStatement() {
+        request = new Request("exec sp_GetAllAllottedLeaves @EmpId", function (err, rowCount, rows) {
+            if (err) {
+                //console.log(err);
+                connection.close();
+                res.json({
+                    type: true,
+                    data: err
+                });
+            } else {           
+                if (rowCount > 0) {
+                    connection.close();
+                    res.json({
+                        type: true,
+                        data: rows
+                    });
+                } else {
+                    connection.close();
+                    res.json({
+                        type: true,
+                        data: 'No Records Found'
+                    });
+                }
+            }
+        });
+
+        request.addParameter('EmployeeID', TYPES.Int, req.body.EmpId.value);
+        connection.execSql(request);
+    }
+});
+
+
 module.exports = router;

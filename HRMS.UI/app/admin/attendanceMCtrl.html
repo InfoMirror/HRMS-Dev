@@ -2,16 +2,14 @@
 <div>
     <form name="upload_form">
         <div class="form-group">
-            <label for="UserEmail">Select File</label>
-            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" id="myfile" />
+            <label for="UserEmail" class="required">Select File</label>
+            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="20MB" id="myfile" required />
         </div>
-        <div class="form-group">
-            <i ng-show="upload_form.file.$error.required">*required</i>
+        <div class="form-group">           
             <br>
             <i ng-show="upload_form.file.$error.maxSize">File too large 
             {{file.size / 1000000|number:1}}MB: max 20M</i>
-            <button class="btn btn-green" type="submit" ng-click="submit()">submit</button>
-            <p>{{progress}}</p>
+            <button class="btn btn-green" type="submit" ng-disabled="!upload_form.$valid" ng-click="submit()">Submit</button>          
         </div>
     </form>
 

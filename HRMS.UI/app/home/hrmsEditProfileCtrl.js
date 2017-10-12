@@ -11,7 +11,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
             $scope.validBloodGroup = /^(A|B|AB|O)[+-]?$/;
             $scope.skypeUserName = "^[a-z0-9_-]{3,15}$";
             $scope.validAlphaNum = /^[a-zA-Z0-9]+$/;
-            $scope.onlyNumbers = /^\d+$/;           
+            $scope.onlyNumbers = /^\d+$/;
             var isSelf = localStorageService.get('isSelf');
             var passedUserEmail = localStorageService.get('passedUserEmail');
 
@@ -25,7 +25,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
                 formatYear: 'yyyy',
                 maxDate: new Date(),
-                minDate: new Date(1920, 0, 1),
+                minDate: new Date(2017, 0, 1),
                 startingDay: 1
             };
         }
@@ -33,6 +33,9 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.dob = function () {
             $scope.popup.opened = true;
         };
+
+         $scope.startMin = moment().add(0, 'days').format('MM/DD/YYYY');
+         $scope.startMax = moment().subtract(-1, 'days').format('MM/DD/YYYY');
         $scope.afterInit = function () {
 
             $scope.getReportingHeads();
@@ -68,13 +71,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
 
         $scope.setPassportDetails = function () {
             if ($scope.formData.ownPassport.value == true) {
-                if ($scope.formData.PassportExpiryDate.value === undefined || $scope.formData.PassportExpiryDate.value == null) {
-                    $scope.formData.PassportExpiryDate.value = new Date();
-                }
-                if ($scope.formData.PassportIssueDate.value === undefined || $scope.formData.PassportIssueDate.value == null) {
-                    $scope.formData.PassportIssueDate.value = new Date();
-                }
-
+                $scope.formData.PassportIssueDate.value = null;
+                $scope.formData.PassportExpiryDate.value = null;
             }
             if ($scope.formData.ownPassport.value == false) {
                 $scope.formData.PassportIssueDate.value = null;
@@ -175,6 +173,8 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
         $scope.getEmpData = function (userEmail) {
             profileFctry.getEmpDetails({ UserEmail: userEmail }).then(function (response) {
                 $scope.formData = response.data[0];
+                // localStorageService.set('firstName',$scope.formData.FirstName.value);
+                //localStorageService.set('lastName',$scope.formData.LastName.value);
                 $scope.formData.ModifiedBy.value = $rootScope.userDetails.UserEmail.value;
                 $scope.employeeDesignation = $scope.formData.Designation.value;
                 $scope.getDOB = $scope.formData.DOB.value;
@@ -341,7 +341,6 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
                     if ($scope.formData.ProfileStatus.value == 23 || $scope.formData.ProfileStatus.value == 22) {
                         if ($rootScope.Role === 'HR' && $state.current.name === "home.editMyProfile") {
                             toastr.success("Profile has been updated successfully");
-                            $window.location.reload();
                         } else {
                             toastr.success("Your Profile has been submitted. Please wait for the approval.");
                         }
@@ -361,7 +360,7 @@ hrBaseApp.controller('hrmsEditProfileCtrl', ['$window', '$scope', '$rootScope', 
                         toastr.success("Profile has been updated successfully");
                         $state.go('home.dashboard');
                     }
-                    $scope.getEmpData($rootScope.userDetails.UserEmail);
+                    $scope.getEmpData($rootScope.userDetails.UserEmail.value);
                 }
                 else {
                     toastr.error("Profile could not be updated");

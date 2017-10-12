@@ -18,6 +18,7 @@
     "git": "^0.1.5",
     "google-auth-library": "^0.9.7",
     "googleapis": "^2.1.7",
+    "gulp-install": "^1.1.0",
     "html": "0.0.10",
     "jade": "^1.11.0",
     "moment": "^2.13.0",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-inject": "^3.0.0",
+    "gulp-install": "^1.1.0",
     "wiredep": "^3.0.0"
   }
 }

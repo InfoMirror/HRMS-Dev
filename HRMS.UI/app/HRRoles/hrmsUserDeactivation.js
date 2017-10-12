@@ -89,7 +89,7 @@ function ($scope, $state, $rootScope, profileFctry, toastr,localStorageService) 
             EmpId: rowId,
             IsActive: status
         }).then(function (response) {
-             toastr.success("Activated employee successfully.")
+             toastr.success("Profile has been reactivated successfully.")
                 $scope.getDeactivatedEmployees();       
         });
     }

@@ -15,7 +15,7 @@ var attendanceCtrl = hrBaseApp.controller('attendanceMCtrl', ['Upload', '$window
                     $scope.file.fileName = $scope.SelMonth + $scope.SelYear + '.xlsx';
                     $scope.upload($scope.file); //call upload function
                 } else {
-                    toastr.warning('File name is not correct is should be like:- Feb2016.xlsx');
+                    toastr.warning('File name is not correct it should be like:- Feb2016.xlsx');
                 }
             }
             else {
@@ -33,15 +33,21 @@ var attendanceCtrl = hrBaseApp.controller('attendanceMCtrl', ['Upload', '$window
             }).then(function (resp) { //upload function returns a promise
                 if (resp.data.error_code === 0) { //validate success
                     toastr.success('Monthly attendance sheet uploaded successfully. ');
+                    setTimeout(function () {
+                        $window.location.reload();
+                    }, 1000);
                 } else {
                     toastr.error('Some error occured');
+                     setTimeout(function () {
+                        $window.location.reload();
+                    }, 1000);
                 }
             }, function (resp) { //catch error
-            toastr.error('Monthly attendance sheet could not be uploaded');
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+                toastr.error('Monthly attendance sheet could not be uploaded');
+                 setTimeout(function () {
+                        $window.location.reload();
+                    }, 1000);
+
             });
         };
 

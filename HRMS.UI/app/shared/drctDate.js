@@ -18,6 +18,7 @@ hrBaseApp.directive('olcaDate', [function () {
         maxAttr: '@maxDate',
         inputName: '@',
         dateChanged: '&',
+        ngblur:'=',
         dateClick: "&",
         dateRequired: '=',
         dateDisabled: '&',showCal:"&"
@@ -138,7 +139,7 @@ hrBaseApp.directive('dateOnly', ['$window', function ($window) {
 
                 $scope.$parent.$watch($scope.minAttr, function (value) {
                     modelCtrl.minDate = value ? new Date(value) : undefined;
-                    modelCtrl.$validate();
+                  //  modelCtrl.$validate();
                 });
 
                 modelCtrl.$validators.min =

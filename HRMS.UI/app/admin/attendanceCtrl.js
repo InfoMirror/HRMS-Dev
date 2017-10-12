@@ -4,12 +4,14 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
         var vm = this;
 
         $scope.init = function () {
+            $scope.disableButton == false;
             $scope.file = {};
         }
 
         $scope.submit = function () {
             if (angular.isDefined($scope.file.name)) {
-                if ($scope.upload_form.file.$valid && $scope.file && /[0-9]{2,2}[A-Z][a-z]{2,2} [0-9]{4,4}(.xlsx)/g.test($scope.file.name)) { //check if from is valid
+
+                if ($scope.uploadForm.file.$valid && $scope.file && /[0-9]{2,2}[A-Z][a-z]{2,2} [0-9]{4,4}(.xlsx)/g.test($scope.file.name)) { //check if from is valid
                     $scope.upload($scope.file); //call upload function
                 } else {
                     toastr.warning('file name is not correct it should be like this :- 02Feb 2016.xlsx');
@@ -30,23 +32,35 @@ var attendanceCtrl = hrBaseApp.controller('attendanceCtrl', ['Upload', '$window'
                 if (resp.data.error_code === 0) { //validate 
                     if (resp.data.error_weekend === 1) {
                         toastr.warning('Excel upload is not allowed for weekend');
+                        setTimeout(function () {
+                            $window.location.reload();
+                        }, 1000);
                     } else {
                         toastr.success('Daily attendance sheet uploaded successfully.');
+                        setTimeout(function () {
+                            $window.location.reload();
+                        }, 1000);
                     }
                 }
                 else if (resp.data.error_code === 11) {
                     toastr.warning('Attandace for this date is already uploaded');
+                    setTimeout(function () {
+                        $window.location.reload();
+                    }, 1000);
                 } else {
-                    toastr.error('an error occured');
+                    toastr.error('Some error occured. File could not be uploaded');
+                    setTimeout(function () {
+                        $window.location.reload();
+                    }, 1000);
                 }
             }, function (resp) { //catch error
                 toastr.error('Daily attendance sheet could not be uploaded');
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+                setTimeout(function () {
+                    $window.location.reload();
+                }, 1000);
             });
         };
 
         $scope.init();
+
     }]);

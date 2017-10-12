@@ -31,7 +31,7 @@
                         <div class="col-sm-12">
                             <div class="col-sm-4">
                                 <span class="font-regular required">Reporting Head:</span>
-                                <select ng-model="formData.ReportingHead.value" ng-disabled="!checkRole()" ng-required="checkRole()">
+                                <select ng-model="formData.ReportingHead.value" style="float: initial" class="col-md-6" ng-disabled="!checkRole()" ng-required="checkRole()">
                                 <option ng-repeat="head in reportingHeads" value="{{head.Id.value}}" ng-selected="{{formData.ReportingHead.value==head.Id.value}}">{{head.Name.value}}</option>
                                 </select>
                             </div>
@@ -385,7 +385,7 @@
                                             <div class="col-sm-6" ng-show="formData.ownPassport.value">
                                                 <div class="form-group">
                                                     <label class="required">Passport Issue Date</label>
-                                                    <olca-date id="passportIssueDate" class="form-group" date-options="dateOptions" input-value="formData.PassportIssueDate.value"
+                                                    <olca-date id="passportIssueDate" date-options="dateOptions" input-value="formData.PassportIssueDate.value" max-date="startMin" 
                                                         date-required="formData.ownPassport.value" show-cal="true"></olca-date>
 
                                                     <span ng-show="editForm.passportIssueDate.$error.required && editForm.passportIssueDate.$dirty" class="error-message">Required*</span>
@@ -396,7 +396,7 @@
                                             <div class="col-sm-6" ng-show="formData.ownPassport.value">
                                                 <div class="form-group">
                                                     <label class="required">Passport Expiry Date</label>
-                                                    <olca-date id="passportExpiryDate" class="form-group" date-options="dateOptions" input-value="formData.PassportExpiryDate.value"
+                                                    <olca-date id="passportExpiryDate" date-options="dateOptions" input-value="formData.PassportExpiryDate.value" min-date="startMax"
                                                         date-required="formData.ownPassport.value" show-cal="true"></olca-date>
                                                     <span ng-show="editForm.passportExpiryDate.$error.required && editForm.passportExpiryDate.$dirty" class="error-message">Required*</span>
                                                 </div>
@@ -426,7 +426,7 @@
                                             <div class="col-sm-6" ng-show="formData.ownVisa.value">
                                                 <div class="form-group">
                                                     <label class="required">Visa Expiry Date</label>
-                                                    <olca-date id="visaExpDate" date-options="dateOptions" date-required="formData.ownVisa.value" min-date="startMin" input-value="formData.visaExpiryDate.value"
+                                                    <olca-date id="visaExpDate" date-options="dateOptions" date-required="formData.ownVisa.value" min-date="startMax" input-value="formData.visaExpiryDate.value"
                                                         show-cal="true"></olca-date>
                                                     <span ng-show="editForm.visaExpiryDate.$error.required && editForm.visaExpiryDate.$dirty" class="error-message">Required*</span>
                                                 </div>
@@ -450,7 +450,7 @@
                                         <a href="#ContactDetails" role="tab" data-toggle="tab" class="btn btn-default">Previous</a>
                                         <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="!checkRole()">Save</button>
 
-                                        <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid || checkAge" ng-show="checkRole()">Approve & Save</button>
+                                        <button type="submit" class="btn btn-green" ng-click="submit()" ng-disabled="!editForm.$valid" ng-show="checkRole()">Approve & Save</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">&nbsp;</div>

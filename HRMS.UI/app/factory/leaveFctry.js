@@ -58,6 +58,13 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
                 }
             },
 
+            'getAllottedLeaves': {
+                method: 'POST',
+                params: {
+                    action: 'getAllottedLeaves'
+                }
+            },
+
         });
 
     var _getAbsents = function (parms) {
@@ -146,6 +153,18 @@ hrBaseApp.factory('leaveFctry', ['$http', '$resource', '$q', function ($http, $r
     }
 
      var _getAllAbsents = function () {
+        var deferred = $q.defer();
+        resource.getAllAbsents(function (response) {
+            deferred.resolve(response);
+        },
+            function (response) {
+                deferred.reject(response);
+
+            });
+        return deferred.promise;
+    }
+
+    var _getAllAbsents = function () {
         var deferred = $q.defer();
         resource.getAllAbsents(function (response) {
             deferred.resolve(response);
